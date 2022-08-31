@@ -1,0 +1,91 @@
+p{
+    font-style: normal;
+    font-weight: 400;
+}
+
+.background {
+    position: relative;
+    width: 1000px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+/*向左右切换的图标*/
+/*浅色切换图标的背景*/
+.shift_eclipse_light {
+    width: 30px;
+    height: 30px;
+    background: rgba(217, 217, 217, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+}
+/*浅色切换图标的左箭头*/
+.shift_left_arrow_light {
+    position: relative;
+    width: 10px;
+    height: 15px;
+    left: 9px;
+    top: 7px;
+}
+/*浅色切换图标的右箭头*/
+.shift_right_arrow_light {
+    position: relative;
+    width: 10px;
+    height: 15px;
+    left: 11px;
+    top: 7px;
+}
+
+/*深色切换图标的背景*/
+.shift_eclipse_dark {
+    width: 30px;
+    height: 30px;
+
+    background: rgba(217, 217, 217, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/*深色切换图标的左箭头*/
+.shift_left_arrow_dark {
+    position: relative;
+    width: 10px;
+    height: 15px;
+    left: 9px;
+    top: 7px;
+}
+
+/*深色切换图标的右箭头*/
+.shift_right_arrow_dark {
+    position: relative;
+    width: 10px;
+    height: 15px;
+    left: 11px;
+    top: 7px;
+}
+
+/*查看详情、查看全部背后的蓝色方框*/
+.blue_rectangle_container {
+    width: 147px;
+    height: 33px;
+    background: #588CC8;
+    border-radius: 7px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 14px;
+    line-height: 0;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/*一排一排陈列图片对应的class*/
+.list_images{
+    position: absolute;
+    display: flex;
+    flex-flow: wrap;
+    align-content: flex-start;
+}
