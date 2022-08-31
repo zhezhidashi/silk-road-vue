@@ -248,7 +248,7 @@ export default {
 			if (event.button === 0) {
 				window.open(this.archive_details_see_archive_url, "_blank");
 			} else if (event.button === 1) {
-				window.open(this.archive_details_see_archive_url, "_blank");
+				window.open(this.archive_details_see_archive_url, "_blank"); 
 			}
 		},
 		archive_details_see_source(event) {
