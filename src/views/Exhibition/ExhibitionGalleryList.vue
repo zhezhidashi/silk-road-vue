@@ -68,7 +68,7 @@
 			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-        <div style="position: relative; height: 300px"></div>
+        <div style="position: relative; height: 400px"></div>
 	</div>
 </template>
 
@@ -207,6 +207,7 @@ export default {
 	width: 869px;
 	left: 73px;
 	top: 321px;
+    z-index: 10;
 	/*background: #588CC8;*/
 }
 

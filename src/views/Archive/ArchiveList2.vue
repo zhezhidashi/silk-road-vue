@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="background: #efefef">
+	<div class="background" style="background: #efefef;">
 		<!--    左侧高级搜索部分-->
 		<div class="archive_list_search_container">
 			<!--    关键词-->
@@ -177,7 +177,7 @@
 		</div>
 
         <!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-        <div style="position: relative; height: 300px"></div>
+        <div style="position: relative; height: 650px; z-index: 0;"></div>
 	</div>
 </template>
 
@@ -305,12 +305,12 @@ export default {
 						search_result_id:
 							search_list_item["main_id"].toString(),
 						img_src: search_list_item["pic_url"],
-						search_result_title: search_list_item["title"]["ES"],
-						search_result_subtitle: search_list_item["location"],
+						search_result_title: search_list_item["title"]["ZH"],
+						search_result_subtitle: search_list_item["location"]["ZH"],
 						search_result_date_from: search_list_item["begin_year"],
 						search_result_date_to: search_list_item["end_year"],
 						search_result_description:
-							search_list_item["intro"]["ES"],
+							search_list_item["intro"]["ZH"],
 					};
 					// console.log(new_map);
 					if (new_map["search_result_id"] === null)
@@ -431,6 +431,10 @@ export default {
 		//跳转至下一页
 		archive_list_jump_next_btn(event) {
 			let now_page_num_int = parseInt(this.now_page_num);
+            if (this.now_page_num === this.total_page_num) {
+				alert("当前已经是最后一页");
+				return;
+			}
 			this.archive_list_jmp(event, (now_page_num_int + 1).toString());
 		},
 
@@ -569,6 +573,7 @@ export default {
 	font-weight: 600;
 	font-size: 14px;
 	color: #2f2f2f;
+    z-index: 10;
 }
 
 .archive_list_search_language_container {
@@ -580,6 +585,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+    z-index: 10;
 }
 
 .archive_list_search_language_option {
@@ -594,6 +600,7 @@ export default {
 	height: 10px;
 	left: 0;
 	top: 7px;
+    
 }
 .archive_list_search_language_option_text {
 	position: absolute;
@@ -611,6 +618,8 @@ export default {
 	height: 33px;
 	left: 58px;
 	top: 438px;
+    z-index: 10;
+
 }
 
 /*右方的搜索结果*/
@@ -624,6 +633,7 @@ export default {
 	display: flex;
 	flex-flow: wrap;
 	align-content: flex-start;
+    z-index: 10;
 	/*background: #588CC8;*/
 }
 /*白色的框*/

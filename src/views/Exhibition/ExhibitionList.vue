@@ -47,6 +47,7 @@
 									height: 178px;
 									border-radius: 7px;
 									margin: 20px;
+                                    cursor: pointer;
 								"
 								v-show="index < 4"
 							/>
@@ -260,5 +261,6 @@ export default {
 	width: 880px;
 	left: 0;
 	top: 134px;
+    z-index: 10;
 }
 </style>

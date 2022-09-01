@@ -24,13 +24,21 @@
 		</div>
 
 		<!-- 标题部分左右切换按钮 -->
-		<div class="shift_eclipse_light" id="index_title_shift_left">
+		<div
+			@mousedown="title_shift_left_btn"
+			class="shift_eclipse_light"
+			id="index_title_shift_left"
+		>
 			<img
 				class="shift_left_arrow_light"
 				:src="shift_left_arrow_light_src"
 			/>
 		</div>
-		<div class="shift_eclipse_light" id="index_title_shift_right">
+		<div
+			@mousedown="title_shift_right_btn"
+			class="shift_eclipse_light"
+			id="index_title_shift_right"
+		>
 			<img
 				class="shift_right_arrow_light"
 				:src="shift_right_arrow_light_src"
@@ -79,13 +87,21 @@
 		</p>
 
 		<!-- 公告部分左右切换按钮 -->
-		<div class="shift_eclipse_light" id="index_board_shift_left">
+		<div
+			@mousedown="board_shift_left_btn"
+			class="shift_eclipse_light"
+			id="index_board_shift_left"
+		>
 			<img
 				class="shift_left_arrow_light"
 				:src="shift_left_arrow_light_src"
 			/>
 		</div>
-		<div class="shift_eclipse_light" id="index_board_shift_right">
+		<div
+			@mousedown="board_shift_right_btn"
+			class="shift_eclipse_light"
+			id="index_board_shift_right"
+		>
 			<img
 				class="shift_right_arrow_light"
 				:src="shift_right_arrow_light_src"
@@ -131,14 +147,22 @@
 		</div>
 
 		<!-- 左右切换近期展览的图标 -->
-		<div class="shift_eclipse_dark" id="index_exh_shift_left">
+		<div
+			@mousedown="exh_shift_left_btn"
+			class="shift_eclipse_dark"
+			id="index_exh_shift_left"
+		>
 			<img
 				class="shift_left_arrow_dark"
 				:src="shift_left_arrow_dark_src"
 			/>
 		</div>
 
-		<div class="shift_eclipse_dark" id="index_exh_shift_right">
+		<div
+			@mousedown="exh_shift_right_btn"
+			class="shift_eclipse_dark"
+			id="index_exh_shift_right"
+		>
 			<img
 				class="shift_right_arrow_dark"
 				:src="shift_right_arrow_dark_src"
@@ -154,11 +178,9 @@ export default {
 	name: "Home",
 	data() {
 		return {
-            
 			search_keywords: "",
 			gallery_list_id_up: "1",
 			gallery_list_id_down: "1",
-            
 
 			publicPath: process.env.BASE_URL,
 			index_title_image_src: "background_image_1.png",
@@ -231,6 +253,100 @@ export default {
 							: this.gallery_list_id_down,
 				},
 			});
+		},
+
+		//下面是之前 index.html 只保留顶部切换图片和标题的代码
+
+		next_title_image(d, image_nums) {
+			let now_image = document.querySelector(".index_title_image");
+			let now_main_title = document.querySelector(".index_main_title");
+			let now_sub_title = document.querySelector(".index_sub_title");
+			let now_title_intro = document.querySelector(".index_title_intro");
+
+			let now_src = this.index_title_image_src;
+			let img_num = parseInt(now_src.charAt(17));
+			console.log(now_src + "  " + now_src.charAt(17));
+			img_num = ((img_num + d + image_nums - 1) % image_nums) + 1;
+
+			let image_fade_timer = setInterval(image_fade, 1);
+			let opa = 100;
+
+            let inner_this = this;
+
+			function image_fade() {
+				if (opa > 0) {
+					now_image.style.opacity = String(opa / 100);
+					now_main_title.style.opacity = String(opa / 100);
+					now_sub_title.style.opacity = String(opa / 100);
+					now_title_intro.style.opacity = String(opa / 100);
+				} else if (opa === 0) {
+					inner_this.index_title_image_src = `background_image_${img_num}.png`;
+
+					inner_this.index_main_title = `the ${img_num} main title`;
+					inner_this.index_sub_title = `the ${img_num} sub title`;
+					inner_this.index_title_intro = `the ${img_num} title introduction`;
+				} else if (opa > -100) {
+					now_image.style.opacity = String(-opa / 100);
+					now_main_title.style.opacity = String(-opa / 100);
+					now_sub_title.style.opacity = String(-opa / 100);
+					now_title_intro.style.opacity = String(-opa / 100);
+				} else {
+					clearInterval(image_fade_timer);
+				}
+				opa--;
+			}
+		},
+
+		title_shift_left_btn() {
+			this.next_title_image(-1, 3);
+		},
+
+		title_shift_right_btn() {
+			this.next_title_image(1, 3);
+		},
+
+		board_shift_left_btn() {
+			let page_num = document.querySelector(".index_board_shift_pages");
+			let num = parseInt(page_num.textContent.charAt(0));
+			let left_title = document.getElementById("index_board_left_title");
+			let left_text = document.getElementById("index_board_left_text");
+
+			num = num === 1 ? 5 : num - 1;
+			page_num.textContent =
+				num.toString() + page_num.textContent.substring(1);
+			left_title.textContent = `the ${num}th title`;
+			left_text.textContent = `the ${num}th text`;
+		},
+
+		board_shift_right_btn() {
+			let page_num = document.querySelector(".index_board_shift_pages");
+			let num = parseInt(page_num.textContent.charAt(0));
+			let left_title = document.getElementById("index_board_left_title");
+			let left_text = document.getElementById("index_board_left_text");
+
+			num = num === 5 ? 1 : num + 1;
+			page_num.textContent =
+				num.toString() + page_num.textContent.substring(1);
+			left_title.textContent = `the ${num}th title`;
+			left_text.textContent = `the ${num}th text`;
+		},
+
+		exh_shift_left_btn() {
+			let page_num = document.querySelector(".index_exh_shift_pages");
+			let num = parseInt(page_num.textContent.charAt(0));
+
+			num = num === 1 ? 5 : num - 1;
+			page_num.textContent =
+				num.toString() + page_num.textContent.substring(1);
+		},
+
+		exh_shift_right_btn() {
+			let page_num = document.querySelector(".index_exh_shift_pages");
+			let num = parseInt(page_num.textContent.charAt(0));
+
+			num = num === 5 ? 1 : num + 1;
+			page_num.textContent =
+				num.toString() + page_num.textContent.substring(1);
 		},
 	},
 };

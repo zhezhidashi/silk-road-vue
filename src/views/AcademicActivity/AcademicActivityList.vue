@@ -69,7 +69,7 @@
 			</div>
 		</div>
         <!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-        <div style="position: relative; height: 300px"></div>
+        <div style="position: relative; height: 400px"></div>
 	</div>
 </template>
 
@@ -79,46 +79,7 @@ export default {
 	name: "AcademicActivityList",
 	data() {
 		return {
-			academic_activity_images_src: [
-				{
-					academic_activity_id: "1",
-					src: "../static/images/academic_activity_img_1.png",
-					date: "2022-04-01",
-					description: "田野调查中的质性研究工具及其应用",
-				},
-				{
-					academic_activity_id: "2",
-					src: "../static/images/academic_activity_img_2.png",
-					date: "2022-04-13",
-					description:
-						"祖先作为社会道德资本：新加坡华人与祖乡之间的纽带，祖先作为社会道德资本：新加坡华人与祖乡之间的纽带",
-				},
-				{
-					academic_activity_id: "3",
-					src: "../static/images/academic_activity_img_3.png",
-					date: "2022-04-20",
-					description: "中国剧团在东南亚：跨界、旅行与华人性",
-				},
-				{
-					academic_activity_id: "4",
-					src: "../static/images/academic_activity_img_4.png",
-					date: "2022-05-13",
-					description:
-						"选举的反乌托邦：殖民主义中的民主与菲律宾现代性",
-				},
-				{
-					academic_activity_id: "5",
-					src: "../static/images/academic_activity_img_5.png",
-					date: "2022-05-13",
-					description: "海上丝绸之路物种交换研究的历史与现状",
-				},
-				{
-					academic_activity_id: "6",
-					src: "../static/images/academic_activity_img_6.png",
-					date: "2022-05-18",
-					description: "离散法缘：横跨南海之佛教及其现代主义",
-				},
-			],
+			academic_activity_images_src: [],
 		};
 	},
 
@@ -178,8 +139,8 @@ export default {
 
             //修改图片大小
             let now_img = document.querySelector('#academic_activity_images_img_' + academic_activity_id);
-            now_img.left = '-15px';
-            now_img.top = '-15px';
+            now_img.style.left = '-15px';
+            now_img.style.top = '-15px';
             now_img.style.width = '216px';
             now_img.style.height = '255px';
 
@@ -204,8 +165,8 @@ export default {
 
             //还原图片大小
             let now_img = document.querySelector('#academic_activity_images_img_' + academic_activity_id);
-            now_img.left = '0';
-            now_img.top = '0';
+            now_img.style.left = '0';
+            now_img.style.top = '0';
             now_img.style.width = '186px';
             now_img.style.height = '225px';
 
@@ -256,6 +217,7 @@ export default {
 	box-shadow: 0 3px 3px rgba(159, 158, 158, 0.42);
 	border-radius: 0 0 3px 3px;
 	overflow: hidden;
+    z-index: 10;
 }
 
 /* 图片的 container */

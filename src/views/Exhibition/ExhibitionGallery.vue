@@ -28,7 +28,6 @@
 					<div class="exh_gallery_imgList_container">
 						<img
 							@mousedown="exh_gallery_imgList_btn($event, item)"
-							class="img"
 							:src="item.src"
 							style="
 								position: absolute;
@@ -40,6 +39,8 @@
 								filter: drop-shadow(
 									3px 3px 3px rgba(0, 0, 0, 0.25)
 								);
+                                cursor: pointer;
+                                z-index: 10;
 							"
 						/>
 					</div>
@@ -63,19 +64,8 @@ export default {
 			exh_gallery_web_path_gallery_title: "",
 			exh_gallery_mainImage_src: "",
 			exh_gallery_mainImage_text: "",
-			// exh_gallery_web_path_gallery_list_title: '探险家与原住民',
-			// exh_gallery_web_path_gallery_title: '塔斯曼地图',
-			// exh_gallery_mainImage_src: '../static/images/exh_image_mainImage_1.png',
-			// exh_gallery_mainImage_text: '塔斯曼在其1644年的航行中错过了发现澳大利亚与巴布亚新几内亚间的托雷斯海峡的机会，也没有开辟出新的有贸易价值的航线。一个多世纪后，英国探险家詹姆斯·库克（James Cook）重新来到塔斯曼探索过的区域，塔斯曼的发现才得到普遍承认。塔斯曼在其1644年的航行中错过了发现澳大利亚与巴布亚新几内亚间的托雷斯海峡的机会，也没有开辟出新的有贸易价值的航线。一个多世纪后，英国探险家詹姆斯·库克（James Cook）重新来到塔斯曼探索过的区域，塔斯曼的发现才得到普遍承认。塔斯曼在其1644年的航行中错过了发现澳大利亚与巴布亚新几内亚间的托雷斯海峡的机会，也没有开辟出新的有贸易价值的航线。一个多世纪后，英国探险家詹姆斯·库克（James Cook）重新来到塔斯曼探索过的区域，塔斯曼的发现才得到普遍承认。',
-
+			
 			exh_gallery_imgList_src: [
-				// {'src': '../static/images/exh_image_imgList_img_1.png', 'gallery_img_id': '1'},
-				// {'src': '../static/images/exh_image_imgList_img_2.png', 'gallery_img_id': '2'},
-				// {'src': '../static/images/exh_image_imgList_img_3.png', 'gallery_img_id': '3'},
-				// {'src': '../static/images/exh_image_imgList_img_4.png', 'gallery_img_id': '4'},
-				// {'src': '../static/images/exh_image_imgList_img_5.png', 'gallery_img_id': '5'},
-				// {'src': '../static/images/exh_image_imgList_img_6.png', 'gallery_img_id': '6'},
-				// {'src': '../static/images/exh_image_imgList_img_7.png', 'gallery_img_id': '7'},
 			],
 		};
 	},
@@ -175,7 +165,6 @@ export default {
 /*底下的图片列表*/
 #exh_gallery_imgList {
 	width: 814px;
-	height: 100px;
 	left: 84px;
 	top: 730px;
 	/*background: red;*/

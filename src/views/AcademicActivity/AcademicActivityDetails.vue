@@ -6,7 +6,7 @@
 				{{ academic_activity_details_title }}
 			</div>
 			<!--左侧图片-->
-			<img class="academic_activity_details_img" src="" alt="" />
+			<img class="academic_activity_details_img" :src="academic_activity_details_img_src" alt="" />
 
 			<!--描述-->
 			<div class="academic_activity_details_description">
@@ -17,50 +17,45 @@
 </template>
 
 <script>
-import {getForm} from '../../api/data.js'
+import { getForm } from "../../api/data.js";
 export default {
 	name: "AcademicActivityDetails",
 	data() {
 		return {
 			academic_activity_id: "",
-
-			academic_activity_details_title:
-				"中国剧团在东南亚：跨界、旅行与华人性",
-			academic_activity_details_img_src:
-				"../static/images/academic_activity_details_img.png",
-			academic_activity_details_description:
-				"4月20日，项目组主办题为“中国剧团在东南亚：跨界、旅行与华人性”的讲座。讲座也是“从边疆看周边”赴福建省调研项目的系列行前培训的一部分，由暨南大学国际关系学院/华人华侨研究院博士后张倍瑜老师主讲，项目组成员谢侃侃老师主持，项目组成员张忞煜老师参与了本次讲座。",
+			academic_activity_details_title: "",
+			academic_activity_details_img_src: "",
+			academic_activity_details_description: "",
 		};
 	},
-    created() {
-        //从本页url的参数中获取academic_activity_id的值
-        this.academic_activity_id = this.$route.query.academic_activity_id;
+	created() {
+		//从本页url的参数中获取academic_activity_id的值
+		this.academic_activity_id = this.$route.query.academic_activity_id;
 
-        //http请求
-        let url = "/activity/detail?activity_id=" + this.academic_activity_id;
+		//http请求
+		let url = "/activity/detail?activity_id=" + this.academic_activity_id;
 
-        console.log(url);
-        let inner_this = this; // 别改
+		console.log(url);
+		let inner_this = this; // 别改
 
-        getForm(url, function (res, msg) {
-            let data = res.data
-            console.log("http-get data is here");
-            console.log(data);
-            inner_this.academic_activity_id = data['main_id'];
-            inner_this.academic_activity_details_title = data['title'];
-            inner_this.academic_activity_details_img_src = data['cover_pic'];
-            inner_this.academic_activity_details_description = data['intro'];
-        });
+		getForm(url, function (res, msg) {
+			let data = res.data;
+			console.log("http-get data is here");
+			console.log(data);
+			inner_this.academic_activity_id = data["main_id"];
+			inner_this.academic_activity_details_title = data["title"];
+			inner_this.academic_activity_details_img_src = data["cover_pic"];
+			inner_this.academic_activity_details_description = data["intro"];
+		});
 
-
-        //把主页图片的 url 设置好
-        document.querySelector('.academic_activity_details_img').src = this.academic_activity_details_img_src;
-    },
+		//把主页图片的 url 设置好
+		document.querySelector(".academic_activity_details_img").src =
+			this.academic_activity_details_img_src;
+	},
 };
 </script>
 
 <style>
-
 .nav_bar_underline {
 	visibility: visible;
 	left: 577px;

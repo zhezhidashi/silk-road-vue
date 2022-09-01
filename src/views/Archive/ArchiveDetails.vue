@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import {getForm} from '../../api/data.js'
+import { getForm } from "../../api/data.js";
 export default {
 	name: "ArchiveDetails",
 	data() {
@@ -194,34 +194,92 @@ export default {
 		let inner_this = this; // 别改
 
 		getForm(url, function (res, msg) {
-            let data = res.data
+			let data = res.data;
 			console.log(data);
+
+			// 五个具有二级字典的先初始化为 N/A
+			inner_this.archive_details_title = "N/A";
+			inner_this.archive_details_subtitle = "N/A";
+			inner_this.archive_details_description_text_Chinese = "N/A";
+			inner_this.archive_details_description_text_other = "N/A";
+			inner_this.archive_details_properties_collection_ch = "N/A";
+			inner_this.archive_details_properties_collection_en = "N/A";
+			inner_this.archive_details_properties_location_ch = "N/A";
+			inner_this.archive_details_properties_location_en = "N/A";
+			inner_this.archive_details_properties_language_ch = "N/A";
+			inner_this.archive_details_properties_language_en = "N/A";
+
 			//主标题、副标题、主页大图的url、中文描述、外文描述
-			inner_this.archive_details_title = data.title.ZH === undefined ? "N/A" : data.title.ZH;
-			inner_this.archive_details_subtitle =
-				data.title.ES === undefined ? "N/A" : data.title.ES;
+			for (let item in data.title) {
+				if (item === "ZH")
+					inner_this.archive_details_title = data.title.ZH;
+				else inner_this.archive_details_subtitle = data.title[item];
+			}
+
 			inner_this.archive_details_img =
 				data.pic_url === "" ? "N/A" : data.pic_url;
 
-			inner_this.archive_details_description_text_Chinese = data.intro.ZH === undefined ? "N/A" : data.intro.ZH;
-			inner_this.archive_details_description_text_other =
-				data.intro.ES === undefined ? "N/A" : data.intro.ES;
+			for (let item in data.intro) {
+				if (item === "ZH")
+					inner_this.archive_details_description_text_Chinese =
+						data.intro.ZH;
+				else
+					inner_this.archive_details_description_text_other =
+						data.intro[item];
+			}
 
 			//档案的各种属性：年份（中英文）、关键词（中英文）、收藏单位（中英文）、收藏地点（中英文）、档案页数（中英文）、文件尺寸（中英文）、使用语种（中英文）
 			inner_this.archive_details_properties_year_from =
 				data.begin_year === "" ? "N/A" : data.begin_year;
 			inner_this.archive_details_properties_year_to =
 				data.end_year === "" ? "N/A" : data.end_year;
+
 			inner_this.archive_details_properties_keywords_ch = "N/A";
 			inner_this.archive_details_properties_keywords_en = "N/A";
 
-			inner_this.archive_details_properties_collection_ch =
-				data.organization.CH === undefined ? "N/A" : data.organization.CH;
-			inner_this.archive_details_properties_collection_en =
-				data.organization.EN === undefined ? "N/A" : data.organization.EN;
+			for (let item of data.tag_list) {
+				if (item.slice(0, 2) === "ZH") {
+					if (
+						inner_this.archive_details_properties_keywords_ch ===
+						"N/A"
+					) {
+						inner_this.archive_details_properties_keywords_ch =
+							item.slice(3);
+					} else {
+						inner_this.archive_details_properties_keywords_ch +=
+							"、" + item.slice(3);
+					}
+				} else {
+					if (
+						inner_this.archive_details_properties_keywords_en ===
+						"N/A"
+					) {
+						inner_this.archive_details_properties_keywords_en =
+							item.slice(3);
+					} else {
+						inner_this.archive_details_properties_keywords_en +=
+							", " + item.slice(3);
+					}
+				}
+			}
 
-			inner_this.archive_details_properties_location_ch = data.organization.CH === undefined ? 'N/A' : data.organization.CH ;
-			inner_this.archive_details_properties_location_en = data.organization.EN === undefined ? 'N/A' : data.organization.EN ;
+			for (let item in data.organization) {
+				if (item === "ZH")
+					inner_this.archive_details_properties_collection_ch =
+						data.organization.ZH;
+				else
+					inner_this.archive_details_properties_collection_en =
+						data.organization[item];
+			}
+
+			for (let item in data.location) {
+				if (item === "ZH")
+					inner_this.archive_details_properties_location_ch =
+						data.location.ZH;
+				else
+					inner_this.archive_details_properties_location_en =
+						data.location[item];
+			}
 
 			inner_this.archive_details_properties_pages_ch =
 				data.page_count === undefined ? "N/A" : data.page_count;
@@ -233,13 +291,17 @@ export default {
 			inner_this.archive_details_properties_size_en =
 				data.file_size === undefined ? "N/A" : data.file_size;
 
-			inner_this.archive_details_properties_language_ch =
-				data.language.CH === undefined ? "N/A" : data.language.CH;
-			inner_this.archive_details_properties_language_en =
-				data.language.EN === undefined ? "N/A" : data.language.EN;
+			for (let item in data.language) {
+				if (item === "ZH")
+					inner_this.archive_details_properties_language_ch =
+						data.language.ZH;
+				else
+					inner_this.archive_details_properties_language_en =
+						data.language[item];
+			}
 
 			//图片下方“查看文档”和“查看来源”对应的 url
-			inner_this.archive_details_see_archive_url = data.from_url;
+			inner_this.archive_details_see_archive_url = data.pic_url;
 			inner_this.archive_details_see_source_url = data.from_url;
 		});
 	},
@@ -248,7 +310,7 @@ export default {
 			if (event.button === 0) {
 				window.open(this.archive_details_see_archive_url, "_blank");
 			} else if (event.button === 1) {
-				window.open(this.archive_details_see_archive_url, "_blank"); 
+				window.open(this.archive_details_see_archive_url, "_blank");
 			}
 		},
 		archive_details_see_source(event) {
