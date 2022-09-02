@@ -1,5 +1,13 @@
 <template>
-	<div class="background" style="background: #efefef;">
+	<div class="background" style="background: #efefef">
+		<!--回退到上一个页面-->
+		<img
+			@click="router_go_back()"
+			class="go_back"
+			id="go_back2"
+			src="arrow_left_3.png"
+			alt=""
+		/>
 		<!--    左侧高级搜索部分-->
 		<div class="archive_list_search_container">
 			<!--    关键词-->
@@ -176,14 +184,13 @@
 			</div>
 		</div>
 
-        <!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-        <div style="position: relative; height: 650px; z-index: 0;"></div>
+		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
+		<div style="position: relative; height: 600px; z-index: 0"></div>
 	</div>
 </template>
 
 <script>
 import { getForm } from "../../api/data.js";
-
 export default {
 	name: "ArchiveList",
 	data() {
@@ -233,6 +240,10 @@ export default {
 		this.getList();
 	},
 	methods: {
+		router_go_back() {
+            console.log("click!")
+			this.$router.go(-1);
+		},
 		getList() {
 			console.log(this.$route);
 			//从接收的url中取出参数，把data中的变量赋值，用于发送http请求
@@ -249,7 +260,9 @@ export default {
 			//左侧搜索页面有语言选项，因此要根据 url 传递的参数，把对应的选项前面的白色方块变成黑色方块
 
 			if (this.search_language !== "") {
-				this.search_language_list[parseInt(this.search_language) - 1].SquareColor = "rgb(0, 0, 0)";
+				this.search_language_list[
+					parseInt(this.search_language) - 1
+				].SquareColor = "rgb(0, 0, 0)";
 			}
 
 			let now_search_language = "";
@@ -306,7 +319,8 @@ export default {
 							search_list_item["main_id"].toString(),
 						img_src: search_list_item["pic_url"],
 						search_result_title: search_list_item["title"]["ZH"],
-						search_result_subtitle: search_list_item["location"]["ZH"],
+						search_result_subtitle:
+							search_list_item["location"]["ZH"],
 						search_result_date_from: search_list_item["begin_year"],
 						search_result_date_to: search_list_item["end_year"],
 						search_result_description:
@@ -332,19 +346,19 @@ export default {
 
 		//左侧搜索页面有语言选项，鼠标点击哪个，就把哪个选项前面的白色方块变成黑色方块，或者是把黑色方块变成白色方块
 		archive_list_search_language_option(event, language_option) {
-            console.log('language_option', language_option, this.search_language_list[language_option - 1])
+			console.log(
+				"language_option",
+				language_option,
+				this.search_language_list[language_option - 1]
+			);
 			if (
 				this.search_language_list[language_option - 1].SquareColor ===
 				"rgb(0, 0, 0)"
-			) 
-            {
+			) {
 				this.search_language_list[language_option - 1].SquareColor =
 					"rgb(255, 255, 255)";
 				this.search_language = "";
-			} 
-            else 
-            {
-				
+			} else {
 				for (let item of this.search_language_list) {
 					if (item.id === language_option) {
 						item.SquareColor = "rgb(0, 0, 0)";
@@ -352,7 +366,7 @@ export default {
 						item.SquareColor = "rgb(255, 255, 255)";
 					}
 				}
-                this.search_language = language_option.toString();
+				this.search_language = language_option.toString();
 			}
 		},
 
@@ -431,7 +445,7 @@ export default {
 		//跳转至下一页
 		archive_list_jump_next_btn(event) {
 			let now_page_num_int = parseInt(this.now_page_num);
-            if (this.now_page_num === this.total_page_num) {
+			if (this.now_page_num === this.total_page_num) {
 				alert("当前已经是最后一页");
 				return;
 			}
@@ -573,7 +587,7 @@ export default {
 	font-weight: 600;
 	font-size: 14px;
 	color: #2f2f2f;
-    z-index: 10;
+	z-index: 10;
 }
 
 .archive_list_search_language_container {
@@ -585,7 +599,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-    z-index: 10;
+	z-index: 10;
 }
 
 .archive_list_search_language_option {
@@ -600,7 +614,6 @@ export default {
 	height: 10px;
 	left: 0;
 	top: 7px;
-    
 }
 .archive_list_search_language_option_text {
 	position: absolute;
@@ -618,8 +631,7 @@ export default {
 	height: 33px;
 	left: 58px;
 	top: 438px;
-    z-index: 10;
-
+	z-index: 10;
 }
 
 /*右方的搜索结果*/
@@ -633,7 +645,7 @@ export default {
 	display: flex;
 	flex-flow: wrap;
 	align-content: flex-start;
-    z-index: 10;
+	z-index: 10;
 	/*background: #588CC8;*/
 }
 /*白色的框*/
@@ -715,7 +727,7 @@ export default {
 	width: 800px;
 	height: 40px;
 	top: 10px;
-    z-index: 10;
+	z-index: 10;
 	/* background: skyblue; */
 }
 

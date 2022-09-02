@@ -1,5 +1,7 @@
 <template>
 	<div class="background" style="height: 1427px; background: #efefef">
+		<!--回退到上一个页面-->
+		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
 		<!--为了方便vue，我们把整个页面的图片文字全部放到 archive_details_data 里面-->
 		<div id="archive_details_data">
 			<!--    标题与副标题-->
@@ -30,33 +32,28 @@
 				查看来源
 			</p>
 			<p class="archive_details_description_title_Chinese">描述</p>
-			<p class="archive_details_description_text_Chinese">
-				{{ archive_details_description_text_Chinese }}
+			<p class="archive_details_description_text_zh">
+				{{ archive_details_description_text_zh }}
 			</p>
 			<p class="archive_details_description_title_other">Description</p>
-			<p class="archive_details_description_text_other">
-				{{ archive_details_description_text_other }}
+			<p class="archive_details_description_text_en">
+				{{ archive_details_description_text_en }}
 			</p>
 
 			<!--    右侧档案的属性-->
 			<div class="archive_details_properties_container">
 				<!--        每一行都是一个div，分为左侧和右侧文字-->
-				<div class="archive_details_properties_content">
+				<!-- 有些是一行的，有些是两行的，区分开 -->
+				<div class="archive_details_properties_content_line">
 					<p class="archive_details_properties_text_left_up">年份</p>
-					<p class="archive_details_properties_text_left_down">
-						Year
-					</p>
+
 					<p class="archive_details_properties_text_right_up">
 						{{ archive_details_properties_year_from }}~{{
 							archive_details_properties_year_to
 						}}
 					</p>
-					<p class="archive_details_properties_text_right_down">
-						{{ archive_details_properties_year_from }}~{{
-							archive_details_properties_year_to
-						}}
-					</p>
 				</div>
+
 				<div class="archive_details_properties_content">
 					<p class="archive_details_properties_text_left_up">
 						关键词
@@ -65,12 +62,13 @@
 						Keywords
 					</p>
 					<p class="archive_details_properties_text_right_up">
-						{{ archive_details_properties_keywords_ch }}
+						{{ archive_details_properties_keywords_zh }}
 					</p>
 					<p class="archive_details_properties_text_right_down">
 						{{ archive_details_properties_keywords_en }}
 					</p>
 				</div>
+
 				<div class="archive_details_properties_content">
 					<p class="archive_details_properties_text_left_up">
 						收藏单位
@@ -79,12 +77,13 @@
 						Collection
 					</p>
 					<p class="archive_details_properties_text_right_up">
-						{{ archive_details_properties_collection_ch }}
+						{{ archive_details_properties_collection_zh }}
 					</p>
 					<p class="archive_details_properties_text_right_down">
 						{{ archive_details_properties_collection_en }}
 					</p>
 				</div>
+
 				<div class="archive_details_properties_content">
 					<p class="archive_details_properties_text_left_up">
 						收藏地点
@@ -93,40 +92,33 @@
 						Location
 					</p>
 					<p class="archive_details_properties_text_right_up">
-						{{ archive_details_properties_location_ch }}
+						{{ archive_details_properties_location_zh }}
 					</p>
 					<p class="archive_details_properties_text_right_down">
 						{{ archive_details_properties_location_en }}
 					</p>
 				</div>
-				<div class="archive_details_properties_content">
+
+				<div class="archive_details_properties_content_line">
 					<p class="archive_details_properties_text_left_up">
 						档案页数
 					</p>
-					<p class="archive_details_properties_text_left_down">
-						pages
-					</p>
+
 					<p class="archive_details_properties_text_right_up">
-						{{ archive_details_properties_pages_ch }}
-					</p>
-					<p class="archive_details_properties_text_right_down">
-						{{ archive_details_properties_pages_en }}
+						{{ archive_details_properties_pages }}
 					</p>
 				</div>
-				<div class="archive_details_properties_content">
+
+				<div class="archive_details_properties_content_line">
 					<p class="archive_details_properties_text_left_up">
 						文件尺寸
 					</p>
-					<p class="archive_details_properties_text_left_down">
-						Size
-					</p>
+
 					<p class="archive_details_properties_text_right_up">
-						{{ archive_details_properties_size_ch }}
-					</p>
-					<p class="archive_details_properties_text_right_down">
-						{{ archive_details_properties_size_en }}
+						{{ archive_details_properties_size }}
 					</p>
 				</div>
+
 				<div class="archive_details_properties_content">
 					<p class="archive_details_properties_text_left_up">
 						使用语种
@@ -135,7 +127,7 @@
 						Language
 					</p>
 					<p class="archive_details_properties_text_right_up">
-						{{ archive_details_properties_language_ch }}
+						{{ archive_details_properties_language_zh }}
 					</p>
 					<p class="archive_details_properties_text_right_down">
 						{{ archive_details_properties_language_en }}
@@ -155,27 +147,25 @@ export default {
 			//档案在后端数据库的主键
 			archive_details_id: "",
 			//主标题、副标题、主页大图的url、中文描述、外文描述
-			archive_details_title: "",
-			archive_details_subtitle: "",
+			archive_details_title: "N/A",
+			archive_details_subtitle: "N/A",
 			archive_details_img: "",
-			archive_details_description_text_Chinese: "",
-			archive_details_description_text_other: "",
+			archive_details_description_text_zh: "N/A",
+			archive_details_description_text_en: "N/A",
 
 			//档案的各种属性：年份（中英文）、关键词（中英文）、收藏单位（中英文）、收藏地点（中英文）、档案页数（中英文）、文件尺寸（中英文）、使用语种（中英文）
-			archive_details_properties_year_from: "",
-			archive_details_properties_year_to: "",
-			archive_details_properties_keywords_ch: "",
-			archive_details_properties_keywords_en: "",
-			archive_details_properties_collection_ch: "",
-			archive_details_properties_collection_en: "",
-			archive_details_properties_location_ch: "",
-			archive_details_properties_location_en: "",
-			archive_details_properties_pages_ch: "",
-			archive_details_properties_pages_en: "",
-			archive_details_properties_size_ch: "",
-			archive_details_properties_size_en: "",
-			archive_details_properties_language_ch: "",
-			archive_details_properties_language_en: "",
+			archive_details_properties_year_from: "N/A",
+			archive_details_properties_year_to: "N/A",
+			archive_details_properties_keywords_zh: "N/A",
+			archive_details_properties_keywords_en: "N/A",
+			archive_details_properties_collection_zh: "N/A",
+			archive_details_properties_collection_en: "N/A",
+			archive_details_properties_location_zh: "N/A",
+			archive_details_properties_location_en: "N/A",
+			archive_details_properties_pages: "N/A",
+			archive_details_properties_size: "N/A",
+			archive_details_properties_language_zh: "N/A",
+			archive_details_properties_language_en: "N/A",
 
 			//图片下方“查看文档”和“查看来源”对应的 url
 			archive_details_see_archive_url: "",
@@ -197,18 +187,6 @@ export default {
 			let data = res.data;
 			console.log(data);
 
-			// 五个具有二级字典的先初始化为 N/A
-			inner_this.archive_details_title = "N/A";
-			inner_this.archive_details_subtitle = "N/A";
-			inner_this.archive_details_description_text_Chinese = "N/A";
-			inner_this.archive_details_description_text_other = "N/A";
-			inner_this.archive_details_properties_collection_ch = "N/A";
-			inner_this.archive_details_properties_collection_en = "N/A";
-			inner_this.archive_details_properties_location_ch = "N/A";
-			inner_this.archive_details_properties_location_en = "N/A";
-			inner_this.archive_details_properties_language_ch = "N/A";
-			inner_this.archive_details_properties_language_en = "N/A";
-
 			//主标题、副标题、主页大图的url、中文描述、外文描述
 			for (let item in data.title) {
 				if (item === "ZH")
@@ -221,10 +199,10 @@ export default {
 
 			for (let item in data.intro) {
 				if (item === "ZH")
-					inner_this.archive_details_description_text_Chinese =
+					inner_this.archive_details_description_text_zh =
 						data.intro.ZH;
 				else
-					inner_this.archive_details_description_text_other =
+					inner_this.archive_details_description_text_en =
 						data.intro[item];
 			}
 
@@ -234,19 +212,16 @@ export default {
 			inner_this.archive_details_properties_year_to =
 				data.end_year === "" ? "N/A" : data.end_year;
 
-			inner_this.archive_details_properties_keywords_ch = "N/A";
-			inner_this.archive_details_properties_keywords_en = "N/A";
-
 			for (let item of data.tag_list) {
 				if (item.slice(0, 2) === "ZH") {
 					if (
-						inner_this.archive_details_properties_keywords_ch ===
+						inner_this.archive_details_properties_keywords_zh ===
 						"N/A"
 					) {
-						inner_this.archive_details_properties_keywords_ch =
+						inner_this.archive_details_properties_keywords_zh =
 							item.slice(3);
 					} else {
-						inner_this.archive_details_properties_keywords_ch +=
+						inner_this.archive_details_properties_keywords_zh +=
 							"、" + item.slice(3);
 					}
 				} else {
@@ -265,7 +240,7 @@ export default {
 
 			for (let item in data.organization) {
 				if (item === "ZH")
-					inner_this.archive_details_properties_collection_ch =
+					inner_this.archive_details_properties_collection_zh =
 						data.organization.ZH;
 				else
 					inner_this.archive_details_properties_collection_en =
@@ -274,26 +249,22 @@ export default {
 
 			for (let item in data.location) {
 				if (item === "ZH")
-					inner_this.archive_details_properties_location_ch =
+					inner_this.archive_details_properties_location_zh =
 						data.location.ZH;
 				else
 					inner_this.archive_details_properties_location_en =
 						data.location[item];
 			}
 
-			inner_this.archive_details_properties_pages_ch =
-				data.page_count === undefined ? "N/A" : data.page_count;
-			inner_this.archive_details_properties_pages_en =
+			inner_this.archive_details_properties_pages =
 				data.page_count === undefined ? "N/A" : data.page_count;
 
-			inner_this.archive_details_properties_size_ch =
-				data.file_size === undefined ? "N/A" : data.file_size;
-			inner_this.archive_details_properties_size_en =
+			inner_this.archive_details_properties_size =
 				data.file_size === undefined ? "N/A" : data.file_size;
 
 			for (let item in data.language) {
 				if (item === "ZH")
-					inner_this.archive_details_properties_language_ch =
+					inner_this.archive_details_properties_language_zh =
 						data.language.ZH;
 				else
 					inner_this.archive_details_properties_language_en =
@@ -306,6 +277,11 @@ export default {
 		});
 	},
 	methods: {
+        // 路由回退
+        router_go_back() {
+            console.log("click!")
+			this.$router.go(-1);
+		},
 		archive_details_see_archive(event) {
 			if (event.button === 0) {
 				window.open(this.archive_details_see_archive_url, "_blank");
@@ -378,7 +354,7 @@ export default {
 	line-height: 0;
 	color: #588cc8;
 }
-.archive_details_description_text_Chinese {
+.archive_details_description_text_zh {
 	position: absolute;
 	width: 382px;
 	height: 224px;
@@ -399,7 +375,7 @@ export default {
 	line-height: 0;
 	color: #588cc8;
 }
-.archive_details_description_text_other {
+.archive_details_description_text_en {
 	position: absolute;
 	width: 367px;
 	height: 224px;
@@ -424,6 +400,13 @@ export default {
 }
 
 /*每一行（中英文）都包装成一个类*/
+/* 只有一行文字 */
+.archive_details_properties_content_line {
+	position: relative;
+	width: 414px;
+	height: 30px;
+}
+/* 中英文两行文字 */
 .archive_details_properties_content {
 	position: relative;
 	width: 414px;

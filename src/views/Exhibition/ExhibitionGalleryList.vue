@@ -1,5 +1,7 @@
 <template>
 	<div class="background" style="background: #efefef">
+		<!--回退到上一个页面-->
+		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
 		<div class="exh_gallery_list_container">
 			<!--    展览详情页面标题-->
 			<p class="exh_gallery_list_heading">
@@ -68,7 +70,7 @@
 			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-        <div style="position: relative; height: 400px"></div>
+		<div style="position: relative; height: 400px"></div>
 	</div>
 </template>
 
@@ -139,6 +141,11 @@ export default {
 		});
 	},
 	methods: {
+        // 路由回退
+        router_go_back() {
+            console.log("click!")
+			this.$router.go(-1);
+		},
 		// 点击图片跳转到 gallery 界面
 		exh_gallery_list_imgText_btn(event, gallery_id) {
 			this.$router.push({
@@ -207,7 +214,7 @@ export default {
 	width: 869px;
 	left: 73px;
 	top: 321px;
-    z-index: 10;
+	z-index: 10;
 	/*background: #588CC8;*/
 }
 

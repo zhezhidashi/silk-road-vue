@@ -1,12 +1,18 @@
 <template>
 	<div class="background" style="height: 906px; background: #efefef">
+		<!--回退到上一个页面-->
+		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
 		<div class="academic_activity_details">
 			<!--标题-->
 			<div class="academic_activity_details_title">
 				{{ academic_activity_details_title }}
 			</div>
 			<!--左侧图片-->
-			<img class="academic_activity_details_img" :src="academic_activity_details_img_src" alt="" />
+			<img
+				class="academic_activity_details_img"
+				:src="academic_activity_details_img_src"
+				alt=""
+			/>
 
 			<!--描述-->
 			<div class="academic_activity_details_description">
@@ -52,6 +58,13 @@ export default {
 		document.querySelector(".academic_activity_details_img").src =
 			this.academic_activity_details_img_src;
 	},
+    methods: {
+        // 路由回退
+        router_go_back() {
+            console.log("click!")
+			this.$router.go(-1);
+		},
+    }
 };
 </script>
 

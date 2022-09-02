@@ -1,6 +1,7 @@
 <template>
 	<div class="background" style="height: 1577px; background: #efefef">
-		<!--导航栏部分-->
+		<!--回退到上一个页面-->
+		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
 
 		<!--    把整个页面所有数据包装到container里面-->
 		<div class="exh_gallery_container">
@@ -24,7 +25,10 @@
 			</div>
 			<!--    底下的图片列表-->
 			<div class="list_images" id="exh_gallery_imgList">
-				<div v-for="item in exh_gallery_imgList_src" :key='item.gallery_img_id'>
+				<div
+					v-for="item in exh_gallery_imgList_src"
+					:key="item.gallery_img_id"
+				>
 					<div class="exh_gallery_imgList_container">
 						<img
 							@mousedown="exh_gallery_imgList_btn($event, item)"
@@ -39,8 +43,8 @@
 								filter: drop-shadow(
 									3px 3px 3px rgba(0, 0, 0, 0.25)
 								);
-                                cursor: pointer;
-                                z-index: 10;
+								cursor: pointer;
+								z-index: 10;
 							"
 						/>
 					</div>
@@ -51,7 +55,7 @@
 </template>
 
 <script>
-import {getForm} from '../../api/data.js'
+import { getForm } from "../../api/data.js";
 export default {
 	name: "ExhibitionGallery",
 	data() {
@@ -64,60 +68,70 @@ export default {
 			exh_gallery_web_path_gallery_title: "",
 			exh_gallery_mainImage_src: "",
 			exh_gallery_mainImage_text: "",
-			
-			exh_gallery_imgList_src: [
-			],
+
+			exh_gallery_imgList_src: [],
 		};
 	},
-    created() {
-        //从本页面的url中获取 exh_gallery_list_id 和 exh_gallery_id 的值
-        this.exh_gallery_list_id = this.$route.query.gallery_list_id;
-        this.exh_gallery_id = this.$route.query.gallery_id;
-        this.exh_gallery_web_path_gallery_list_title = this.$route.query.gallery_list_title
+	created() {
+		//从本页面的url中获取 exh_gallery_list_id 和 exh_gallery_id 的值
+		this.exh_gallery_list_id = this.$route.query.gallery_list_id;
+		this.exh_gallery_id = this.$route.query.gallery_id;
+		this.exh_gallery_web_path_gallery_list_title =
+			this.$route.query.gallery_list_title;
 
-        //http请求
-        if(this.exh_gallery_list_id === '') alert('exh_gallery_list_id 不能为空');
-        if(this.exh_gallery_id === '') alert('exh_gallery_id 不能为空');
+		//http请求
+		if (this.exh_gallery_list_id === "")
+			alert("exh_gallery_list_id 不能为空");
+		if (this.exh_gallery_id === "") alert("exh_gallery_id 不能为空");
 
-        let url = "/exhibition/album-detail?exhibition_id=" + this.exh_gallery_list_id + "&album_id=" + this.exh_gallery_id;
+		let url =
+			"/exhibition/album-detail?exhibition_id=" +
+			this.exh_gallery_list_id +
+			"&album_id=" +
+			this.exh_gallery_id;
 
-        console.log(url);
+		console.log(url);
 
-        this.exh_gallery_imgList_src = [];
+		this.exh_gallery_imgList_src = [];
 
-        let inner_this = this; // 别改
-        
-        getForm(url, function (res, msg) {
-            let data = res.data
-            console.log("http-get data is here", data);
-            // 修改 标题、图片url，图片简介
-            inner_this.exh_gallery_web_path_gallery_title = data['title'];
-            inner_this.exh_gallery_mainImage_src = null;
-            inner_this.exh_gallery_mainImage_text = data['intro'];
-            
-            for(let item in data['picture_dict']){
-                if(inner_this.exh_gallery_mainImage_src === null){
-                    inner_this.exh_gallery_mainImage_src = data['picture_dict'][item]['pic_url']
-                }
-                let new_map = {
-                    'src': data['picture_dict'][item]['pic_url'],
-                    'gallery_img_id': item,
-                    'intro': data['picture_dict'][item]['intro'],
-                    'title': data['picture_dict'][item]['title']
-                }
-                console.log('exhibition gallery new_map', new_map)
-                inner_this.exh_gallery_imgList_src.push(new_map)
-            }
-        });
+		let inner_this = this; // 别改
 
-    },
-    methods: {
-        // 点击下方列表的图片，修改大图的url
-        exh_gallery_imgList_btn(event, item){
-            document.querySelector('.exh_gallery_mainImage').src = item.src;
-            this.exh_gallery_mainImage_text = item['intro']
-        }
-    }
+		getForm(url, function (res, msg) {
+			let data = res.data;
+			console.log("http-get data is here", data);
+			// 修改 标题、图片url，图片简介
+			inner_this.exh_gallery_web_path_gallery_title = data["title"];
+			inner_this.exh_gallery_mainImage_src = null;
+			inner_this.exh_gallery_mainImage_text = data["intro"];
+
+			for (let item in data["picture_dict"]) {
+				if (inner_this.exh_gallery_mainImage_src === null) {
+					inner_this.exh_gallery_mainImage_src =
+						data["picture_dict"][item]["pic_url"];
+				}
+				let new_map = {
+					src: data["picture_dict"][item]["pic_url"],
+					gallery_img_id: item,
+					intro: data["picture_dict"][item]["intro"],
+					title: data["picture_dict"][item]["title"],
+				};
+				console.log("exhibition gallery new_map", new_map);
+				inner_this.exh_gallery_imgList_src.push(new_map);
+			}
+		});
+	},
+	methods: {
+        // 路由回退
+        router_go_back() {
+            console.log("click!")
+			this.$router.go(-1);
+		},
+		// 点击下方列表的图片，修改大图的url
+		exh_gallery_imgList_btn(event, item) {
+			document.querySelector(".exh_gallery_mainImage").src = item.src;
+			this.exh_gallery_mainImage_text = item["intro"];
+		},
+	},
 };
 </script>
 

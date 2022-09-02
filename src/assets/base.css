@@ -89,3 +89,21 @@ p{
     flex-flow: wrap;
     align-content: flex-start;
 }
+
+#go_back1{
+    position: absolute;
+    left: 117px;
+    top: 146px;
+    width: 27px;
+    cursor: pointer;
+    z-index: 11;
+}
+
+#go_back2{
+    position: absolute;
+    left: 257px;
+    top: 146px;
+    width: 27px;
+    cursor: pointer;
+    z-index: 11;
+}

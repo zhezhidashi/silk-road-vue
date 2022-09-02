@@ -1,5 +1,7 @@
 <template>
 	<div class="background" style="height: 906px; background: #efefef">
+		<!--回退到上一个页面-->
+		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
 		<!--标题-->
 		<p class="major_event_title">网站大事记</p>
 
@@ -26,6 +28,13 @@
 <script>
 export default {
     name: 'MajorEvent',
+    methods: {
+        // 路由回退
+        router_go_back() {
+            console.log("click!")
+			this.$router.go(-1);
+		},
+    }
 };
 </script>
 

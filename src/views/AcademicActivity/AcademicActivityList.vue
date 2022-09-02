@@ -3,9 +3,15 @@
 		<!--    标题-->
 		<p class="academic_activity_title">学术活动</p>
 
+		<!--回退到上一个页面-->
+		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
+
 		<!--一排一排陈列图片-->
 		<div class="list_images" id="academic_activity_images">
-			<div v-for="item in academic_activity_images_src" :key='item.academic_activity_id'>
+			<div
+				v-for="item in academic_activity_images_src"
+				:key="item.academic_activity_id"
+			>
 				<!--把每一块img、时间、简介都包装成一个container-->
 				<div
 					@mousedown="
@@ -68,13 +74,13 @@
 				</div>
 			</div>
 		</div>
-        <!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-        <div style="position: relative; height: 400px"></div>
+		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
+		<div style="position: relative; height: 400px"></div>
 	</div>
 </template>
 
 <script>
-import {getForm} from '../../api/data.js'
+import { getForm } from "../../api/data.js";
 export default {
 	name: "AcademicActivityList",
 	data() {
@@ -83,103 +89,118 @@ export default {
 		};
 	},
 
-    // 生命周期函数，有很多种，created是常用的一种
-    // 在页面对应的生命周期自动执行
-    created() {
+	// 生命周期函数，有很多种，created是常用的一种
+	// 在页面对应的生命周期自动执行
+	created() {
+		//http请求
+		let url = "/activity/list";
 
-        //http请求
-        let url = "/activity/list";
+		console.log(url);
 
-        console.log(url);
+		this.academic_activity_images_src = [];
 
-        this.academic_activity_images_src = [];
+		let inner_this = this; // 别改
 
-        let inner_this = this; // 别改
+		getForm(url, function (res, msg) {
+			let data = res.data;
+			console.log("http-get data is here");
+			console.log("data list", data.list);
+			for (let item of data.list) {
+				console.log("academic item", item);
+				let new_map = {
+					academic_activity_id: item["main_id"].toString(),
+					src: item["cover_pic"],
+					date: item["date"],
+					description: item["title"],
+				};
+				console.log("academic new_map", new_map);
+				inner_this.academic_activity_images_src.push(new_map);
+			}
+		});
 
-        getForm(url, function (res, msg) {
-            let data = res.data
-            console.log("http-get data is here");
-            console.log('data list', data.list);
-            for (let item of data.list) {
-                console.log('academic item', item)
-                let new_map = {
-                    'academic_activity_id': item['main_id'].toString(),
-                    'src': item['cover_pic'],
-                    'date': item['date'],
-                    'description': item['title']
-                }
-                console.log('academic new_map', new_map)
-                inner_this.academic_activity_images_src.push(new_map);
-            }
-        });
+		console.log("academic_list", this.academic_activity_images_src);
+	},
 
-        console.log('academic_list', this.academic_activity_images_src)
-    },
+	// 这里定义方法
+	methods: {
+        // 路由回退
+        router_go_back() {
+            console.log("click!")
+			this.$router.go(-1);
+		},
+		academic_activity_images_btn(event, academic_activity_id) {
+			this.$router.push({
+				path: "/AcademicActivityDetails",
+				query: {
+					academic_activity_id,
+				},
+			});
+		},
+		//鼠标悬停效果。背景色改为蓝色，文字改为白色
+		academic_activity_mouseover(event, academic_activity_id) {
+			//修改整个边框和鼠标指针样式
+			let now_container = document.querySelector(
+				"#academic_activity_images_container_" + academic_activity_id
+			);
+			now_container.style.cursor = "pointer";
+			// now_container.style.width = '216px';
+			// now_container.style.height = '327px';
+			// now_container.style.margin = '5px';
+			now_container.style.background = "#023871";
 
-    // 这里定义方法
-    methods: {
-        academic_activity_images_btn(event, academic_activity_id) {
-            this.$router.push({
-                path: '/AcademicActivityDetails',
-                query: {
-                    academic_activity_id
-                }
-            })
-        },
-        //鼠标悬停效果。背景色改为蓝色，文字改为白色
-        academic_activity_mouseover(event, academic_activity_id) {
-            //修改整个边框和鼠标指针样式
-            let now_container = document.querySelector('#academic_activity_images_container_' + academic_activity_id)
-            now_container.style.cursor = 'pointer';
-            // now_container.style.width = '216px';
-            // now_container.style.height = '327px';
-            // now_container.style.margin = '5px';
-            now_container.style.background = '#023871';
+			//修改图片大小
+			let now_img = document.querySelector(
+				"#academic_activity_images_img_" + academic_activity_id
+			);
+			now_img.style.left = "-15px";
+			now_img.style.top = "-15px";
+			now_img.style.width = "216px";
+			now_img.style.height = "255px";
 
+			//修改日期文字大小
+			// let now_date = document.querySelector('#academic_activity_images_date_' + academic_activity_id);
+			// now_date.style.fontSize = '15px';
 
-            //修改图片大小
-            let now_img = document.querySelector('#academic_activity_images_img_' + academic_activity_id);
-            now_img.style.left = '-15px';
-            now_img.style.top = '-15px';
-            now_img.style.width = '216px';
-            now_img.style.height = '255px';
+			//修改图片文字颜色
+			let now_text = document.querySelector(
+				"#academic_activity_images_text_" + academic_activity_id
+			);
+			now_text.style.color = "#FFFFFF";
+			// now_text.style.fontSize = '15px';
+		},
 
-            //修改日期文字大小
-            // let now_date = document.querySelector('#academic_activity_images_date_' + academic_activity_id);
-            // now_date.style.fontSize = '15px';
+		academic_activity_mouseleave(event, academic_activity_id) {
+			//还原整个边框和鼠标指针样式
+			let now_container = document.querySelector(
+				"#academic_activity_images_container_" + academic_activity_id
+			);
+			now_container.style.cursor = "default";
+			// now_container.style.width = '186px';
+			// now_container.style.height = '297px';
+			// now_container.style.margin = '20px';
+			now_container.style.background = "#FFFFFF";
 
-            //修改图片文字颜色
-            let now_text = document.querySelector('#academic_activity_images_text_' + academic_activity_id);
-            now_text.style.color = '#FFFFFF';
-            // now_text.style.fontSize = '15px';
-        },
+			//还原图片大小
+			let now_img = document.querySelector(
+				"#academic_activity_images_img_" + academic_activity_id
+			);
+			now_img.style.left = "0";
+			now_img.style.top = "0";
+			now_img.style.width = "186px";
+			now_img.style.height = "225px";
 
-        academic_activity_mouseleave(event, academic_activity_id) {
-            //还原整个边框和鼠标指针样式
-            let now_container = document.querySelector('#academic_activity_images_container_' + academic_activity_id)
-            now_container.style.cursor = 'default';
-            // now_container.style.width = '186px';
-            // now_container.style.height = '297px';
-            // now_container.style.margin = '20px';
-            now_container.style.background = '#FFFFFF';
+			//还原日期文字大小
+			// let now_date = document.querySelector('#academic_activity_images_date_' + academic_activity_id);
+			// now_date.style.fontSize = '8px';
 
-            //还原图片大小
-            let now_img = document.querySelector('#academic_activity_images_img_' + academic_activity_id);
-            now_img.style.left = '0';
-            now_img.style.top = '0';
-            now_img.style.width = '186px';
-            now_img.style.height = '225px';
-
-            //还原日期文字大小
-            // let now_date = document.querySelector('#academic_activity_images_date_' + academic_activity_id);
-            // now_date.style.fontSize = '8px';
-
-            //还原图片文字颜色
-            let now_text = document.querySelector('#academic_activity_images_text_' + academic_activity_id);
-            now_text.style.color = '#000000';
-            // now_text.style.fontSize = '8px';
-        },
-    },
+			//还原图片文字颜色
+			let now_text = document.querySelector(
+				"#academic_activity_images_text_" + academic_activity_id
+			);
+			now_text.style.color = "#000000";
+			// now_text.style.fontSize = '8px';
+		},
+	},
 };
 </script>
 
@@ -217,7 +238,7 @@ export default {
 	box-shadow: 0 3px 3px rgba(159, 158, 158, 0.42);
 	border-radius: 0 0 3px 3px;
 	overflow: hidden;
-    z-index: 10;
+	z-index: 10;
 }
 
 /* 图片的 container */
