@@ -1,7 +1,13 @@
 <template>
 	<div class="background" style="background: #efefef">
 		<!--回退到上一个页面-->
-		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
+		<img
+			@click="router_go_back()"
+			class="go_back"
+			id="go_back1"
+			src="arrow_left_3.png"
+			alt=""
+		/>
 		<div class="exh_gallery_list_container">
 			<!--    展览详情页面标题-->
 			<p class="exh_gallery_list_heading">
@@ -33,11 +39,12 @@
 						"
 					>
 						<!--图片-->
-						<img
-							class="exh_gallery_list_imgText_img"
-							:src="item.img_src"
-						/>
-
+						<div class="exh_gallery_list_imgText_img_container">
+							<div
+								class="exh_gallery_list_imgText_img"
+								:style="`background-image:url(${item.img_src})`"
+							></div>
+						</div>
 						<!--图片的阴影-->
 						<div
 							class="exh_gallery_list_imgText_img_shadow"
@@ -81,28 +88,10 @@ export default {
 	name: "ExhibitionGalleryList",
 	data() {
 		return {
-			exh_gallery_list_heading:
-				"探险家与原住民：意象再造与现实记录\n阿贝尔·塔斯曼航海日志",
-			exh_gallery_list_text:
-				"阿贝尔·塔斯曼（Abel Janszoon Tasman）是荷兰商人、航海家、探险家，1642年至1644年间两次受命于荷兰东印度公司探索南太平洋，是早期到达澳大利亚塔斯马尼亚岛、斐济、新西兰等地的欧洲探险家......",
+			exh_gallery_list_heading: "",
+			exh_gallery_list_text: "",
 			gallery_list_id: "",
-			imgText_list: [
-				{
-					gallery_id: "1",
-					img_src: "../static/images/exh_details_img_1.png",
-					text: "阿贝尔·塔斯曼（Abel Janszoon Tasman）是荷兰商人、航海家、探险家，1642年至1644年间两次受命于荷兰东印度公司探索南太平洋，是早期到达澳大利亚塔斯马尼亚岛、斐济、新西兰等地的欧洲探险家。",
-				},
-				{
-					gallery_id: "2",
-					img_src: "../static/images/exh_details_img_2.png",
-					text: "塔斯曼在其1644年的航行中错过了发现澳大利亚与巴布亚新几内亚间的托雷斯海峡的机会，也没有开辟出新的有贸易价值的航线。一个多世纪后，英国探险家詹姆斯·库克（James Cook）重新来到塔斯曼探索过的区域，塔斯曼的发现才得到普遍承认。",
-				},
-				{
-					gallery_id: "3",
-					img_src: "../static/images/exh_details_img_3.png",
-					text: "1642年11月24日，塔斯曼率领的两艘船Heemskerck和Zeehaen在澳大利亚南部海域进行探索，发现了一个新的岛屿（今澳大利亚塔斯曼岛），并以荷兰东印度总督安东尼·范·迪门（Anthony van Diemen）之名将该岛命名为“范迪门地”（Anthony van Diemens Landt）。",
-				},
-			],
+			imgText_list: [],
 		};
 	},
 	created() {
@@ -141,9 +130,9 @@ export default {
 		});
 	},
 	methods: {
-        // 路由回退
-        router_go_back() {
-            console.log("click!")
+		// 路由回退
+		router_go_back() {
+			console.log("click!");
 			this.$router.go(-1);
 		},
 		// 点击图片跳转到 gallery 界面
@@ -228,13 +217,26 @@ export default {
 }
 
 /*图片部分*/
-.exh_gallery_list_imgText_img {
+.exh_gallery_list_imgText_img_container {
 	position: absolute;
 	width: 399px;
 	height: 258px;
 	left: 14px;
 	top: 12px;
 	border-radius: 7px;
+}
+
+.exh_gallery_list_imgText_img{
+    width: 100%;
+	height: 0;
+	padding-bottom: 65%;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+    border-radius: 7px;
 }
 
 /*图片的灰色表面，用于hover效果*/

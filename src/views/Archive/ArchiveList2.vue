@@ -124,18 +124,13 @@
 						search_result.search_result_id
 					"
 				>
-					<img
-						class="img"
-						:src="search_result.img_src"
-						style="
-							position: absolute;
-							width: 145px;
-							height: 167px;
-							left: 34px;
-							top: 28px;
-						"
-						alt="图片路径错误"
-					/>
+					<div class="search_result_img_container">
+						<div
+							class="search_result_img"
+							:style="`background-image:url(${search_result.img_src})`"
+							alt="图片路径错误"
+						></div>
+					</div>
 					<div class="archive_list_search_result_title">
 						{{ search_result.search_result_title }}
 					</div>
@@ -241,7 +236,7 @@ export default {
 	},
 	methods: {
 		router_go_back() {
-            console.log("click!")
+			console.log("click!");
 			this.$router.go(-1);
 		},
 		getList() {
@@ -660,12 +655,23 @@ export default {
 	cursor: pointer;
 }
 /*图片*/
-.archive_list_search_result_img {
+.search_result_img_container {
 	position: absolute;
 	width: 145px;
 	height: 167px;
 	left: 34px;
 	top: 28px;
+}
+.search_result_img{
+    width: 100%;
+	height: 0;
+	padding-bottom: 115%;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
 }
 /*标题*/
 .archive_list_search_result_title {

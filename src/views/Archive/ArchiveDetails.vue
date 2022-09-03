@@ -1,7 +1,13 @@
 <template>
 	<div class="background" style="height: 1427px; background: #efefef">
 		<!--回退到上一个页面-->
-		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
+		<img
+			@click="router_go_back()"
+			class="go_back"
+			id="go_back1"
+			src="arrow_left_3.png"
+			alt=""
+		/>
 		<!--为了方便vue，我们把整个页面的图片文字全部放到 archive_details_data 里面-->
 		<div id="archive_details_data">
 			<!--    标题与副标题-->
@@ -11,11 +17,13 @@
 			</p>
 
 			<!--    左侧图片、查看档案、查看来源、图片中文描述、图片其他语种描述-->
-			<img
-				class="archive_details_img"
-				:src="archive_details_img"
-				alt=""
-			/>
+			<div class="archive_details_img_container">
+				<div
+					class="archive_details_img"
+					:style="`background-image:url(${archive_details_img})`"
+					alt=""
+				></div>
+			</div>
 
 			<p
 				@mousedown="archive_details_see_archive($event)"
@@ -277,9 +285,9 @@ export default {
 		});
 	},
 	methods: {
-        // 路由回退
-        router_go_back() {
-            console.log("click!")
+		// 路由回退
+		router_go_back() {
+			console.log("click!");
 			this.$router.go(-1);
 		},
 		archive_details_see_archive(event) {
@@ -327,7 +335,7 @@ export default {
 }
 
 /*左侧图片、查看档案、查看来源、图片中文描述、图片其他语种描述*/
-.archive_details_img {
+.archive_details_img_container {
 	position: absolute;
 	width: 315px;
 	height: 364px;
@@ -335,6 +343,20 @@ export default {
 	top: 240px;
 	filter: drop-shadow(6px 6px 11px rgba(0, 0, 0, 0.25));
 }
+
+.archive_details_img {
+    width: 100%;
+	height: 0;
+	padding-bottom: 116%;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
+}
+
 .archive_details_view {
 	position: absolute;
 	top: 625px;

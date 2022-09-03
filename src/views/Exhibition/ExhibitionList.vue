@@ -1,7 +1,13 @@
 <template>
 	<div class="background" style="background: #efefef">
 		<!--回退到上一个页面-->
-		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
+		<img
+			@click="router_go_back()"
+			class="go_back"
+			id="go_back1"
+			src="arrow_left_3.png"
+			alt=""
+		/>
 		<!--线上展览标题-->
 		<p class="exh_list_h1">线上展览</p>
 
@@ -36,7 +42,7 @@
 							v-for="(img_src, index) in item.imgList"
 							:key="img_src.gallery_id"
 						>
-							<img
+							<div
 								@mousedown="
 									exh_list_images_btn(
 										$event,
@@ -45,17 +51,14 @@
 										item.exh_list_h2
 									)
 								"
-								class="img"
-								:src="img_src.src"
-								style="
-									width: 178px;
-									height: 178px;
-									border-radius: 7px;
-									margin: 20px;
-									cursor: pointer;
-								"
-								v-show="index < 4"
-							/>
+								class="exh_list_images_img_container"
+							>
+								<div
+									class="exh_list_images_img"
+									:style="`background-image:url(${img_src.src})`"
+									v-show="index < 4"
+								></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -74,36 +77,10 @@ export default {
 		return {
 			exh_list_items: [
 				{
-					exh_list_h2: "探险家与原住民",
-					exh_list_text:
-						"阿贝尔·塔斯曼（Abel Janszoon Tasman）是荷兰商人、航海家、探险家，1642年至1644年间两次受命于荷兰东印度公司探索南太平洋，是早期到达澳大利亚塔斯马尼亚岛、斐济、新西兰等地的欧洲探险家。",
-					gallery_list_id: "1",
-					imgList: [
-						{
-							src: "../static/images/exh_list_image_up_1.png",
-							gallery_id: "1",
-						},
-						{
-							src: "../static/images/exh_list_image_up_2.png",
-							gallery_id: "2",
-						},
-						{
-							src: "../static/images/exh_list_image_up_3.png",
-							gallery_id: "3",
-						},
-						{
-							src: "../static/images/exh_list_image_up_4.png",
-							gallery_id: "4",
-						},
-						{
-							src: "../static/images/exh_list_image_up_1.png",
-							gallery_id: "5",
-						},
-						{
-							src: "../static/images/exh_list_image_up_2.png",
-							gallery_id: "6",
-						},
-					],
+					exh_list_h2: "",
+					exh_list_text: "",
+					gallery_list_id: "",
+					imgList: [],
 				},
 			],
 		};
@@ -165,9 +142,9 @@ export default {
 		});
 	},
 	methods: {
-        // 路由回退
-        router_go_back() {
-            console.log("click!")
+		// 路由回退
+		router_go_back() {
+			console.log("click!");
 			this.$router.go(-1);
 		},
 		see_all_btn(event, gallery_list_id, title, intro) {
@@ -271,5 +248,28 @@ export default {
 	left: 0;
 	top: 134px;
 	z-index: 10;
+}
+
+/* 每一张图片的属性 */
+.exh_list_images_img_container {
+    width: 178px;
+	height: 178px;
+	border-radius: 7px;
+	margin: 20px;
+	cursor: pointer;
+}
+
+.exh_list_images_img {
+    width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+    border-radius: 7px;
+	
 }
 </style>

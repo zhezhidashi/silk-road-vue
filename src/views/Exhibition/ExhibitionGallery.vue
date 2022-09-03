@@ -1,7 +1,13 @@
 <template>
 	<div class="background" style="height: 1577px; background: #efefef">
 		<!--回退到上一个页面-->
-		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
+		<img
+			@click="router_go_back()"
+			class="go_back"
+			id="go_back1"
+			src="arrow_left_3.png"
+			alt=""
+		/>
 
 		<!--    把整个页面所有数据包装到container里面-->
 		<div class="exh_gallery_container">
@@ -29,24 +35,14 @@
 					v-for="item in exh_gallery_imgList_src"
 					:key="item.gallery_img_id"
 				>
-					<div class="exh_gallery_imgList_container">
-						<img
-							@mousedown="exh_gallery_imgList_btn($event, item)"
-							:src="item.src"
-							style="
-								position: absolute;
-								width: 83px;
-								height: 65px;
-								left: 0;
-								top: 0;
-								border-radius: 7px;
-								filter: drop-shadow(
-									3px 3px 3px rgba(0, 0, 0, 0.25)
-								);
-								cursor: pointer;
-								z-index: 10;
-							"
-						/>
+					<div
+						@mousedown="exh_gallery_imgList_btn($event, item)"
+						class="exh_gallery_imgList_container"
+					>
+						<div
+							class="ImgList_img"
+							:style="`background-image:url(${item.src})`"
+						></div>
 					</div>
 				</div>
 			</div>
@@ -80,9 +76,6 @@ export default {
 			this.$route.query.gallery_list_title;
 
 		//http请求
-		if (this.exh_gallery_list_id === "")
-			alert("exh_gallery_list_id 不能为空");
-		if (this.exh_gallery_id === "") alert("exh_gallery_id 不能为空");
 
 		let url =
 			"/exhibition/album-detail?exhibition_id=" +
@@ -121,9 +114,9 @@ export default {
 		});
 	},
 	methods: {
-        // 路由回退
-        router_go_back() {
-            console.log("click!")
+		// 路由回退
+		router_go_back() {
+			console.log("click!");
 			this.$router.go(-1);
 		},
 		// 点击下方列表的图片，修改大图的url
@@ -188,5 +181,20 @@ export default {
 	width: 83px;
 	height: 65px;
 	margin: 13px;
+}
+.ImgList_img {
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+    border-radius: 7px;
+	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
+	cursor: pointer;
+    z-index: 10;
 }
 </style>

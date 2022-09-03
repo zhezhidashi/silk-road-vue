@@ -40,14 +40,14 @@
 				>
 					<!--图片-->
 					<div class="academic_activity_images_img_container">
-						<img
-							:src="item.src"
+						<div
+                            :style="`background-image:url(${item.src})`"
 							class="academic_activity_images_img"
 							:id="
 								'academic_activity_images_img_' +
 								item.academic_activity_id
 							"
-						/>
+						></div>
 					</div>
 
 					<!--日期-->
@@ -143,30 +143,19 @@ export default {
 				"#academic_activity_images_container_" + academic_activity_id
 			);
 			now_container.style.cursor = "pointer";
-			// now_container.style.width = '216px';
-			// now_container.style.height = '327px';
-			// now_container.style.margin = '5px';
 			now_container.style.background = "#023871";
 
 			//修改图片大小
 			let now_img = document.querySelector(
 				"#academic_activity_images_img_" + academic_activity_id
 			);
-			now_img.style.left = "-15px";
-			now_img.style.top = "-15px";
-			now_img.style.width = "216px";
-			now_img.style.height = "255px";
-
-			//修改日期文字大小
-			// let now_date = document.querySelector('#academic_activity_images_date_' + academic_activity_id);
-			// now_date.style.fontSize = '15px';
+            now_img.style.transform = "scale(1.2, 1.2)"
 
 			//修改图片文字颜色
 			let now_text = document.querySelector(
 				"#academic_activity_images_text_" + academic_activity_id
 			);
 			now_text.style.color = "#FFFFFF";
-			// now_text.style.fontSize = '15px';
 		},
 
 		academic_activity_mouseleave(event, academic_activity_id) {
@@ -175,30 +164,19 @@ export default {
 				"#academic_activity_images_container_" + academic_activity_id
 			);
 			now_container.style.cursor = "default";
-			// now_container.style.width = '186px';
-			// now_container.style.height = '297px';
-			// now_container.style.margin = '20px';
 			now_container.style.background = "#FFFFFF";
 
 			//还原图片大小
 			let now_img = document.querySelector(
 				"#academic_activity_images_img_" + academic_activity_id
 			);
-			now_img.style.left = "0";
-			now_img.style.top = "0";
-			now_img.style.width = "186px";
-			now_img.style.height = "225px";
-
-			//还原日期文字大小
-			// let now_date = document.querySelector('#academic_activity_images_date_' + academic_activity_id);
-			// now_date.style.fontSize = '8px';
+            now_img.style.transform = "scale(1, 1)"
 
 			//还原图片文字颜色
 			let now_text = document.querySelector(
 				"#academic_activity_images_text_" + academic_activity_id
 			);
 			now_text.style.color = "#000000";
-			// now_text.style.fontSize = '8px';
 		},
 	},
 };
@@ -252,10 +230,16 @@ export default {
 
 /*图片*/
 .academic_activity_images_img {
-	position: relative;
-	width: 186px;
-	height: 225px;
-	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.25));
+    width: 100%;
+	height: 0;
+	padding-bottom: 121%;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
 	border-radius: 3px 3px 0 0;
 }
 
