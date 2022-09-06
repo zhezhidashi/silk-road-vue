@@ -68,8 +68,8 @@ export default {
 
 			imgList_src: [],
 
-			CanvasWidth: 1000, // 画布大小
-			CanvasHeight: 500,
+			CanvasWidth: 1, // 画布大小
+			CanvasHeight: 1,
 			MyCanvas: null,
 			ctx: null,
 			ImgObject: {
