@@ -6,6 +6,7 @@
 			class="go_back"
 			id="go_back1"
 			src="arrow_left_3.png"
+			style="left: 0"
 			alt=""
 		/>
 
@@ -17,7 +18,10 @@
 		</div>
 
 		<!--    大图片-->
-		<div class="MainImageContainer">
+		<div
+			class="MainImageContainer"
+			:style="`width: ${CanvasWidth}; height: ${CanvasHeight}; `"
+		>
 			<canvas
 				ref="MainImageCanvas"
 				:width="CanvasWidth"
@@ -59,25 +63,23 @@ export default {
 			// 左上角的路径、大图的url，大图底下的文字描述
 			web_path_gallery_list_title: "",
 			web_path_gallery_title: "",
-			MainImage_src: "./风景壁纸04.jpg",
+			MainImage_src: null,
 			MainImage_text: "",
 
 			imgList_src: [],
 
-			CanvasWidth: 810, // 画布大小
-			CanvasHeight: 410,
-			extraImgList: [
-				{
-					url: require("./风景壁纸04.jpg"),
-					x: 0,
-					y: 0,
-					width: 810,
-					height: 410,
-				},
-			],
-			MCanvas: null,
+			CanvasWidth: 1000, // 画布大小
+			CanvasHeight: 500,
+			MyCanvas: null,
 			ctx: null,
-			ImgObject: [],
+			ImgObject: {
+				img: null,
+				url: null,
+				x: 0,
+				y: 0,
+				width: 0,
+				height: 0,
+			},
 			ImgX: 0, // 图片在画布中渲染的起点x坐标
 			ImgY: 0,
 			ImgScale: 1, // 图片的缩放大小
@@ -85,18 +87,17 @@ export default {
 	},
 	mounted() {
 		this.GetData();
-		this.SetCanvas();
 	},
 	methods: {
 		// 路由回退
 		router_go_back() {
-			console.log("click!");
 			this.$router.go(-1);
 		},
 		// 点击下方列表的图片，修改大图的url
 		imgList_btn(event, item) {
 			this.MainImage_src = item.src;
 			this.MainImage_text = item["intro"];
+			this.SetCanvas();
 		},
 
 		// HTTP获取网页基本数据
@@ -119,19 +120,19 @@ export default {
 
 			this.imgList_src = [];
 
-			let inner_this = this; // 别改
+			let _this = this; // 别改
 
 			getForm(url, function (res, msg) {
 				let data = res.data;
 				console.log("http-get data is here", data);
 				// 修改 标题、图片url，图片简介
-				inner_this.web_path_gallery_title = data["title"];
-				inner_this.MainImage_src = null;
-				inner_this.MainImage_text = data["intro"];
+				_this.web_path_gallery_title = data["title"];
+				_this.MainImage_src = null;
+				_this.MainImage_text = data["intro"];
 
 				for (let item in data["picture_dict"]) {
-					if (inner_this.MainImage_src === null) {
-						inner_this.MainImage_src =
+					if (_this.MainImage_src === null) {
+						_this.MainImage_src =
 							data["picture_dict"][item]["pic_url"];
 					}
 					let new_map = {
@@ -140,83 +141,84 @@ export default {
 						intro: data["picture_dict"][item]["intro"],
 						title: data["picture_dict"][item]["title"],
 					};
-					console.log("exhibition gallery new_map", new_map);
-					inner_this.imgList_src.push(new_map);
+					_this.imgList_src.push(new_map);
 				}
+
+				_this.SetCanvas();
 			});
 		},
 
 		// 初始化 Canvas 设置相关参数
 		SetCanvas() {
+			this.CanvasWidth = 1000;
+			this.CanvasHeight = 500;
 			this.MyCanvas = this.$refs.MainImageCanvas;
-			console.log("this.MyCanvas", this.MyCanvas);
 			this.ctx = this.MyCanvas.getContext("2d");
 			this.loadImg();
 			this.canvasEventsInit();
 		},
 
 		loadImg() {
-			var _this = this;
-			let extraImgList = _this.extraImgList;
-			let length = extraImgList.length;
-			var imageList = [];
-			let count = 0;
+            this.ImgX = this.ImgY = 0;
+            this.ImgScale = 1;
+            
+			this.ImgObject.url = this.MainImage_src;
 			//加载背景图片
-			var isBgLoaded = false;
-			var img = new Image();
-			var bgImg = extraImgList[0];
-			img.src = bgImg.url;
-			img.onload = () => {
-				imageList.push({
-					img: img,
-					x: bgImg.x,
-					y: bgImg.y,
-					width: bgImg.width,
-					height: bgImg.height,
-				});
-				++count;
-				if (length > 1) {
-					//加载剩余图片
-					for (let key = 1; key < length; key++) {
-						let item = extraImgList[key];
-						let extraImg = new Image();
-						extraImg.src = item.url;
-						extraImg.onload = () => {
-							imageList.push({
-								img: extraImg,
-								x: item.x,
-								y: item.y,
-								width: item.width,
-								height: item.height,
-							});
-							if (++count >= length) {
-								_this.ImgObject = imageList;
-								_this.drawImage(imageList);
-							}
-						};
-					}
-				} else {
-					_this.ImgObject = imageList;
-					_this.drawImage(imageList);
-				}
+			this.ImgObject.img = new Image();
+			this.ImgObject.img.src = this.ImgObject.url;
+
+			// 图片比较窄
+			if (this.ImgObject.img.height * 2 >= this.ImgObject.img.width) {
+				this.ImgObject.width =
+					(this.CanvasHeight * this.ImgObject.img.width) /
+					this.ImgObject.img.height;
+				this.ImgObject.height = this.CanvasHeight;
+				this.CanvasWidth = this.ImgObject.width;
+			}
+
+			// 图片比较宽
+			if (this.ImgObject.img.height * 2 < this.ImgObject.img.width) {
+				this.ImgObject.width = this.CanvasWidth;
+				this.ImgObject.height =
+					(this.CanvasWidth * this.ImgObject.img.height) /
+					this.ImgObject.img.width;
+				this.CanvasHeight = this.ImgObject.height;
+			}
+
+			let _this = this;
+			this.ImgObject.img.onload = () => {
+				_this.drawImage(_this.ImgObject);
 			};
 		},
-		drawImage(imgList) {
-			var _this = this;
-			_this.ctx.clearRect(0, 0, this.CanvasWidth, this.CanvasHeight);
-			for (let i = 0; i < imgList.length; i++) {
-				_this.ctx.drawImage(
-					imgList[i].img, //规定要使用的图片
-					_this.ImgX + imgList[i].x * _this.ImgScale,
-					_this.ImgY + imgList[i].y * _this.ImgScale, //在画布上放置图像的 x 、y坐标位置。
-					imgList[i].width * _this.ImgScale,
-					imgList[i].height * _this.ImgScale //要使用的图像的宽度、高度
-				);
+
+		drawImage(Img) {
+            let _this = this;
+
+			// 保证  imgX  在  [img.width*(1-imgScale),0]   区间内
+			if (_this.ImgX < _this.CanvasWidth * (1 - _this.ImgScale)) {
+				_this.ImgX = _this.CanvasWidth * (1 - _this.ImgScale);
+			} else if (_this.ImgX > 0) {
+				_this.ImgX = 0;
 			}
+			// 保证  imgY   在  [img.height*(1-imgScale),0]   区间内
+			if (_this.ImgY < _this.CanvasHeight * (1 - _this.ImgScale)) {
+				_this.ImgY = _this.CanvasHeight * (1 - _this.ImgScale);
+			} else if (_this.ImgY > 0) {
+				_this.ImgY = 0;
+			}
+
+			_this.ctx.clearRect(0, 0, this.CanvasWidth, this.CanvasHeight);
+			_this.ctx.drawImage(
+				Img.img, //规定要使用的图片
+				_this.ImgX + Img.x * _this.ImgScale,
+				_this.ImgY + Img.y * _this.ImgScale, //在画布上放置图像的 x 、y坐标位置。
+				Img.width * _this.ImgScale,
+				Img.height * _this.ImgScale //要使用的图像的宽度、高度
+			);
 		},
-		/**
-		 * 为画布上鼠标的拖动和缩放注册事件
-		 */
+		/*
+		为画布上鼠标的拖动和缩放注册事件
+		*/
 		canvasEventsInit() {
 			var _this = this;
 			var canvas = _this.MyCanvas;
@@ -229,8 +231,8 @@ export default {
 					//移动
 					canvas.style.cursor = "move";
 
-					var x = (evt.clientX - pos.x) * 2 + ImgX;
-					var y = (evt.clientY - pos.y) * 2 + ImgY;
+					var x = evt.clientX - pos.x + ImgX;
+					var y = evt.clientY - pos.y + ImgY;
 					_this.ImgX = x;
 					_this.ImgY = y;
 					_this.drawImage(_this.ImgObject); //重新绘制图片
@@ -247,13 +249,12 @@ export default {
 				var wheelDelta = event.wheelDelta
 					? event.wheelDelta
 					: event.deltaY * -40; //获取当前鼠标的滚动情况
-				if (wheelDelta > 0) {
-					_this.ImgScale += 0.02;
-				} else {
-					if (_this.ImgScale > 0.3) {
-						_this.ImgScale -= 0.02;
-					}
+				if (wheelDelta > 0 && _this.ImgScale < 3) {
+					_this.ImgScale += 0.01;
+				} else if (wheelDelta < 0 && _this.ImgScale > 1) {
+					_this.ImgScale -= 0.01;
 				}
+
 				_this.drawImage(_this.ImgObject); //重新绘制图片
 				event.preventDefault && event.preventDefault();
 				return false;
@@ -273,9 +274,9 @@ export default {
 /*左上角的网页路径*/
 .web_path {
 	position: absolute;
-	width: 266px;
+	width: 1000px;
 	height: 13px;
-	left: 99px;
+	left: 0px;
 	top: 192px;
 	font-size: 14px;
 	line-height: 96%;
@@ -285,30 +286,29 @@ export default {
 /*大图片*/
 .MainImageContainer {
 	position: absolute;
-	width: 810px;
-	height: 410px;
-	left: 98px;
+	left: 0;
 	top: 240px;
 	background: gainsboro;
 	border-radius: 7px;
+	border: 3px solid #000;
 }
 
 /*大图片的描述*/
 .MainImage_text {
 	position: absolute;
-	width: 813px;
-	left: 99px;
+	width: 1000px;
+	left: 0;
 	height: 30px;
-	top: 665px;
+	top: 765px;
 	font-size: 11px;
 	line-height: 120%;
 	color: #2f2f2f;
 }
 /*底下的图片列表*/
 #imgList {
-	width: 814px;
-	left: 84px;
-	top: 730px;
+	width: 1000px;
+	left: 0px;
+	top: 830px;
 	/*background: red;*/
 }
 .imgList_container {
