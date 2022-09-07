@@ -1,6 +1,6 @@
 import axios from "./axios";
 
-export const baseUrl = '/api'
+export const baseUrl = 'https://api_doc.pacificsilkroad.cn'
 
 // 向指定的 url 获取数据表单
 export const getForm = (requestUrl, callback) => {

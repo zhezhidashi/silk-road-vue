@@ -203,7 +203,7 @@ export default {
 			}
 
 			inner_this.archive_details_img =
-				data.pic_url === "" ? "N/A" : data.pic_url;
+				data.mini_pic_url === "" ? "N/A" : data.mini_pic_url;
 
 			for (let item in data.intro) {
 				if (item === "ZH")
@@ -280,7 +280,7 @@ export default {
 			}
 
 			//图片下方“查看文档”和“查看来源”对应的 url
-			inner_this.archive_details_see_archive_url = data.pic_url;
+			inner_this.archive_details_see_archive_url = data.archive_url;
 			inner_this.archive_details_see_source_url = data.from_url;
 		});
 	},

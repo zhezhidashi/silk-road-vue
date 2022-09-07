@@ -26,21 +26,66 @@
 				ref="MainImageCanvas"
 				:width="CanvasWidth"
 				:height="CanvasHeight"
+				z-index="15"
+				position="absolute"
+				style="vertical-align: middle"
 			></canvas>
+			<div
+				style="
+					position: absolute;
+					box-sizing: border-box;
+					border: 2px solid #000;
+					top: 2px;
+					right: 2px;
+					z-index: 20;
+				"
+				:width="`${MiniImgWidth}px`"
+				:height="`${MiniImgHeight}px`"
+			>
+				<img
+					position="absolute"
+					:src="MainImage_src"
+					:width="`${MiniImgWidth}px`"
+					:height="`${MiniImgHeight}px`"
+					style="vertical-align: middle"
+				/>
+				<div
+					class="RedBorder"
+					:style="`position: absolute;
+                        box-sizing: border-box;
+						border: 2px solid red;
+						z-index: 25;
+                        left: ${
+							(-ImgX / CanvasWidth / ImgScale) * MiniImgWidth
+						}px;
+                        top: ${
+							(-ImgY / CanvasHeight / ImgScale) * MiniImgHeight
+						}px;
+                        width: ${MiniImgWidth / ImgScale}px;
+                        height: ${MiniImgHeight / ImgScale}px;`"
+				></div>
+			</div>
 		</div>
-		<!-- <img class="MainImage" :src="MainImage_src" alt="" /> -->
 
 		<!--    大图片的描述-->
 		<div class="MainImage_text">
-			{{ MainImage_text }}
+			<div class="MainImage_text_item">中文标题：&ensp;{{ MainImage_prop.title_zh }}</div>
+			<div class="MainImage_text_item">外文标题：&ensp;{{ MainImage_prop.title_en }}</div>
+			<div class="MainImage_text_item">中文简介：&ensp;{{ MainImage_prop.intro_zh }}</div>
+			<div class="MainImage_text_item">外文简介：&ensp;{{ MainImage_prop.intro_en }}</div>
+			<div class="MainImage_text_item">档案日期：&ensp;{{ MainImage_prop.date }}</div>
+			<div class="MainImage_text_item">档案尺寸：&ensp;{{ MainImage_prop.size }}</div>
+			<div class="MainImage_text_item">
+				档案组织：&ensp;{{ MainImage_prop.organization }}
+			</div>
+			<div class="MainImage_text_item">
+				档案编号：&ensp;{{ MainImage_prop.archive_id }}
+			</div>
 		</div>
 		<!--    底下的图片列表-->
 		<div class="list_images" id="imgList">
-			<div v-for="item in imgList_src" :key="item.gallery_img_id">
-				<div
-					@mousedown="imgList_btn($event, item)"
-					class="imgList_container"
-				>
+			<div v-for="item in ImgList" :key="item.gallery_img_id">
+				<div @mousedown="ImgList_btn(item)" class="imgList_container">
 					<div
 						class="ImgList_img"
 						:style="`background-image:url(${item.src})`"
@@ -64,12 +109,26 @@ export default {
 			web_path_gallery_list_title: "",
 			web_path_gallery_title: "",
 			MainImage_src: null,
-			MainImage_text: "",
+			MainImage_text: "111",
+			MainImage_prop: {
+				src: "",
+				gallery_img_id: "",
+				title_zh: "",
+				title_en: "",
+				intro_zh: "",
+				intro_en: "",
+				date: "",
+				size: "",
+				organization: "",
+				archive_id: "",
+			},
 
-			imgList_src: [],
+			ImgList: [],
 
 			CanvasWidth: 1, // 画布大小
 			CanvasHeight: 1,
+			MiniImgWidth: 1, //右上角缩略图大小
+			MiniImgHeight: 1,
 			MyCanvas: null,
 			ctx: null,
 			ImgObject: {
@@ -94,9 +153,10 @@ export default {
 			this.$router.go(-1);
 		},
 		// 点击下方列表的图片，修改大图的url
-		imgList_btn(event, item) {
+		ImgList_btn(item) {
 			this.MainImage_src = item.src;
-			this.MainImage_text = item["intro"];
+			this.MainImage_prop = item;
+            this.web_path_gallery_title = item.title_zh;
 			this.SetCanvas();
 		},
 
@@ -118,32 +178,51 @@ export default {
 
 			console.log(url);
 
-			this.imgList_src = [];
+			this.ImgList = [];
 
 			let _this = this; // 别改
 
 			getForm(url, function (res, msg) {
-				let data = res.data;
-				console.log("http-get data is here", data);
+				let data = res.data["picture_dict"];
+				console.log("picture_dict is here", data);
 				// 修改 标题、图片url，图片简介
 				_this.web_path_gallery_title = data["title"];
 				_this.MainImage_src = null;
 				_this.MainImage_text = data["intro"];
 
-				for (let item in data["picture_dict"]) {
-					if (_this.MainImage_src === null) {
-						_this.MainImage_src =
-							data["picture_dict"][item]["pic_url"];
-					}
+				for (let item in data) {
 					let new_map = {
-						src: data["picture_dict"][item]["pic_url"],
+						src: data[item]["pic_url"],
 						gallery_img_id: item,
-						intro: data["picture_dict"][item]["intro"],
-						title: data["picture_dict"][item]["title"],
+						title_zh: "N/A",
+						title_en: "N/A",
+						intro_zh: "N/A",
+						intro_en: "N/A",
+						date: data[item].date,
+						size: data[item].size,
+						organization: data[item].organization,
+						archive_id: data[item].archive_id,
 					};
-					_this.imgList_src.push(new_map);
+					for (let item_id in data[item].title) {
+						if (item_id === "ZH") {
+							new_map.title_zh = data[item].title[item_id];
+						} else {
+							new_map.title_en = data[item].title[item_id];
+						}
+					}
+					for (let item_id in data[item].intro) {
+						if (item_id === "ZH") {
+							new_map.intro_zh = data[item].intro[item_id];
+						} else {
+							new_map.intro_en = data[item].intro[item_id];
+						}
+					}
+					_this.ImgList.push(new_map);
+					if (_this.ImgList.length === 1)
+						_this.ImgList_btn(_this.ImgList[0]);
 				}
 
+				console.log("ImgList", _this.ImgList);
 				_this.SetCanvas();
 			});
 		},
@@ -154,14 +233,16 @@ export default {
 			this.CanvasHeight = 500;
 			this.MyCanvas = this.$refs.MainImageCanvas;
 			this.ctx = this.MyCanvas.getContext("2d");
+			// console.log(this.ctx)
 			this.loadImg();
 			this.canvasEventsInit();
 		},
 
 		loadImg() {
-            this.ImgX = this.ImgY = 0;
-            this.ImgScale = 1;
-            
+			// 初始化图像相关参数
+			this.ImgX = this.ImgY = 0;
+			this.ImgScale = 1;
+
 			this.ImgObject.url = this.MainImage_src;
 			//加载背景图片
 			this.ImgObject.img = new Image();
@@ -185,6 +266,10 @@ export default {
 				this.CanvasHeight = this.ImgObject.height;
 			}
 
+			// 设置缩略图大小
+			this.MiniImgWidth = this.CanvasWidth * 0.2;
+			this.MiniImgHeight = this.CanvasHeight * 0.2;
+
 			let _this = this;
 			this.ImgObject.img.onload = () => {
 				_this.drawImage(_this.ImgObject);
@@ -192,7 +277,7 @@ export default {
 		},
 
 		drawImage(Img) {
-            let _this = this;
+			let _this = this;
 
 			// 保证  imgX  在  [img.width*(1-imgScale),0]   区间内
 			if (_this.ImgX < _this.CanvasWidth * (1 - _this.ImgScale)) {
@@ -206,6 +291,8 @@ export default {
 			} else if (_this.ImgY > 0) {
 				_this.ImgY = 0;
 			}
+
+			// console.log("ImgX", _this.ImgX, _this.CanvasWidth, document.querySelector('.RedBorder'))
 
 			_this.ctx.clearRect(0, 0, this.CanvasWidth, this.CanvasHeight);
 			_this.ctx.drawImage(
@@ -250,9 +337,9 @@ export default {
 					? event.wheelDelta
 					: event.deltaY * -40; //获取当前鼠标的滚动情况
 				if (wheelDelta > 0 && _this.ImgScale < 3) {
-					_this.ImgScale += 0.01;
+					_this.ImgScale += 0.02;
 				} else if (wheelDelta < 0 && _this.ImgScale > 1) {
-					_this.ImgScale -= 0.01;
+					_this.ImgScale -= 0.02;
 				}
 
 				_this.drawImage(_this.ImgObject); //重新绘制图片
@@ -289,7 +376,8 @@ export default {
 	left: 0;
 	top: 240px;
 	background: gainsboro;
-	border-radius: 7px;
+	/* border-radius: 7px; */
+	box-sizing: border-box;
 	border: 3px solid #000;
 }
 
@@ -298,17 +386,25 @@ export default {
 	position: absolute;
 	width: 1000px;
 	left: 0;
-	height: 30px;
+	height: 180px;
 	top: 765px;
-	font-size: 11px;
-	line-height: 120%;
-	color: #2f2f2f;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
+
+.MainImage_text_item {
+	position: relative;
+	color: #2f2f2f;
+	font-size: 16px;
+	width: 1000px;
+}
+
 /*底下的图片列表*/
 #imgList {
 	width: 1000px;
 	left: 0px;
-	top: 830px;
+	top: 980px;
 	/*background: red;*/
 }
 .imgList_container {

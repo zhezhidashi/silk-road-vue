@@ -312,7 +312,7 @@ export default {
 					let new_map = {
 						search_result_id:
 							search_list_item["main_id"].toString(),
-						img_src: search_list_item["pic_url"],
+						img_src: search_list_item["mini_pic_url"],
 						search_result_title: search_list_item["title"]["ZH"],
 						search_result_subtitle:
 							search_list_item["location"]["ZH"],
