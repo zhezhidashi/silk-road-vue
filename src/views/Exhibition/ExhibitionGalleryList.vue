@@ -187,9 +187,8 @@ export default {
 	color: #2f2f2f;
 }
 .exh_gallery_list_text {
-	position: absolute;
+	position: relative;
 	width: 813px;
-	height: 43px;
 	left: 97px;
 	top: 259px;
 	font-size: 11px;

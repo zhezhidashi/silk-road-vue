@@ -231,8 +231,15 @@ export default {
 	left: 20px;
 	top: 68px;
 	font-size: 11px;
-	line-height: 120%;
+	line-height: 150%;
 	color: #2f2f2f;
+
+    /* 最多显示2行文字，否则就是省略号 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 
 /*每一个exhibition对应的查看全部*/

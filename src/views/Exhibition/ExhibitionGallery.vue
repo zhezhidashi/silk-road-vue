@@ -19,39 +19,47 @@
 
 		<!--    大图片-->
 		<div
-			class="MainImageContainer"
-			:style="`width: ${CanvasWidth}; height: ${CanvasHeight}; `"
+			style="
+				position: absolute;
+				left: 130px;
+				top: 240px;
+				width: 860px;
+				height: 430px;
+				display: flex;
+				justify-content: center;
+			"
 		>
-			<canvas
-				ref="MainImageCanvas"
-				:width="CanvasWidth"
-				:height="CanvasHeight"
-				z-index="15"
-				position="absolute"
-				style="vertical-align: middle"
-			></canvas>
-			<div
-				style="
-					position: absolute;
-					box-sizing: border-box;
-					border: 2px solid #000;
-					top: 2px;
-					right: 2px;
-					z-index: 20;
-				"
-				:width="`${MiniImgWidth}px`"
-				:height="`${MiniImgHeight}px`"
-			>
-				<img
+			<div class="MainImageContainer">
+				<canvas
+					ref="MainImageCanvas"
+					:width="CanvasWidth"
+					:height="CanvasHeight"
+					z-index="15"
 					position="absolute"
-					:src="MainImage_src"
+					style="vertical-align: middle"
+				></canvas>
+				<div
+					style="
+						position: absolute;
+						box-sizing: border-box;
+						border: 2px solid #000;
+						top: 2px;
+						right: 2px;
+						z-index: 20;
+					"
 					:width="`${MiniImgWidth}px`"
 					:height="`${MiniImgHeight}px`"
-					style="vertical-align: middle"
-				/>
-				<div
-					class="RedBorder"
-					:style="`position: absolute;
+				>
+					<img
+						position="absolute"
+						:src="MainImage_src"
+						:width="`${MiniImgWidth}px`"
+						:height="`${MiniImgHeight}px`"
+						style="vertical-align: middle"
+					/>
+					<div
+						class="RedBorder"
+						:style="`position: absolute;
                         box-sizing: border-box;
 						border: 2px solid red;
 						z-index: 25;
@@ -63,27 +71,45 @@
 						}px;
                         width: ${MiniImgWidth / ImgScale}px;
                         height: ${MiniImgHeight / ImgScale}px;`"
-				></div>
+					></div>
+				</div>
 			</div>
 		</div>
 
 		<!--    大图片的描述-->
 		<div class="MainImage_text">
-			<div class="MainImage_text_item">中文标题：&ensp;{{ MainImage_prop.title_zh }}</div>
-			<div class="MainImage_text_item">外文标题：&ensp;{{ MainImage_prop.title_en }}</div>
-			<div class="MainImage_text_item">中文简介：&ensp;{{ MainImage_prop.intro_zh }}</div>
-			<div class="MainImage_text_item">外文简介：&ensp;{{ MainImage_prop.intro_en }}</div>
-			<div class="MainImage_text_item">档案日期：&ensp;{{ MainImage_prop.date }}</div>
-			<div class="MainImage_text_item">档案尺寸：&ensp;{{ MainImage_prop.size }}</div>
+			<div class="MainImage_text_item">
+				中文标题：&ensp;{{ MainImage_prop.title_zh }}
+			</div>
+			<!-- <div class="MainImage_text_item">
+				外文标题：&ensp;{{ MainImage_prop.title_en }}
+			</div> -->
+			<!-- <div class="MainImage_text_item">
+				外文简介：&ensp;{{ MainImage_prop.intro_en }}
+			</div> -->
+			<div class="MainImage_text_item">
+				档案日期：&ensp;{{ MainImage_prop.date }}
+			</div>
+			<div class="MainImage_text_item">
+				档案尺寸：&ensp;{{ MainImage_prop.size }}
+			</div>
 			<div class="MainImage_text_item">
 				档案组织：&ensp;{{ MainImage_prop.organization }}
 			</div>
 			<div class="MainImage_text_item">
 				档案编号：&ensp;{{ MainImage_prop.archive_id }}
 			</div>
+            <div>
+                <br/>
+            </div>
+			<div class="MainImage_text_item"            
+            style="">
+				{{ MainImage_prop.intro_zh }}
+			</div>
 		</div>
+
 		<!--    底下的图片列表-->
-		<div class="list_images" id="imgList">
+		<el-scrollbar class="list_images" id="imgList">
 			<div v-for="item in ImgList" :key="item.gallery_img_id">
 				<div @mousedown="ImgList_btn(item)" class="imgList_container">
 					<div
@@ -92,7 +118,7 @@
 					></div>
 				</div>
 			</div>
-		</div>
+		</el-scrollbar>
 	</div>
 </template>
 
@@ -156,7 +182,6 @@ export default {
 		ImgList_btn(item) {
 			this.MainImage_src = item.src;
 			this.MainImage_prop = item;
-            this.web_path_gallery_title = item.title_zh;
 			this.SetCanvas();
 		},
 
@@ -184,9 +209,9 @@ export default {
 
 			getForm(url, function (res, msg) {
 				let data = res.data["picture_dict"];
-				console.log("picture_dict is here", data);
+				// console.log("picture_dict is here", res.data);
 				// 修改 标题、图片url，图片简介
-				_this.web_path_gallery_title = data["title"];
+				_this.web_path_gallery_title = res.data['title'];
 				_this.MainImage_src = null;
 				_this.MainImage_text = data["intro"];
 
@@ -229,8 +254,8 @@ export default {
 
 		// 初始化 Canvas 设置相关参数
 		SetCanvas() {
-			this.CanvasWidth = 1000;
-			this.CanvasHeight = 500;
+			this.CanvasWidth = 860;
+			this.CanvasHeight = 430;
 			this.MyCanvas = this.$refs.MainImageCanvas;
 			this.ctx = this.MyCanvas.getContext("2d");
 			// console.log(this.ctx)
@@ -366,17 +391,15 @@ export default {
 	left: 0px;
 	top: 192px;
 	font-size: 14px;
-	line-height: 96%;
+	line-height: 100%;
 	color: #2f2f2f;
 }
 
 /*大图片*/
 .MainImageContainer {
 	position: absolute;
-	left: 0;
-	top: 240px;
 	background: gainsboro;
-	/* border-radius: 7px; */
+	border-radius: 7px;
 	box-sizing: border-box;
 	border: 3px solid #000;
 }
@@ -384,8 +407,8 @@ export default {
 /*大图片的描述*/
 .MainImage_text {
 	position: absolute;
-	width: 1000px;
-	left: 0;
+	width: 860px;
+	left: 140px;
 	height: 180px;
 	top: 765px;
 	display: flex;
@@ -397,21 +420,23 @@ export default {
 	position: relative;
 	color: #2f2f2f;
 	font-size: 16px;
-	width: 1000px;
+    line-height: 20px;
+	width: 860px;
 }
 
 /*底下的图片列表*/
 #imgList {
-	width: 1000px;
+	width: 130px;
+    height: 430px;
 	left: 0px;
-	top: 980px;
-	/*background: red;*/
+	top: 240px;
+	/* background: red; */
 }
 .imgList_container {
 	position: relative;
-	width: 83px;
+	width: 80px;
 	height: 65px;
-	margin: 13px;
+    padding: 20px;
 }
 .ImgList_img {
 	width: 100%;
