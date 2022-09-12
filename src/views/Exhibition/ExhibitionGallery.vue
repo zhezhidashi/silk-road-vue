@@ -79,32 +79,38 @@
 		<!--    大图片的描述-->
 		<div class="MainImage_text">
 			<div class="MainImage_text_item">
-				中文标题：&ensp;{{ MainImage_prop.title_zh }}
+				<div class="title_intro_item">
+					<div style="font-weight: bold">标题:</div>
+					<div>{{ MainImage_prop.title_zh }}</div>
+				</div>
+				<div class="title_intro_item">
+					<div style="font-weight: bold">title:</div>
+					<div>{{ MainImage_prop.title_en }}</div>
+				</div>
+				<div class="title_intro_item">
+					<div style="font-weight: bold">título:</div>
+					<div>{{ MainImage_prop.title_es }}</div>
+				</div>
 			</div>
-			<!-- <div class="MainImage_text_item">
-				外文标题：&ensp;{{ MainImage_prop.title_en }}
-			</div> -->
-			<!-- <div class="MainImage_text_item">
-				外文简介：&ensp;{{ MainImage_prop.intro_en }}
-			</div> -->
+			<br />
 			<div class="MainImage_text_item">
-				档案日期：&ensp;{{ MainImage_prop.date }}
+				<div>档案日期: {{ MainImage_prop.date }}</div>
+				<div>档案尺寸: {{ MainImage_prop.size }}</div>
+				<div>档案组织: {{ MainImage_prop.organization }}</div>
+				<div>档案编号: {{ MainImage_prop.archive_id }}</div>
 			</div>
-			<div class="MainImage_text_item">
-				档案尺寸：&ensp;{{ MainImage_prop.size }}
+			<br />
+			<div class="MainImage_text_item" style="flex-direction: column">
+				<div style="font-weight: bold">描述:</div>
+				<div>{{ MainImage_prop.intro_zh }}</div>
 			</div>
-			<div class="MainImage_text_item">
-				档案组织：&ensp;{{ MainImage_prop.organization }}
+			<div class="MainImage_text_item" style="flex-direction: column">
+				<div style="font-weight: bold">description:</div>
+				<div>{{ MainImage_prop.intro_en }}</div>
 			</div>
-			<div class="MainImage_text_item">
-				档案编号：&ensp;{{ MainImage_prop.archive_id }}
-			</div>
-            <div>
-                <br/>
-            </div>
-			<div class="MainImage_text_item"            
-            style="">
-				{{ MainImage_prop.intro_zh }}
+			<div class="MainImage_text_item" style="flex-direction: column">
+				<div style="font-weight: bold">descripción:</div>
+				<div>{{ MainImage_prop.intro_es }}</div>
 			</div>
 		</div>
 
@@ -141,8 +147,10 @@ export default {
 				gallery_img_id: "",
 				title_zh: "",
 				title_en: "",
+				title_es: "",
 				intro_zh: "",
 				intro_en: "",
+				intro_es: "",
 				date: "",
 				size: "",
 				organization: "",
@@ -211,7 +219,7 @@ export default {
 				let data = res.data["picture_dict"];
 				// console.log("picture_dict is here", res.data);
 				// 修改 标题、图片url，图片简介
-				_this.web_path_gallery_title = res.data['title'];
+				_this.web_path_gallery_title = res.data["title"];
 				_this.MainImage_src = null;
 				_this.MainImage_text = data["intro"];
 
@@ -221,8 +229,10 @@ export default {
 						gallery_img_id: item,
 						title_zh: "N/A",
 						title_en: "N/A",
+						title_es: "N/A",
 						intro_zh: "N/A",
 						intro_en: "N/A",
+						intro_es: "N/A",
 						date: data[item].date,
 						size: data[item].size,
 						organization: data[item].organization,
@@ -231,15 +241,19 @@ export default {
 					for (let item_id in data[item].title) {
 						if (item_id === "ZH") {
 							new_map.title_zh = data[item].title[item_id];
-						} else {
+						} else if (item_id === "EN") {
 							new_map.title_en = data[item].title[item_id];
+						} else if (item_id === "ES") {
+							new_map.title_es = data[item].title[item_id];
 						}
 					}
 					for (let item_id in data[item].intro) {
 						if (item_id === "ZH") {
 							new_map.intro_zh = data[item].intro[item_id];
-						} else {
+						} else if (item_id === "EN") {
 							new_map.intro_en = data[item].intro[item_id];
+						} else if (item_id === "ES") {
+							new_map.intro_es = data[item].intro[item_id];
 						}
 					}
 					_this.ImgList.push(new_map);
@@ -420,14 +434,20 @@ export default {
 	position: relative;
 	color: #2f2f2f;
 	font-size: 16px;
-    line-height: 20px;
+	line-height: 20px;
 	width: 860px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 5px;
 }
-
+.title_intro_item {
+	width: 280px;
+}
 /*底下的图片列表*/
 #imgList {
 	width: 130px;
-    height: 430px;
+	height: 430px;
 	left: 0px;
 	top: 240px;
 	/* background: red; */
@@ -436,7 +456,7 @@ export default {
 	position: relative;
 	width: 80px;
 	height: 65px;
-    padding: 20px;
+	padding: 20px;
 }
 .ImgList_img {
 	width: 100%;

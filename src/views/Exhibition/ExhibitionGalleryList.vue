@@ -14,7 +14,11 @@
 				{{ exh_gallery_list_heading }}
 			</p>
 			<!--展览详情的描述-->
-			<p class="exh_gallery_list_text">{{ exh_gallery_list_text }}</p>
+			<div class="exh_gallery_list_text">
+                <div v-for="(item, index) in exh_gallery_list_text" :key="index" style="padding:5px;">
+                    &emsp;&emsp;{{item}}
+                </div>
+            </div>
 
 			<!--    这下面的东西看起来也像是从数据库里面捞出来的，也用v-for做成list吧-->
 			<div class="exh_gallery_list_imgText">
@@ -89,7 +93,7 @@ export default {
 	data() {
 		return {
 			exh_gallery_list_heading: "",
-			exh_gallery_list_text: "",
+			exh_gallery_list_text: [],
 			gallery_list_id: "",
 			imgText_list: [],
 		};
@@ -98,7 +102,7 @@ export default {
 		this.gallery_list_id = this.$route.query.gallery_list_id;
 		this.exh_gallery_list_heading =
 			this.$route.query.exh_gallery_list_heading;
-		this.exh_gallery_list_text = this.$route.query.exh_gallery_list_text;
+		this.exh_gallery_list_text = this.$route.query.exh_gallery_list_text.toString().split("\\n");
 
 		console.log(this.gallery_list_id);
 
