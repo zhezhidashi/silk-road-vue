@@ -11,11 +11,7 @@
 		/>
 
 		<!--    左上角的网页路径-->
-		<div class="web_path">
-			线上展览&gt;{{ web_path_gallery_list_title }}&gt;{{
-				web_path_gallery_title
-			}}&gt;
-		</div>
+		<div class="web_path">线上展览&gt;{{ web_path_gallery_title }}&gt;</div>
 
 		<!--    大图片-->
 		<div
