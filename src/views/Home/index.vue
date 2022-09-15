@@ -1,17 +1,17 @@
 <template>
 	<div class="background" style="height: 2136px; background: #023871">
 		<!-- 标题图片 -->
-		<img class="index_title_image" :src="index_title_image_src" />
+		<img class="index_title_image" :src="index_title_image_src[now_img_num]" />
 
 		<!-- 标题部分 -->
 		<div class="index_title_back">
-			<p class="index_main_title">
-				{{ index_main_title }}
-			</p>
-			<p class="index_sub_title">{{ index_sub_title }}</p>
-			<p class="index_title_intro">
-				{{ index_title_intro }}
-			</p>
+			<div class="index_main_title">
+				{{ index_main_title[now_img_num] }}
+			</div>
+			<div class="index_sub_title">{{ index_sub_title[now_img_num] }}</div>
+			<div class="index_title_intro">
+				&emsp;&emsp;{{ index_title_intro[now_img_num] }}
+			</div>
 		</div>
 
 		<!-- 查看详情部分 -->
@@ -183,12 +183,46 @@ export default {
 			gallery_list_id_down: "1",
 
 			publicPath: process.env.BASE_URL,
-			index_title_image_src: "background_image_1.png",
+			index_title_image_src: [
+				"background_image_1.jpg",
+				"background_image_2.jpg",
+				"background_image_3.jpg",
+				"background_image_4.jpg",
+				"background_image_5.jpg",
+				"background_image_6.jpg",
+				"background_image_7.jpg",
+			],
 
-			index_main_title: "探险家与原住民：意象再造与现实记录",
-			index_sub_title: "阿贝尔·塔斯曼航海日志",
-			index_title_intro:
-				"阿贝尔·塔斯曼（Abel JanszoonTasman）是荷兰商人、航海家、探险家，1642年至1644年间两次受命于荷兰东印度公司探索南太平洋，是早期到达澳大利亚塔斯马尼亚岛、斐济、新西兰等地的欧洲探险家......",
+			index_main_title: [
+				"有帆自远方来:",
+				"有帆自远方来:",
+				"有帆自远方来:",
+				"有帆自远方来:",
+				"有帆自远方来:",
+				"有帆自远方来:",
+                "有帆自远方来:",
+			],
+			index_sub_title: [
+				"大帆船日主题展",
+				"大帆船日主题展",
+				"大帆船日主题展",
+				"大帆船日主题展",
+				"大帆船日主题展",
+				"大帆船日主题展",
+                "大帆船日主题展",
+			],
+			index_title_intro: [
+				"《古今形胜之图》，约1574年。传入欧洲的首张中国（明）全图，福建金沙书院重刻本，经闽南华商取得，在马尼拉华人协助下由传教士将图注译为西班牙文，交菲律宾都督呈递西班牙国王菲利普二世。图中城镇、山川、河流、军事要地均十分详细。",
+				"奥特里乌斯绘制的太平洋地图（局部），1589年。作者出生于哈布斯堡王朝治下的安特卫普，对海外探索极为关注，同时享有发达的图书出版资源，搜集和传播了大量有关太平洋的新知，如图中新几内亚、所罗门群岛均刚刚为西班牙人由秘鲁西航“发现”。",
+				"西班牙人绘中国艾尔摩沙岛和南方部分地区，1626年。附于1626年菲岛都督上书，称已占领艾尔摩沙岛北部一港口。",
+				"阿卡普尔科圣迭戈棱堡设计图，1707年9月1日。原防御工事建于1615-1617年，因战役和地震多次重修，此为工程师Luis Bouchard de Becourt为“加强南海沿岸及港口海防”所提交的报告之一。该堡垒1949年改造为博物馆，向游人开放至今，许多收藏和展陈与“中国船”有关。",
+				"卡加延河岸教堂分布图（局部），1719年。船长、领航员Juan Luis de Acosta绘，以字母标注了吕宋岛最北端卡加延河流域地势、道路、村庄、教堂等。",
+				"马尼拉-加的斯航线图，1777年。18世纪中后期，西班牙成立王家菲律宾公司，此后大帆船也可行驶印度洋、大西洋航线。",
+                "缺失",
+			],
+
+            // 首页轮播图，现在是第几张图片
+            now_img_num: 0,
 
 			shift_left_arrow_light_src: "arrow_left_1.png",
 			shift_right_arrow_light_src: "arrow_right_1.png",
@@ -257,21 +291,16 @@ export default {
 
 		//下面是之前 index.html 只保留顶部切换图片和标题的代码
 
-		next_title_image(d, image_nums) {
+		next_title_image(d, img_total_num) {
 			let now_image = document.querySelector(".index_title_image");
 			let now_main_title = document.querySelector(".index_main_title");
 			let now_sub_title = document.querySelector(".index_sub_title");
 			let now_title_intro = document.querySelector(".index_title_intro");
 
-			let now_src = this.index_title_image_src;
-			let img_num = parseInt(now_src.charAt(17));
-			console.log(now_src + "  " + now_src.charAt(17));
-			img_num = ((img_num + d + image_nums - 1) % image_nums) + 1;
-
 			let image_fade_timer = setInterval(image_fade, 1);
 			let opa = 100;
 
-            let inner_this = this;
+			let _this = this;
 
 			function image_fade() {
 				if (opa > 0) {
@@ -280,11 +309,7 @@ export default {
 					now_sub_title.style.opacity = String(opa / 100);
 					now_title_intro.style.opacity = String(opa / 100);
 				} else if (opa === 0) {
-					inner_this.index_title_image_src = `background_image_${img_num}.png`;
-
-					inner_this.index_main_title = `the ${img_num} main title`;
-					inner_this.index_sub_title = `the ${img_num} sub title`;
-					inner_this.index_title_intro = `the ${img_num} title introduction`;
+					_this.now_img_num = (_this.now_img_num + d + img_total_num) % img_total_num;
 				} else if (opa > -100) {
 					now_image.style.opacity = String(-opa / 100);
 					now_main_title.style.opacity = String(-opa / 100);
@@ -298,11 +323,11 @@ export default {
 		},
 
 		title_shift_left_btn() {
-			this.next_title_image(-1, 3);
+			this.next_title_image(-1, 7);
 		},
 
 		title_shift_right_btn() {
-			this.next_title_image(1, 3);
+			this.next_title_image(1, 7);
 		},
 
 		board_shift_left_btn() {
@@ -366,42 +391,40 @@ export default {
 /* 主标题及介绍部分 */
 .index_title_back {
 	position: absolute;
-	width: 431px;
+	width: 460px;
 	height: 158px;
-	left: 269px;
+	left: 250px;
 	top: 109px;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 	background: rgba(54, 54, 54, 0.35);
 }
 
 .index_main_title {
 	position: relative;
-	display: flex;
-	justify-content: center;
-
-	font-size: 23px;
-	line-height: 0;
+	text-align: center;
+	font-size: 28px;
+	line-height: 120%;
 	color: #ffffff;
 }
 
 .index_sub_title {
 	position: relative;
-	display: flex;
-	justify-content: center;
-
-	font-size: 32px;
-	line-height: 0;
+	text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+	font-size: 23px;
+	line-height: 120%;
 	color: #ffffff;
 }
 
 .index_title_intro {
 	position: relative;
-	width: 372px;
-	height: 63px;
-	left: 47px;
-
-	font-size: 12px;
-	line-height: 21px;
+	margin-left: 20px;
+    margin-right: 20px;
+	font-size: 13px;
+	line-height: 140%;
 	color: #ffffff;
 }
 

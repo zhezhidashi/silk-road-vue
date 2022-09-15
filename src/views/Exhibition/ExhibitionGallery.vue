@@ -175,7 +175,7 @@ export default {
 		};
 	},
 	mounted() {
-		this.GetData();
+		this.GetData(this.SetCanvas());
 	},
 	methods: {
 		// 路由回退
@@ -190,7 +190,7 @@ export default {
 		},
 
 		// HTTP获取网页基本数据
-		GetData() {
+		GetData(callback) {
 			//从本页面的url中获取 list_id 和 id 的值
 			this.list_id = this.$route.query.gallery_list_id;
 			this.id = this.$route.query.gallery_id;
@@ -256,10 +256,9 @@ export default {
 					if (_this.ImgList.length === 1)
 						_this.ImgList_btn(_this.ImgList[0]);
 				}
-
 				console.log("ImgList", _this.ImgList);
-				_this.SetCanvas();
 			});
+            callback();
 		},
 
 		// 初始化 Canvas 设置相关参数

@@ -16,7 +16,7 @@ p{
 .shift_eclipse_light {
     width: 30px;
     height: 30px;
-    background: rgba(217, 217, 217, 0.3);
+    background: rgb(148, 142, 142);
     border-radius: 50%;
     cursor: pointer;
 }
