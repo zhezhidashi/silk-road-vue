@@ -20,10 +20,10 @@
 		<div class="BoardTextContainer">
 			<div class="BoardTextBlock">
 				<div class="index_board_title">
-					{{ index_board_left_title }}
+					{{ index_board_left_title[BoardIndex] }}
 				</div>
 				<div class="index_board_text">
-					{{ index_board_left_text }}
+					{{ index_board_left_text[BoardIndex] }}
 				</div>
 			</div>
 
@@ -31,10 +31,10 @@
 
 			<div class="BoardTextBlock">
 				<div class="index_board_title">
-					{{ index_board_middle_title }}
+					{{ index_board_middle_title[BoardIndex] }}
 				</div>
 				<div class="index_board_text">
-					{{ index_board_middle_text }}
+					{{ index_board_middle_text[BoardIndex] }}
 				</div>
 			</div>
 
@@ -42,10 +42,10 @@
 
 			<div class="BoardTextBlock">
 				<div class="index_board_title">
-					{{ index_board_right_title }}
+					{{ index_board_right_title[BoardIndex] }}
 				</div>
 				<div class="index_board_text">
-					{{ index_board_right_text }}
+					{{ index_board_right_text[BoardIndex] }}
 				</div>
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 		<div class="BoardShiftContainer">
 			<!-- 公告部分左右切换按钮 -->
 			<div
-				@mousedown="board_shift_left_btn"
+				@mousedown="BoardShift(-1)"
 				class="shift_eclipse_light"
 				id="index_board_shift_left"
 			>
@@ -63,10 +63,12 @@
 				/>
 			</div>
 
-			<div class="index_board_shift_pages">1&emsp;/&emsp;5</div>
+			<div class="index_board_shift_pages">
+				{{ BoardIndex + 1 }}&emsp;/&emsp;{{ BoardTotal }}
+			</div>
 
 			<div
-				@mousedown="board_shift_right_btn"
+				@mousedown="BoardShift(1)"
 				class="shift_eclipse_light"
 				id="index_board_shift_right"
 			>
@@ -80,6 +82,7 @@
 </template>
 
 <script>
+import {throttle} from 'lodash'
 export default {
 	name: "IndexBoard",
 	data() {
@@ -90,19 +93,57 @@ export default {
 
 			index_search_logo_src: "search_logo.png",
 
-			index_board_left_title: "大平洋考古最新发现",
-			index_board_left_text:
-				"一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-			index_board_middle_title: "荷兰资料馆的资料更新",
-			index_board_middle_text:
-				"一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-			index_board_right_title: "西印度档案总馆地图",
-			index_board_right_text:
-				"一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+			// 记录公告现在展示第几个，总共多少个
+			BoardIndex: 0,
+			BoardTotal: 5,
+
+			index_board_left_title: [
+				"1 大平洋考古最新发现",
+				"2 大平洋考古最新发现",
+				"3 大平洋考古最新发现",
+				"4 大平洋考古最新发现",
+				"5 大平洋考古最新发现",
+			],
+			index_board_left_text: [
+				"1 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"2 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"3 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"4 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"5 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+			],
+
+			index_board_middle_title: [
+				"1 荷兰资料馆的资料更新",
+				"2 荷兰资料馆的资料更新",
+				"3 荷兰资料馆的资料更新",
+				"4 荷兰资料馆的资料更新",
+				"5 荷兰资料馆的资料更新",
+			],
+			index_board_middle_text: [
+				"1 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"2 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"3 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"4 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"5 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+			],
+			index_board_right_title: [
+				"1 西印度档案总馆地图",
+				"2 西印度档案总馆地图",
+				"3 西印度档案总馆地图",
+				"4 西印度档案总馆地图",
+				"5 西印度档案总馆地图",
+			],
+			index_board_right_text: [
+				"1 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"2 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"3 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"4 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+				"5 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+			],
 		};
 	},
-    methods: {
-        //搜索框的搜索按钮
+	methods: {
+		//搜索框的搜索按钮
 		click_search_btn(event) {
 			this.$router.push({
 				path: "/ArchiveList",
@@ -116,46 +157,38 @@ export default {
 			});
 		},
 
-		//近期展览的查看详情，option 为 1 表示上半部分的查看详情，option 为 2 表示下半部分的查看详情
-		index_exh_see_details_btn(event, option) {
-			this.$router.push({
-				path: "/ExhibitionGalleryList",
-				query: {
-					gallery_list_id:
-						option === 1
-							? this.gallery_list_id_up
-							: this.gallery_list_id_down,
-				},
-			});
-		},
+		BoardShift: throttle( function(d){
+			let IndexBoardTitle =
+				document.querySelectorAll(".index_board_title");
+			let IndexBoardText = document.querySelectorAll(".index_board_text");
 
-		board_shift_left_btn() {
-			let page_num = document.querySelector(".index_board_shift_pages");
-			let num = parseInt(page_num.textContent.charAt(0));
-			let left_title = document.getElementById("index_board_left_title");
-			let left_text = document.getElementById("index_board_left_text");
+			let image_fade_timer = setInterval(image_fade, 7);
+			let opa = 100;
+			let _this = this;
+			function image_fade() {
+				if (opa > 0) {
+					for (let i = 0; i < 3; i++) {
+						IndexBoardTitle[i].style.opacity = String(opa / 100);
+						IndexBoardText[i].style.opacity = String(opa / 100);
+					}
+				} else if (opa === 0) {
+					_this.BoardIndex =
+						(_this.BoardIndex + d + _this.BoardTotal) %
+						_this.BoardTotal;
+				} else if (opa > -100) {
+					for (let i = 0; i < 3; i++) {
+						IndexBoardTitle[i].style.opacity = String(-opa / 100);
+						IndexBoardText[i].style.opacity = String(-opa / 100);
+					}
+				} else {
+					clearInterval(image_fade_timer);
+				}
+				opa--;
+			}
+		}, 2000),
 
-			num = num === 1 ? 5 : num - 1;
-			page_num.textContent =
-				num.toString() + page_num.textContent.substring(1);
-			left_title.textContent = `the ${num}th title`;
-			left_text.textContent = `the ${num}th text`;
-		},
 
-		board_shift_right_btn() {
-			let page_num = document.querySelector(".index_board_shift_pages");
-			let num = parseInt(page_num.textContent.charAt(0));
-			let left_title = document.getElementById("index_board_left_title");
-			let left_text = document.getElementById("index_board_left_text");
-
-			num = num === 5 ? 1 : num + 1;
-			page_num.textContent =
-				num.toString() + page_num.textContent.substring(1);
-			left_title.textContent = `the ${num}th title`;
-			left_text.textContent = `the ${num}th text`;
-		},
-
-    }
+	},
 };
 </script>
 
@@ -209,10 +242,9 @@ export default {
 	font-size: 48px;
 	line-height: 150%;
 	color: #ffffff;
-
-    font-family:"微软雅黑";
 }
 
+/* 公告整体的 Container */
 .BoardTextContainer {
 	position: absolute;
 	width: 1284px;
@@ -225,6 +257,8 @@ export default {
 	justify-content: space-around;
 	align-items: center;
 }
+
+/* 左中右每个部分的 Container */
 .BoardTextBlock {
 	width: 364px;
 	height: 258px;
@@ -234,6 +268,7 @@ export default {
 	align-content: center;
 }
 
+/* 公告中间两条竖着的白线 */
 .index_board_left_line {
 	width: 0;
 	height: 189px;
@@ -245,6 +280,7 @@ export default {
 	border: 0.5px solid #ffffff;
 }
 
+/* 每一小部分的标题和文字描述 */
 .index_board_title {
 	width: 340px;
 	height: 30px;
@@ -252,8 +288,8 @@ export default {
 	color: #ffffff;
 	padding: 10px;
 	text-align: center;
+	opacity: 1;
 }
-
 .index_board_text {
 	width: 340px;
 	height: 125px;
@@ -262,6 +298,8 @@ export default {
 	line-height: 180%;
 	color: #ffffff;
 	padding: 10px;
+
+	opacity: 1;
 }
 
 .BoardShiftContainer {
@@ -279,9 +317,9 @@ export default {
 }
 
 .index_board_shift_pages {
-	width: 73px;
+	width: 90px;
 	height: 60px;
-    text-align: center;
+	text-align: center;
 
 	font-size: 20px;
 	line-height: 60px;

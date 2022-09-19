@@ -107,6 +107,20 @@ export default {
 		};
 	},
 	methods: {
+		//近期展览的查看详情，option 为 1 表示上半部分的查看详情，option 为 2 表示下半部分的查看详情
+		index_exh_see_details_btn(event, option) {
+			this.$router.push({
+				path: "/ExhibitionGalleryList",
+				query: {
+					gallery_list_id:
+						option === 1
+							? this.gallery_list_id_up
+							: this.gallery_list_id_down,
+				},
+			});
+		},
+
+
 		exh_shift_left_btn() {
 			let page_num = document.querySelector(".index_exh_shift_pages");
 			let num = parseInt(page_num.textContent.charAt(0));
