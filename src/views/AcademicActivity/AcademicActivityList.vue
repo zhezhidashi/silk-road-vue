@@ -1,10 +1,16 @@
 <template>
 	<div class="background" style="background: #efefef">
 		<!--    标题-->
-		<p class="academic_activity_title">学术活动</p>
+		<div class="academic_activity_title">学术活动</div>
 
 		<!--回退到上一个页面-->
-		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />
+		<img
+			@click="router_go_back()"
+			class="go_back"
+			id="go_back1"
+			src="arrow_left_3.png"
+			alt=""
+		/>
 
 		<!--一排一排陈列图片-->
 		<div class="list_images" id="academic_activity_images">
@@ -41,7 +47,7 @@
 					<!--图片-->
 					<div class="academic_activity_images_img_container">
 						<div
-                            :style="`background-image:url(${item.src})`"
+							:style="`background-image:url(${item.src})`"
 							class="academic_activity_images_img"
 							:id="
 								'academic_activity_images_img_' +
@@ -123,9 +129,9 @@ export default {
 
 	// 这里定义方法
 	methods: {
-        // 路由回退
-        router_go_back() {
-            console.log("click!")
+		// 路由回退
+		router_go_back() {
+			console.log("click!");
 			this.$router.go(-1);
 		},
 		academic_activity_images_btn(event, academic_activity_id) {
@@ -149,7 +155,7 @@ export default {
 			let now_img = document.querySelector(
 				"#academic_activity_images_img_" + academic_activity_id
 			);
-            now_img.style.transform = "scale(1.2, 1.2)"
+			now_img.style.transform = "scale(1.2, 1.2)";
 
 			//修改图片文字颜色
 			let now_text = document.querySelector(
@@ -170,7 +176,7 @@ export default {
 			let now_img = document.querySelector(
 				"#academic_activity_images_img_" + academic_activity_id
 			);
-            now_img.style.transform = "scale(1, 1)"
+			now_img.style.transform = "scale(1, 1)";
 
 			//还原图片文字颜色
 			let now_text = document.querySelector(
@@ -192,25 +198,27 @@ export default {
 /*标题*/
 .academic_activity_title {
 	position: absolute;
-	left: 441px;
-	top: 135px;
-	font-size: 22px;
-	line-height: 0;
+	width: 139px;
+	height: 42px;
+	left: 651px;
+	top: 213px;
+	font-size: 32px;
 	color: #023871;
 }
 /*存放整个页面的数据*/
 #academic_activity_images {
 	position: relative;
-	width: 910px;
-	left: 53px;
-	top: 212px;
+	width: 1330px;
+	left: 95px;
+	top: 278px;
 }
 
 /*把每一块img、时间、简介都包装成一个container*/
 .academic_activity_images_container {
 	position: relative;
-	width: 186px;
-	height: 297px;
+	width: 268px;
+	height: 428px;
+
 	background: #ffffff;
 	margin: 20px;
 	box-shadow: 0 3px 3px rgba(159, 158, 158, 0.42);
@@ -222,15 +230,15 @@ export default {
 /* 图片的 container */
 .academic_activity_images_img_container {
 	position: relative;
-	width: 186px;
-	height: 225px;
+	width: 268px;
+	height: 324px;
 	border-radius: 3px 3px 0 0;
 	overflow: hidden;
 }
 
 /*图片*/
 .academic_activity_images_img {
-    width: 100%;
+	width: 100%;
 	height: 0;
 	padding-bottom: 121%;
 	overflow: hidden;
@@ -247,8 +255,8 @@ export default {
 .academic_activity_images_date {
 	position: relative;
 	margin: 10px;
-	font-size: 8px;
-	line-height: 30%;
+	font-size: 14px;
+	line-height: 150%;
 	color: #919191;
 }
 
@@ -256,8 +264,8 @@ export default {
 .academic_activity_images_text {
 	position: relative;
 	margin: 10px;
-	font-size: 8px;
-	line-height: 120%;
+	font-size: 14px;
+	line-height: 150%;
 	color: #000000;
 
 	/*最多显示两行文字，否则就是省略号*/

@@ -2,7 +2,7 @@
 	<div class="background" style="height: 906px; background: #efefef">
 		<!--回退到上一个页面-->
 		<img @click="router_go_back()" class="go_back" id="go_back1" src="arrow_left_3.png" alt="" />        
-		<p class="latest_content_title">最新内容</p>
+		<div class="latest_content_title">最新内容</div>
 	</div>
 </template>
 
@@ -28,10 +28,11 @@ export default {
 /*标题*/
 .latest_content_title {
 	position: absolute;
-	left: 441px;
-	top: 135px;
-	font-size: 22px;
-	line-height: 0;
+	width: 139px;
+	height: 42px;
+	left: 651px;
+	top: 213px;
+	font-size: 32px;
 	color: #023871;
 }
 </style>

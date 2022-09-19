@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="height: 906px; background: #efefef">
+	<div class="background" style="height: 1304px; background: #efefef">
 		<!--回退到上一个页面-->
 		<img
 			@click="router_go_back()"
@@ -17,7 +17,7 @@
 			<div class="academic_activity_details_img_container">
 				<div
 					class="academic_activity_details_img"
-                    :style="`background-image:url(${academic_activity_details_img_src})`"
+					:style="`background-image:url(${academic_activity_details_img_src})`"
 					alt=""
 				></div>
 			</div>
@@ -86,21 +86,21 @@ export default {
 /*标题*/
 .academic_activity_details_title {
 	position: absolute;
+	top: 220px;
+	width: 1440px;
+	height: 24px;
+	font-size: 24px;
 	text-align: center;
-	top: 140px;
-	font-size: 17px;
-	width: 900px;
-	height: 20px;
 	line-height: 100%;
 	color: #2f2f2f;
 }
 /*左侧图片*/
-.academic_activity_details_img_container{
-    position: absolute;
-	width: 346px;
-	height: 490px;
-	left: 84px;
-	top: 227px;
+.academic_activity_details_img_container {
+	position: absolute;
+	width: 498px;
+	height: 705px;
+	left: 122px;
+	top: 327px;
 }
 .academic_activity_details_img {
 	width: 100%;
@@ -117,11 +117,12 @@ export default {
 /*描述*/
 .academic_activity_details_description {
 	position: absolute;
-	width: 382px;
-	left: 484px;
-	top: 227px;
-	font-size: 14px;
-	line-height: 21px;
+	width: 550px;
+	height: 705px;
+	left: 697px;
+	top: 327px;
+	font-size: 20px;
+	line-height: 180%;
 	color: #2f2f2f;
 }
 </style>

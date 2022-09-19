@@ -10,15 +10,19 @@
 		/>
 		<div class="exh_gallery_list_container">
 			<!--    展览详情页面标题-->
-			<p class="exh_gallery_list_heading">
+			<div class="exh_gallery_list_heading">
 				{{ exh_gallery_list_heading }}
-			</p>
+			</div>
 			<!--展览详情的描述-->
 			<div class="exh_gallery_list_text">
-                <div v-for="(item, index) in exh_gallery_list_text" :key="index" style="padding:5px;">
-                    &emsp;&emsp;{{item}}
-                </div>
-            </div>
+				<div
+					v-for="(item, index) in exh_gallery_list_text"
+					:key="index"
+					style="padding: 5px"
+				>
+					&emsp;&emsp;{{ item }}
+				</div>
+			</div>
 
 			<!--    这下面的东西看起来也像是从数据库里面捞出来的，也用v-for做成list吧-->
 			<div class="exh_gallery_list_imgText">
@@ -73,15 +77,15 @@
 						</div>
 
 						<!--图片右侧的介绍文字-->
-						<p class="exh_gallery_list_imgText_text">
+						<div class="exh_gallery_list_imgText_text">
 							{{ item.text }}
-						</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 400px"></div>
+		<div style="position: relative; height: 600px"></div>
 	</div>
 </template>
 
@@ -102,7 +106,9 @@ export default {
 		this.gallery_list_id = this.$route.query.gallery_list_id;
 		this.exh_gallery_list_heading =
 			this.$route.query.exh_gallery_list_heading;
-		this.exh_gallery_list_text = this.$route.query.exh_gallery_list_text.toString().split("\\n");
+		this.exh_gallery_list_text = this.$route.query.exh_gallery_list_text
+			.toString()
+			.split("\\n");
 
 		console.log(this.gallery_list_id);
 
@@ -181,56 +187,59 @@ export default {
 /*页面标题*/
 .exh_gallery_list_heading {
 	position: absolute;
-	width: 330px;
+	width: 1440px;
 	height: 50px;
-	left: 345px;
-	top: 130px;
-	font-size: 19px;
+	text-align: center;
+
+	top: 225px;
+	font-size: 34px;
 	line-height: 150%;
 	text-align: center;
 	color: #2f2f2f;
 }
 .exh_gallery_list_text {
 	position: relative;
-	width: 813px;
-	left: 97px;
-	top: 259px;
-	font-size: 11px;
-	line-height: 21px;
+	width: 1150px;
+	left: 150px;
+	top: 350px;
+	font-size: 16px;
+	line-height: 150%;
 	color: #2f2f2f;
+	/* background: red; */
+	margin-bottom: 30px;
 }
 
 /*展览详情页，把整个模块都定义成类*/
 .exh_gallery_list_imgText {
 	position: relative;
-	width: 869px;
-	left: 73px;
-	top: 321px;
+	width: 1150px;
+	left: 150px;
+	top: 400px;
 	z-index: 10;
-	/*background: #588CC8;*/
+	/* background: #588cc8; */
 }
 
 /*整个模块的框*/
 .exh_gallery_list_imgText_container {
 	position: relative;
-	width: 850px;
-	height: 281px;
-	margin: 10px;
-	/*background: red;*/
+	width: 1050px;
+	height: 372px;
+	margin: 20px;
+	/* background: red; */
 }
 
 /*图片部分*/
 .exh_gallery_list_imgText_img_container {
 	position: absolute;
-	width: 399px;
-	height: 258px;
-	left: 14px;
-	top: 12px;
+	width: 574px;
+	height: 372px;
+    left: 0;
+    top: 0;
 	border-radius: 7px;
 }
 
-.exh_gallery_list_imgText_img{
-    width: 100%;
+.exh_gallery_list_imgText_img {
+	width: 100%;
 	height: 0;
 	padding-bottom: 65%;
 	overflow: hidden;
@@ -239,16 +248,16 @@ export default {
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
-    border-radius: 7px;
+	border-radius: 7px;
 }
 
 /*图片的灰色表面，用于hover效果*/
 .exh_gallery_list_imgText_img_shadow {
 	position: absolute;
-	width: 399px;
-	height: 258px;
-	left: 14px;
-	top: 12px;
+	width: 574px;
+	height: 372px;
+    left: 0;
+    top: 0;
 	border-radius: 7px;
 	background: rgba(47, 47, 47, 0.5);
 	display: none;
@@ -268,11 +277,11 @@ export default {
 .exh_gallery_list_imgText_text {
 	position: absolute;
 	width: 383px;
-	left: 446px;
-	top: 100px;
+	left: 700px;
+	top: 150px;
 
-	font-size: 11px;
-	line-height: 17px;
+	font-size: 24px;
+	line-height: 180%;
 	color: #2f2f2f;
 }
 </style>

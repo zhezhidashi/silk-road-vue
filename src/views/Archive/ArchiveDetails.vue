@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="height: 1427px; background: #efefef">
+	<div class="background" style="height: 1623px; background: #efefef">
 		<!--回退到上一个页面-->
 		<img
 			@click="router_go_back()"
@@ -11,10 +11,10 @@
 		<!--为了方便vue，我们把整个页面的图片文字全部放到 archive_details_data 里面-->
 		<div id="archive_details_data">
 			<!--    标题与副标题-->
-			<p class="archive_details_title">{{ archive_details_title }}</p>
-			<p class="archive_details_subtitle">
+			<div class="archive_details_title">{{ archive_details_title }}</div>
+			<div class="archive_details_subtitle">
 				{{ archive_details_subtitle }}
-			</p>
+			</div>
 
 			<!--    左侧图片、查看档案、查看来源、图片中文描述、图片其他语种描述-->
 			<div class="archive_details_img_container">
@@ -25,121 +25,125 @@
 				></div>
 			</div>
 
-			<p
+			<div
 				@mousedown="archive_details_see_archive($event)"
 				class="archive_details_view"
-				style="left: 270px"
+				style="left: 390px"
 			>
 				查看档案
-			</p>
-			<p
+			</div>
+			<div
 				@mousedown="archive_details_see_source($event)"
 				class="archive_details_view"
-				style="left: 343px"
+				style="left: 496px"
 			>
 				查看来源
-			</p>
-			<p class="archive_details_description_title_Chinese">描述</p>
-			<p class="archive_details_description_text_zh">
+			</div>
+			<div class="archive_details_description_title_Chinese">描述</div>
+			<div class="archive_details_description_text_zh">
 				{{ archive_details_description_text_zh }}
-			</p>
-			<p class="archive_details_description_title_other">Description</p>
-			<p class="archive_details_description_text_en">
+			</div>
+			<div class="archive_details_description_title_other">
+				Description
+			</div>
+			<div class="archive_details_description_text_en">
 				{{ archive_details_description_text_en }}
-			</p>
+			</div>
 
 			<!--    右侧档案的属性-->
 			<div class="archive_details_properties_container">
 				<!--        每一行都是一个div，分为左侧和右侧文字-->
 				<!-- 有些是一行的，有些是两行的，区分开 -->
 				<div class="archive_details_properties_content_line">
-					<p class="archive_details_properties_text_left_up">年份</p>
+					<div class="archive_details_properties_text_left_up">
+						年份
+					</div>
 
-					<p class="archive_details_properties_text_right_up">
+					<div class="archive_details_properties_text_right_up">
 						{{ archive_details_properties_year_from }}~{{
 							archive_details_properties_year_to
 						}}
-					</p>
+					</div>
 				</div>
 
 				<div class="archive_details_properties_content">
-					<p class="archive_details_properties_text_left_up">
+					<div class="archive_details_properties_text_left_up">
 						关键词
-					</p>
-					<p class="archive_details_properties_text_left_down">
+					</div>
+					<div class="archive_details_properties_text_left_down">
 						Keywords
-					</p>
-					<p class="archive_details_properties_text_right_up">
+					</div>
+					<div class="archive_details_properties_text_right_up">
 						{{ archive_details_properties_keywords_zh }}
-					</p>
-					<p class="archive_details_properties_text_right_down">
+					</div>
+					<div class="archive_details_properties_text_right_down">
 						{{ archive_details_properties_keywords_en }}
-					</p>
+					</div>
 				</div>
 
 				<div class="archive_details_properties_content">
-					<p class="archive_details_properties_text_left_up">
+					<div class="archive_details_properties_text_left_up">
 						收藏单位
-					</p>
-					<p class="archive_details_properties_text_left_down">
+					</div>
+					<div class="archive_details_properties_text_left_down">
 						Collection
-					</p>
-					<p class="archive_details_properties_text_right_up">
+					</div>
+					<div class="archive_details_properties_text_right_up">
 						{{ archive_details_properties_collection_zh }}
-					</p>
-					<p class="archive_details_properties_text_right_down">
+					</div>
+					<div class="archive_details_properties_text_right_down">
 						{{ archive_details_properties_collection_en }}
-					</p>
+					</div>
 				</div>
 
 				<div class="archive_details_properties_content">
-					<p class="archive_details_properties_text_left_up">
+					<div class="archive_details_properties_text_left_up">
 						收藏地点
-					</p>
-					<p class="archive_details_properties_text_left_down">
+					</div>
+					<div class="archive_details_properties_text_left_down">
 						Location
-					</p>
-					<p class="archive_details_properties_text_right_up">
+					</div>
+					<div class="archive_details_properties_text_right_up">
 						{{ archive_details_properties_location_zh }}
-					</p>
-					<p class="archive_details_properties_text_right_down">
+					</div>
+					<div class="archive_details_properties_text_right_down">
 						{{ archive_details_properties_location_en }}
-					</p>
+					</div>
 				</div>
 
 				<div class="archive_details_properties_content_line">
-					<p class="archive_details_properties_text_left_up">
+					<div class="archive_details_properties_text_left_up">
 						档案页数
-					</p>
+					</div>
 
-					<p class="archive_details_properties_text_right_up">
+					<div class="archive_details_properties_text_right_up">
 						{{ archive_details_properties_pages }}
-					</p>
+					</div>
 				</div>
 
 				<div class="archive_details_properties_content_line">
-					<p class="archive_details_properties_text_left_up">
+					<div class="archive_details_properties_text_left_up">
 						文件尺寸
-					</p>
+					</div>
 
-					<p class="archive_details_properties_text_right_up">
+					<div class="archive_details_properties_text_right_up">
 						{{ archive_details_properties_size }}
-					</p>
+					</div>
 				</div>
 
 				<div class="archive_details_properties_content">
-					<p class="archive_details_properties_text_left_up">
+					<div class="archive_details_properties_text_left_up">
 						使用语种
-					</p>
-					<p class="archive_details_properties_text_left_down">
+					</div>
+					<div class="archive_details_properties_text_left_down">
 						Language
-					</p>
-					<p class="archive_details_properties_text_right_up">
+					</div>
+					<div class="archive_details_properties_text_right_up">
 						{{ archive_details_properties_language_zh }}
-					</p>
-					<p class="archive_details_properties_text_right_down">
+					</div>
+					<div class="archive_details_properties_text_right_down">
 						{{ archive_details_properties_language_en }}
-					</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -318,34 +322,35 @@ export default {
 .archive_details_title {
 	position: absolute;
 	text-align: center;
-	width: 900px;
-	top: 140px;
-	font-size: 17px;
-	line-height: 120%;
+	width: 1440px;
+	top: 221px;
+	font-size: 24px;
+	line-height: 150%;
 	color: #2f2f2f;
 }
 .archive_details_subtitle {
 	position: absolute;
 	text-align: center;
-	width: 900px;
-	top: 174px;
-	font-size: 11px;
-	line-height: 0;
+	width: 1440px;
+	height: 18px;
+	top: 251px;
+	font-size: 16px;
+	line-height: 150%;
 	color: #b9b9b9;
 }
 
 /*左侧图片、查看档案、查看来源、图片中文描述、图片其他语种描述*/
 .archive_details_img_container {
 	position: absolute;
-	width: 315px;
-	height: 364px;
-	left: 85px;
-	top: 240px;
+	width: 454px;
+	height: 524px;
+	left: 122px;
+	top: 345px;
 	filter: drop-shadow(6px 6px 11px rgba(0, 0, 0, 0.25));
 }
 
 .archive_details_img {
-    width: 100%;
+	width: 100%;
 	height: 0;
 	padding-bottom: 116%;
 	overflow: hidden;
@@ -359,80 +364,89 @@ export default {
 
 .archive_details_view {
 	position: absolute;
-	top: 625px;
+	top: 902px;
 	font-weight: 600;
-	font-size: 14px;
-	line-height: 0;
+	font-size: 20px;
+	line-height: 120%;
 	color: #023871;
 	text-decoration: underline;
 	cursor: pointer;
 }
 
+/* 图片中文描述 */
 .archive_details_description_title_Chinese {
 	position: absolute;
-	left: 85px;
-	top: 704px;
-	font-size: 17px;
-	line-height: 0;
+	width: 50px;
+	height: 21px;
+	left: 122px;
+	top: 1014px;
+	font-size: 24px;
+	line-height: 100%;
 	color: #588cc8;
 }
 .archive_details_description_text_zh {
 	position: absolute;
-	width: 382px;
-	height: 224px;
-	left: 85px;
-	top: 742px;
+	width: 550px;
+	height: 323px;
+	left: 122px;
+	top: 1068px;
 
-	font-size: 14px;
-	line-height: 21px;
+	font-size: 20px;
+	line-height: 150%;
 	color: #2f2f2f;
 }
+
+/* 图片外文描述 */
 .archive_details_description_title_other {
 	/* Description */
 
 	position: absolute;
-	left: 540px;
-	top: 704px;
-	font-size: 17px;
-	line-height: 0;
+	width: 192px;
+	height: 42px;
+	left: 777px;
+	top: 1014px;
+	font-size: 24px;
+	line-height: 100%;
 	color: #588cc8;
 }
 .archive_details_description_text_en {
 	position: absolute;
-	width: 367px;
-	height: 224px;
-	left: 540px;
-	top: 742px;
+	width: 528px;
+	height: 323px;
+	left: 777px;
+	top: 1068px;
 
-	font-size: 14px;
-	line-height: 21px;
+	font-size: 20px;
+	line-height: 150%;
 	color: #2f2f2f;
 }
 
 /*右侧档案的属性*/
 .archive_details_properties_container {
 	position: absolute;
-	width: 414px;
-	height: 382px;
-	left: 528px;
-	top: 232px;
+	width: 520px;
+	height: 535px;
+	left: 777px;
+	top: 340px;
 	display: flex;
 	flex-direction: column;
-	/*background: #588CC8;*/
+	/* background: #588CC8; */
 }
 
 /*每一行（中英文）都包装成一个类*/
 /* 只有一行文字 */
 .archive_details_properties_content_line {
 	position: relative;
-	width: 414px;
-	height: 30px;
+	width: 480px;
+    height: 50px;
+	padding: 10px;
 }
 /* 中英文两行文字 */
 .archive_details_properties_content {
 	position: relative;
-	width: 414px;
-	height: 54px;
+	width: 480px;
+    height: 80px;
+	padding: 15px;
 }
 
 /*类别名字中文*/
@@ -440,8 +454,8 @@ export default {
 	position: absolute;
 	left: 10px;
 	top: 5px;
-	font-size: 14px;
-	line-height: 0;
+	font-size: 20px;
+	line-height: 150%;
 	color: #9a9999;
 }
 /*类别名字英文*/
@@ -449,8 +463,8 @@ export default {
 	position: absolute;
 	left: 10px;
 	top: 30px;
-	font-size: 10px;
-	line-height: 0;
+	font-size: 16px;
+	line-height: 150%;
 	color: #9a9999;
 }
 /*类别内容中文*/
@@ -458,8 +472,8 @@ export default {
 	position: absolute;
 	left: 100px;
 	top: 5px;
-	font-size: 14px;
-	line-height: 0;
+	font-size: 20px;
+	line-height: 150%;
 	color: #2f2f2f;
 }
 /*类别内容英文*/
@@ -467,8 +481,8 @@ export default {
 	position: absolute;
 	left: 100px;
 	top: 30px;
-	font-size: 10px;
-	line-height: 0;
+	font-size: 16px;
+	line-height: 150%;
 	color: #9a9999;
 }
 </style>

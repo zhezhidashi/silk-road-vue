@@ -1,19 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-// const VueRouterPush = VueRouter.prototype.push
-// VueRouter.prototype.push = function push(to) {
-//     return VueRouterPush.call(this, to).catch(err => err)
-// }
-
-// //replace
-// const VueRouterReplace = VueRouter.prototype.replace
-// VueRouter.prototype.replace = function replace(to) {
-//     return VueRouterReplace.call(this, to).catch(err => err)
-// }
+let OriginPush = VueRouter.prototype.push;
+let OriginReplace = VueRouter.prototype.replace;
+VueRouter.prototype.push = function(location, resolve, reject){
+    if(resolve && reject){
+        OriginPush.call(this, location, resolve, reject);
+    }
+    else{
+        OriginPush.call(this, location, ()=>{}, ()=>{});
+    }
+}
+VueRouter.prototype.replace = function(location, resolve, reject){
+    if(resolve && reject){
+        OriginReplace.call(this, location, resolve, reject);
+    }
+    else{
+        OriginReplace.call(this, location, ()=>{}, ()=>{});
+    }
+}
 
 const routes = [
     {
@@ -109,14 +116,6 @@ const routes = [
                     title: '档案列表'
                 },
                 component: () => import('../views/Archive/ArchiveList.vue')
-            },
-            {
-                path: '/ArchiveList2',
-                name: 'ArchiveList2',
-                meta: {
-                    title: '档案列表'
-                },
-                component: () => import('../views/Archive/ArchiveList2.vue')
             },
             {
                 path: '/ArchiveDetails',

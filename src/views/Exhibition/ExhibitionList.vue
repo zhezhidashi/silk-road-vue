@@ -9,7 +9,7 @@
 			alt=""
 		/>
 		<!--线上展览标题-->
-		<p class="exh_list_h1">线上展览</p>
+		<div class="exh_list_h1">线上展览</div>
 
 		<!-- 把 标题、查看全部、图片列表当作一个类，记为 exh_list_content。并且把这些类全部装到 exh_list_container 里面方便 v-for 展示-->
 		<div class="exh_list_container">
@@ -21,7 +21,7 @@
 					<div class="exh_list_text">{{ item.exh_list_text }}</div>
 					<!--“查看全部”方框-->
 					<div class="blue_rectangle_container" id="exh_list_see_all">
-						<p
+						<div
 							@mousedown="
 								see_all_btn(
 									$event,
@@ -33,7 +33,7 @@
 							class="see_all_text"
 						>
 							查看全部
-						</p>
+						</div>
 					</div>
 					<!--图片列表-->
 					<div class="list_images" id="exh_list_images">
@@ -52,8 +52,13 @@
 									)
 								"
 								class="exh_list_images_img_container"
+                                @mouseover="MouseOverImage(item.gallery_list_id, img_src.gallery_id)"
+                                @mouseleave="MouseLeaveImage(item.gallery_list_id, img_src.gallery_id)"
 							>
-								<div
+								<!-- 鼠标悬停查看详情 -->
+								<div class="ImageSeeDetailsHover" :id="`ImageSeeDetails_${item.gallery_list_id}_${img_src.gallery_id}`">查看大图</div>
+								<div class="ImageContainerHover" :id="`ImageContainer_${item.gallery_list_id}_${img_src.gallery_id}`"></div>
+                                <div
 									class="exh_list_images_img"
 									:style="`background-image:url(${img_src.src})`"
 									v-show="index < 4"
@@ -167,6 +172,18 @@ export default {
 				},
 			});
 		},
+        MouseOverImage(v1, v2){
+            let Container = document.querySelector(`#ImageContainer_${v1}_${v2}`)
+            let SeeDetails = document.querySelector(`#ImageSeeDetails_${v1}_${v2}`)
+            Container.style.display = "flex";
+            SeeDetails.style.display = "flex";
+        },
+        MouseLeaveImage(v1, v2){
+            let Container = document.querySelector(`#ImageContainer_${v1}_${v2}`)
+            let SeeDetails = document.querySelector(`#ImageSeeDetails_${v1}_${v2}`)
+            Container.style.display = "none";
+            SeeDetails.style.display = "none";
+        }
 	},
 };
 </script>
@@ -181,44 +198,39 @@ export default {
 /*页面标题*/
 .exh_list_h1 {
 	position: absolute;
-	width: 90px;
-	height: 21px;
-	left: 441px;
-	top: 135px;
-	font-size: 22px;
-	line-height: 0;
+	width: 139px;
+	height: 42px;
+	left: 651px;
+	top: 213px;
+	font-size: 32px;
 	color: #023871;
 }
 
 /*exhibition list 整个框*/
 .exh_list_container {
 	position: relative;
-	/*height: 900px;*/
-	width: 940px;
-	left: 30px;
-	top: 206px;
-
-	/*background: lightblue;*/
+	width: 1150px;
+	left: 140px;
+	top: 320px;
+	/* background: lightblue; */
 }
 
 /*每一个exhibition对应的块*/
 .exh_list_content {
 	position: relative;
-	height: 400px;
-	width: 880px;
+	width: 1100px;
+	height: 500px;
 	margin: 30px;
-
 	/* background: blue; */
 }
 
 /*每一个exhibition的标题*/
 .exh_list_h2 {
 	position: absolute;
-	width: 500px;
+	width: 800px;
 	left: 20px;
 	top: 25px;
-
-	font-size: 17px;
+	font-size: 24px;
 	line-height: 120%;
 	color: #2f2f2f;
 }
@@ -226,15 +238,15 @@ export default {
 /*每一个exhibition对应文字描述*/
 .exh_list_text {
 	position: absolute;
-	width: 840px;
-	height: 35px;
+	width: 1050px;
 	left: 20px;
-	top: 68px;
-	font-size: 11px;
+	top: 100px;
+	font-size: 16px;
 	line-height: 150%;
 	color: #2f2f2f;
+    /* background: red; */
 
-    /* 最多显示2行文字，否则就是省略号 */
+	/* 最多显示2行文字，否则就是省略号 */
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
@@ -247,36 +259,72 @@ export default {
 	position: absolute;
 	right: 10px;
 	top: 10px;
+	font-size: 20px;
 }
 
 /*一排一排陈列图片 上半部分对应的id*/
 #exh_list_images {
-	width: 880px;
+	width: 1000px;
 	left: 0;
-	top: 134px;
+	top: 160px;
 	z-index: 10;
 }
 
 /* 每一张图片的属性 */
 .exh_list_images_img_container {
-    width: 178px;
-	height: 178px;
+	width: 210px;
+	height: 210px;
 	border-radius: 7px;
 	margin: 20px;
 	cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .exh_list_images_img {
-    width: 100%;
+	width: 100%;
 	height: 0;
 	padding-bottom: 100%;
-	overflow: hidden;
+	border-radius: 7px;
+
 	background-position: center center;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
-    border-radius: 7px;
-	
+	border-radius: 7px;
 }
+
+/* 鼠标悬浮出现“查看详情” */
+.ImageContainerHover{
+    position: absolute;
+    width: 210px;
+	height: 210px;
+    overflow: hidden;
+    background: rgba(95, 95, 95, 0.37);
+    display: none;
+    z-index: 15;
+} 
+
+.ImageSeeDetailsHover {
+	position: absolute;
+	width: 150px;
+	height: 50px;
+
+	background: #588cc8;
+	border-radius: 7px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-size: 18px;
+	color: #ffffff;
+	cursor: pointer;
+	z-index: 20;
+
+    display: none;
+}
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="height: 1000px">
+	<div class="background" style="height: 1500px">
 		<!--回退到上一个页面-->
 		<img
 			@click="router_go_back()"
@@ -63,20 +63,22 @@ export default {
 /*标题*/
 .web_intro_title {
 	position: absolute;
-	left: 441px;
-	top: 135px;
-	font-size: 22px;
-	line-height: 0;
+	width: 180px;
+	height: 42px;
+	left: 630px;
+	top: 213px;
+	font-size: 32px;
 	color: #023871;
 }
 .web_intro_text {
 	position: absolute;
-	left: 100px;
-	top: 250px;
-	width: 800px;
+	left: 120px;
+	top: 350px;
+	width: 1217px;
 }
 .web_intro_paragraph{
-    padding: 6px;
-    font-size: 17px;
+    margin: 20px;
+    font-size: 20px;
+    line-height: 180%;
 }
 </style>

@@ -8,13 +8,14 @@
 			src="arrow_left_3.png"
 			alt=""
 		/>
+
 		<!--    左侧高级搜索部分-->
 		<div class="archive_list_search_container">
 			<!--    关键词-->
-			<p class="archive_list_search_keywords">关键词</p>
+			<div class="archive_list_search_keywords">关键词</div>
 			<img
 				class="archive_list_search_arrow"
-				style="position: absolute; left: 117px; top: 147px"
+				style="position: absolute; left: 169px; top: 212px"
 				src="archive_list_search_arrow.png"
 			/>
 			<div class="archive_list_search_keywords_block">
@@ -26,10 +27,10 @@
 			</div>
 
 			<!--    日期-->
-			<p class="archive_list_search_year">年份</p>
+			<div class="archive_list_search_year">年份</div>
 			<img
 				class="archive_list_search_arrow"
-				style="position: absolute; left: 100px; top: 220px"
+				style="position: absolute; left: 150px; top: 317px"
 				src="archive_list_search_arrow.png"
 			/>
 			<!--    搜索的日期范围-->
@@ -40,7 +41,7 @@
 					class="archive_list_search_date_from_text"
 				/>
 			</div>
-			<p class="archive_list_search_date_text">至</p>
+			<div class="archive_list_search_date_text">至</div>
 			<div class="archive_list_search_date_to">
 				<input
 					type="search"
@@ -50,10 +51,10 @@
 			</div>
 
 			<!--    语言-->
-			<p class="archive_list_search_language">语言</p>
+			<div class="archive_list_search_language">语言</div>
 			<img
 				class="archive_list_search_arrow"
-				style="position: absolute; left: 100px; top: 294px"
+				style="position: absolute; left: 150px; top: 423px"
 				src="archive_list_search_arrow.png"
 			/>
 
@@ -84,12 +85,12 @@
 				class="blue_rectangle_container"
 				id="archive_list_advanced_search"
 			>
-				<p
+				<div
 					@mousedown="archive_list_advanced_search_btn($event)"
 					style="font-weight: 700; font-size: 14px; color: #ffffff"
 				>
 					搜索
-				</p>
+				</div>
 			</div>
 		</div>
 
@@ -366,29 +367,16 @@ export default {
 		},
 
 		archive_list_advanced_search_btn(event) {
-			if (this.$route.name === "ArchiveList") {
-				this.$router.push({
-					path: "/ArchiveList2",
-					query: {
-						search_keywords: this.search_keywords,
-						search_date_from: this.search_date_from,
-						search_date_to: this.search_date_to,
-						search_language: this.search_language,
-						now_page_num: this.now_page_num,
-					},
-				});
-			} else {
-				this.$router.push({
-					path: "/ArchiveList",
-					query: {
-						search_keywords: this.search_keywords,
-						search_date_from: this.search_date_from,
-						search_date_to: this.search_date_to,
-						search_language: this.search_language,
-						now_page_num: this.now_page_num,
-					},
-				});
-			}
+			this.$router.push({
+				path: "/ArchiveList",
+				query: {
+					search_keywords: this.search_keywords,
+					search_date_from: this.search_date_from,
+					search_date_to: this.search_date_to,
+					search_language: this.search_language,
+					now_page_num: this.now_page_num,
+				},
+			});
 		},
 
 		archive_list_search_result_btn(event, search_result_id) {
@@ -402,29 +390,16 @@ export default {
 
 		//服务于下面三个跳转的函数
 		archive_list_jmp(event, page_num) {
-			if (this.$route.name === "ArchiveList") {
-				this.$router.push({
-					path: "/ArchiveList2",
-					query: {
-						search_keywords: this.search_keywords,
-						search_date_from: this.search_date_from,
-						search_date_to: this.search_date_to,
-						search_language: this.search_language,
-						now_page_num: page_num,
-					},
-				});
-			} else {
-				this.$router.push({
-					path: "/ArchiveList",
-					query: {
-						search_keywords: this.search_keywords,
-						search_date_from: this.search_date_from,
-						search_date_to: this.search_date_to,
-						search_language: this.search_language,
-						now_page_num: page_num,
-					},
-				});
-			}
+			this.$router.push({
+				path: "/ArchiveList",
+				query: {
+					search_keywords: this.search_keywords,
+					search_date_from: this.search_date_from,
+					search_date_to: this.search_date_to,
+					search_language: this.search_language,
+					now_page_num: page_num,
+				},
+			});
 		},
 
 		//跳转至上一页
@@ -440,7 +415,7 @@ export default {
 		//跳转至下一页
 		archive_list_jump_next_btn(event) {
 			let now_page_num_int = parseInt(this.now_page_num);
-			if (this.now_page_num === this.total_page_num) {
+			if (this.now_page_num >= this.total_page_num) {
 				alert("当前已经是最后一页");
 				return;
 			}
@@ -468,133 +443,143 @@ export default {
 	visibility: hidden;
 }
 /*左侧高级搜索部分*/
-
-/*日期*/
+/* 左侧搜索的向下指的箭头图片 */
 .archive_list_search_arrow {
 	position: absolute;
-	width: 10px;
+	width: 13px;
 }
+
+/*关键字*/
 .archive_list_search_keywords {
 	position: absolute;
-	width: 42px;
-	height: 13px;
-	left: 54px;
-	top: 125px;
+	width: 60px;
+	height: 19px;
+	left: 78px;
+	top: 207px;
 
 	font-weight: 600;
-	font-size: 14px;
-	line-height: 96%;
+	font-size: 20px;
+	line-height: 100%;
 	color: #2f2f2f;
 }
+/* 输入关键字的Container */
 .archive_list_search_keywords_block {
 	position: absolute;
-	width: 151px;
-	height: 29px;
-	left: 54px;
-	top: 165px;
+	width: 218px;
+	height: 42px;
+	left: 78px;
+	top: 238px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.4px rgba(0, 0, 0, 0.11);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    z-index: 10;
 }
+/* 输入关键字文本 */
 .archive_list_search_keywords_text {
 	position: absolute;
-	width: 143px;
-	height: 23px;
-	left: 5px;
-	top: 3px;
+	width: 200px;
+	height: 30px;
 	border: none;
 	outline: none;
-	font-size: 14px;
-	line-height: 100%;
-}
-.archive_list_search_keywords_img {
-	position: absolute;
-	width: 14px;
-	left: 130px;
-	top: 8px;
+	font-size: 20px;
 }
 
+/* 年份 */
 .archive_list_search_year {
 	position: absolute;
-	left: 54px;
-	top: 200px;
+	width: 42px;
+	height: 19px;
+	left: 78px;
+	top: 312px;
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 20px;
 	color: #2f2f2f;
 }
-
+/* 年份 from 的 Container */
 .archive_list_search_date_from {
 	position: absolute;
-	width: 58px;
-	height: 29px;
-	left: 54px;
-	top: 242px;
-
+	width: 84px;
+	height: 42px;
+	left: 78px;
+	top: 348px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.3px rgba(0, 0, 0, 0.11);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    z-index: 10;
 }
+/* 年份 from 的文本 */
 .archive_list_search_date_from_text {
 	position: absolute;
-	width: 53px;
-	height: 23px;
-	left: 5px;
-	top: 3px;
+	width: 75px;
+	height: 30px;
 	border: none;
 	outline: none;
-	font-size: 14px;
-	line-height: 100%;
+	font-size: 20px;
 }
+/* “至” 那个字 */
 .archive_list_search_date_text {
 	position: absolute;
-	width: 13px;
-	height: 13px;
-	left: 124px;
-	top: 240px;
+	width: 18px;
+	height: 19px;
+	left: 178px;
+	top: 362px;
 
 	font-size: 11px;
 	line-height: 96%;
 	color: #2f2f2f;
 }
+/* 年份 to 的 Container */
 .archive_list_search_date_to {
 	position: absolute;
-	width: 58px;
-	height: 29px;
-	left: 147px;
-	top: 242px;
+	width: 84px;
+	height: 42px;
+	left: 212px;
+	top: 348px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.3px rgba(0, 0, 0, 0.11);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    z-index: 10;
 }
+/* 年份 to 的文本 */
 .archive_list_search_date_to_text {
 	position: absolute;
-	width: 53px;
-	height: 23px;
-	left: 5px;
-	top: 3px;
+	width: 75px;
+	height: 30px;
 	border: none;
 	outline: none;
-	font-size: 14px;
-	line-height: 100%;
+	font-size: 20px;
 }
+
 /*语言*/
 .archive_list_search_language {
 	position: absolute;
-	left: 54px;
-	top: 275px;
+	width: 42px;
+	height: 19px;
+	left: 78px;
+	top: 417px;
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 20px;
 	color: #2f2f2f;
 	z-index: 10;
 }
-
+/* 语言的 Container */
 .archive_list_search_language_container {
 	position: absolute;
-	width: 110px;
+	width: 200px;
 	height: 102px;
-	left: 49px;
-	top: 320px;
+	left: 80px;
+	top: 460px;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	z-index: 10;
+	/* background: red; */
 }
 
 .archive_list_search_language_option {
@@ -605,16 +590,16 @@ export default {
 }
 .archive_list_search_language_option_square {
 	position: absolute;
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 	left: 0;
-	top: 7px;
+	top: 15px;
 }
 .archive_list_search_language_option_text {
 	position: absolute;
-	left: 15px;
-	top: 7px;
-	font-size: 12px;
+	left: 30px;
+	top: 15px;
+	font-size: 15px;
 	line-height: 100%;
 	color: #2f2f2f;
 }
@@ -622,10 +607,10 @@ export default {
 /*高级搜索框*/
 #archive_list_advanced_search {
 	position: absolute;
-	width: 148px;
-	height: 33px;
-	left: 58px;
-	top: 438px;
+	width: 213px;
+	height: 48px;
+	left: 84px;
+	top: 631px;
 	z-index: 10;
 }
 
@@ -633,21 +618,20 @@ export default {
 
 .archive_list_search_result {
 	position: relative;
-	width: 685px;
-	/*height: 555px;*/
-	left: 281px;
-	top: 177px;
+	width: 950px;
+	left: 440px;
+	top: 270px;
 	display: flex;
 	flex-flow: wrap;
 	align-content: flex-start;
 	z-index: 10;
-	/*background: #588CC8;*/
+	/* background: #588cc8; */
 }
 /*白色的框*/
 .archive_list_search_result_container {
 	position: relative;
-	width: 632px;
-	height: 236px;
+	width: 909px;
+	height: 339px;
 	background: #f4f4f4;
 	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25);
 	border-radius: 7px;
@@ -657,13 +641,14 @@ export default {
 /*图片*/
 .search_result_img_container {
 	position: absolute;
-	width: 145px;
-	height: 167px;
-	left: 34px;
-	top: 28px;
+	position: absolute;
+	width: 208px;
+	height: 240px;
+	left: 49px;
+	top: 40px;
 }
-.search_result_img{
-    width: 100%;
+.search_result_img {
+	width: 100%;
 	height: 0;
 	padding-bottom: 115%;
 	overflow: hidden;
@@ -676,10 +661,12 @@ export default {
 /*标题*/
 .archive_list_search_result_title {
 	position: absolute;
-	left: 199px;
-	top: 18px;
-	font-size: 17px;
-	line-height: 120%;
+	width: 400px;
+	height: 30px;
+	left: 286px;
+	top: 40px;
+	font-size: 24px;
+	line-height: 30px;
 	color: #2f2f2f;
 	/*最多显示一行文字，否则就是省略号*/
 	overflow: hidden;
@@ -693,29 +680,32 @@ export default {
 .archive_list_search_result_subtitle {
 	/* 西印度档案总馆 */
 	position: absolute;
-	left: 199px;
-	top: 69px;
-	font-size: 11px;
-	line-height: 0;
+	width: 400px;
+	height: 16px;
+	left: 290px;
+	top: 76px;
+	font-size: 16px;
 	color: #2f2f2f;
 }
 /*时间*/
 .archive_list_search_result_date {
 	position: absolute;
-	left: 199px;
-	top: 95px;
-	font-size: 11px;
-	line-height: 0;
+	width: 224px;
+	height: 18px;
+	left: 289px;
+	top: 102px;
+	font-size: 16px;
 	color: #2f2f2f;
 }
 /*描述*/
 .archive_list_search_result_description {
 	position: absolute;
-	width: 402px;
-	left: 199px;
-	top: 115px;
+	position: absolute;
+	width: 589px;
+	left: 286px;
+	top: 208px;
 
-	font-size: 11px;
+	font-size: 16px;
 	line-height: 150%;
 	color: #2f2f2f;
 

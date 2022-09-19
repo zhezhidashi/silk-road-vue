@@ -5,11 +5,12 @@ import './assets/base.css'
 import App from './App.vue'
 import ElementUI from 'element-ui'
 import router from './router'
+// 引入Swiper样式
+import "swiper/css/swiper.css";
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
-
 
 //title修改
 router.beforeEach((to,from,next)=>{

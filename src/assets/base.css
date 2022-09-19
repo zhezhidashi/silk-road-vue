@@ -1,14 +1,11 @@
-p{
+p {
     font-style: normal;
     font-weight: 400;
 }
 
 .background {
     position: relative;
-    width: 1000px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
+    width: 1440px;
 }
 
 /*向左右切换的图标*/
@@ -20,6 +17,7 @@ p{
     border-radius: 50%;
     cursor: pointer;
 }
+
 /*浅色切换图标的左箭头*/
 .shift_left_arrow_light {
     position: relative;
@@ -28,6 +26,7 @@ p{
     left: 9px;
     top: 7px;
 }
+
 /*浅色切换图标的右箭头*/
 .shift_right_arrow_light {
     position: relative;
@@ -67,8 +66,8 @@ p{
 
 /*查看详情、查看全部背后的蓝色方框*/
 .blue_rectangle_container {
-    width: 147px;
-    height: 33px;
+    width: 213px;
+    height: 48px;
     background: #588CC8;
     border-radius: 7px;
 
@@ -76,34 +75,41 @@ p{
     justify-content: center;
     align-items: center;
 
-    font-size: 14px;
-    line-height: 0;
+    font-size: 20px;
     color: #FFFFFF;
     cursor: pointer;
 }
 
 /*一排一排陈列图片对应的class*/
-.list_images{
+.list_images {
     position: absolute;
     display: flex;
     flex-flow: wrap;
     align-content: flex-start;
 }
 
-#go_back1{
+#go_back1 {
     position: absolute;
-    left: 117px;
-    top: 146px;
-    width: 27px;
+    left: 156px;
+    top: 210px;
+
+    width: 35px;
     cursor: pointer;
     z-index: 11;
 }
 
-#go_back2{
+#go_back2 {
     position: absolute;
-    left: 257px;
-    top: 146px;
-    width: 27px;
+    left: 464px;
+    top: 204px;
+    width: 35px;
     cursor: pointer;
     z-index: 11;
 }
+
+/* @font-face {
+    font-style:normal;
+    font-family:'微软雅黑';
+    src:url('微软雅黑.ttf') format('truetype');
+} */
+
