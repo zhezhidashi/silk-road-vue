@@ -191,8 +191,7 @@ export default {
 <style>
 .nav_bar_underline {
 	visibility: visible;
-	left: 485px;
-	top: 45px;
+	left: 882px;
 }
 
 /*页面标题*/
@@ -210,6 +209,7 @@ export default {
 .exh_list_container {
 	position: relative;
 	width: 1150px;
+    min-height: 100vh;
 	left: 140px;
 	top: 320px;
 	/* background: lightblue; */

@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="width: 100%; height: 3221px; background: #023871">
+	<div class="background" style="width: 100%; height: auto; background: #023871">
         <!-- 轮播图 -->
         <IndexImage/>
         <IndexBoard/>

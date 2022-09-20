@@ -1,16 +1,24 @@
 import Vue from 'vue'
+Vue.config.productionTip = false
+
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/base.css'
 
 import App from './App.vue'
 import ElementUI from 'element-ui'
+Vue.use(ElementUI);
+
 import router from './router'
+
 // 引入Swiper样式
 import "swiper/css/swiper.css";
+// 引入 v-viewer 样式
+import 'viewerjs/dist/viewer.css'
 
-Vue.config.productionTip = false
+import Viewer from 'v-viewer'
+Vue.use(Viewer)
 
-Vue.use(ElementUI);
+
 
 //title修改
 router.beforeEach((to,from,next)=>{

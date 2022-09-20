@@ -28,8 +28,7 @@ export default {
 <style>
 .nav_bar_underline {
 	visibility: visible;
-	left: 745px;
-	top: 45px;
+	left: 1265px;
 }
 
 /*标题*/

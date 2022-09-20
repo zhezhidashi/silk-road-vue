@@ -75,7 +75,7 @@ const routes = [
                 meta: {
                     title: '线上展览-相册内容'
                 },
-                component: () => import('../views/Exhibition/ExhibitionGallery.vue')
+                component: () => import('../views/Exhibition/ExhibitionGallery')
             },
             {
                 path: '/AcademicActivityList',

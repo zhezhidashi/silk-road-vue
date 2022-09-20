@@ -12,8 +12,8 @@
 
 <style>
 .FooterStyle{
-    width: 1000px;
-    height: 70px;
+    width: 1440px;
+    height: 140px;
     display: flex;
 	justify-content: center;
 	align-items: center;
@@ -21,13 +21,13 @@
 }
 .footer_container {
 	position: relative;
-	width: 264px;
-	height: 27px;
+	width: 410px;
+	height: auto;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 14px;
-	line-height: 0;
+	font-size: 20px;
+	line-height: 150%;
 	color: #ffffff;
 }
 .footer_line_left {

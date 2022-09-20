@@ -191,8 +191,7 @@ export default {
 <style>
 .nav_bar_underline {
 	visibility: visible;
-	left: 577px;
-	top: 45px;
+	left: 1015px;
 }
 
 /*标题*/
@@ -209,6 +208,7 @@ export default {
 #academic_activity_images {
 	position: relative;
 	width: 1330px;
+    min-height: 100vh;
 	left: 95px;
 	top: 278px;
 }

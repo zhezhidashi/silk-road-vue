@@ -22,8 +22,7 @@ export default {
 <style>
 .nav_bar_underline {
 	visibility: visible;
-	left: 395px;
-	top: 45px;
+	left: 746px;
 }
 /*标题*/
 .latest_content_title {

@@ -56,8 +56,7 @@ export default {
 /* 修改导航栏波浪线的样式 */
 .nav_bar_underline {
 	visibility: visible;
-	left: 305px;
-	top: 45px;
+	left: 612px;
 }
 
 /*标题*/

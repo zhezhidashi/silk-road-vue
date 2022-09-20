@@ -1,24 +1,24 @@
 <template>
-	<div>
-		<!-- 标题图片 -->
-		<div class="swiper-container" id="IndexImageContainer">
-			<div class="swiper-wrapper">
-				<div
-					class="swiper-slide"
-					v-for="(item, index) in index_title_image_src"
-					:key="index"
-				>
-					<img class="IndexImage" :src="item" />
-				</div>
+	<!-- 标题图片 -->
+	<div class="swiper-container" id="IndexImageContainer">
+		<div class="swiper-wrapper">
+			<div
+				class="swiper-slide"
+				v-for="(item, index) in index_title_image_src"
+				:key="index"
+			>
+				<img class="IndexImage" :src="item" />
 			</div>
-
-			<div class="swiper-pagination"></div>
-			<!-- 如果需要导航按钮 -->
-			<div class="swiper-button-prev" id="IndexImageShiftPrev"></div>
-			<div class="swiper-button-next" id="IndexImageShiftNext"></div>
 		</div>
-		<!-- 查看详情部分 -->
-		<div
+
+		<div class="swiper-pagination"></div>
+		<!-- 如果需要导航按钮 -->
+		<div class="swiper-button-prev" id="IndexImageShiftPrev"></div>
+		<div class="swiper-button-next" id="IndexImageShiftNext"></div>
+	</div>
+
+	<!-- 查看详情部分 -->
+	<!-- <div
 			@mousedown="index_title_see_details_btn($event)"
 			class="blue_rectangle_container"
 			id="index_title_see_details"
@@ -26,9 +26,9 @@
 			<div class="index_see_details" style="font-weight: 700">
 				查看详情
 			</div>
-		</div>
-		<!-- 标题部分 -->
-		<!-- <div class="index_title_back">
+		</div> -->
+	<!-- 标题部分 -->
+	<!-- <div class="index_title_back">
 			<div class="index_main_title">
 				{{ index_main_title[now_img_num] }}
 			</div>
@@ -39,7 +39,6 @@
 				&emsp;&emsp;{{ index_title_intro[now_img_num] }}
 			</div>
 		</div> -->
-	</div>
 </template>
 
 <script>
@@ -52,11 +51,13 @@ export default {
 				"background_image_1.jpg",
 				"background_image_2.jpg",
 				"background_image_3.jpg",
-				"background_image_4.jpg",
-				"background_image_5.jpg",
-				"background_image_6.jpg",
-				"background_image_7.jpg",
 			],
+
+			// index_title_image_src: [
+			// 	"https://dev.pacificsilkroad.cn/img-service/1/1-zN1170083P.jpg",
+			// 	"https://dev.pacificsilkroad.cn/img-service/1/1-BZpi703xX3.jpg",
+			// 	"https://dev.pacificsilkroad.cn/img-service/1/1-v7j6D8nvHe.jpg",
+			// ],
 
 			index_main_title: [
 				"有帆自远方来:",
@@ -104,7 +105,7 @@ export default {
 				// 如果需要分页器
 				pagination: {
 					el: ".swiper-pagination",
-                    clickable: true,
+					clickable: true,
 				},
 				// 如果需要前进后退按钮
 				navigation: {
@@ -124,19 +125,20 @@ export default {
 	width: 100%;
 	height: auto;
 	left: 0;
-	top: -7px;
+	top: 129px;
 }
 .IndexImage {
 	width: 100%;
+	height: 100%;
 }
 
 /* 标题部分“查看详情”  */
-#index_title_see_details {
+/* #index_title_see_details {
 	position: absolute;
 	right: 30px;
 	margin: auto;
 	z-index: 20;
-}
+} */
 
 /* 分页器颜色 */
 

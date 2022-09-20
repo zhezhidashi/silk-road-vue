@@ -1,88 +1,94 @@
 <template>
-	<div>
-		<!-- 近期展览部份 -->
-		<!-- 上半 -->
-		<div class="index_exh_back">
-			<div class="index_exh_title">近期展览</div>
+	<!-- 近期展览部份 -->
+	<!-- 上半 -->
+	<div class="index_exh_back">
+		<div class="index_exh_title">近期展览</div>
 
-			<div class="index_exh_up_back">
-				<img class="index_exh_up_image" :src="index_exh_up_image_src" />
-				<div class="index_exh_up_title1">{{ index_exh_up_title1 }}</div>
-				<div class="index_exh_up_title2">{{ index_exh_up_title2 }}</div>
-				<div class="index_exh_up_text">
-					{{ index_exh_up_text }}
-				</div>
-				<div class="index_exh_up_line"></div>
-				<div
-					@mousedown="index_exh_see_details_btn($event, 1)"
-					class="blue_rectangle_container"
-					id="index_exh_up_see_details"
-				>
-					<div class="index_see_details" style="font-weight: 700">
-						查看详情
-					</div>
+		<div class="index_exh_up_back">
+			<div
+				class="index_exh_up_image"
+				:style="`background-image: linear-gradient(267.33deg, #023871 12.04%, rgba(30, 50, 49, 0) 60.56%), url(${index_exh_up_image_src[ExhibitionIndex]});`"
+			></div>
+			<div class="index_exh_up_title1">
+				{{ index_exh_up_title1[ExhibitionIndex] }}
+			</div>
+			<div class="index_exh_up_title2">
+				{{ index_exh_up_title2[ExhibitionIndex] }}
+			</div>
+			<div class="index_exh_up_text">
+				{{ index_exh_up_text[ExhibitionIndex] }}
+			</div>
+			<div class="index_exh_up_line"></div>
+			<div
+				@mousedown="index_exh_see_details_btn($event, 1)"
+				class="blue_rectangle_container"
+				id="index_exh_up_see_details"
+			>
+				<div class="index_see_details" style="font-weight: 700">
+					查看详情
 				</div>
 			</div>
+		</div>
 
-			<!-- 下半 -->
-			<div class="index_exh_down_back">
+		<!-- 下半 -->
+		<div class="index_exh_down_back">
+			<div
+				class="index_exh_down_image"
+				:style="`background-image: linear-gradient(84.6deg, #023871 11.21%, rgba(30, 50, 49, 0) 66.36%), url(${index_exh_down_image_src[ExhibitionIndex]});`"
+			/>
+			<div class="index_exh_down_title1">
+				{{ index_exh_down_title1[ExhibitionIndex] }}
+			</div>
+			<div class="index_exh_down_title2">
+				{{ index_exh_down_title2[ExhibitionIndex] }}
+			</div>
+			<div class="index_exh_down_text">
+				{{ index_exh_down_text[ExhibitionIndex] }}
+			</div>
+
+			<div class="index_exh_down_line"></div>
+			<div
+				@mousedown="index_exh_see_details_btn($event, 2)"
+				class="blue_rectangle_container"
+				id="index_exh_down_see_details"
+			>
+				<div class="see_details" style="font-weight: 700">查看详情</div>
+			</div>
+		</div>
+
+		<!-- 左右切换近期展览的图标 -->
+		<div class="ExhibitionShiftContainer">
+			<div
+				@mousedown="ExhibitionShift(-1)"
+				class="shift_eclipse_dark"
+				id="index_exh_shift_left"
+			>
 				<img
-					class="index_exh_down_image"
-					:src="index_exh_down_image_src"
+					class="shift_left_arrow_dark"
+					:src="shift_left_arrow_dark_src"
 				/>
-				<div class="index_exh_down_title1">
-					{{ index_exh_down_title1 }}
-				</div>
-				<div class="index_exh_down_title2">
-					{{ index_exh_down_title2 }}
-				</div>
-				<div class="index_exh_down_text2">
-					{{ index_exh_down_text2 }}
-				</div>
-
-				<div class="index_exh_down_line"></div>
-				<div
-					@mousedown="index_exh_see_details_btn($event, 2)"
-					class="blue_rectangle_container"
-					id="index_exh_down_see_details"
-				>
-					<div class="see_details" style="font-weight: 700">
-						查看详情
-					</div>
-				</div>
 			</div>
 
-			<!-- 左右切换近期展览的图标 -->
-			<div class="ExhibitionShiftContainer">
-				<div
-					@mousedown="exh_shift_left_btn"
-					class="shift_eclipse_dark"
-					id="index_exh_shift_left"
-				>
-					<img
-						class="shift_left_arrow_dark"
-						:src="shift_left_arrow_dark_src"
-					/>
-				</div>
+			<div class="index_exh_shift_pages">
+				{{ ExhibitionIndex + 1 }}&emsp;/&emsp;{{ ExhibitionTotal }}
+			</div>
 
-				<div class="index_exh_shift_pages">1&emsp;/&emsp;5</div>
-
-				<div
-					@mousedown="exh_shift_right_btn"
-					class="shift_eclipse_dark"
-					id="index_exh_shift_right"
-				>
-					<img
-						class="shift_right_arrow_dark"
-						:src="shift_right_arrow_dark_src"
-					/>
-				</div>
+			<div
+				@mousedown="ExhibitionShift(1)"
+				class="shift_eclipse_dark"
+				id="index_exh_shift_right"
+			>
+				<img
+					class="shift_right_arrow_dark"
+					:src="shift_right_arrow_dark_src"
+				/>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { throttle } from "lodash";
 export default {
 	name: "IndexExhibition",
 	data() {
@@ -93,17 +99,49 @@ export default {
 			shift_left_arrow_dark_src: "arrow_left_2.png",
 			shift_right_arrow_dark_src: "arrow_right_2.png",
 
-			index_exh_up_image_src: "exh_image1.jpg",
-			index_exh_up_title1: "菲律宾的地图档案",
-			index_exh_up_title2: "西印度档案总馆",
-			index_exh_up_text:
-				"一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置，有一个大型结构。这里的结构跨度长达150千米，每个疑似跑道的结构宽度达到了8000米左右。<br>从该结构来看，这里曾经的科学技术水平应该很高。因此有些人怀疑，这是不是传说中淹没海中的亚特兰蒂斯文明。",
+			ExhibitionIndex: 0,
+			ExhibitionTotal: 3,
+			index_exh_up_image_src: [
+				"exh_image1.jpg",
+				"exh_image2.jpg",
+				"exh_image1.jpg",
+			],
+			index_exh_up_title1: [
+				"1 菲律宾的地图档案",
+				"2 菲律宾的地图档案",
+				"3 菲律宾的地图档案",
+			],
+			index_exh_up_title2: [
+				"1 西印度档案总馆",
+				"2 西印度档案总馆",
+				"3 西印度档案总馆",
+			],
+			index_exh_up_text: [
+				"1 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置，有一个大型结构。这里的结构跨度长达150千米，每个疑似跑道的结构宽度达到了8000米左右。<br>从该结构来看，这里曾经的科学技术水平应该很高。因此有些人怀疑，这是不是传说中淹没海中的亚特兰蒂斯文明。",
+				"2 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置，有一个大型结构。这里的结构跨度长达150千米，每个疑似跑道的结构宽度达到了8000米左右。<br>从该结构来看，这里曾经的科学技术水平应该很高。因此有些人怀疑，这是不是传说中淹没海中的亚特兰蒂斯文明。",
+				"3 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置，有一个大型结构。这里的结构跨度长达150千米，每个疑似跑道的结构宽度达到了8000米左右。<br>从该结构来看，这里曾经的科学技术水平应该很高。因此有些人怀疑，这是不是传说中淹没海中的亚特兰蒂斯文明。",
+			],
 
-			index_exh_down_image_src: "exh_image2.jpg",
-			index_exh_down_title1: "菲律宾的地图档案",
-			index_exh_down_title2: "西印度档案总馆",
-			index_exh_down_text2:
-				"一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置，有一个大型结构。这里的结构跨度长达150千米，每个疑似跑道的结构宽度达到了8000米左右。<br>从该结构来看，这里曾经的科学技术水平应该很高。因此有些人怀疑，这是不是传说中淹没海中的亚特兰蒂斯文明。",
+			index_exh_down_image_src: [
+				"exh_image2.jpg",
+				"exh_image1.jpg",
+				"exh_image2.jpg",
+			],
+			index_exh_down_title1: [
+				"1 菲律宾的地图档案",
+				"2 菲律宾的地图档案",
+				"3 菲律宾的地图档案",
+			],
+			index_exh_down_title2: [
+				"1 西印度档案总馆",
+				"2 西印度档案总馆",
+				"3 西印度档案总馆",
+			],
+			index_exh_down_text: [
+				"1 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置，有一个大型结构。这里的结构跨度长达150千米，每个疑似跑道的结构宽度达到了8000米左右。<br>从该结构来看，这里曾经的科学技术水平应该很高。因此有些人怀疑，这是不是传说中淹没海中的亚特兰蒂斯文明。",
+				"2 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置，有一个大型结构。这里的结构跨度长达150千米，每个疑似跑道的结构宽度达到了8000米左右。<br>从该结构来看，这里曾经的科学技术水平应该很高。因此有些人怀疑，这是不是传说中淹没海中的亚特兰蒂斯文明。",
+				"3 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置，有一个大型结构。这里的结构跨度长达150千米，每个疑似跑道的结构宽度达到了8000米左右。<br>从该结构来看，这里曾经的科学技术水平应该很高。因此有些人怀疑，这是不是传说中淹没海中的亚特兰蒂斯文明。",
+			],
 		};
 	},
 	methods: {
@@ -120,24 +158,50 @@ export default {
 			});
 		},
 
+		// 切换
+		ExhibitionShift: throttle(function (d) {
+			let ImageUp = document.querySelector(".index_exh_up_image");
+			let Title1Up = document.querySelector(".index_exh_up_title1");
+			let Title2Up = document.querySelector(".index_exh_up_title2");
+			let TextUp = document.querySelector(".index_exh_up_text");
 
-		exh_shift_left_btn() {
-			let page_num = document.querySelector(".index_exh_shift_pages");
-			let num = parseInt(page_num.textContent.charAt(0));
+			let ImageDown = document.querySelector(".index_exh_down_image");
+			let Title1Down = document.querySelector(".index_exh_down_title1");
+			let Title2Down = document.querySelector(".index_exh_down_title2");
+			let TextDown = document.querySelector(".index_exh_down_text");
 
-			num = num === 1 ? 5 : num - 1;
-			page_num.textContent =
-				num.toString() + page_num.textContent.substring(1);
-		},
-
-		exh_shift_right_btn() {
-			let page_num = document.querySelector(".index_exh_shift_pages");
-			let num = parseInt(page_num.textContent.charAt(0));
-
-			num = num === 5 ? 1 : num + 1;
-			page_num.textContent =
-				num.toString() + page_num.textContent.substring(1);
-		},
+			let image_fade_timer = setInterval(image_fade, 7);
+			let opa = 100;
+			let _this = this;
+			function image_fade() {
+				if (opa > 0) {
+					ImageUp.style.opacity = String(opa / 100);
+					Title1Up.style.opacity = String(opa / 100);
+					Title2Up.style.opacity = String(opa / 100);
+					TextUp.style.opacity = String(opa / 100);
+					ImageDown.style.opacity = String(opa / 100);
+					Title1Down.style.opacity = String(opa / 100);
+					Title2Down.style.opacity = String(opa / 100);
+					TextDown.style.opacity = String(opa / 100);
+				} else if (opa === 0) {
+					_this.ExhibitionIndex =
+						(_this.ExhibitionIndex + d + _this.ExhibitionTotal) %
+						_this.ExhibitionTotal;
+				} else if (opa > -100) {
+					ImageUp.style.opacity = String(-opa / 100);
+					Title1Up.style.opacity = String(-opa / 100);
+					Title2Up.style.opacity = String(-opa / 100);
+					TextUp.style.opacity = String(-opa / 100);
+					ImageDown.style.opacity = String(-opa / 100);
+					Title1Down.style.opacity = String(-opa / 100);
+					Title2Down.style.opacity = String(-opa / 100);
+					TextDown.style.opacity = String(-opa / 100);
+				} else {
+					clearInterval(image_fade_timer);
+				}
+				opa--;
+			}
+		}, 2000),
 	},
 };
 </script>
@@ -145,12 +209,14 @@ export default {
 <style scoped>
 /*近期展示部分*/
 .index_exh_back {
-	position: absolute;
+	position: relative;
 	width: 100%;
-	height: 1642px;
+	top: 129px;
+	height: 1700px;
 	background: #efefef;
 }
 
+/* “近期展览”四个字 */
 .index_exh_title {
 	position: absolute;
 	width: 196px;
@@ -184,8 +250,8 @@ export default {
 	left: 0;
 	top: 0;
 	border-radius: 28px;
+	opacity: 1;
 }
-
 .index_exh_up_title1 {
 	position: absolute;
 	width: 472px;
@@ -196,8 +262,8 @@ export default {
 	font-size: 32px;
 	line-height: 100%;
 	color: #ffffff;
+	opacity: 1;
 }
-
 .index_exh_up_title2 {
 	position: absolute;
 	width: 270px;
@@ -208,8 +274,8 @@ export default {
 	font-size: 20px;
 	line-height: 100%;
 	color: #ffffff;
+	opacity: 1;
 }
-
 .index_exh_up_text {
 	position: absolute;
 	width: 574px;
@@ -220,8 +286,8 @@ export default {
 	font-size: 16px;
 	line-height: 200%;
 	color: #ffffff;
+	opacity: 1;
 }
-
 .index_exh_up_line {
 	position: absolute;
 	width: 557px;
@@ -253,16 +319,15 @@ export default {
 	background: #023871;
 	border-radius: 28px;
 }
-
 .index_exh_down_image {
 	position: absolute;
 	width: 633px;
 	height: 520px;
 	left: 585px;
 	top: 0;
-	border-radius: 28px;
+	border-radius: 0 28px 28px 0;
+	opacity: 1;
 }
-
 .index_exh_down_title1 {
 	position: absolute;
 	width: 436px;
@@ -273,8 +338,8 @@ export default {
 	font-size: 32px;
 	line-height: 100%;
 	color: #ffffff;
+	opacity: 1;
 }
-
 .index_exh_down_title2 {
 	position: absolute;
 	width: 445px;
@@ -285,9 +350,9 @@ export default {
 	font-size: 20px;
 	line-height: 100%;
 	color: #ffffff;
+	opacity: 1;
 }
-
-.index_exh_down_text2 {
+.index_exh_down_text {
 	position: absolute;
 	width: 557px;
 	height: 234px;
@@ -297,8 +362,8 @@ export default {
 	font-size: 16px;
 	line-height: 200%;
 	color: #ffffff;
+	opacity: 1;
 }
-
 .index_exh_down_line {
 	position: absolute;
 	width: 557px;
@@ -316,7 +381,7 @@ export default {
 	top: 432px;
 }
 
-/* “查看详情” 部分 */
+/* 切换轮播图部分 */
 .ExhibitionShiftContainer {
 	position: absolute;
 	width: 459px;
@@ -329,17 +394,15 @@ export default {
 	justify-content: space-between;
 	align-items: center;
 }
-
 .index_exh_shift_pages {
 	width: 106px;
 	height: 60px;
-    
+
 	font-size: 20px;
-    text-align: center;
+	text-align: center;
 	line-height: 60px;
 	color: #000;
 }
-
 #index_exh_shift_left {
 	width: 30px;
 	height: 30px;

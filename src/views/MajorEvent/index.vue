@@ -47,8 +47,7 @@ export default {
 <style>
 .nav_bar_underline {
 	visibility: visible;
-	left: 659px;
-	top: 45px;
+	left: 1141px;
 }
 /*标题*/
 .major_event_title {

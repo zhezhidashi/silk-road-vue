@@ -91,27 +91,27 @@ export default {
 /*导航栏蓝色背景*/
 .navigation {
 	position: relative;
-	width: 1000px;
-	height: 90px;
-    /* background: #023871; */
+	width: 1440px;
+	height: 129px;
+	/* background: #023871; */
 	/* z-index: 999; */
 }
 /*导航栏“太平洋丝绸之路”的logo*/
 .navigation_logo {
 	position: absolute;
-	width: 190px;
-	height: 60px;
-	left: 59px;
-	top: 15px;
+	width: 274px;
+	height: 86px;
+	left: 100px;
+	top: 21px;
 	cursor: pointer;
 }
 /*导航栏六个跳转选项*/
 .nav_bar_text_container {
 	position: absolute;
-	width: 494px;
-	height: 22px;
-	left: 301px;
-	top: 33px;
+	width: 730px;
+	height: auto;
+	right: 100px;
+	top: 34px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -123,7 +123,7 @@ export default {
 .nav_bar_academic,
 .nav_bar_event,
 .nav_bar_contact {
-	font-size: 14px;
+	font-size: 20px;
 	line-height: 100%;
 	color: #ffffff;
 	cursor: pointer;
@@ -153,7 +153,8 @@ export default {
 /*导航栏中跳转至某个页面的下划波浪线*/
 .nav_bar_underline {
 	position: relative;
-	width: 50px;
-	height: 6px;
+	width: 72px;
+	height: 9px;
+    top: 70px;
 }
 </style>

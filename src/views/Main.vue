@@ -38,7 +38,7 @@
 	position: fixed;
 	top: 0;
 	z-index: 999;
-	height: 90px;
+	height: auto;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -47,6 +47,7 @@
 }
 .Main {
 	position: relative;
+    height: auto;
 	display: flex;
 	justify-content: center;
 	align-content: center;

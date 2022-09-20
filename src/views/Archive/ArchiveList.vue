@@ -149,7 +149,10 @@
 				</div>
 			</div>
 
-			<div class="archive_list_jump_container">
+			
+		</div>
+
+        <div class="archive_list_jump_container">
 				<div
 					class="shift_eclipse_dark"
 					id="archive_list_shift_left"
@@ -178,8 +181,6 @@
 					/>
 				</div>
 			</div>
-		</div>
-
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div style="position: relative; height: 600px; z-index: 0"></div>
 	</div>
@@ -619,6 +620,7 @@ export default {
 .archive_list_search_result {
 	position: relative;
 	width: 950px;
+    min-height: 100vh;
 	left: 440px;
 	top: 270px;
 	display: flex;
@@ -720,38 +722,36 @@ export default {
 /*搜索结果换页*/
 .archive_list_jump_container {
 	position: relative;
-	width: 800px;
+	width: 400px;
 	height: 40px;
 	top: 10px;
 	z-index: 10;
 	/* background: skyblue; */
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 /*第几页*/
 .archive_list_shift_pages {
-	position: absolute;
-	width: 120px;
-	height: 13px;
-	top: 10px;
-	left: 320px;
+	width: auto;
+	height: auto;
 
-	font-size: 14px;
+	font-size: 20px;
 	line-height: 100%;
 	color: #000;
 }
 
 /*上页*/
 #archive_list_shift_left {
-	position: absolute;
-	top: 0;
-	left: 200px;
 	cursor: pointer;
 }
 /*下页*/
 #archive_list_shift_right {
-	position: absolute;
-	top: 0;
-	left: 470px;
 	cursor: pointer;
 }
 </style>
