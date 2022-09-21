@@ -212,7 +212,7 @@ export default {
 	position: relative;
 	width: 100%;
 	top: 129px;
-	height: 1700px;
+	height: 1900px;
 	background: #efefef;
 }
 
@@ -221,12 +221,12 @@ export default {
 	position: absolute;
 	width: 196px;
 	height: 47px;
-	top: 66px;
+	top: 130px;
 	left: 0;
 	right: 0;
 	margin: auto;
 
-	font-size: 33px;
+	font-size: 48px;
 	line-height: 100%;
 	color: #2f2f2f;
 }
@@ -236,7 +236,7 @@ export default {
 	position: absolute;
 	width: 1218px;
 	height: 520px;
-	top: 189px;
+	top: 289px;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -259,7 +259,7 @@ export default {
 	left: 609px;
 	top: 48px;
 
-	font-size: 32px;
+	font-size: 36px;
 	line-height: 100%;
 	color: #ffffff;
 	opacity: 1;
@@ -269,9 +269,9 @@ export default {
 	width: 270px;
 	height: 19px;
 	left: 609px;
-	top: 99px;
+	top: 105px;
 
-	font-size: 20px;
+	font-size: 28px;
 	line-height: 100%;
 	color: #ffffff;
 	opacity: 1;
@@ -279,14 +279,21 @@ export default {
 .index_exh_up_text {
 	position: absolute;
 	width: 574px;
-	height: 229px;
+    height: auto;
 	left: 609px;
 	top: 147px;
 
-	font-size: 16px;
+	font-size: 20px;
 	line-height: 200%;
 	color: #ffffff;
 	opacity: 1;
+
+    /* 最多显示5行文字，否则就是省略号 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
 }
 .index_exh_up_line {
 	position: absolute;
@@ -311,7 +318,7 @@ export default {
 	position: absolute;
 	width: 1218px;
 	height: 520px;
-	top: 761px;
+	top: 920px;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -335,7 +342,7 @@ export default {
 	left: 52px;
 	top: 51px;
 
-	font-size: 32px;
+	font-size: 36px;
 	line-height: 100%;
 	color: #ffffff;
 	opacity: 1;
@@ -345,9 +352,9 @@ export default {
 	width: 445px;
 	height: 21px;
 	left: 52px;
-	top: 102px;
+	top: 105px;
 
-	font-size: 20px;
+	font-size: 28px;
 	line-height: 100%;
 	color: #ffffff;
 	opacity: 1;
@@ -355,14 +362,21 @@ export default {
 .index_exh_down_text {
 	position: absolute;
 	width: 557px;
-	height: 234px;
+    height: auto;
 	left: 52px;
 	top: 149px;
 
-	font-size: 16px;
+	font-size: 20px;
 	line-height: 200%;
 	color: #ffffff;
 	opacity: 1;
+
+    /* 最多显示5行文字，否则就是省略号 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
 }
 .index_exh_down_line {
 	position: absolute;
@@ -389,7 +403,7 @@ export default {
 	left: 0;
 	right: 0;
 	margin: auto;
-	top: 1400px;
+	top: 1540px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

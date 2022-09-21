@@ -197,9 +197,9 @@ export default {
 /*标题*/
 .academic_activity_title {
 	position: absolute;
-	width: 139px;
+	width: 180px;
 	height: 42px;
-	left: 651px;
+	left: 630px;
 	top: 213px;
 	font-size: 32px;
 	color: #023871;
@@ -210,7 +210,7 @@ export default {
 	width: 1330px;
     min-height: 100vh;
 	left: 95px;
-	top: 278px;
+	top: 350px;
 }
 
 /*把每一块img、时间、简介都包装成一个container*/
@@ -254,18 +254,18 @@ export default {
 /*图片日期*/
 .academic_activity_images_date {
 	position: relative;
-	margin: 10px;
-	font-size: 14px;
-	line-height: 150%;
+	font-size: 20px;
+	line-height: 170%;
 	color: #919191;
+    margin: 0 15px 0 15px;
 }
 
 /*图片简介*/
 .academic_activity_images_text {
 	position: relative;
-	margin: 10px;
-	font-size: 14px;
-	line-height: 150%;
+	font-size: 20px;
+    margin: 0 15px 0 15px;
+	line-height: 170%;
 	color: #000000;
 
 	/*最多显示两行文字，否则就是省略号*/

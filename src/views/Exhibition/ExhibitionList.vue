@@ -70,7 +70,7 @@
 			</div>
 		</div>
 		<!-- 这里留一块300px高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 300px"></div>
+		<div style="position: relative; height: 600px"></div>
 	</div>
 </template>
 
@@ -197,9 +197,9 @@ export default {
 /*页面标题*/
 .exh_list_h1 {
 	position: absolute;
-	width: 139px;
+	width: 180px;
 	height: 42px;
-	left: 651px;
+	left: 630px;
 	top: 213px;
 	font-size: 32px;
 	color: #023871;
@@ -230,7 +230,7 @@ export default {
 	width: 800px;
 	left: 20px;
 	top: 25px;
-	font-size: 24px;
+	font-size: 28px;
 	line-height: 120%;
 	color: #2f2f2f;
 }
@@ -241,8 +241,8 @@ export default {
 	width: 1050px;
 	left: 20px;
 	top: 100px;
-	font-size: 16px;
-	line-height: 150%;
+	font-size: 20px;
+	line-height: 200%;
 	color: #2f2f2f;
     /* background: red; */
 
@@ -266,7 +266,7 @@ export default {
 #exh_list_images {
 	width: 1000px;
 	left: 0;
-	top: 160px;
+	top: 180px;
 	z-index: 10;
 }
 

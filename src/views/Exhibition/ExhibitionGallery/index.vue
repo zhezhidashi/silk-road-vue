@@ -9,9 +9,8 @@
 		/>
 
 		<!-- 图片题目 -->
-		<div class="GalleryImageTitle">{{ MainImageProp.title_zh }}</div>
+		<div class="GalleryImageTitle">{{ MainImageProp.TitleZH }}</div>
 
-		<img class="GalleryMainImage" :src="MainImageProp.src" />
 		<!--网页路径-->
 		<div class="WebPath">
 			线上展览&ensp;&gt;&ensp;{{
@@ -19,53 +18,13 @@
 			}}&ensp;&gt;&ensp;{{ WebPathGalleryTitle }}
 		</div>
 
-		<!--    大图片-->
-
-		<!--    大图片的描述-->
-		<!-- <div class="MainImage_text">
-			<div class="MainImage_text_item">
-				<div class="title_intro_item">
-					<div style="font-weight: bold">标题:</div>
-					<div>{{ MainImageProp.title_zh }}</div>
-				</div>
-				<div class="title_intro_item">
-					<div style="font-weight: bold">title:</div>
-					<div>{{ MainImageProp.title_en }}</div>
-				</div>
-				<div class="title_intro_item">
-					<div style="font-weight: bold">título:</div>
-					<div>{{ MainImageProp.title_es }}</div>
-				</div>
-			</div>
-			<br />
-			<div class="MainImage_text_item">
-				<div>档案日期: {{ MainImageProp.date }}</div>
-				<div>档案尺寸: {{ MainImageProp.size }}</div>
-				<div>档案组织: {{ MainImageProp.organization }}</div>
-				<div>档案编号: {{ MainImageProp.archive_id }}</div>
-			</div>
-			<br />
-			<div class="MainImage_text_item" style="flex-direction: column">
-				<div style="font-weight: bold">描述:</div>
-				<div>{{ MainImageProp.intro_zh }}</div>
-			</div>
-			<div class="MainImage_text_item" style="flex-direction: column">
-				<div style="font-weight: bold">description:</div>
-				<div>{{ MainImageProp.intro_en }}</div>
-			</div>
-			<div class="MainImage_text_item" style="flex-direction: column">
-				<div style="font-weight: bold">descripción:</div>
-				<div>{{ MainImageProp.intro_es }}</div>
-			</div>
-		</div> -->
-
-		<!--    底下的图片列表-->
-
+		<!--左侧图片列表-->
 		<el-scrollbar class="ImageListContainer">
 			<div v-for="item in ImgList" :key="item.gallery_img_id">
 				<div
 					@mousedown="ImageListBtn(item)"
 					class="ImageListImgContainer"
+					:id="`ImageListImgContainer_${item.gallery_img_id}`"
 				>
 					<div
 						class="ImageListImg"
@@ -74,36 +33,107 @@
 				</div>
 			</div>
 		</el-scrollbar>
+
+		<!--右侧大图片-->
+		<viewer class="GalleryMainImageContainer">
+			<el-tooltip
+				class="item"
+				effect="dark"
+				content="点击查看大图"
+				placement="right"
+				position="absolute"
+			>
+				<img class="GalleryMainImage" :src="MainImageProp.src" />
+			</el-tooltip>
+		</viewer>
+
+		<!--大图片的描述-->
+		<el-tabs type="border-card" class="MainImageDescription">
+			<el-tab-pane
+				v-for="(LanguageItem, index) in LanguageType"
+				:key="index"
+				:label="LanguageMap[LanguageItem]"
+			>
+				<el-descriptions
+					class="margin-top"
+					:column="1"
+					border
+					style="font-size: 20px"
+					:label-style="{ width: '120px' }"
+				>
+					<el-descriptions-item>
+						<template slot="label"> 标题 </template>
+						{{ MainImageProp["Title" + LanguageItem] }}
+					</el-descriptions-item>
+				</el-descriptions>
+
+				<el-descriptions
+					class="margin-top"
+					:column="2"
+					border
+					style="font-size: 20px"
+					:label-style="{ width: '120px' }"
+				>
+					<el-descriptions-item>
+						<template slot="label"> 档案日期 </template>
+						{{ MainImageProp.date }}
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template slot="label"> 档案尺寸 </template>
+						{{ MainImageProp.size }}
+					</el-descriptions-item>
+
+					<el-descriptions-item>
+						<template slot="label"> 档案组织 </template>
+						{{ MainImageProp.organization }}
+					</el-descriptions-item>
+					<el-descriptions-item>
+						<template slot="label"> 档案编号 </template>
+						{{ MainImageProp.archive_id }}
+					</el-descriptions-item>
+				</el-descriptions>
+
+				<el-descriptions
+					class="margin-top"
+					:column="1"
+					border
+					style="font-size: 20px"
+					:label-style="{ width: '120px' }"
+				>
+					<el-descriptions-item>
+						<template slot="label"> 档案描述 </template>
+						{{ MainImageProp["Intro" + LanguageItem] }}
+					</el-descriptions-item>
+				</el-descriptions>
+			</el-tab-pane>
+		</el-tabs>
 	</div>
 </template>
 
 <script>
 import { getForm } from "../../../api/data.js";
-import { HappyScroll } from "vue-happy-scroll";
 export default {
 	name: "ExhibitionGallery",
-	components: {
-		HappyScroll,
-	},
 	data() {
 		return {
 			// gallery_list 在数据库中的主键，gallery在数据库中主键
 			list_id: "",
 			id: "",
 			// 左上角的路径、大图的url，大图底下的文字描述
-			WebPathGalleryListTitle: "马尼拉：亚洲中转站",
-			WebPathGalleryTitle: "1.1接近中国",
+			WebPathGalleryListTitle: "加载中",
+			WebPathGalleryTitle: "加载中",
 
 			// 大图片的属性
 			MainImageProp: {
-				src: "https://dev.pacificsilkroad.cn/img-service/1/1-h1j13w9f7A.jpg",
+				src: "Loading.gif",
 				gallery_img_id: "",
-				title_zh: "古今形胜之图",
-				title_en: "",
-				title_es: "",
-				intro_zh: "",
-				intro_en: "",
-				intro_es: "",
+				TitleZH: "加载中",
+				TitleEN: "",
+				TitleES: "",
+				IntroZH: "",
+				IntroEN: "",
+				IntroES: "",
 				date: "",
 				size: "",
 				organization: "",
@@ -112,6 +142,16 @@ export default {
 
 			// 存储图片列表及其相关属性
 			ImgList: [],
+
+			// 存储需要展示那些语种
+			LanguageType: ["ZH", "EN", "ES"],
+
+			// 语种简称对应表
+			LanguageMap: {
+				ZH: "中文",
+				EN: "英文",
+				ES: "西班牙文",
+			},
 		};
 	},
 	mounted() {
@@ -158,12 +198,12 @@ export default {
 					let new_map = {
 						src: data[item]["pic_url"],
 						gallery_img_id: item,
-						title_zh: "N/A",
-						title_en: "N/A",
-						title_es: "N/A",
-						intro_zh: "N/A",
-						intro_en: "N/A",
-						intro_es: "N/A",
+						TitleZH: "N/A",
+						TitleEN: "N/A",
+						TitleES: "N/A",
+						IntroZH: "N/A",
+						IntroEN: "N/A",
+						IntroES: "N/A",
 						date: data[item].date,
 						size: data[item].size,
 						organization: data[item].organization,
@@ -171,28 +211,54 @@ export default {
 					};
 					for (let item_id in data[item].title) {
 						if (item_id === "ZH") {
-							new_map.title_zh = data[item].title[item_id];
+							new_map.TitleZH = data[item].title[item_id];
 						} else if (item_id === "EN") {
-							new_map.title_en = data[item].title[item_id];
+							new_map.TitleEN = data[item].title[item_id];
 						} else if (item_id === "ES") {
-							new_map.title_es = data[item].title[item_id];
+							new_map.TitleES = data[item].title[item_id];
 						}
 					}
 					for (let item_id in data[item].intro) {
 						if (item_id === "ZH") {
-							new_map.intro_zh = data[item].intro[item_id];
+							new_map.IntroZH = data[item].intro[item_id];
 						} else if (item_id === "EN") {
-							new_map.intro_en = data[item].intro[item_id];
+							new_map.IntroEN = data[item].intro[item_id];
 						} else if (item_id === "ES") {
-							new_map.intro_es = data[item].intro[item_id];
+							new_map.IntroES = data[item].intro[item_id];
 						}
 					}
 					_this.ImgList.push(new_map);
-					if (_this.ImgList.length === 1)
+					if (_this.ImgList.length === 1) {
 						_this.ImageListBtn(_this.ImgList[0]);
+					}
 				}
 				console.log("ImgList", _this.ImgList);
 			});
+		},
+	},
+	watch: {
+		MainImageProp: {
+			handler(newValue, oldValue) {
+				this.$nextTick(() => {
+                    // 把之前的 Container 还原
+					if (oldValue.gallery_img_id !== "") {
+						let CurGalleryImg = document.querySelector(
+							`#ImageListImgContainer_${oldValue.gallery_img_id}`
+						);
+						CurGalleryImg.style.width = "130px";
+						CurGalleryImg.style.height = "130px";
+						CurGalleryImg.style.padding = "30px";
+					}
+					
+                    // 把新的 Container 放大
+					let CurGalleryImg = document.querySelector(
+						`#ImageListImgContainer_${newValue.gallery_img_id}`
+					);
+					CurGalleryImg.style.width = "160px";
+					CurGalleryImg.style.height = "160px";
+					CurGalleryImg.style.padding = "15px";
+				});
+			},
 		},
 	},
 };
@@ -228,37 +294,34 @@ export default {
 	color: #2f2f2f;
 }
 
-/* 网页主图 */
-.GalleryMainImage {
-	position: relative;
-	width: 1172px;
-	height: auto;
-	left: 141px;
-	top: 380px;
-}
-
-/*底下的图片列表*/
+/*左侧的图片列表*/
 .ImageListContainer {
-	position: relative;
-	width: 1172px;
-	height: 160px;
-	left: 141px;
+	position: absolute;
+	width: 200px;
+	height: 800px;
+	left: 100px;
 	top: 390px;
-	background: red;
+	/* background: blue; */
 
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	align-items: center;
+}
 
-	/* overflow-x:hidden; */
+/* 隐藏滚动条 */
+.el-scrollbar__wrap {
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .ImageListImgContainer {
 	position: relative;
-	width: 120px;
-	height: 100px;
-	margin: 10px;
+	width: 130px;
+	height: 130px;
+	padding: 30px;
+	/* background: blue; */
 }
+
 .ImageListImg {
 	width: 100%;
 	height: 0;
@@ -275,29 +338,39 @@ export default {
 	z-index: 10;
 }
 
-/*大图片的描述*/
-.MainImage_text {
+/* 网页主图 */
+.GalleryMainImageContainer {
 	position: absolute;
-	width: 860px;
-	left: 140px;
-	height: 180px;
-	top: 765px;
+	width: 1100px;
+	height: 800px;
+	left: 340px;
+	top: 390px;
+	/* background: red; */
+
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
-.MainImage_text_item {
+
+.GalleryMainImage {
 	position: relative;
-	color: #2f2f2f;
-	font-size: 16px;
-	line-height: 20px;
-	width: 860px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding: 5px;
+	max-width: 1100px;
+	max-height: 800px;
+	cursor: pointer;
 }
-.title_intro_item {
-	width: 280px;
+
+/*大图片的描述*/
+.MainImageDescription {
+	position: absolute;
+	top: 1300px;
+	left: 150px;
+	width: 1140px;
+	height: auto;
+	/* background: skyblue; */
+}
+
+/* 调整标签页的样式 */
+.el-tabs__item {
+	font-size: 20px;
 }
 </style>

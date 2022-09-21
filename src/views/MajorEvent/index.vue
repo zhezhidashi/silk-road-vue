@@ -69,7 +69,7 @@ export default {
 
 	font-weight: 700;
 	font-size: 20px;
-	line-height: 180%;
+	line-height: 200%;
 	/* identical to box height, or 150% */
 
 	color: #2f2f2f;
@@ -82,7 +82,7 @@ export default {
 	top: 420px;
 
 	font-size: 20px;
-	line-height: 180%;
+	line-height: 200%;
 	color: #2f2f2f;
 }
 
@@ -95,7 +95,7 @@ export default {
 
 	font-weight: 700;
 	font-size: 20px;
-	line-height: 180%;
+	line-height: 200%;
 	color: #2f2f2f;
 }
 .major_event_text_2 {
@@ -105,7 +105,7 @@ export default {
 	left: 128px;
 	top: 590px;
 	font-size: 20px;
-	line-height: 180%;
+	line-height: 200%;
 
 	color: #2f2f2f;
 }

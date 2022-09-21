@@ -85,7 +85,7 @@
 			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 600px"></div>
+		<div style="position: relative; height: 800px"></div>
 	</div>
 </template>
 
@@ -190,7 +190,7 @@ export default {
 	height: 50px;
 	text-align: center;
 
-	top: 225px;
+	top: 213px;
 	font-size: 34px;
 	line-height: 150%;
 	text-align: center;
@@ -201,8 +201,8 @@ export default {
 	width: 1150px;
 	left: 150px;
 	top: 350px;
-	font-size: 16px;
-	line-height: 150%;
+	font-size: 20px;
+	line-height: 200%;
 	color: #2f2f2f;
 	/* background: red; */
 	margin-bottom: 30px;
@@ -280,7 +280,7 @@ export default {
 	top: 150px;
 
 	font-size: 24px;
-	line-height: 180%;
+	line-height: 200%;
 	color: #2f2f2f;
 }
 </style>

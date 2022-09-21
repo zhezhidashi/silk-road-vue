@@ -8,7 +8,7 @@
 			src="arrow_left_3.png"
 			alt=""
 		/>
-		<p class="web_intro_title">网站简介</p>
+		<div class="web_intro_title">网站简介</div>
 		<div class="web_intro_text">
 			<div class="web_intro_paragraph">
 				&emsp;&emsp;{{ ParagraphOne }}
@@ -78,6 +78,6 @@ export default {
 .web_intro_paragraph{
     margin: 20px;
     font-size: 20px;
-    line-height: 180%;
+    line-height: 200%;
 }
 </style>

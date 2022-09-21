@@ -27,9 +27,9 @@ export default {
 /*标题*/
 .latest_content_title {
 	position: absolute;
-	width: 139px;
+	width: 180px;
 	height: 42px;
-	left: 651px;
+	left: 630px;
 	top: 213px;
 	font-size: 32px;
 	color: #023871;

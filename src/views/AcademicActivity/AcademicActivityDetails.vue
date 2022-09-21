@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="height: 1304px; background: #efefef">
+	<div class="background" style="min-height: 2200px; background: #efefef">
 		<!--回退到上一个页面-->
 		<img
 			@click="router_go_back()"
@@ -88,7 +88,7 @@ export default {
 	top: 220px;
 	width: 1440px;
 	height: 24px;
-	font-size: 24px;
+	font-size: 36px;
 	text-align: center;
 	line-height: 100%;
 	color: #2f2f2f;
@@ -115,13 +115,13 @@ export default {
 
 /*描述*/
 .academic_activity_details_description {
-	position: absolute;
+	position: relative;
 	width: 550px;
-	height: 705px;
+	height: auto;
 	left: 697px;
 	top: 327px;
 	font-size: 20px;
-	line-height: 180%;
+	line-height: 200%;
 	color: #2f2f2f;
 }
 </style>

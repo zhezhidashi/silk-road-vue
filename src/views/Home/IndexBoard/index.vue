@@ -284,7 +284,7 @@ export default {
 .index_board_title {
 	width: 340px;
 	height: 30px;
-	font-size: 24px;
+	font-size: 28px;
 	color: #ffffff;
 	padding: 10px;
 	text-align: center;
@@ -292,14 +292,20 @@ export default {
 }
 .index_board_text {
 	width: 340px;
-	height: 125px;
 
-	font-size: 16px;
-	line-height: 180%;
+	font-size: 20px;
+	line-height: 200%;
 	color: #ffffff;
 	padding: 10px;
 
 	opacity: 1;
+
+    /* 最多显示4行文字，否则就是省略号 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
 }
 
 .BoardShiftContainer {
