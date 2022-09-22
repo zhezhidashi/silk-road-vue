@@ -102,9 +102,9 @@ export default {
 			ExhibitionIndex: 0,
 			ExhibitionTotal: 3,
 			index_exh_up_image_src: [
-				"exh_image1.jpg",
-				"exh_image2.jpg",
-				"exh_image1.jpg",
+				"https://dev.pacificsilkroad.cn/img-service/1/1-4ns8GTdJG9.jpg",
+				"https://dev.pacificsilkroad.cn/img-service/1/1-UOYxieXb1x.jpg",
+				"https://dev.pacificsilkroad.cn/img-service/1/1-4ns8GTdJG9.jpg",
 			],
 			index_exh_up_title1: [
 				"1 菲律宾的地图档案",
@@ -123,9 +123,9 @@ export default {
 			],
 
 			index_exh_down_image_src: [
-				"exh_image2.jpg",
-				"exh_image1.jpg",
-				"exh_image2.jpg",
+                "https://dev.pacificsilkroad.cn/img-service/1/1-UOYxieXb1x.jpg",
+				"https://dev.pacificsilkroad.cn/img-service/1/1-4ns8GTdJG9.jpg",
+				"https://dev.pacificsilkroad.cn/img-service/1/1-UOYxieXb1x.jpg",
 			],
 			index_exh_down_title1: [
 				"1 菲律宾的地图档案",
@@ -279,7 +279,7 @@ export default {
 .index_exh_up_text {
 	position: absolute;
 	width: 574px;
-    height: auto;
+	height: auto;
 	left: 609px;
 	top: 147px;
 
@@ -288,7 +288,7 @@ export default {
 	color: #ffffff;
 	opacity: 1;
 
-    /* 最多显示5行文字，否则就是省略号 */
+	/* 最多显示5行文字，否则就是省略号 */
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
@@ -362,7 +362,7 @@ export default {
 .index_exh_down_text {
 	position: absolute;
 	width: 557px;
-    height: auto;
+	height: auto;
 	left: 52px;
 	top: 149px;
 
@@ -371,7 +371,7 @@ export default {
 	color: #ffffff;
 	opacity: 1;
 
-    /* 最多显示5行文字，否则就是省略号 */
+	/* 最多显示5行文字，否则就是省略号 */
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;

@@ -27,52 +27,48 @@
 			<!--    这下面的东西看起来也像是从数据库里面捞出来的，也用v-for做成list吧-->
 			<div class="exh_gallery_list_imgText">
 				<div v-for="item in imgText_list" :key="item.gallery_list_id">
-					<div
-						class="exh_gallery_list_imgText_container"
-						:id="
-							'exh_gallery_list_imgText_container_' +
-							item.gallery_id
-						"
-						@mouseover="
-							exh_gallery_list_imgText_mouseover(
-								$event,
-								item.gallery_id
-							)
-						"
-						@mouseleave="
-							exh_gallery_list_imgText_mouseleave(
-								$event,
-								item.gallery_id
-							)
-						"
-					>
+					<div class="exh_gallery_list_imgText_container">
 						<!--图片-->
-						<div class="exh_gallery_list_imgText_img_container">
+						<div
+							class="exh_gallery_list_imgText_img_container"
+							@mouseenter="
+								exh_gallery_list_imgText_mouseover(
+									$event,
+									item.gallery_id
+								)
+							"
+							@mouseleave="
+								exh_gallery_list_imgText_mouseleave(
+									$event,
+									item.gallery_id
+								)
+							"
+						>
 							<div
 								class="exh_gallery_list_imgText_img"
 								:style="`background-image:url(${item.img_src})`"
 							></div>
-						</div>
-						<!--图片的阴影-->
-						<div
-							class="exh_gallery_list_imgText_img_shadow"
-							:id="
-								'exh_gallery_list_imgText_img_shadow_' +
-								item.gallery_id
-							"
-						>
-							<!--查看详情部分-->
+							<!--图片的阴影-->
 							<div
-								@mousedown="
-									exh_gallery_list_imgText_btn(
-										$event,
-										item.gallery_id
-									)
+								class="exh_gallery_list_imgText_img_shadow"
+								:id="
+									'exh_gallery_list_imgText_img_shadow_' +
+									item.gallery_id
 								"
-								class="blue_rectangle_container"
-								id="exh_gallery_list_imgText_see_details"
 							>
-								查看详情
+								<!--查看详情部分-->
+								<div
+									@mousedown="
+										exh_gallery_list_imgText_btn(
+											$event,
+											item.gallery_id
+										)
+									"
+									class="blue_rectangle_container"
+									id="exh_gallery_list_imgText_see_details"
+								>
+									查看详情
+								</div>
 							</div>
 						</div>
 
@@ -128,7 +124,7 @@ export default {
 				let new_map = {
 					gallery_id: item,
 					img_src: null,
-					text: data[item]["intro"],
+					text: data[item]["title"],
 				};
 				for (let img_item in data[item]["picture_dict"]) {
 					new_map["img_src"] =
@@ -163,7 +159,7 @@ export default {
 				"#exh_gallery_list_imgText_img_shadow_" + gallery_id
 			);
 			// console.log(now_shadow);
-			now_shadow.style.display = "inline";
+			now_shadow.style.visibility = "visible";
 		},
 
 		// 鼠标离开图片上方恢复原样
@@ -171,7 +167,7 @@ export default {
 			let now_shadow = document.querySelector(
 				"#exh_gallery_list_imgText_img_shadow_" + gallery_id
 			);
-			now_shadow.style.display = "none";
+			now_shadow.style.visibility = "hidden";
 		},
 	},
 };
@@ -211,7 +207,7 @@ export default {
 /*展览详情页，把整个模块都定义成类*/
 .exh_gallery_list_imgText {
 	position: relative;
-	width: 1150px;
+	width: 1100px;
 	left: 150px;
 	top: 400px;
 	z-index: 10;
@@ -221,10 +217,13 @@ export default {
 /*整个模块的框*/
 .exh_gallery_list_imgText_container {
 	position: relative;
-	width: 1050px;
+	width: 1150px;
 	height: 372px;
-	margin: 20px;
+	margin: 100px 0 80px 0;
 	/* background: red; */
+	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
+	box-shadow: 6px 0 12px -5px rgb(190, 196, 252),
+		-6px 0 12px -5px rgb(189, 196, 252);
 }
 
 /*图片部分*/
@@ -232,8 +231,8 @@ export default {
 	position: absolute;
 	width: 574px;
 	height: 372px;
-    left: 0;
-    top: 0;
+	left: 0;
+	top: 0;
 	border-radius: 7px;
 }
 
@@ -255,21 +254,14 @@ export default {
 	position: absolute;
 	width: 574px;
 	height: 372px;
-    left: 0;
-    top: 0;
+	left: 0;
+	top: 0;
 	border-radius: 7px;
 	background: rgba(47, 47, 47, 0.5);
-	display: none;
-}
-
-/*hover效果的查看详情*/
-#exh_gallery_list_imgText_see_details {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	visibility: hidden;
 }
 
 /*文字部分*/
@@ -279,7 +271,7 @@ export default {
 	left: 700px;
 	top: 150px;
 
-	font-size: 24px;
+	font-size: 28px;
 	line-height: 200%;
 	color: #2f2f2f;
 }

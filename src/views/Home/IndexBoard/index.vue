@@ -17,7 +17,7 @@
 
 		<!-- 公告部分 -->
 		<div class="index_latest_board_main_title">最新公告</div>
-		<div class="BoardTextContainer">
+		<!-- <div class="BoardTextContainer">
 			<div class="BoardTextBlock">
 				<div class="index_board_title">
 					{{ index_board_left_title[BoardIndex] }}
@@ -47,6 +47,13 @@
 				<div class="index_board_text">
 					{{ index_board_right_text[BoardIndex] }}
 				</div>
+			</div>
+		</div> -->
+
+		<div class="BoardTextContainer">
+			<div class="BoardTextTitle" @click="GoIndexBoard">{{ BoardTextTitle[BoardIndex] }}</div>
+			<div class="BoardTextParagraph">
+				&emsp;&emsp;{{ BoardTextParagraph[BoardIndex] }}
 			</div>
 		</div>
 
@@ -82,7 +89,7 @@
 </template>
 
 <script>
-import {throttle} from 'lodash'
+import { throttle } from "lodash";
 export default {
 	name: "IndexBoard",
 	data() {
@@ -95,50 +102,16 @@ export default {
 
 			// 记录公告现在展示第几个，总共多少个
 			BoardIndex: 0,
-			BoardTotal: 5,
+			BoardTotal: 2,
 
-			index_board_left_title: [
-				"1 大平洋考古最新发现",
-				"2 大平洋考古最新发现",
-				"3 大平洋考古最新发现",
-				"4 大平洋考古最新发现",
-				"5 大平洋考古最新发现",
-			],
-			index_board_left_text: [
-				"1 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"2 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"3 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"4 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"5 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+			BoardTextTitle: [
+				"课题组成员参加第五届“文学与图像”学术论坛",
+				"文理共建，深度融合，探索数字人文建设模式",
 			],
 
-			index_board_middle_title: [
-				"1 荷兰资料馆的资料更新",
-				"2 荷兰资料馆的资料更新",
-				"3 荷兰资料馆的资料更新",
-				"4 荷兰资料馆的资料更新",
-				"5 荷兰资料馆的资料更新",
-			],
-			index_board_middle_text: [
-				"1 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"2 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"3 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"4 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"5 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-			],
-			index_board_right_title: [
-				"1 西印度档案总馆地图",
-				"2 西印度档案总馆地图",
-				"3 西印度档案总馆地图",
-				"4 西印度档案总馆地图",
-				"5 西印度档案总馆地图",
-			],
-			index_board_right_text: [
-				"1 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"2 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"3 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"4 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
-				"5 一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置...",
+			BoardTextParagraph: [
+				"2022年1月8—9日，项目组成员参加北京大学第五届“文学与图像”学术论坛并发表论文：《画像与海图：对“中国船”在太平洋文化交流中影响的几点思考》（吴杰伟）、《〈西印度舶来药物史〉第二部分插图研究》（于施洋）、《图绘太平洋：荷兰东印度公司太平洋航路的开辟与航海图绘制》（谢侃侃）、《蒙昧的帝国：Bik 海参采捕图与荷兰殖民知识焦虑，1814—1824》（徐冠勉）。",
+				"项目团队和人工智能研究院智能系统软件研究中心马郓团队开展紧密合作，共同建设“太平洋丝绸之路档案文献数据库”。项目团队主要负责收集、整理太平洋丝绸之路外文档案文献，人工智能研究院团队师生主要负责技术层面的建设和实施工作，探索出“深度融合，适度交叉，有序推进，互相成就”的数字人文建设模式。",
 			],
 		};
 	},
@@ -157,29 +130,24 @@ export default {
 			});
 		},
 
-		BoardShift: throttle( function(d){
-			let IndexBoardTitle =
-				document.querySelectorAll(".index_board_title");
-			let IndexBoardText = document.querySelectorAll(".index_board_text");
+		BoardShift: throttle(function (d) {
+			let IndexBoardTitle = document.querySelector(".BoardTextTitle");
+			let IndexBoardText = document.querySelector(".BoardTextParagraph");
 
 			let image_fade_timer = setInterval(image_fade, 7);
 			let opa = 100;
 			let _this = this;
 			function image_fade() {
 				if (opa > 0) {
-					for (let i = 0; i < 3; i++) {
-						IndexBoardTitle[i].style.opacity = String(opa / 100);
-						IndexBoardText[i].style.opacity = String(opa / 100);
-					}
+					IndexBoardTitle.style.opacity = String(opa / 100);
+					IndexBoardText.style.opacity = String(opa / 100);
 				} else if (opa === 0) {
 					_this.BoardIndex =
 						(_this.BoardIndex + d + _this.BoardTotal) %
 						_this.BoardTotal;
 				} else if (opa > -100) {
-					for (let i = 0; i < 3; i++) {
-						IndexBoardTitle[i].style.opacity = String(-opa / 100);
-						IndexBoardText[i].style.opacity = String(-opa / 100);
-					}
+					IndexBoardTitle.style.opacity = String(-opa / 100);
+					IndexBoardText.style.opacity = String(-opa / 100);
 				} else {
 					clearInterval(image_fade_timer);
 				}
@@ -187,7 +155,14 @@ export default {
 			}
 		}, 2000),
 
-
+        GoIndexBoard(){
+            this.$router.push({
+                path: '/LatestBoard',
+                query: {
+                    'BoardIndex': this.BoardIndex,
+                }
+            })
+        }
 	},
 };
 </script>
@@ -245,7 +220,7 @@ export default {
 }
 
 /* 公告整体的 Container */
-.BoardTextContainer {
+/* .BoardTextContainer {
 	position: absolute;
 	width: 1284px;
 	height: 298px;
@@ -256,20 +231,20 @@ export default {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-}
+} */
 
 /* 左中右每个部分的 Container */
-.BoardTextBlock {
+/* .BoardTextBlock {
 	width: 364px;
 	height: 258px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	align-content: center;
-}
+} */
 
 /* 公告中间两条竖着的白线 */
-.index_board_left_line {
+/* .index_board_left_line {
 	width: 0;
 	height: 189px;
 	border: 0.5px solid #ffffff;
@@ -278,10 +253,10 @@ export default {
 	width: 0;
 	height: 189px;
 	border: 0.5px solid #ffffff;
-}
+} */
 
 /* 每一小部分的标题和文字描述 */
-.index_board_title {
+/* .index_board_title {
 	width: 340px;
 	height: 30px;
 	font-size: 28px;
@@ -300,13 +275,58 @@ export default {
 
 	opacity: 1;
 
-    /* 最多显示4行文字，否则就是省略号 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+} */
+
+.BoardTextContainer {
+	position: absolute;
+	width: 1000px;
+	height: 298px;
+	top: 370px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* background: red; */
+}
+
+.BoardTextTitle {
+	position: absolute;
+	width: auto;
+	height: auto;
+	left: 0;
+	right: 0;
+	margin: auto;
+	top: 10px;
+	text-align: center;
+	font-size: 32px;
+	line-height: 150%;
+	color: #ffffff;
+	/* background: blue; */
+}
+.BoardTextParagraph {
+	position: absolute;
+	width: 800px;
+	height: auto;
+	top: 90px;
+	left: 100px;
+	color: #ffffff;
+	font-size: 24px;
+	line-height: 170%;
+
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 }
+.BoardTextTitle:hover {
+	text-decoration: underline;
+}
+
 
 .BoardShiftContainer {
 	position: absolute;

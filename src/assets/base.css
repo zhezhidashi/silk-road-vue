@@ -119,6 +119,6 @@ p {
     src: url('../../public/楷体_GB2312.ttf')
 } */
 
-/* div {
-    font-family: '微软雅黑';
-} */
+div {
+    font-family: 'Alegreya';
+}

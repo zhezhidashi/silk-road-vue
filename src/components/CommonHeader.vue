@@ -11,7 +11,7 @@
 				网站简介
 			</p>
 			<p @mousedown="MenuClick($event, menu[2])" class="nav_bar_latest">
-				最新内容
+				最新公告
 			</p>
 			<p @mousedown="MenuClick($event, menu[3])" class="nav_bar_display">
 				线上展览
@@ -52,8 +52,8 @@ export default {
 					name: "WebIntro",
 				},
 				{
-					path: "/LatestContent",
-					name: "LatestContent",
+					path: "/LatestBoard",
+					name: "LatestBoard",
 				},
 				{
 					path: "/ExhibitionList",

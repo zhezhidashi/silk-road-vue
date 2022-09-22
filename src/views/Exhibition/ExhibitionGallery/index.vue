@@ -240,7 +240,7 @@ export default {
 		MainImageProp: {
 			handler(newValue, oldValue) {
 				this.$nextTick(() => {
-                    // 把之前的 Container 还原
+					// 把之前的 Container 还原
 					if (oldValue.gallery_img_id !== "") {
 						let CurGalleryImg = document.querySelector(
 							`#ImageListImgContainer_${oldValue.gallery_img_id}`
@@ -249,8 +249,8 @@ export default {
 						CurGalleryImg.style.height = "130px";
 						CurGalleryImg.style.padding = "30px";
 					}
-					
-                    // 把新的 Container 放大
+
+					// 把新的 Container 放大
 					let CurGalleryImg = document.querySelector(
 						`#ImageListImgContainer_${newValue.gallery_img_id}`
 					);
@@ -348,8 +348,8 @@ export default {
 	/* background: red; */
 
 	display: flex;
-    justify-content: center;
-    align-items: center;
+	justify-content: center;
+	align-items: center;
 }
 
 .GalleryMainImage {
@@ -357,6 +357,8 @@ export default {
 	max-width: 1100px;
 	max-height: 800px;
 	cursor: pointer;
+	box-shadow: 6px 0 12px -5px rgb(190, 196, 252),
+		-6px 0 12px -5px rgb(189, 196, 252);
 }
 
 /*大图片的描述*/

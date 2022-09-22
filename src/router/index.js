@@ -46,12 +46,12 @@ const routes = [
                 component: () => import('../views/WebIntro/index.vue')
             },
             {
-                path: '/LatestContent',
-                name: 'LatestContent',
+                path: '/LatestBoard',
+                name: 'LatestBoard',
                 meta: {
                     title: '最新内容'
                 },
-                component: () => import('../views/LatestContent/index.vue')
+                component: () => import('../views/LatestBoard')
             },
             {
                 path: '/ExhibitionList',
