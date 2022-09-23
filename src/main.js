@@ -11,13 +11,13 @@ Vue.use(ElementUI);
 import router from './router'
 
 // 引入Swiper样式
-import "swiper/css/swiper.css";
+import "swiper/dist/css/swiper.css";
+
 // 引入 v-viewer 样式
 import 'viewerjs/dist/viewer.css'
 
 import Viewer from 'v-viewer'
 Vue.use(Viewer)
-
 
 
 //title修改

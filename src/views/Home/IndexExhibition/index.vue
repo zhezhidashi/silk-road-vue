@@ -211,7 +211,6 @@ export default {
 .index_exh_back {
 	position: relative;
 	width: 100%;
-	top: 129px;
 	height: 1900px;
 	background: #efefef;
 }

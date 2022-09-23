@@ -92,17 +92,18 @@ export default {
 .navigation {
 	position: relative;
 	width: 1440px;
-	height: 129px;
+	height: 13vh;
 	/* background: #023871; */
 	/* z-index: 999; */
 }
 /*导航栏“太平洋丝绸之路”的logo*/
 .navigation_logo {
 	position: absolute;
-	width: 274px;
-	height: 86px;
+	height: 80px;
 	left: 100px;
-	top: 21px;
+	top: 0;
+    bottom: 0;
+    margin: auto;
 	cursor: pointer;
 }
 /*导航栏六个跳转选项*/
@@ -111,7 +112,9 @@ export default {
 	width: 730px;
 	height: auto;
 	right: 100px;
-	top: 34px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -155,6 +158,6 @@ export default {
 	position: relative;
 	width: 72px;
 	height: 9px;
-    top: 70px;
+    top: 7.5vh;
 }
 </style>

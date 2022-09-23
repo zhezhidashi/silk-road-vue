@@ -1,7 +1,3 @@
-p {
-    font-style: normal;
-    font-weight: 400;
-}
 
 .background {
     position: relative;
@@ -121,4 +117,5 @@ p {
 
 div {
     font-family: 'Alegreya';
+    font-weight: 400;
 }

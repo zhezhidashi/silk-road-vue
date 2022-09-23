@@ -1,32 +1,30 @@
 <template>
-	<div class="background" style="width: 100%; height: auto; background: #023871">
-        <!-- 轮播图 -->
-        <IndexImage/>
-        <IndexBoard/>
-		<IndexExhibition/>
-
-		
+	<div
+		class="background"
+		style="width: 100%; height: auto;"
+	>
+		<!-- 轮播图 -->
+		<IndexImage />
+		<IndexBoard />
+		<!-- <IndexExhibition /> -->
 	</div>
 </template>
 
 <script scoped>
-import IndexImage from './IndexImage'
-import IndexBoard from './IndexBoard'
-import IndexExhibition from './IndexExhibition'
+import IndexImage from "./IndexImage";
+import IndexBoard from "./IndexBoard";
+import IndexExhibition from "./IndexExhibition";
 
 export default {
 	name: "Home",
-    components:{
-        IndexImage,
-        IndexBoard,
-        IndexExhibition
-    },
-	data() {
-		return {
-		};
+	components: {
+		IndexImage,
+		IndexBoard,
+		IndexExhibition,
 	},
-	
-	
+	data() {
+		return {};
+	},
 };
 </script>
 

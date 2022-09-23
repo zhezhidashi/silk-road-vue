@@ -47,6 +47,7 @@
 }
 .Main {
 	position: relative;
+    top: 100px;
     height: auto;
 	display: flex;
 	justify-content: center;
@@ -55,6 +56,7 @@
 .Footer {
 	position: relative;
 	display: flex;
+    top: 100px;
 	justify-content: center;
 	align-items: center;
 	background: #023871;
