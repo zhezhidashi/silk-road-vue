@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="min-height: 2200px; background: #efefef">
+	<div class="AcademicActivityDetails">
 		<!--回退到上一个页面-->
 		<img
 			@click="router_go_back()"
@@ -8,12 +8,12 @@
 			src="arrow_left_3.png"
 			alt=""
 		/>
-		<div class="academic_activity_details">
-			<!--标题-->
-			<div class="academic_activity_details_title">
-				{{ academic_activity_details_title }}
-			</div>
-			<!--左侧图片-->
+		<!--标题-->
+		<div class="academic_activity_details_title">
+			{{ academic_activity_details_title }}
+		</div>
+		<!--左侧图片-->
+		<div class="ImageAndText">
 			<div class="academic_activity_details_img_container">
 				<div
 					class="academic_activity_details_img"
@@ -27,6 +27,7 @@
 				{{ academic_activity_details_description }}
 			</div>
 		</div>
+        <div style="height: 500px;"></div>
 	</div>
 </template>
 
@@ -84,22 +85,33 @@ export default {
 
 /*标题*/
 .academic_activity_details_title {
-	position: absolute;
-	top: 220px;
+	position: relative;
+	top: 120px;
 	width: 1440px;
-	height: 24px;
 	font-size: 36px;
+	line-height: 150%;
 	text-align: center;
 	line-height: 100%;
 	color: #2f2f2f;
 }
+
+.ImageAndText {
+	position: relative;
+	width: 1200px;
+	top: 220px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* background: skyblue; */
+	display: flex;
+	justify-content: space-around;
+}
 /*左侧图片*/
 .academic_activity_details_img_container {
-	position: absolute;
+	position: relative;
 	width: 498px;
 	height: 705px;
-	left: 122px;
-	top: 327px;
+	/* background: red; */
 }
 .academic_activity_details_img {
 	width: 100%;
@@ -118,10 +130,9 @@ export default {
 	position: relative;
 	width: 550px;
 	height: auto;
-	left: 697px;
-	top: 327px;
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;
+	/* background: blue; */
 }
 </style>

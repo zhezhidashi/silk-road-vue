@@ -18,34 +18,47 @@
 			}}&ensp;&gt;&ensp;{{ WebPathGalleryTitle }}
 		</div>
 
-		<!--左侧图片列表-->
-		<el-scrollbar class="ImageListContainer">
-			<div v-for="item in ImgList" :key="item.gallery_img_id">
-				<div
-					@mousedown="ImageListBtn(item)"
-					class="ImageListImgContainer"
-					:id="`ImageListImgContainer_${item.gallery_img_id}`"
-				>
-					<div
-						class="ImageListImg"
-						:style="`background-image:url(${item.src})`"
-					></div>
-				</div>
+		<div class="ListAndMainImageContainer">
+			<!--左侧图片列表-->
+			<div class="ImageListContainer">
+				<vue-scroll class="ImageListContainer" :ops="ops">
+					<div v-for="item in ImgList" :key="item.gallery_img_id">
+						<div
+							@mousedown="ImageListBtn(item)"
+							class="ImageListImgContainer"
+							:id="`ImageListImgContainer_${item.gallery_img_id}`"
+						>
+							<div
+								class="ImageListImg"
+								:style="`background-image:url(${item.src})`"
+							></div>
+						</div>
+					</div>
+				</vue-scroll>
 			</div>
-		</el-scrollbar>
 
-		<!--右侧大图片-->
-		<viewer class="GalleryMainImageContainer">
-			<el-tooltip
-				class="item"
-				effect="dark"
-				content="点击查看大图"
-				placement="right"
-				position="absolute"
-			>
-				<img class="GalleryMainImage" :src="MainImageProp.src" />
-			</el-tooltip>
-		</viewer>
+			<!--右侧大图片-->
+			<viewer class="GalleryMainImageContainer" :images="ImgList">
+				<img
+					class="GalleryMainImage"
+					v-for="item in ImgList"
+					:src="item.src"
+					:key="item.gallery_img_id"
+					v-show="
+						item.gallery_img_id === MainImageProp.gallery_img_id
+					"
+				/>
+				<!-- <el-tooltip
+					class="item"
+					effect="dark"
+					content="点击查看大图"
+					placement="right"
+					position="absolute"
+				>
+					
+				</el-tooltip> -->
+			</viewer>
+		</div>
 
 		<!--大图片的描述-->
 		<el-tabs type="border-card" class="MainImageDescription">
@@ -143,6 +156,9 @@ export default {
 			// 存储图片列表及其相关属性
 			ImgList: [],
 
+			// 为了方便 v-viewer 显示下方的列表，需要单独存储所有 Img 的 Src
+			ImgSrcList: ["Loading.gif"],
+
 			// 存储需要展示那些语种
 			LanguageType: ["ZH", "EN", "ES"],
 
@@ -151,6 +167,21 @@ export default {
 				ZH: "中文",
 				EN: "英文",
 				ES: "西班牙文",
+			},
+
+			// scroll 的配置项
+			ops: {
+				vuescroll: {},
+				scrollPanel: {},
+				rail: {
+					keepShow: true,
+				},
+				bar: {
+					hoverStyle: true,
+					onlyShowBarOnScroll: false, //是否只有滚动的时候才显示滚动条
+					opacity: 0, //滚动条透明度
+					"overflow-x": "hidden",
+				},
 			},
 		};
 	},
@@ -227,6 +258,7 @@ export default {
 							new_map.IntroES = data[item].intro[item_id];
 						}
 					}
+					// _this.ImgSrcList.push(new_map.src)
 					_this.ImgList.push(new_map);
 					if (_this.ImgList.length === 1) {
 						_this.ImageListBtn(_this.ImgList[0]);
@@ -272,11 +304,10 @@ export default {
 
 /* 网页图片标题 */
 .GalleryImageTitle {
-	position: absolute;
+	position: relative;
 	width: 1440px;
-	height: auto;
-	top: 225px;
-	font-size: 36px;
+	top: 100px;
+	font-size: 32px;
 	line-height: 150%;
 	text-align: center;
 	/* background: blue; */
@@ -284,34 +315,43 @@ export default {
 
 /*左上角的网页路径*/
 .WebPath {
-	position: absolute;
-	width: 1214px;
+	position: relative;
+	width: 1200px;
 	height: auto;
-	left: 143px;
-	top: 318px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	top: 200px;
 	font-size: 24px;
 	line-height: 150%;
 	color: #2f2f2f;
 }
 
+/* 图片列表和大图片的 Container */
+.ListAndMainImageContainer {
+	position: relative;
+	top: 250px;
+	height: 80vh;
+	width: 1220px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* background: red; */
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 /*左侧的图片列表*/
 .ImageListContainer {
-	position: absolute;
-	width: 200px;
-	height: 800px;
-	left: 100px;
-	top: 390px;
+	position: relative;
+	width: 220px;
+	height: 80vh;
 	/* background: blue; */
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-
-/* 隐藏滚动条 */
-.el-scrollbar__wrap {
-	overflow-x: hidden;
-	overflow-y: hidden;
 }
 
 .ImageListImgContainer {
@@ -340,11 +380,9 @@ export default {
 
 /* 网页主图 */
 .GalleryMainImageContainer {
-	position: absolute;
-	width: 1100px;
-	height: 800px;
-	left: 340px;
-	top: 390px;
+	position: relative;
+	width: 1000px;
+	height: 80vh;
 	/* background: red; */
 
 	display: flex;
@@ -354,8 +392,8 @@ export default {
 
 .GalleryMainImage {
 	position: relative;
-	max-width: 1100px;
-	max-height: 800px;
+	max-width: 1000px;
+	max-height: 80vh;
 	cursor: pointer;
 	box-shadow: 6px 0 12px -5px rgb(190, 196, 252),
 		-6px 0 12px -5px rgb(189, 196, 252);
@@ -363,10 +401,12 @@ export default {
 
 /*大图片的描述*/
 .MainImageDescription {
-	position: absolute;
-	top: 1300px;
-	left: 150px;
-	width: 1140px;
+	position: relative;
+	top: 350px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 1000px;
 	height: auto;
 	/* background: skyblue; */
 }

@@ -34,11 +34,11 @@ export default {
 /*标题*/
 .contact_us_title {
 	position: absolute;
-	width: 165px;
-	height: 35px;
-	left: 635px;
-	top: 213px;
+	width: 1440px;
+    text-align: center;
+	top: 100px;
     font-size: 32px;
+    line-height: 150%;
 	color: #023871;
 }
 </style>

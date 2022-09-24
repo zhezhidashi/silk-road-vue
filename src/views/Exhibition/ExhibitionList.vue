@@ -197,11 +197,11 @@ export default {
 /*页面标题*/
 .exh_list_h1 {
 	position: absolute;
-	width: 180px;
-	height: 42px;
-	left: 630px;
-	top: 213px;
+	width: 1440px;
+    text-align: center;
+	top: 100px;
 	font-size: 32px;
+    line-height: 150%;
 	color: #023871;
 }
 
@@ -210,9 +210,11 @@ export default {
 	position: relative;
 	width: 1150px;
     min-height: 100vh;
-	left: 140px;
-	top: 320px;
+	top: 220px;
 	/* background: lightblue; */
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 /*每一个exhibition对应的块*/

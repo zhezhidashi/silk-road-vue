@@ -61,19 +61,20 @@ export default {
 
 /*标题*/
 .web_intro_title {
-	position: absolute;
-	width: 180px;
-	height: 42px;
-	left: 630px;
-	top: 213px;
+	position: relative;
+	width: 1440px;
+	text-align: center;
+	top: 100px;
 	font-size: 32px;
 	color: #023871;
 }
 .web_intro_text {
-	position: absolute;
-	left: 120px;
-	top: 350px;
-	width: 1217px;
+	position: relative;
+	width: 1000px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 160px;
 }
 .web_intro_paragraph{
     margin: 20px;

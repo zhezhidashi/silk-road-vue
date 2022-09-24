@@ -81,7 +81,7 @@
 			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 400px"></div>
+		<div style="position: relative; height: 500px"></div>
 	</div>
 </template>
 
@@ -152,10 +152,10 @@ export default {
 			now_container.style.background = "#023871";
 
 			//修改图片大小
-			let now_img = document.querySelector(
-				"#academic_activity_images_img_" + academic_activity_id
-			);
-			now_img.style.transform = "scale(1.2, 1.2)";
+			// let now_img = document.querySelector(
+			// 	"#academic_activity_images_img_" + academic_activity_id
+			// );
+			// now_img.style.transform = "scale(1.2, 1.2)";
 
 			//修改图片文字颜色
 			let now_text = document.querySelector(
@@ -173,10 +173,10 @@ export default {
 			now_container.style.background = "#FFFFFF";
 
 			//还原图片大小
-			let now_img = document.querySelector(
-				"#academic_activity_images_img_" + academic_activity_id
-			);
-			now_img.style.transform = "scale(1, 1)";
+			// let now_img = document.querySelector(
+			// 	"#academic_activity_images_img_" + academic_activity_id
+			// );
+			// now_img.style.transform = "scale(1, 1)";
 
 			//还原图片文字颜色
 			let now_text = document.querySelector(
@@ -197,11 +197,12 @@ export default {
 /*标题*/
 .academic_activity_title {
 	position: absolute;
-	width: 180px;
-	height: 42px;
-	left: 630px;
-	top: 213px;
+    width: 1440px;
+	left: 0; right: 0; margin: auto;
+    text-align: center;
+	top: 100px;
 	font-size: 32px;
+    line-height: 150%;
 	color: #023871;
 }
 /*存放整个页面的数据*/
@@ -210,14 +211,14 @@ export default {
 	width: 1330px;
     min-height: 100vh;
 	left: 95px;
-	top: 350px;
+	top: 250px;
 }
 
 /*把每一块img、时间、简介都包装成一个container*/
 .academic_activity_images_container {
 	position: relative;
 	width: 268px;
-	height: 428px;
+	height: 490px;
 
 	background: #ffffff;
 	margin: 20px;
@@ -231,7 +232,7 @@ export default {
 .academic_activity_images_img_container {
 	position: relative;
 	width: 268px;
-	height: 324px;
+	height: 360px;
 	border-radius: 3px 3px 0 0;
 	overflow: hidden;
 }
@@ -240,7 +241,7 @@ export default {
 .academic_activity_images_img {
 	width: 100%;
 	height: 0;
-	padding-bottom: 121%;
+	padding-bottom: 150%;
 	overflow: hidden;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -255,17 +256,17 @@ export default {
 .academic_activity_images_date {
 	position: relative;
 	font-size: 20px;
-	line-height: 170%;
+	line-height: 150%;
+    margin: 10px 15px 0 15px;
 	color: #919191;
-    margin: 0 15px 0 15px;
 }
 
 /*图片简介*/
 .academic_activity_images_text {
 	position: relative;
 	font-size: 20px;
-    margin: 0 15px 0 15px;
-	line-height: 170%;
+    margin: 10px 15px 10px 15px;
+	line-height: 150%;
 	color: #000000;
 
 	/*最多显示两行文字，否则就是省略号*/

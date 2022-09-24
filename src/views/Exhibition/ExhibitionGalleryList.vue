@@ -181,35 +181,35 @@ export default {
 
 /*页面标题*/
 .exh_gallery_list_heading {
-	position: absolute;
+	position: relative;
 	width: 1440px;
-	height: 50px;
 	text-align: center;
 
-	top: 213px;
-	font-size: 34px;
+	top: 100px;
+	font-size: 32px;
 	line-height: 150%;
 	text-align: center;
 	color: #2f2f2f;
 }
 .exh_gallery_list_text {
 	position: relative;
-	width: 1150px;
-	left: 150px;
-	top: 350px;
+	width: 1000px;
+	top: 200px;
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;
 	/* background: red; */
-	margin-bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 /*展览详情页，把整个模块都定义成类*/
 .exh_gallery_list_imgText {
 	position: relative;
 	width: 1100px;
-	left: 150px;
-	top: 400px;
+	left: 0;right: 0;margin: auto;
+	top: 300px;
 	z-index: 10;
 	/* background: #588cc8; */
 }

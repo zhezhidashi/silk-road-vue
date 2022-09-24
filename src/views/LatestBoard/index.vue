@@ -83,12 +83,11 @@ export default {
 /*标题*/
 .BoardTitle {
 	position: relative;
-	width: 1200px;
-	height: 42px;
+	width: 1440px;
 	text-align: center;
-	left: 120px;
-	top: 213px;
+	top: 100px;
 	font-size: 32px;
+    line-height: 150%;
 	color: black;
 	/* background:red; */
 }
@@ -98,7 +97,7 @@ export default {
 	width: 800px;
 	height: auto;
 	left: 320px;
-	top: 300px;
+	top: 200px;
 }
 /* 正文的 Container */
 .BoardText {
@@ -106,7 +105,7 @@ export default {
 	width: 1000px;
 	height: auto;
 	left: 220px;
-	top: 340px;
+	top: 250px;
 
 	display: flex;
 	flex-direction: column;

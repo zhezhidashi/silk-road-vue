@@ -16,6 +16,10 @@ import "swiper/dist/css/swiper.css";
 // 引入 v-viewer 样式
 import 'viewerjs/dist/viewer.css'
 
+// 引入 vuescroll
+import vuescroll from 'vuescroll';
+Vue.use(vuescroll);
+
 import Viewer from 'v-viewer'
 Vue.use(Viewer)
 
