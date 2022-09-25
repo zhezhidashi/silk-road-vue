@@ -291,7 +291,7 @@ export default {
 	methods: {
 		// 路由回退
 		router_go_back() {
-			console.log("click!");
+            // 这个界面只能从 ArchiveList 跳转过来，因此回退用 go(-1) 就很方便
 			this.$router.go(-1);
 		},
 		archive_details_see_archive(event) {
@@ -315,7 +315,7 @@ export default {
 <style>
 /* 隐藏导航栏波浪线 */
 .nav_bar_underline {
-	visibility: hidden;
+	display: none;
 }
 
 /*标题与副标题*/

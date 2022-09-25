@@ -48,7 +48,8 @@
 										$event,
 										item.gallery_list_id,
 										img_src.gallery_id,
-										item.exh_list_h2
+										item.exh_list_h2,
+                                        item.exh_list_text
 									)
 								"
 								class="exh_list_images_img_container"
@@ -149,8 +150,9 @@ export default {
 	methods: {
 		// 路由回退
 		router_go_back() {
-			console.log("click!");
-			this.$router.go(-1);
+			this.$router.push({
+                path: '/Home'
+            })
 		},
 		see_all_btn(event, gallery_list_id, title, intro) {
 			this.$router.push({
@@ -162,13 +164,14 @@ export default {
 				},
 			});
 		},
-		exh_list_images_btn(event, gallery_list_id, gallery_id, exh_list_h2) {
+		exh_list_images_btn(event, gallery_list_id, gallery_id, exh_list_h2, intro) {
 			this.$router.push({
 				path: "/ExhibitionGallery",
 				query: {
 					gallery_list_id,
 					gallery_id,
 					gallery_list_title: exh_list_h2,
+                    exh_gallery_list_text: intro,
 				},
 			});
 		},
@@ -190,7 +193,7 @@ export default {
 
 <style>
 .nav_bar_underline {
-	visibility: visible;
+	display: inline;
 	left: 882px;
 }
 

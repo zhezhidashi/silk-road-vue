@@ -64,8 +64,9 @@ export default {
 	methods: {
 		// 路由回退
 		router_go_back() {
-			console.log("click!");
-			this.$router.go(-1);
+			this.$router.push({
+                path: '/Home'
+            })
 		},
 	},
 	created() {
@@ -77,7 +78,7 @@ export default {
 
 <style>
 .nav_bar_underline {
-	visibility: visible;
+	display: inline;
 	left: 746px;
 }
 /*标题*/

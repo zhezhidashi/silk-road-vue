@@ -30,6 +30,6 @@ export default {
 
 <style>
 .nav_bar_underline {
-	visibility: hidden;
+	display: none;
 }
 </style>

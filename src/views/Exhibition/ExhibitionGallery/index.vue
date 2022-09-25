@@ -131,8 +131,10 @@ export default {
 	data() {
 		return {
 			// gallery_list 在数据库中的主键，gallery在数据库中主键
-			list_id: "",
-			id: "",
+			ExhibitionID: "",
+			AlbumID: "",
+            // 展览的简介，用于回退
+            exh_gallery_list_text: '',
 			// 左上角的路径、大图的url，大图底下的文字描述
 			WebPathGalleryListTitle: "加载中",
 			WebPathGalleryTitle: "加载中",
@@ -191,7 +193,14 @@ export default {
 	methods: {
 		// 路由回退
 		router_go_back() {
-			this.$router.go(-1);
+			this.$router.push({
+				path: "/ExhibitionGalleryList",
+				query: {
+					gallery_list_id: this.ExhibitionID,
+					exh_gallery_list_heading: this.WebPathGalleryListTitle,
+					exh_gallery_list_text: this.exh_gallery_list_text,
+				},
+			});
 		},
 		// 点击下方列表的图片，修改大图的url
 		ImageListBtn(item) {
@@ -200,18 +209,19 @@ export default {
 
 		// HTTP获取网页基本数据
 		GetData() {
-			//从本页面的url中获取 list_id 和 id 的值
-			this.list_id = this.$route.query.gallery_list_id;
-			this.id = this.$route.query.gallery_id;
+			//从本页面的url中获取 ExhibitionID 和 AlbumID 的值
+			this.ExhibitionID = this.$route.query.gallery_list_id;
+			this.AlbumID = this.$route.query.gallery_id;
 			this.WebPathGalleryListTitle = this.$route.query.gallery_list_title;
+            this.exh_gallery_list_text = this.$route.query.exh_gallery_list_text;
 
 			//http请求
 
 			let url =
 				"/exhibition/album-detail?exhibition_id=" +
-				this.list_id +
+				this.ExhibitionID +
 				"&album_id=" +
-				this.id;
+				this.AlbumID;
 
 			console.log(url);
 
@@ -298,7 +308,7 @@ export default {
 
 <style>
 .nav_bar_underline {
-	visibility: visible;
+	display: inline;
 	left: 882px;
 }
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="AcademicActivityDetails">
+	<div class="background">
 		<!--回退到上一个页面-->
 		<img
 			@click="router_go_back()"
@@ -70,8 +70,9 @@ export default {
 	methods: {
 		// 路由回退
 		router_go_back() {
-			console.log("click!");
-			this.$router.go(-1);
+			this.$router.push({
+                path: '/AcademicActivityList'
+            })
 		},
 	},
 };
@@ -79,7 +80,7 @@ export default {
 
 <style>
 .nav_bar_underline {
-	visibility: visible;
+	display: inline;
 	left: 1015px;
 }
 

@@ -96,12 +96,14 @@ export default {
 			exh_gallery_list_text: [],
 			gallery_list_id: "",
 			imgText_list: [],
+            exh_gallery_list_text_origin: '',
 		};
 	},
 	created() {
 		this.gallery_list_id = this.$route.query.gallery_list_id;
 		this.exh_gallery_list_heading =
 			this.$route.query.exh_gallery_list_heading;
+        this.exh_gallery_list_text_origin = this.$route.query.exh_gallery_list_text;
 		this.exh_gallery_list_text = this.$route.query.exh_gallery_list_text
 			.toString()
 			.split("\\n");
@@ -138,8 +140,9 @@ export default {
 	methods: {
 		// 路由回退
 		router_go_back() {
-			console.log("click!");
-			this.$router.go(-1);
+			this.$router.push({
+                path: '/ExhibitionList'
+            })
 		},
 		// 点击图片跳转到 gallery 界面
 		exh_gallery_list_imgText_btn(event, gallery_id) {
@@ -149,6 +152,7 @@ export default {
 					gallery_list_id: this.gallery_list_id,
 					gallery_id,
 					gallery_list_title: this.exh_gallery_list_heading,
+                    exh_gallery_list_text: this.exh_gallery_list_text_origin,
 				},
 			});
 		},
@@ -175,7 +179,7 @@ export default {
 
 <style>
 .nav_bar_underline {
-	visibility: visible;
+	display: inline;
 	left: 882px;
 }
 

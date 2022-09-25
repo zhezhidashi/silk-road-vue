@@ -4,20 +4,16 @@
 		<img
 			@click="router_go_back()"
 			class="go_back"
-			id="go_back2"
+			id="go_back1"
 			src="arrow_left_3.png"
 			alt=""
 		/>
 
 		<!--    左侧高级搜索部分-->
-		<div class="archive_list_search_container">
-			<!--    关键词-->
+		<div class="SearchContainer">
+			<!-- 关键词 -->
 			<div class="archive_list_search_keywords">关键词</div>
-			<img
-				class="archive_list_search_arrow"
-				style="position: absolute; left: 169px; top: 212px"
-				src="archive_list_search_arrow.png"
-			/>
+			<!-- 关键词白框 -->
 			<div class="archive_list_search_keywords_block">
 				<input
 					type="search"
@@ -26,40 +22,32 @@
 				/>
 			</div>
 
-			<!--    日期-->
+			<!-- 年份 -->
 			<div class="archive_list_search_year">年份</div>
-			<img
-				class="archive_list_search_arrow"
-				style="position: absolute; left: 150px; top: 317px"
-				src="archive_list_search_arrow.png"
-			/>
-			<!--    搜索的日期范围-->
-			<div class="archive_list_search_date_from">
-				<input
-					type="search"
-					v-model="search_date_from"
-					class="archive_list_search_date_from_text"
-				/>
-			</div>
-			<div class="archive_list_search_date_text">至</div>
-			<div class="archive_list_search_date_to">
-				<input
-					type="search"
-					v-model="search_date_to"
-					class="archive_list_search_date_to_text"
-				/>
+
+			<!-- 年份白框 -->
+			<div class="YearFromToContainer">
+				<div class="archive_list_search_date_from">
+					<input
+						type="search"
+						v-model="search_date_from"
+						class="archive_list_search_date_from_text"
+					/>
+				</div>
+				<div class="archive_list_search_date_text">至</div>
+				<div class="archive_list_search_date_to">
+					<input
+						type="search"
+						v-model="search_date_to"
+						class="archive_list_search_date_to_text"
+					/>
+				</div>
 			</div>
 
-			<!--    语言-->
+			<!-- 语言 -->
 			<div class="archive_list_search_language">语言</div>
-			<img
-				class="archive_list_search_arrow"
-				style="position: absolute; left: 150px; top: 423px"
-				src="archive_list_search_arrow.png"
-			/>
 
-			<!--    四种语言用flex布局，外面套一个框-->
-			<div class="archive_list_search_language_container">
+			<div class="LanguageContainer">
 				<div v-for="item in search_language_list" :key="item.id">
 					<div class="archive_list_search_language_option">
 						<div
@@ -80,14 +68,11 @@
 				</div>
 			</div>
 
-			<!--    高级搜索框-->
-			<div
-				class="blue_rectangle_container"
-				id="archive_list_advanced_search"
-			>
+			<!--高级搜索框-->
+			<div class="blue_rectangle_container" id="AdvancedSearchContainer">
 				<div
 					@mousedown="archive_list_advanced_search_btn($event)"
-					style="font-weight: 700; font-size: 14px; color: #ffffff"
+					style="font-weight: 700; font-size: 18px; color: #ffffff"
 				>
 					搜索
 				</div>
@@ -148,39 +133,37 @@
 					</div>
 				</div>
 			</div>
-
-			
 		</div>
 
-        <div class="archive_list_jump_container">
-				<div
-					class="shift_eclipse_dark"
-					id="archive_list_shift_left"
-					@mousedown="archive_list_jump_last_btn($event)"
-				>
-					<img
-						class="shift_left_arrow_dark"
-						src="arrow_left_2.png"
-						alt=""
-					/>
-				</div>
-
-				<div class="archive_list_shift_pages">
-					{{ now_page_num }}&emsp;/&emsp;{{ total_page_num }}
-				</div>
-
-				<div
-					class="shift_eclipse_dark"
-					id="archive_list_shift_right"
-					@mousedown="archive_list_jump_next_btn($event)"
-				>
-					<img
-						class="shift_right_arrow_dark"
-						src="arrow_right_2.png"
-						alt=""
-					/>
-				</div>
+		<div class="archive_list_jump_container">
+			<div
+				class="shift_eclipse_dark"
+				id="archive_list_shift_left"
+				@mousedown="archive_list_jump_last_btn($event)"
+			>
+				<img
+					class="shift_left_arrow_dark"
+					src="arrow_left_2.png"
+					alt=""
+				/>
 			</div>
+
+			<div class="archive_list_shift_pages">
+				{{ now_page_num }}&emsp;/&emsp;{{ total_page_num }}
+			</div>
+
+			<div
+				class="shift_eclipse_dark"
+				id="archive_list_shift_right"
+				@mousedown="archive_list_jump_next_btn($event)"
+			>
+				<img
+					class="shift_right_arrow_dark"
+					src="arrow_right_2.png"
+					alt=""
+				/>
+			</div>
+		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div style="position: relative; height: 600px; z-index: 0"></div>
 	</div>
@@ -238,8 +221,9 @@ export default {
 	},
 	methods: {
 		router_go_back() {
-			console.log("click!");
-			this.$router.go(-1);
+			this.$router.push({
+				path: "/Home",
+			});
 		},
 		getList() {
 			console.log(this.$route);
@@ -324,15 +308,15 @@ export default {
 							search_list_item["intro"]["ZH"],
 					};
 					// console.log(new_map);
-					if (new_map["search_result_id"] === null)
+					if (new_map["search_result_id"] === undefined)
 						new_map["search_result_id"] = "N/A";
-					if (new_map["search_result_title"] === null)
+					if (new_map["search_result_title"] === undefined)
 						new_map["search_result_title"] = "N/A";
-					if (new_map["search_result_subtitle"] === null)
+					if (new_map["search_result_subtitle"] === undefined)
 						new_map["search_result_subtitle"] = "N/A";
-					if (new_map["search_result_date"] === null)
+					if (new_map["search_result_date"] === undefined)
 						new_map["search_result_date"] = "N/A";
-					if (new_map["search_result_description"] === null)
+					if (new_map["search_result_description"] === undefined)
 						new_map["search_result_description"] = "N/A";
 					http_get_result.push(new_map);
 				}
@@ -441,46 +425,55 @@ export default {
 <style>
 /* 隐藏导航栏波浪线 */
 .nav_bar_underline {
-	visibility: hidden;
+	display: none;
 }
 /*左侧高级搜索部分*/
+.SearchContainer {
+	position: absolute;
+	left: 100px;
+	top: 150px;
+	width: 230px;
+	height: 500px;
+	/* background: red; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* align-items: center; */
+}
 /* 左侧搜索的向下指的箭头图片 */
 .archive_list_search_arrow {
 	position: absolute;
 	width: 13px;
 }
 
-/*关键字*/
+/*关键字和年份的Container*/
+
+/* 关键字 */
 .archive_list_search_keywords {
-	position: absolute;
+	position: relative;
 	width: 60px;
-	height: 19px;
-	left: 78px;
-	top: 207px;
 
 	font-weight: 600;
 	font-size: 20px;
-	line-height: 100%;
+	line-height: 150%;
 	color: #2f2f2f;
 }
 /* 输入关键字的Container */
 .archive_list_search_keywords_block {
-	position: absolute;
-	width: 218px;
+	position: relative;
+	width: 230px;
 	height: 42px;
-	left: 78px;
-	top: 238px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.4px rgba(0, 0, 0, 0.11);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-    z-index: 10;
+	z-index: 10;
 }
 /* 输入关键字文本 */
 .archive_list_search_keywords_text {
 	position: absolute;
-	width: 200px;
+	width: 210px;
 	height: 30px;
 	border: none;
 	outline: none;
@@ -489,28 +482,33 @@ export default {
 
 /* 年份 */
 .archive_list_search_year {
-	position: absolute;
+	position: relative;
 	width: 42px;
-	height: 19px;
-	left: 78px;
-	top: 312px;
 	font-weight: 600;
 	font-size: 20px;
+	line-height: 150%;
 	color: #2f2f2f;
 }
-/* 年份 from 的 Container */
+/* 年份 from to 的 Container */
+.YearFromToContainer {
+	position: relative;
+	height: 42px;
+	width: 230px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .archive_list_search_date_from {
-	position: absolute;
+	position: relative;
 	width: 84px;
 	height: 42px;
-	left: 78px;
-	top: 348px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.3px rgba(0, 0, 0, 0.11);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    z-index: 10;
+	z-index: 10;
 }
 /* 年份 from 的文本 */
 .archive_list_search_date_from_text {
@@ -523,29 +521,22 @@ export default {
 }
 /* “至” 那个字 */
 .archive_list_search_date_text {
-	position: absolute;
-	width: 18px;
-	height: 19px;
-	left: 178px;
-	top: 362px;
-
-	font-size: 11px;
-	line-height: 96%;
+	position: relative;
+	font-size: 18px;
+	line-height: 150px;
 	color: #2f2f2f;
 }
 /* 年份 to 的 Container */
 .archive_list_search_date_to {
-	position: absolute;
+	position: relative;
 	width: 84px;
 	height: 42px;
-	left: 212px;
-	top: 348px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.3px rgba(0, 0, 0, 0.11);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    z-index: 10;
+	z-index: 10;
 }
 /* 年份 to 的文本 */
 .archive_list_search_date_to_text {
@@ -559,70 +550,72 @@ export default {
 
 /*语言*/
 .archive_list_search_language {
-	position: absolute;
+	position: relative;
 	width: 42px;
-	height: 19px;
-	left: 78px;
-	top: 417px;
 	font-weight: 600;
 	font-size: 20px;
+	line-height: 150%;
 	color: #2f2f2f;
 	z-index: 10;
 }
 /* 语言的 Container */
-.archive_list_search_language_container {
-	position: absolute;
-	width: 200px;
-	height: 102px;
-	left: 80px;
-	top: 460px;
+.LanguageContainer {
+	position: relative;
+	width: 230px;
+
+	height: 170px;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: space-evenly;
 	z-index: 10;
-	/* background: red; */
+	/* background: skyblue; */
+
+	outline: 1px blue dashed;
+	outline-offset: -5px;
+	border-radius: 10px;
+	box-shadow: 0 0 0 5px transparent;
 }
 
 .archive_list_search_language_option {
 	position: relative;
-	left: 10px;
-	width: 100px;
-	height: 30px;
+	width: 190px;
+	height: 27px;
+	/* background: pink; */
+	margin-left: 20px;
+
+	display: flex;
+	align-items: center;
 }
 .archive_list_search_language_option_square {
 	position: absolute;
-	width: 15px;
-	height: 15px;
+	width: 18px;
+	height: 18px;
 	left: 0;
-	top: 15px;
+	cursor: pointer;
 }
 .archive_list_search_language_option_text {
 	position: absolute;
 	left: 30px;
-	top: 15px;
-	font-size: 15px;
-	line-height: 100%;
+	font-size: 18px;
+	line-height: 150%;
 	color: #2f2f2f;
 }
 
 /*高级搜索框*/
-#archive_list_advanced_search {
-	position: absolute;
-	width: 213px;
+#AdvancedSearchContainer {
+	position: relative;
+	width: 230px;
 	height: 48px;
-	left: 84px;
-	top: 631px;
 	z-index: 10;
 }
 
 /*右方的搜索结果*/
-
 .archive_list_search_result {
 	position: relative;
 	width: 950px;
-    min-height: 100vh;
+	min-height: 100vh;
 	left: 440px;
-	top: 270px;
+	top: 150px;
 	display: flex;
 	flex-flow: wrap;
 	align-content: flex-start;
@@ -727,13 +720,13 @@ export default {
 	top: 10px;
 	z-index: 10;
 	/* background: skyblue; */
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    left: 0;
-    right: 0;
-    margin: auto;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 
 /*第几页*/

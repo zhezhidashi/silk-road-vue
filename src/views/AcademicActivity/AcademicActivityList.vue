@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="background: #efefef">
+	<div class="background">
 		<!--    标题-->
 		<div class="academic_activity_title">学术活动</div>
 
@@ -131,8 +131,9 @@ export default {
 	methods: {
 		// 路由回退
 		router_go_back() {
-			console.log("click!");
-			this.$router.go(-1);
+			this.$router.push({
+                path: '/Home'
+            })
 		},
 		academic_activity_images_btn(event, academic_activity_id) {
 			this.$router.push({
@@ -190,13 +191,13 @@ export default {
 
 <style>
 .nav_bar_underline {
-	visibility: visible;
+	display: inline;
 	left: 1015px;
 }
 
 /*标题*/
 .academic_activity_title {
-	position: absolute;
+	position: relative;
     width: 1440px;
 	left: 0; right: 0; margin: auto;
     text-align: center;
@@ -211,7 +212,7 @@ export default {
 	width: 1330px;
     min-height: 100vh;
 	left: 95px;
-	top: 250px;
+	top: 200px;
 }
 
 /*把每一块img、时间、简介都包装成一个container*/

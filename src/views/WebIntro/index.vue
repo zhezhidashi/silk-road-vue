@@ -45,8 +45,9 @@ export default {
 	methods: {
 		// 路由回退
 		router_go_back() {
-			console.log("click!");
-			this.$router.go(-1);
+			this.$router.push({
+                path: '/Home'
+            });
 		},
 	},
 };
@@ -55,7 +56,7 @@ export default {
 <style>
 /* 修改导航栏波浪线的样式 */
 .nav_bar_underline {
-	visibility: visible;
+	display: inline;
 	left: 612px;
 }
 
@@ -80,5 +81,7 @@ export default {
     margin: 20px;
     font-size: 20px;
     line-height: 200%;
+    /* display: flex;
+    justify-content: space-between; */
 }
 </style>
