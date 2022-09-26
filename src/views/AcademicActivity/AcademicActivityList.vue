@@ -98,6 +98,7 @@ export default {
 	// 生命周期函数，有很多种，created是常用的一种
 	// 在页面对应的生命周期自动执行
 	created() {
+        
 		//http请求
 		let url = "/activity/list";
 
@@ -126,7 +127,6 @@ export default {
 
 		console.log("academic_list", this.academic_activity_images_src);
 	},
-
 	// 这里定义方法
 	methods: {
 		// 路由回退

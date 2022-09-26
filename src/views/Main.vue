@@ -76,5 +76,10 @@ export default {
 	data() {
 		return {};
 	},
+    watch: {
+		$route(to, from) {
+			window.location.reload(); //监测到路由发生跳转时刷新一次页面
+		},
+	},
 };
 </script>

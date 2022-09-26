@@ -33,6 +33,7 @@
 
 <script>
 import { getForm } from "../../api/data.js";
+
 export default {
 	name: "AcademicActivityDetails",
 	data() {
@@ -44,6 +45,7 @@ export default {
 		};
 	},
 	created() {
+        
 		//从本页url的参数中获取academic_activity_id的值
 		this.academic_activity_id = this.$route.query.academic_activity_id;
 

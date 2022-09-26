@@ -6,10 +6,10 @@
 		<div class="BoardTextContainer">
 			<div class="BoardTextBlock">
 				<div class="index_board_title" @click="GoIndexBoard(3 * BoardIndex)">
-					{{ index_board_left_title[BoardIndex] }}
+					{{ IndexBoardTitle[3 * BoardIndex] }}
 				</div>
 				<div class="index_board_text">
-					{{ index_board_left_text[BoardIndex] }}
+					{{ IndexBoardText[3 * BoardIndex] }}
 				</div>
 			</div>
 
@@ -17,10 +17,10 @@
 
 			<div class="BoardTextBlock">
 				<div class="index_board_title" @click="GoIndexBoard(3 * BoardIndex + 1)">
-					{{ index_board_middle_title[BoardIndex] }}
+					{{ IndexBoardTitle[3 * BoardIndex + 1] }}
 				</div>
 				<div class="index_board_text">
-					{{ index_board_middle_text[BoardIndex] }}
+					{{ IndexBoardText[3 * BoardIndex + 1] }}
 				</div>
 			</div>
 
@@ -28,10 +28,10 @@
 
 			<div class="BoardTextBlock">
 				<div class="index_board_title" @click="GoIndexBoard(3 * BoardIndex + 2)">
-					{{ index_board_right_title[BoardIndex] }}
+					{{ IndexBoardTitle[3 * BoardIndex + 2] }}
 				</div>
 				<div class="index_board_text">
-					{{ index_board_right_text[BoardIndex] }}
+					{{ IndexBoardText[3 * BoardIndex + 2] }}
 				</div>
 			</div>
 		</div>
@@ -80,23 +80,16 @@ export default {
 			BoardIndex: 0,
 			BoardTotal: 1,
 
-			index_board_left_title: [
-				"课题组成员参加第五届“文学与图像”学术论坛",
-			],
-			index_board_left_text: [
-				"2022年1月8—9日，项目组成员参加北京大学第五届“文学与图像”学术论坛并发表论文：《画像与海图：对“中国船”在太平洋文化交流中影响的几点思考》（吴杰伟）、《〈西印度舶来药物史〉第二部分插图研究》（于施洋）、《图绘太平洋：荷兰东印度公司太平洋航路的开辟与航海图绘制》（谢侃侃）、《蒙昧的帝国：Bik 海参采捕图与荷兰殖民知识焦虑，1814—1824》（徐冠勉）。",
-			],
-
-			index_board_middle_title: [
-				"文理共建，深度融合，探索数字人文建设模式",
-			],
-			index_board_middle_text: [
-				"项目团队和人工智能研究院智能系统软件研究中心马郓团队开展紧密合作，共同建设“太平洋丝绸之路档案文献数据库”。项目团队主要负责收集、整理太平洋丝绸之路外文档案文献，人工智能研究院团队师生主要负责技术层面的建设和实施工作，探索出“深度融合，适度交叉，有序推进，互相成就”的数字人文建设模式。",
-			],
-			index_board_right_title: ["西印度档案总馆地图"],
-			index_board_right_text: [
-				"一位业余海底考古学家Mac·McIver在哥斯达黎加的科科斯岛附近发现了一座庞大的水下结构，非常类似于大型机场。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置。据他介绍，在科科斯岛东北约80千米处，水下约1800米左右的位置。",
-			],
+            IndexBoardTitle: [
+                "项目组获得西班牙海军博物馆前副馆长马塞利诺·冈萨雷斯部分画作资料",
+                "文理共建，深度融合，探索数字人文建设模式",
+                "课题组成员参加第五届“文学与图像”学术论坛",
+            ],
+            IndexBoardText: [
+                "2022年9月20日，西班牙海军上校、西班牙海军博物馆前副馆长、西班牙王家海军学院院士马塞利诺·冈萨雷斯（Marcelino González, 1943- ）将其七十余幅画作授权项目组使用，其中二十余幅集中展示16世纪西班牙探索太平洋相关的人物和船只，将结集成“波涛中的面孔”主题线上展览。这些人物中，有著名航海家如麦哲伦、德雷克这些英雄式的“明星”，也包括不甚里程碑式、传奇性的探险家——但回到历史现场，其“征服”世界上最后一片未知大洋的勇气和智慧依然令人钦佩。画作参照这些历史人物最有名的油画、版画，通过再创作，以相对统一的尺寸、材质（水彩或铅笔）、笔触画成，体现出一位退役海军军官对前辈的理解，对西班牙最辉煌的一段海洋史的回顾。",
+                "项目团队和人工智能研究院智能系统软件研究中心马郓团队开展紧密合作，共同建设“太平洋丝绸之路档案文献数据库”。项目团队主要负责收集、整理太平洋丝绸之路外文档案文献，人工智能研究院团队师生主要负责技术层面的建设和实施工作，探索出“深度融合，适度交叉，有序推进，互相成就”的数字人文建设模式。",
+                "2022年1月8—9日，项目组成员参加北京大学第五届“文学与图像”学术论坛并发表论文：《画像与海图：对“中国船”在太平洋文化交流中影响的几点思考》（吴杰伟）、《〈西印度舶来药物史〉第二部分插图研究》（于施洋）、《图绘太平洋：荷兰东印度公司太平洋航路的开辟与航海图绘制》（谢侃侃）、《蒙昧的帝国：Bik 海参采捕图与荷兰殖民知识焦虑，1814—1824》（徐冠勉）。",
+            ],
 		};
 	},
 	methods: {
