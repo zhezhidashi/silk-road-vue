@@ -30,7 +30,7 @@
 
 	<!-- 查看详情部分 -->
 	<!-- <div
-			@mousedown="index_title_see_details_btn($event)"
+			@click="index_title_see_details_btn($event)"
 			class="blue_rectangle_container"
 			id="index_title_see_details"
 		>

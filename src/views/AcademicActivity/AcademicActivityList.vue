@@ -20,7 +20,7 @@
 			>
 				<!--把每一块img、时间、简介都包装成一个container-->
 				<div
-					@mousedown="
+					@click="
 						academic_activity_images_btn(
 							$event,
 							item.academic_activity_id

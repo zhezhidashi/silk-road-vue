@@ -47,8 +47,8 @@
 }
 .Main {
 	position: relative;
-    top: 100px;
-    height: auto;
+	top: 100px;
+	height: auto;
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -56,10 +56,14 @@
 .Footer {
 	position: relative;
 	display: flex;
-    top: 100px;
+	top: 100px;
 	justify-content: center;
 	align-items: center;
 	background: #023871;
+}
+
+.NotClick {
+	pointer-events: none;
 }
 </style>
 
@@ -76,10 +80,24 @@ export default {
 	data() {
 		return {};
 	},
-    watch: {
+    // 路由改变时强制刷新页面，可以解决 Header 波浪线残留和点击新页面选中所有文字的问题
+	watch: {
 		$route(to, from) {
 			window.location.reload(); //监测到路由发生跳转时刷新一次页面
 		},
 	},
+	methods: {},
+};
+
+// 滚动的时候禁止掉鼠标事件，可以解决新页面滚动残留的问题，scroll_cnt1 === scroll_cnt2 才开启鼠标事件
+let scroll_cnt1 = 0, scroll_cnt2 = 0;
+window.onscroll = function () {
+    // console.log('1')
+	document.querySelector("div").style["pointer-events"] = "none";
+    scroll_cnt1++;
+    setTimeout(() => {
+        scroll_cnt2++;
+		if(scroll_cnt1 === scroll_cnt2) document.querySelector("div").style["pointer-events"] = "auto";
+	}, 20);
 };
 </script>

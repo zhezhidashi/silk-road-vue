@@ -39,7 +39,7 @@
 		<div class="BoardShiftContainer">
 			<!-- 公告部分左右切换按钮 -->
 			<div
-				@mousedown="BoardShift(-1)"
+				@click="BoardShift(-1)"
 				class="shift_eclipse_light"
 				id="index_board_shift_left"
 			>
@@ -54,7 +54,7 @@
 			</div>
 
 			<div
-				@mousedown="BoardShift(1)"
+				@click="BoardShift(1)"
 				class="shift_eclipse_light"
 				id="index_board_shift_right"
 			>

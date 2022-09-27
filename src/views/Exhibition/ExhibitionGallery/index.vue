@@ -24,7 +24,7 @@
 				<vue-scroll class="ImageListContainer" :ops="ops">
 					<div v-for="item in ImgList" :key="item.gallery_img_id">
 						<div
-							@mousedown="ImageListBtn(item)"
+							@click="ImageListBtn(item)"
 							class="ImageListImgContainer"
 							:id="`ImageListImgContainer_${item.gallery_img_id}`"
 						>

@@ -30,8 +30,6 @@ function stopMove() {
     document.body.style.overflow = 'hidden';
     // 禁止页面滑动
     document.addEventListener("touchmove", m, { passive: false });
-    // 禁止鼠标点击
-    // document.querySelector('class').style.cursor = "not-allowed";
 }
 //开启页面滚动
 function Move() {
@@ -47,18 +45,17 @@ router.beforeEach((to, from, next) => {
     document.documentElement.scrollTop = 0
     // 兼容safari
     window.pageYOffset = 0
-    // 禁止页面滚动
-    // stopMove()
+    // 鼠标点击
     if (to.meta.title) {
         document.title = to.meta.title;
         next()
     }
 })
 
-
 new Vue({
     router,
     render: h => h(App),
 }).$mount('#app')
+
 
 

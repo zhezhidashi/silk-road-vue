@@ -26,14 +26,14 @@
 			</div>
 
 			<div
-				@mousedown="archive_details_see_archive($event)"
+				@click="archive_details_see_archive($event)"
 				class="archive_details_view"
 				style="left: 390px"
 			>
 				查看档案
 			</div>
 			<div
-				@mousedown="archive_details_see_source($event)"
+				@click="archive_details_see_source($event)"
 				class="archive_details_view"
 				style="left: 496px"
 			>

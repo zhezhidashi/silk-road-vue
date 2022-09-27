@@ -20,7 +20,7 @@
 			</div>
 			<div class="index_exh_up_line"></div>
 			<div
-				@mousedown="index_exh_see_details_btn($event, 1)"
+				@click="index_exh_see_details_btn($event, 1)"
 				class="blue_rectangle_container"
 				id="index_exh_up_see_details"
 			>
@@ -48,7 +48,7 @@
 
 			<div class="index_exh_down_line"></div>
 			<div
-				@mousedown="index_exh_see_details_btn($event, 2)"
+				@click="index_exh_see_details_btn($event, 2)"
 				class="blue_rectangle_container"
 				id="index_exh_down_see_details"
 			>
@@ -59,7 +59,7 @@
 		<!-- 左右切换近期展览的图标 -->
 		<div class="ExhibitionShiftContainer">
 			<div
-				@mousedown="ExhibitionShift(-1)"
+				@click="ExhibitionShift(-1)"
 				class="shift_eclipse_dark"
 				id="index_exh_shift_left"
 			>
@@ -74,7 +74,7 @@
 			</div>
 
 			<div
-				@mousedown="ExhibitionShift(1)"
+				@click="ExhibitionShift(1)"
 				class="shift_eclipse_dark"
 				id="index_exh_shift_right"
 			>

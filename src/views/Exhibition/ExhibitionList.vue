@@ -22,7 +22,7 @@
 					<!--“查看全部”方框-->
 					<div class="blue_rectangle_container" id="exh_list_see_all">
 						<div
-							@mousedown="
+							@click="
 								see_all_btn(
 									$event,
 									item.gallery_list_id,
@@ -43,7 +43,7 @@
 							:key="img_src.gallery_id"
 						>
 							<div
-								@mousedown="
+								@click="
 									exh_list_images_btn(
 										$event,
 										item.gallery_list_id,

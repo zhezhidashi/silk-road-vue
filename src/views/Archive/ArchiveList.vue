@@ -51,7 +51,7 @@
 				<div v-for="item in search_language_list" :key="item.id">
 					<div class="archive_list_search_language_option">
 						<div
-							@mousedown="
+							@click="
 								archive_list_search_language_option(
 									$event,
 									item.id
@@ -71,7 +71,7 @@
 			<!--高级搜索框-->
 			<div class="blue_rectangle_container" id="AdvancedSearchContainer">
 				<div
-					@mousedown="archive_list_advanced_search_btn($event)"
+					@click="archive_list_advanced_search_btn($event)"
 					style="font-weight: 700; font-size: 18px; color: #ffffff"
 				>
 					搜索
@@ -86,7 +86,7 @@
 				:key="search_result.search_result_id"
 			>
 				<div
-					@mousedown="
+					@click="
 						archive_list_search_result_btn(
 							$event,
 							search_result.search_result_id
@@ -139,7 +139,7 @@
 			<div
 				class="shift_eclipse_dark"
 				id="archive_list_shift_left"
-				@mousedown="archive_list_jump_last_btn($event)"
+				@click="archive_list_jump_last_btn($event)"
 			>
 				<img
 					class="shift_left_arrow_dark"
@@ -155,7 +155,7 @@
 			<div
 				class="shift_eclipse_dark"
 				id="archive_list_shift_right"
-				@mousedown="archive_list_jump_next_btn($event)"
+				@click="archive_list_jump_next_btn($event)"
 			>
 				<img
 					class="shift_right_arrow_dark"
@@ -411,7 +411,7 @@ export default {
 		archive_list_search_result_mouseover(event, search_result_id) {
 			document.querySelector(
 				"#archive_list_search_result_container_" + search_result_id
-			).style.background = "rgba(47, 47, 47, 0.5)";
+			).style.background = "rgba(47, 47, 47, 0.2)";
 		},
 		archive_list_search_result_mouseleave(event, search_result_id) {
 			document.querySelector(
@@ -679,7 +679,7 @@ export default {
 	height: 16px;
 	left: 290px;
 	top: 76px;
-	font-size: 16px;
+	font-size: 20px;
 	color: #2f2f2f;
 }
 /*时间*/
@@ -688,8 +688,8 @@ export default {
 	width: 224px;
 	height: 18px;
 	left: 289px;
-	top: 102px;
-	font-size: 16px;
+	top: 106px;
+	font-size: 20px;
 	color: #2f2f2f;
 }
 /*描述*/
@@ -698,9 +698,9 @@ export default {
 	position: absolute;
 	width: 589px;
 	left: 286px;
-	top: 208px;
+	top: 168px;
 
-	font-size: 16px;
+	font-size: 20px;
 	line-height: 150%;
 	color: #2f2f2f;
 

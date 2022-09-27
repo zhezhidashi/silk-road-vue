@@ -58,7 +58,7 @@
 							>
 								<!--查看详情部分-->
 								<div
-									@mousedown="
+									@click="
 										exh_gallery_list_imgText_btn(
 											$event,
 											item.gallery_id
