@@ -48,17 +48,13 @@ export default {
 			this.$router.push({
                 path: '/Home'
             });
+            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 	},
 };
 </script>
 
-<style>
-/* 修改导航栏波浪线的样式 */
-.nav_bar_underline {
-	display: inline;
-	left: 612px;
-}
+<style scoped>
 
 /*标题*/
 .web_intro_title {

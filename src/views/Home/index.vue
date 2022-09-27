@@ -28,8 +28,5 @@ export default {
 };
 </script>
 
-<style>
-.nav_bar_underline {
-	display: none;
-}
+<style scoped>
 </style>

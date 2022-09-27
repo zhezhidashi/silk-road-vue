@@ -103,12 +103,6 @@ export default {
 		};
 	},
 	methods: {
-		// 标题部分查看详情的按钮
-		index_title_see_details_btn() {
-			this.$router.push({
-				name: "LatestContent",
-			});
-		},
 	},
 	mounted() {
 		// 初始化 Swiper
@@ -142,6 +136,7 @@ export default {
 									now_page_num: "",
 								},
 							});
+                            this.$store.dispatch("GetHeaderIndex", 0);
 						}
 					},
 				},

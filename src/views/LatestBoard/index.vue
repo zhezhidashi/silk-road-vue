@@ -66,6 +66,7 @@ export default {
 			this.$router.push({
 				path: "/Home",
 			});
+            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 	},
 	created() {
@@ -83,11 +84,7 @@ export default {
 };
 </script>
 
-<style>
-.nav_bar_underline {
-	display: inline;
-	left: 746px;
-}
+<style scoped>
 /*标题*/
 .BoardTitle {
 	position: relative;

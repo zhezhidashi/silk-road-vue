@@ -24,6 +24,9 @@ import Viewer from 'v-viewer'
 
 Vue.use(Viewer)
 
+// 引入仓库
+import store from './store'
+
 //停止页面滚动、禁止鼠标点击
 function stopMove() {
     let m = function (e) { e.preventDefault(); };
@@ -54,6 +57,7 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
     router,
+    store,
     render: h => h(App),
 }).$mount('#app')
 

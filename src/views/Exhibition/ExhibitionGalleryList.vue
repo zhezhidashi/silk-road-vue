@@ -143,9 +143,11 @@ export default {
 			this.$router.push({
                 path: '/ExhibitionList'
             })
+            this.$store.dispatch("GetHeaderIndex", 3);
 		},
 		// 点击图片跳转到 gallery 界面
 		exh_gallery_list_imgText_btn(event, gallery_id) {
+            
 			this.$router.push({
 				path: "/ExhibitionGallery",
 				query: {
@@ -177,11 +179,7 @@ export default {
 };
 </script>
 
-<style>
-.nav_bar_underline {
-	display: inline;
-	left: 882px;
-}
+<style scoped>
 
 /*页面标题*/
 .exh_gallery_list_heading {

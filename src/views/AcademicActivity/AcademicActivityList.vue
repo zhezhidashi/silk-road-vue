@@ -20,7 +20,7 @@
 			>
 				<!--把每一块img、时间、简介都包装成一个container-->
 				<div
-					@click="
+					@click.once="
 						academic_activity_images_btn(
 							$event,
 							item.academic_activity_id
@@ -98,7 +98,6 @@ export default {
 	// 生命周期函数，有很多种，created是常用的一种
 	// 在页面对应的生命周期自动执行
 	created() {
-        
 		//http请求
 		let url = "/activity/list";
 
@@ -132,8 +131,9 @@ export default {
 		// 路由回退
 		router_go_back() {
 			this.$router.push({
-                path: '/Home'
-            })
+				path: "/Home",
+			});
+			this.$store.dispatch("GetHeaderIndex", 0);
 		},
 		academic_activity_images_btn(event, academic_activity_id) {
 			this.$router.push({
@@ -142,6 +142,12 @@ export default {
 					academic_activity_id,
 				},
 			});
+			this.$store.dispatch("GetHeaderIndex", 4);
+
+			document.querySelector("div").style["user-select"] = "none";
+			setTimeout(() => {
+				document.querySelector("div").style["user-select"] = "auto";
+			}, 500);
 		},
 		//鼠标悬停效果。背景色改为蓝色，文字改为白色
 		academic_activity_mouseover(event, academic_activity_id) {
@@ -189,28 +195,25 @@ export default {
 };
 </script>
 
-<style>
-.nav_bar_underline {
-	display: inline;
-	left: 1015px;
-}
-
+<style scoped>
 /*标题*/
 .academic_activity_title {
 	position: relative;
-    width: 1440px;
-	left: 0; right: 0; margin: auto;
-    text-align: center;
+	width: 1440px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	text-align: center;
 	top: 100px;
 	font-size: 32px;
-    line-height: 150%;
+	line-height: 150%;
 	color: #023871;
 }
 /*存放整个页面的数据*/
 #academic_activity_images {
 	position: relative;
 	width: 1330px;
-    min-height: 100vh;
+	min-height: 100vh;
 	left: 95px;
 	top: 200px;
 }
@@ -258,7 +261,7 @@ export default {
 	position: relative;
 	font-size: 20px;
 	line-height: 150%;
-    margin: 10px 15px 0 15px;
+	margin: 10px 15px 0 15px;
 	color: #919191;
 }
 
@@ -266,7 +269,7 @@ export default {
 .academic_activity_images_text {
 	position: relative;
 	font-size: 20px;
-    margin: 10px 15px 10px 15px;
+	margin: 10px 15px 10px 15px;
 	line-height: 150%;
 	color: #000000;
 

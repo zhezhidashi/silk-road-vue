@@ -130,6 +130,7 @@ export default {
 					BoardIndex: d,
 				},
 			});
+            this.$store.dispatch("GetHeaderIndex", 2);
 		},
 	},
 };

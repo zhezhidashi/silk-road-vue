@@ -42,16 +42,13 @@ export default {
 			this.$router.push({
                 path: '/Home'
             })
+            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 	},
 };
 </script>
 
-<style>
-.nav_bar_underline {
-	display: inline;
-	left: 1141px;
-}
+<style scoped>
 /*标题*/
 .MajorEventTitle {
 	position: absolute;

@@ -1,47 +1,48 @@
 <template>
 	<div class="navigation" id="index_navigation">
 		<img
-			@mousedown="MenuClick($event, menu[0])"
+			@click="MenuClick(menu[0], 0)"
 			class="navigation_logo"
 			src="logo.png"
 		/>
 
 		<div class="nav_bar_text_container">
-			<p @mousedown="MenuClick($event, menu[1])" class="nav_bar_intro">
+			<div @click="MenuClick(menu[1], 1)" class="nav_bar_intro">
 				网站简介
-			</p>
-			<p @mousedown="MenuClick($event, menu[2])" class="nav_bar_latest">
+			</div>
+			<div @click="MenuClick(menu[2], 2)" class="nav_bar_latest">
 				最新公告
-			</p>
-			<p @mousedown="MenuClick($event, menu[3])" class="nav_bar_display">
+			</div>
+			<div @click="MenuClick(menu[3], 3)" class="nav_bar_display">
 				线上展览
-			</p>
-			<p @mousedown="MenuClick($event, menu[4])" class="nav_bar_academic">
+			</div>
+			<div @click="MenuClick(menu[4], 4)" class="nav_bar_academic">
 				学术活动
-			</p>
-			<p @mousedown="MenuClick($event, menu[5])" class="nav_bar_event">
+			</div>
+			<div @click="MenuClick(menu[5], 5)" class="nav_bar_event">
 				大事记
-			</p>
-			<p @mousedown="MenuClick($event, menu[6])" class="nav_bar_contact">
+			</div>
+			<div @click="MenuClick(menu[6], 6)" class="nav_bar_contact">
 				联系我们
-			</p>
+			</div>
+            <img class="nav_bar_underline" src="nav_bar_underline.png" :style="`left: ${LineLeft[HeaderIndex]}; display: ${DisplayState[HeaderIndex]};`">
 		</div>
-		<img class="nav_bar_underline" src="nav_bar_underline.png" alt="" />
-		<!-- <div class="navigation_login_back">
-			<a class="navigation_login">登录/注册</a>
-		</div> -->
+		
 	</div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
 	name: "CommonHeader",
-	props: {
-		UnderlineStyleLeft: String,
-	},
+    computed: {
+        ...mapGetters(['HeaderIndex'])
+    },
 	data() {
 		return {
-			publicPath: process.env.BASE_URL,
+            // 波浪线的左端距离
+            LineLeft: ['0', '0', '137px', '273px', '407px', '532px', '654px'],
+            DisplayState: ['none', 'inline', 'inline', 'inline', 'inline', 'inline', 'inline'],
 			menu: [
 				{
 					path: "/Home",
@@ -75,19 +76,17 @@ export default {
 		};
 	},
 	methods: {
-		MenuClick(event, item) {
+		MenuClick(item, index) {
 			this.$router.push({
 				name: item.name,
 			});
-			if (this.$route.fullPath == item.path) {
-				window.location.reload();
-			}
+            this.$store.dispatch("GetHeaderIndex", index);
 		},
 	},
 };
 </script>
 
-<style>
+<style scoped>
 /*导航栏蓝色背景*/
 .navigation {
 	position: relative;
@@ -132,32 +131,11 @@ export default {
 	cursor: pointer;
 }
 
-/*导航栏的登录注册蓝色方框*/
-.navigation_login_back {
-	position: absolute;
-	width: 109px;
-	height: 35px;
-	left: 825px;
-	top: 29px;
-	background: #588cc8;
-	border-radius: 7px;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	font-size: 14px;
-	line-height: 0;
-	color: #ffffff;
-	text-decoration: none;
-
-	cursor: pointer;
-}
 /*导航栏中跳转至某个页面的下划波浪线*/
 .nav_bar_underline {
-	position: relative;
+	position: absolute;
 	width: 72px;
 	height: 9px;
-    top: 7.5vh;
+    top: 8vh;
 }
 </style>

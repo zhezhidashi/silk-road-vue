@@ -45,7 +45,6 @@ export default {
 		};
 	},
 	created() {
-        
 		//从本页url的参数中获取academic_activity_id的值
 		this.academic_activity_id = this.$route.query.academic_activity_id;
 
@@ -75,16 +74,13 @@ export default {
 			this.$router.push({
                 path: '/AcademicActivityList'
             })
+            this.$store.dispatch("GetHeaderIndex", 4);
 		},
 	},
 };
 </script>
 
-<style>
-.nav_bar_underline {
-	display: inline;
-	left: 1015px;
-}
+<style scoped>
 
 /*标题*/
 .academic_activity_details_title {

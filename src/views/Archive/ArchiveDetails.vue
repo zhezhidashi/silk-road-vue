@@ -293,6 +293,7 @@ export default {
 		router_go_back() {
             // 这个界面只能从 ArchiveList 跳转过来，因此回退用 go(-1) 就很方便
 			this.$router.go(-1);
+            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 		archive_details_see_archive(event) {
 			if (event.button === 0) {
@@ -312,11 +313,7 @@ export default {
 };
 </script>
 
-<style>
-/* 隐藏导航栏波浪线 */
-.nav_bar_underline {
-	display: none;
-}
+<style scoped>
 
 /*标题与副标题*/
 .archive_details_title {

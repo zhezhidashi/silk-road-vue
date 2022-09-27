@@ -153,6 +153,7 @@ export default {
 			this.$router.push({
                 path: '/Home'
             })
+            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 		see_all_btn(event, gallery_list_id, title, intro) {
 			this.$router.push({
@@ -163,6 +164,7 @@ export default {
 					exh_gallery_list_text: intro,
 				},
 			});
+            this.$store.dispatch("GetHeaderIndex", 3);
 		},
 		exh_list_images_btn(event, gallery_list_id, gallery_id, exh_list_h2, intro) {
 			this.$router.push({
@@ -174,6 +176,7 @@ export default {
                     exh_gallery_list_text: intro,
 				},
 			});
+            this.$store.dispatch("GetHeaderIndex", 3);
 		},
         MouseOverImage(v1, v2){
             let Container = document.querySelector(`#ImageContainer_${v1}_${v2}`)
@@ -191,11 +194,7 @@ export default {
 };
 </script>
 
-<style>
-.nav_bar_underline {
-	display: inline;
-	left: 882px;
-}
+<style scoped>
 
 /*页面标题*/
 .exh_list_h1 {

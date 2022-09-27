@@ -224,6 +224,7 @@ export default {
 			this.$router.push({
 				path: "/Home",
 			});
+            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 		getList() {
 			console.log(this.$route);
@@ -362,6 +363,7 @@ export default {
 					now_page_num: this.now_page_num,
 				},
 			});
+            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 
 		archive_list_search_result_btn(event, search_result_id) {
@@ -422,11 +424,7 @@ export default {
 };
 </script>
 
-<style>
-/* 隐藏导航栏波浪线 */
-.nav_bar_underline {
-	display: none;
-}
+<style scoped>
 /*左侧高级搜索部分*/
 .SearchContainer {
 	position: absolute;

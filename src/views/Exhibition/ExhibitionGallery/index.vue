@@ -201,6 +201,7 @@ export default {
 					exh_gallery_list_text: this.exh_gallery_list_text,
 				},
 			});
+            this.$store.dispatch("GetHeaderIndex", 3);
 		},
 		// 点击下方列表的图片，修改大图的url
 		ImageListBtn(item) {
@@ -268,7 +269,6 @@ export default {
 							new_map.IntroES = data[item].intro[item_id];
 						}
 					}
-					// _this.ImgSrcList.push(new_map.src)
 					_this.ImgList.push(new_map);
 					if (_this.ImgList.length === 1) {
 						_this.ImageListBtn(_this.ImgList[0]);
@@ -307,10 +307,6 @@ export default {
 </script>
 
 <style>
-.nav_bar_underline {
-	display: inline;
-	left: 882px;
-}
 
 /* 网页图片标题 */
 .GalleryImageTitle {
