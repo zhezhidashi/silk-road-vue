@@ -5,7 +5,7 @@
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
-			src="arrow_left_3.png"
+			src="GoBack.png"
 			alt=""
 		/>
 		<!--为了方便vue，我们把整个页面的图片文字全部放到 archive_details_data 里面-->

@@ -5,60 +5,12 @@
 }
 
 /*向左右切换的图标*/
-/*浅色切换图标的背景*/
-.shift_eclipse_light {
-    width: 30px;
-    height: 30px;
-    background: rgb(148, 142, 142);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-/*浅色切换图标的左箭头*/
-.shift_left_arrow_light {
+.PageShift{
     position: relative;
-    width: 10px;
-    height: 15px;
-}
-
-/*浅色切换图标的右箭头*/
-.shift_right_arrow_light {
-    position: relative;
-    width: 10px;
-    height: 15px;
-}
-
-/*深色切换图标的背景*/
-.shift_eclipse_dark {
     width: 30px;
-    height: 30px;
-
-    background: rgba(217, 217, 217, 0.3);
-    border-radius: 50%;
     cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
 }
-
-/*深色切换图标的左箭头*/
-.shift_left_arrow_dark {
-    position: relative;
-    width: 10px;
-    height: 15px;
-}
-
-/*深色切换图标的右箭头*/
-.shift_right_arrow_dark {
-    position: relative;
-    width: 10px;
-    height: 15px;
-}
-
 /*查看详情、查看全部背后的蓝色方框*/
 .blue_rectangle_container {
     width: 213px;

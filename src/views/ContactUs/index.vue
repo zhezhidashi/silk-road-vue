@@ -5,7 +5,7 @@
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
-			src="arrow_left_3.png"
+			src="GoBack.png"
 			alt=""
 		/>
 		<div class="contact_us_title">联系我们</div>

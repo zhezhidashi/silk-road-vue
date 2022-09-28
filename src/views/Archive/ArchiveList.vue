@@ -5,7 +5,7 @@
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
-			src="arrow_left_3.png"
+			src="GoBack.png"
 			alt=""
 		/>
 
@@ -136,33 +136,21 @@
 		</div>
 
 		<div class="archive_list_jump_container">
-			<div
-				class="shift_eclipse_dark"
-				id="archive_list_shift_left"
+			<img
+				class="PageShift"
 				@click="archive_list_jump_last_btn($event)"
+                src="ShiftLeft.png"
 			>
-				<img
-					class="shift_left_arrow_dark"
-					src="arrow_left_2.png"
-					alt=""
-				/>
-			</div>
 
 			<div class="archive_list_shift_pages">
 				{{ now_page_num }}&emsp;/&emsp;{{ total_page_num }}
 			</div>
 
-			<div
-				class="shift_eclipse_dark"
-				id="archive_list_shift_right"
-				@click="archive_list_jump_next_btn($event)"
+			<img
+				class="PageShift"
+				@click="archive_list_jump_last_btn($event)"
+                src="ShiftRight.png"
 			>
-				<img
-					class="shift_right_arrow_dark"
-					src="arrow_right_2.png"
-					alt=""
-				/>
-			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div style="position: relative; height: 600px; z-index: 0"></div>
