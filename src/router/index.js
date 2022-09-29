@@ -110,12 +110,20 @@ const routes = [
                 component: () => import('../views/ContactUs/index.vue')
             },
             {
-                path: '/ArchiveList',
-                name: 'ArchiveList',
+                path: '/ArchiveList1',
+                name: 'ArchiveList1',
                 meta: {
                     title: '档案列表'
                 },
-                component: () => import('../views/Archive/ArchiveList.vue')
+                component: () => import('../views/Archive/ArchiveList1.vue')
+            },
+            {
+                path: '/ArchiveList2',
+                name: 'ArchiveList2',
+                meta: {
+                    title: '档案列表'
+                },
+                component: () => import('../views/Archive/ArchiveList2.vue')
             },
             {
                 path: '/ArchiveDetails',

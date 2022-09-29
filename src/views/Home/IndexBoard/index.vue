@@ -29,56 +29,52 @@
 			</div>
 		</div>
 
-		<div class="BoardContainer">
-			<div class="ExhibitionBoardTitle" style="margin: 30px">
-				最新公告
-			</div>
-			<div class="ContentContainer">
+		<div class="ExhibitionBoardTitle">最新公告</div>
+		<div class="ContentContainer">
+			<div v-for="(item, index) in BoardList[BoardIndex]" :key="index">
 				<div
-					v-for="(item, index) in BoardList[BoardIndex]"
-					:key="index"
+					class="ItemContainer"
+					:id="`ItemContainerBoard${index}`"
+					@click="GoBoard(item, index)"
+					@mouseover="ItemMouseOver(`Board${index}`)"
+					@mouseleave="ItemMouseLeave(`Board${index}`)"
 				>
-					<div
-						class="ItemContainer"
-						:id="`ItemContainerBoard${index}`"
-						@click="GoBoard(item, index)"
-						@mouseover="ItemMouseOver(`Board${index}`)"
-						@mouseleave="ItemMouseLeave(`Board${index}`)"
-					>
-						<div class="ImageContainer">
-							<div
-								class="BackgroundImage"
-								:style="`background-image:url(${item.Image})`"
-							></div>
-						</div>
+					<div class="ImageContainer">
 						<div
-							class="ImageTitleContainer"
-							:id="`TitleContainerBoard${index}`"
-						>
-							<div class="ImageTitle" :id="`TitleBoard${index}`">
-								{{ item.Title }}
-							</div>
+							class="BackgroundImage"
+							:style="`background-image:url(${item.Image})`"
+						></div>
+					</div>
+					<div
+						class="ImageTitleContainer"
+						:id="`TitleContainerBoard${index}`"
+					>
+						<div class="ImageTitle" :id="`TitleBoard${index}`">
+							{{ item.Title }}
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="BoardShiftContainer">
-				<!-- 公告部分左右切换按钮 -->
-				<img
-					@click="BoardShift(-1)"
-					class="PageShift"
-					:src="ShiftLeftSrc"
-				/>
-				<div class="BoardShiftPages">
-					{{ BoardIndex + 1 }}&emsp;/&emsp;{{ BoardTotal }}
-				</div>
-				<img
-					@click="BoardShift(1)"
-					class="PageShift"
-					:src="ShiftRightSrc"
-				/>
-			</div>
 		</div>
+		<div class="BoardShiftContainer">
+			<!-- 公告部分左右切换按钮 -->
+			<img
+				@click="BoardShift(-1)"
+				class="PageShift"
+				:src="ShiftLeftSrc"
+			/>
+			<div class="BoardShiftPages">
+				{{ BoardIndex + 1 }}&emsp;/&emsp;{{ BoardTotal }}
+			</div>
+			<img
+				@click="BoardShift(1)"
+				class="PageShift"
+				:src="ShiftRightSrc"
+			/>
+		</div>
+
+        <!-- 页底放浪花效果 -->
+        <img src="底部浪花.svg" style="position: absolute; width: 100%; bottom: 0;"/>
 	</div>
 </template>
 
@@ -89,18 +85,19 @@ export default {
 	data() {
 		return {
 			// 近期展览的标题和图片
+            // 注意，如果要增加或删除这里的数据，别忘把切换按钮的一并修改。
 			ExhibitionList: [
-				{
-					Title: "测试标题1测试标题1测试标题1测试标题1测试标题1测试标题1",
-					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-COIa7dl373.jpg",
+                {
+					Title: "波涛中的面孔",
+					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-kiWbO6Mu0Q.jpg",
+                    ID: '5',
+                    Intro: '暂无',
 				},
 				{
-					Title: "测试标题2测试标题2测试标题2测试标题2测试标题2测试标题2",
-					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-COIa7dl373.jpg",
-				},
-				{
-					Title: "测试标题3测试标题3测试标题3测试标题3测试标题3测试标题3",
-					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-COIa7dl373.jpg",
+					Title: "有帆自远方来",
+					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-sh2p9ppPcH.jpg",
+                    ID: '4',
+                    Intro: '2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。%5Cn%20经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。%20%5Cn%20大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。',
 				},
 			],
 
@@ -111,15 +108,15 @@ export default {
 				[
 					{
 						Title: "项目组获得西班牙海军博物馆前副馆长马塞利诺·冈萨雷斯部分画作资料",
-						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-COIa7dl373.jpg",
+						Image: "BoardImage1.jpg",
 					},
 					{
 						Title: "文理共建，深度融合，探索数字人文建设模式",
-						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-COIa7dl373.jpg",
+						Image: "BoardImage2.jpg",
 					},
 					{
 						Title: "课题组成员参加第五届“文学与图像”学术论坛",
-						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-COIa7dl373.jpg",
+						Image: "BoardImage3.jpg",
 					},
 				],
 			],
@@ -131,8 +128,7 @@ export default {
 	},
 	methods: {
 		BoardShift: throttle(function (d) {
-			let BoardImage =
-				document.querySelectorAll(".BackgroundImage");
+			let BoardImage = document.querySelectorAll(".BackgroundImage");
 			let BoardTitle = document.querySelectorAll(".ImageTitle");
 
 			let ImageFadeTimer = setInterval(ImageFade, 7);
@@ -140,7 +136,7 @@ export default {
 			let _this = this;
 			function ImageFade() {
 				if (opa > 0) {
-					for (let i = 3; i < 6; i++) {
+					for (let i = 2; i < 5; i++) {
 						BoardImage[i].style.opacity = String(opa / 100);
 						BoardTitle[i].style.opacity = String(opa / 100);
 					}
@@ -149,7 +145,7 @@ export default {
 						(_this.BoardIndex + d + _this.BoardTotal) %
 						_this.BoardTotal;
 				} else if (opa > -100) {
-					for (let i = 3; i < 6; i++) {
+					for (let i = 2; i < 5; i++) {
 						BoardImage[i].style.opacity = String(-opa / 100);
 						BoardTitle[i].style.opacity = String(-opa / 100);
 					}
@@ -170,7 +166,16 @@ export default {
 			this.$store.dispatch("GetHeaderIndex", 2);
 		},
 
-		GoExhibition(item, index) {},
+		GoExhibition(item, index) {
+            this.$router.push({
+				path: "/ExhibitionGalleryList",
+				query: {
+					gallery_list_id: item.ID,
+					exh_gallery_list_heading: item.Title,
+                    exh_gallery_list_text: item.Intro,
+				},
+			});
+        },
 
 		ItemMouseOver(type) {
 			// 鼠标悬浮修改 Style

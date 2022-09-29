@@ -1,13 +1,13 @@
 <template>
 	<div class="background" style="background: #efefef">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 
 		<!--    左侧高级搜索部分-->
 		<div class="SearchContainer">
@@ -139,8 +139,8 @@
 			<img
 				class="PageShift"
 				@click="archive_list_jump_last_btn($event)"
-                src="ShiftLeft.png"
-			>
+				src="ShiftLeft.png"
+			/>
 
 			<div class="archive_list_shift_pages">
 				{{ now_page_num }}&emsp;/&emsp;{{ total_page_num }}
@@ -148,19 +148,19 @@
 
 			<img
 				class="PageShift"
-				@click="archive_list_jump_last_btn($event)"
-                src="ShiftRight.png"
-			>
+				@click="archive_list_jump_next_btn($event)"
+				src="ShiftRight.png"
+			/>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 600px; z-index: 0"></div>
+		<div style="position: relative; height: 500px; z-index: 0"></div>
 	</div>
 </template>
 
 <script>
 import { getForm } from "../../api/data.js";
 export default {
-	name: "ArchiveList",
+	name: "ArchiveList1",
 	data() {
 		return {
 			// 高级搜索栏的语言选项
@@ -207,12 +207,21 @@ export default {
 	created() {
 		this.getList();
 	},
+	mounted() {
+		this.$store.dispatch("GetHeaderIndex", 0);
+	},
 	methods: {
 		router_go_back() {
 			this.$router.push({
 				path: "/Home",
 			});
-            this.$store.dispatch("GetHeaderIndex", 0);
+		},
+		watch: {
+			"this.$route.query": {
+				handler() {
+					window.location.reload();
+				},
+			},
 		},
 		getList() {
 			console.log(this.$route);
@@ -241,13 +250,6 @@ export default {
 			if (this.search_language === "2") now_search_language = "Japanese";
 			if (this.search_language === "3") now_search_language = "French";
 			if (this.search_language === "4") now_search_language = "Spanish";
-
-			/***************************************************************************************
-        关于url拼接的事项"
-            如果字段为空，就不拼接上去：所以需要做个判断来实现拼接
-            之前的url前缀不对，127.0.0.1是本地ip，不是服务器的ip
-            以api文档为准，上面能请求则说明是前端bug，不能请求则是后端bug（通常会提示服务器内部错误，500）
-         ****************************************************************************************/
 
 			//如果关键字的值为空，就不传参
 			let url = "/archive/list/?";
@@ -287,7 +289,8 @@ export default {
 					let new_map = {
 						search_result_id:
 							search_list_item["main_id"].toString(),
-						img_src: search_list_item["mini_pic_url"],
+						// img_src: search_list_item["mini_pic_url"],
+						img_src: "默认图片.jpg",
 						search_result_title: search_list_item["title"]["ZH"],
 						search_result_subtitle:
 							search_list_item["location"]["ZH"],
@@ -341,17 +344,29 @@ export default {
 		},
 
 		archive_list_advanced_search_btn(event) {
-			this.$router.push({
-				path: "/ArchiveList",
-				query: {
-					search_keywords: this.search_keywords,
-					search_date_from: this.search_date_from,
-					search_date_to: this.search_date_to,
-					search_language: this.search_language,
-					now_page_num: this.now_page_num,
-				},
-			});
-            this.$store.dispatch("GetHeaderIndex", 0);
+			if (this.$route.path === "/ArchiveList1") {
+				this.$router.push({
+					path: "/ArchiveList2",
+					query: {
+						search_keywords: this.search_keywords,
+						search_date_from: this.search_date_from,
+						search_date_to: this.search_date_to,
+						search_language: this.search_language,
+						now_page_num: "1",
+					},
+				});
+			} else {
+				this.$router.push({
+					path: "/ArchiveList1",
+					query: {
+						search_keywords: this.search_keywords,
+						search_date_from: this.search_date_from,
+						search_date_to: this.search_date_to,
+						search_language: this.search_language,
+						now_page_num: "1",
+					},
+				});
+			}
 		},
 
 		archive_list_search_result_btn(event, search_result_id) {
@@ -365,16 +380,29 @@ export default {
 
 		//服务于下面三个跳转的函数
 		archive_list_jmp(event, page_num) {
-			this.$router.push({
-				path: "/ArchiveList",
-				query: {
-					search_keywords: this.search_keywords,
-					search_date_from: this.search_date_from,
-					search_date_to: this.search_date_to,
-					search_language: this.search_language,
-					now_page_num: page_num,
-				},
-			});
+			if (this.$route.path === "/ArchiveList1") {
+				this.$router.push({
+					path: "/ArchiveList2",
+					query: {
+						search_keywords: this.search_keywords,
+						search_date_from: this.search_date_from,
+						search_date_to: this.search_date_to,
+						search_language: this.search_language,
+						now_page_num: page_num,
+					},
+				});
+			} else {
+				this.$router.push({
+					path: "/ArchiveList1",
+					query: {
+						search_keywords: this.search_keywords,
+						search_date_from: this.search_date_from,
+						search_date_to: this.search_date_to,
+						search_language: this.search_language,
+						now_page_num: page_num,
+					},
+				});
+			}
 		},
 
 		//跳转至上一页
@@ -618,6 +646,7 @@ export default {
 	border-radius: 7px;
 	margin: 20px;
 	cursor: pointer;
+	/* background: red; */
 }
 /*图片*/
 .search_result_img_container {
@@ -703,7 +732,7 @@ export default {
 	position: relative;
 	width: 400px;
 	height: 40px;
-	top: 10px;
+	top: 300px;
 	z-index: 10;
 	/* background: skyblue; */
 

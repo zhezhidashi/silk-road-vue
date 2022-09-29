@@ -19,6 +19,9 @@ export default {
 		IndexImage,
 		IndexBoard,
 	},
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 0);
+    },
 	data() {
 		return {};
 	},

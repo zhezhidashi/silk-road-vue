@@ -92,21 +92,21 @@ export default {
 };
 
 // 滚动的时候禁止掉鼠标事件，可以解决新页面滚动残留的问题，scroll_cnt1 === scroll_cnt2 才开启鼠标事件
-let scroll_cnt1 = 0,
-	scroll_cnt2 = 0;
+// let scroll_cnt1 = 0,
+// 	scroll_cnt2 = 0;
 
 // 禁止滚轮事件
-window.onscroll = function () {
-	document.querySelector("div").style["pointer-events"] = "none";
-	scroll_cnt1++;
-	setTimeout(() => {
-		scroll_cnt2++;
-		if (scroll_cnt1 === scroll_cnt2) {
-			document.querySelector("div").style["pointer-events"] = "auto";
-            scroll_cnt1 = scroll_cnt2 = 0;
-		}
-	}, 20);
-};
+// window.onscroll = function () {
+// 	document.querySelector("div").style["pointer-events"] = "none";
+// 	scroll_cnt1++;
+// 	setTimeout(() => {
+// 		scroll_cnt2++;
+// 		if (scroll_cnt1 === scroll_cnt2) {
+// 			document.querySelector("div").style["pointer-events"] = "auto";
+//             scroll_cnt1 = scroll_cnt2 = 0;
+// 		}
+// 	}, 10);
+// };
 
 // 禁止选中文字
 // window.onclick = function () {

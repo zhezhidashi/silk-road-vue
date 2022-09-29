@@ -4,13 +4,13 @@
 		<div class="academic_activity_title">学术活动</div>
 
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 
 		<!--一排一排陈列图片-->
 		<div class="list_images" id="academic_activity_images">
@@ -95,8 +95,6 @@ export default {
 		};
 	},
 
-	// 生命周期函数，有很多种，created是常用的一种
-	// 在页面对应的生命周期自动执行
 	created() {
 		//http请求
 		let url = "/activity/list";
@@ -126,6 +124,9 @@ export default {
 
 		console.log("academic_list", this.academic_activity_images_src);
 	},
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 4);
+    },
 	// 这里定义方法
 	methods: {
 		// 路由回退
@@ -133,7 +134,6 @@ export default {
 			this.$router.push({
 				path: "/Home",
 			});
-			this.$store.dispatch("GetHeaderIndex", 0);
 		},
 		academic_activity_images_btn(event, academic_activity_id) {
 			this.$router.push({
@@ -142,7 +142,6 @@ export default {
 					academic_activity_id,
 				},
 			});
-			this.$store.dispatch("GetHeaderIndex", 4);
 
 			document.querySelector("div").style["user-select"] = "none";
 			setTimeout(() => {

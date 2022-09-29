@@ -1,13 +1,13 @@
 <template>
 	<div class="background" style="height: 906px; background: #efefef">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 		<div class="contact_us_title">联系我们</div>
 	</div>
 </template>
@@ -21,9 +21,11 @@ export default {
 			this.$router.push({
                 path: '/Home'
             })
-            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 	},
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 6);
+    },
 };
 </script>
 

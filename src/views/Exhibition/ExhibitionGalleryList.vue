@@ -1,13 +1,13 @@
 <template>
 	<div class="background" style="background: #efefef">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 		<div class="exh_gallery_list_container">
 			<!--    展览详情页面标题-->
 			<div class="exh_gallery_list_heading">
@@ -99,6 +99,9 @@ export default {
             exh_gallery_list_text_origin: '',
 		};
 	},
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 3);
+    },
 	created() {
 		this.gallery_list_id = this.$route.query.gallery_list_id;
 		this.exh_gallery_list_heading =
@@ -143,7 +146,6 @@ export default {
 			this.$router.push({
                 path: '/ExhibitionList'
             })
-            this.$store.dispatch("GetHeaderIndex", 3);
 		},
 		// 点击图片跳转到 gallery 界面
 		exh_gallery_list_imgText_btn(event, gallery_id) {

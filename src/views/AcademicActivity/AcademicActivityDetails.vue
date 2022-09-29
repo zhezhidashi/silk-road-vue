@@ -1,13 +1,13 @@
 <template>
 	<div class="background">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 		<!--标题-->
 		<div class="academic_activity_details_title">
 			{{ academic_activity_details_title }}
@@ -68,13 +68,15 @@ export default {
 		document.querySelector(".academic_activity_details_img").src =
 			this.academic_activity_details_img_src;
 	},
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 4);
+    },
 	methods: {
 		// 路由回退
 		router_go_back() {
 			this.$router.push({
                 path: '/AcademicActivityList'
             })
-            this.$store.dispatch("GetHeaderIndex", 4);
 		},
 	},
 };

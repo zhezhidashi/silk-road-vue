@@ -1,13 +1,13 @@
 <template>
 	<div class="background" :style="`height: auto; background: #efefef`">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 		<div class="BoardTitle">{{ BoardTitle[BoardIndex] }}</div>
 		<img
 			v-show="BoardImage[BoardIndex] !== ''"
@@ -41,9 +41,9 @@ export default {
 				"课题组成员参加第五届“文学与图像”学术论坛",
 			],
 			BoardImage: [
-				"",
-				"https://dev.pacificsilkroad.cn/img-service/1/1-COIa7dl373.jpg",
-				"",
+				"BoardImage1.jpg",
+				"BoardImage2.jpg",
+				"BoardImage3.jpg",
 			],
 			BoardText: [
 				[
@@ -66,7 +66,6 @@ export default {
 			this.$router.push({
 				path: "/Home",
 			});
-            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 	},
 	created() {
@@ -74,12 +73,7 @@ export default {
 			this.BoardIndex = this.$route.query.BoardIndex;
 	},
 	mounted() {
-		//开启页面滚动
-		let m = function (e) {
-			e.preventDefault();
-		};
-		document.body.style.overflow = ""; //出现滚动条
-		document.removeEventListener("touchmove", m, { passive: true });
+		this.$store.dispatch("GetHeaderIndex", 2);
 	},
 };
 </script>

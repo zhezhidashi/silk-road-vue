@@ -1,13 +1,13 @@
 <template>
 	<div class="background" style="background: #efefef">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 		<!--线上展览标题-->
 		<div class="exh_list_h1">线上展览</div>
 
@@ -91,7 +91,9 @@ export default {
 			],
 		};
 	},
-
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 3);
+    },
 	created() {
 		// http 请求部分
 		let url = "/exhibition/list";
@@ -153,7 +155,6 @@ export default {
 			this.$router.push({
                 path: '/Home'
             })
-            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 		see_all_btn(event, gallery_list_id, title, intro) {
 			this.$router.push({
@@ -164,7 +165,6 @@ export default {
 					exh_gallery_list_text: intro,
 				},
 			});
-            this.$store.dispatch("GetHeaderIndex", 3);
 		},
 		exh_list_images_btn(event, gallery_list_id, gallery_id, exh_list_h2, intro) {
 			this.$router.push({
@@ -176,7 +176,6 @@ export default {
                     exh_gallery_list_text: intro,
 				},
 			});
-            this.$store.dispatch("GetHeaderIndex", 3);
 		},
         MouseOverImage(v1, v2){
             let Container = document.querySelector(`#ImageContainer_${v1}_${v2}`)

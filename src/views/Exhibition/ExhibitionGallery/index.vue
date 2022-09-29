@@ -1,12 +1,12 @@
 <template>
 	<div class="background" style="height: 3000px; background: #efefef">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
-		/>
+		/> -->
 
 		<!-- 图片题目 -->
 		<div class="GalleryImageTitle">{{ MainImageProp.TitleZH }}</div>
@@ -189,6 +189,7 @@ export default {
 	},
 	mounted() {
 		this.GetData();
+        this.$store.dispatch("GetHeaderIndex", 3);
 	},
 	methods: {
 		// 路由回退
@@ -201,7 +202,6 @@ export default {
 					exh_gallery_list_text: this.exh_gallery_list_text,
 				},
 			});
-            this.$store.dispatch("GetHeaderIndex", 3);
 		},
 		// 点击下方列表的图片，修改大图的url
 		ImageListBtn(item) {

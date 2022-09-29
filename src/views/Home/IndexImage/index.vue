@@ -24,6 +24,7 @@
 				class="index_search_words"
 				placeholder="输入档案关键词 / search for"
 			/>
+            <img id="Wave" src="搜索框浪花.png" />
 			<img id="SearchLogo" :src="index_search_logo_src" />
 		</div>
 	</div>
@@ -73,7 +74,7 @@ export default {
 							console.log("点击了主页的图片！");
 						} else if (event.path[0].id === "SearchLogo") {
 							_this.$router.push({
-								path: "/ArchiveList",
+								path: "/ArchiveList1",
 								query: {
 									search_keywords: _this.search_keywords,
 									search_date_from: "",
@@ -82,7 +83,6 @@ export default {
 									now_page_num: "",
 								},
 							});
-							this.$store.dispatch("GetHeaderIndex", 0);
 						}
 					},
 				},
@@ -111,26 +111,37 @@ export default {
 }
 .index_search_words {
 	position: relative;
-	width: 1000px;
+	width: 950px;
 	height: 50px;
 	border: none;
 	outline: none;
 	left: 15px;
 	font-size: 20px;
 	line-height: 100%;
-	color: rgb(0, 0, 139, 0.8);
+	color: rgb(136, 136, 136);
 	background: #efefef;
 	/* background: red; */
+    
+}
+/* 浪花 */
+#Wave {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    /* background: red; */
+    /* cursor: pointer; */
+	width: 90px;
+    /* z-index: 100; */
 }
 #SearchLogo {
 	position: absolute;
 	width: 36px;
 	height: 48px;
-	right: 20px;
+	right: 70px;
 	cursor: pointer;
 }
 ::-webkit-input-placeholder {
-	color: rgb(0, 0, 255, 0.5);
+	color: #588CC8;
 }
 /* 标题图片 */
 #IndexImageContainer {
@@ -140,14 +151,14 @@ export default {
 	height: 88vh;
 	left: 0;
 }
-.swiper-slide{
-    position: relative;
-    height: 88vh;
-    width: auto;
-    overflow: hidden;
+.swiper-slide {
+	position: relative;
+	height: 88vh;
+	width: auto;
+	overflow: hidden;
 }
 #IndexImage {
-    position: absolute;
+	position: absolute;
 	width: auto;
 	height: 88vh;
 	cursor: pointer;

@@ -1,13 +1,13 @@
 <template>
 	<div class="background" style="height: 1300px; background: #efefef">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 		<!--标题-->
 		<div class="MajorEventTitle">网站大事记</div>
 
@@ -42,9 +42,11 @@ export default {
 			this.$router.push({
                 path: '/Home'
             })
-            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 	},
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 5);
+    }
 };
 </script>
 

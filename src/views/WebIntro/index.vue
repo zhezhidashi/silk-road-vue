@@ -1,13 +1,13 @@
 <template>
 	<div class="background" style="height: 1500px">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 		<div class="web_intro_title">网站简介</div>
 		<div class="web_intro_text">
 			<div class="web_intro_paragraph">
@@ -48,9 +48,11 @@ export default {
 			this.$router.push({
                 path: '/Home'
             });
-            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 	},
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 1);
+    }
 };
 </script>
 

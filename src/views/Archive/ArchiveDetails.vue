@@ -1,13 +1,13 @@
 <template>
 	<div class="background" style="height: 1623px; background: #efefef">
 		<!--回退到上一个页面-->
-		<img
+		<!-- <img
 			@click="router_go_back()"
 			class="go_back"
 			id="go_back1"
 			src="GoBack.png"
 			alt=""
-		/>
+		/> -->
 		<!--为了方便vue，我们把整个页面的图片文字全部放到 archive_details_data 里面-->
 		<div id="archive_details_data">
 			<!--    标题与副标题-->
@@ -207,7 +207,7 @@ export default {
 			}
 
 			inner_this.archive_details_img =
-				data.mini_pic_url === "" ? "N/A" : data.mini_pic_url;
+				data.mini_pic_url === "" ? "默认图片.jpg" : data.mini_pic_url;
 
 			for (let item in data.intro) {
 				if (item === "ZH")
@@ -288,12 +288,14 @@ export default {
 			inner_this.archive_details_see_source_url = data.from_url;
 		});
 	},
+    mounted(){
+        this.$store.dispatch("GetHeaderIndex", 0);
+    },
 	methods: {
 		// 路由回退
 		router_go_back() {
             // 这个界面只能从 ArchiveList 跳转过来，因此回退用 go(-1) 就很方便
 			this.$router.go(-1);
-            this.$store.dispatch("GetHeaderIndex", 0);
 		},
 		archive_details_see_archive(event) {
 			if (event.button === 0) {
