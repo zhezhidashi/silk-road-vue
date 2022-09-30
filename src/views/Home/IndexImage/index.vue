@@ -24,7 +24,7 @@
 				class="index_search_words"
 				placeholder="输入档案关键词 / search for"
 			/>
-            <img id="Wave" src="搜索框浪花.png" />
+			<img id="Wave" src="搜索框浪花.png" />
 			<img id="SearchLogo" :src="index_search_logo_src" />
 		</div>
 	</div>
@@ -54,40 +54,39 @@ export default {
 	mounted() {
 		// 初始化 Swiper
 		let _this = this;
-		var mySwiper = new Swiper(
-			document.querySelector("#IndexImageContainer"),
-			{
-				loop: true, // 循环模式选项
-				// 如果需要分页器
-				pagination: {
-					el: ".swiper-pagination",
-					clickable: true,
+		var mySwiper = new Swiper(".swiper-container", {
+			loop: true, // 循环模式选项
+			// 如果需要分页器
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+				// type: "custom",
+				
+			},
+			// 如果需要前进后退按钮
+			navigation: {
+				prevEl: "#IndexImageShiftPrev",
+				nextEl: "#IndexImageShiftNext",
+			},
+			on: {
+				click: function (event) {
+					if (event.path[0].id === "IndexImage") {
+						console.log("点击了主页的图片！");
+					} else if (event.path[0].id === "SearchLogo") {
+						_this.$router.push({
+							path: "/ArchiveList1",
+							query: {
+								search_keywords: _this.search_keywords,
+								search_date_from: "",
+								search_date_to: "",
+								search_language: "",
+								now_page_num: "",
+							},
+						});
+					}
 				},
-				// 如果需要前进后退按钮
-				navigation: {
-					prevEl: "#IndexImageShiftPrev",
-					nextEl: "#IndexImageShiftNext",
-				},
-				on: {
-					click: function (event) {
-						if (event.path[0].id === "IndexImage") {
-							console.log("点击了主页的图片！");
-						} else if (event.path[0].id === "SearchLogo") {
-							_this.$router.push({
-								path: "/ArchiveList1",
-								query: {
-									search_keywords: _this.search_keywords,
-									search_date_from: "",
-									search_date_to: "",
-									search_language: "",
-									now_page_num: "",
-								},
-							});
-						}
-					},
-				},
-			}
-		);
+			},
+		});
 	},
 };
 </script>
@@ -121,17 +120,16 @@ export default {
 	color: rgb(136, 136, 136);
 	background: #efefef;
 	/* background: red; */
-    
 }
 /* 浪花 */
 #Wave {
 	position: absolute;
-    bottom: 0;
-    right: 0;
-    /* background: red; */
-    /* cursor: pointer; */
+	bottom: 0;
+	right: 0;
+	/* background: red; */
+	/* cursor: pointer; */
 	width: 90px;
-    /* z-index: 100; */
+	/* z-index: 100; */
 }
 #SearchLogo {
 	position: absolute;
@@ -141,7 +139,7 @@ export default {
 	cursor: pointer;
 }
 ::-webkit-input-placeholder {
-	color: #588CC8;
+	color: #588cc8;
 }
 /* 标题图片 */
 #IndexImageContainer {
@@ -166,9 +164,6 @@ export default {
 	transform: translate(-50%, 0);
 }
 .swiper-pagination {
-	bottom: 130px;
-	/* --swiper-theme-color: #ff6600; */
-	/* width: 20px;
-    height: 20px; */
+	bottom: 18vh;
 }
 </style>

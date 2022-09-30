@@ -71,3 +71,21 @@ div {
     font-weight: 400;
     text-align: justify;
 }
+
+/* 修改分页器原点样式 */
+.swiper-pagination .swiper-pagination-bullet {
+	width: 10px;
+	height: 10px;
+    border: white 2px solid;
+    opacity: 0.5;
+    background: white;
+    box-shadow: 2px 2px 4px black;
+}
+.swiper-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #007aff;
+}
+/* 修改分页器原点间距 */
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 6px;
+}
