@@ -1,16 +1,34 @@
-
+/* 公共属性 */
 .background {
     position: relative;
     width: 1440px;
+    background: #efefef;
+    min-height: 100vh;
 }
 
+/* 大标题 */
+.Heading {
+    position: relative;
+    width: 1440px;
+    height: auto;
+    text-align: center;
+    top: 100px;
+    font-size: 32px;
+    line-height: 150%;
+    color: #023871;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
 /*向左右切换的图标*/
-.PageShift{
+.PageShift {
     position: relative;
     width: 30px;
     cursor: pointer;
-
 }
+
 /*查看详情、查看全部背后的蓝色方框*/
 .blue_rectangle_container {
     width: 213px;
@@ -35,57 +53,99 @@
     align-content: flex-start;
 }
 
-#go_back1 {
-    position: absolute;
-    left: 50px;
-    top: 50px;
-
-    width: 35px;
-    cursor: pointer;
-    z-index: 11;
-}
-
-#go_back2 {
-    position: absolute;
-    left: 464px;
-    top: 204px;
-    width: 35px;
-    cursor: pointer;
-    z-index: 11;
-}
-
-/* @font-face {
-    font-style: normal;
-    font-family: '微软雅黑';
-    src: url('../../public/微软雅黑.ttf');
-} */
-
-/* @font-face {
-    font-style: normal;
-    font-family: '楷体gb2312';
-    src: url('../../public/楷体_GB2312.ttf')
-} */
-
+/* 调整字体 */
 div {
     font-family: 'Alegreya';
     font-weight: 400;
     text-align: justify;
 }
 
+/* 卡片的效果 阴影 圆角 */
+.Card {
+    box-shadow: 0 5px 4px rgba(159, 158, 158, 0.42);
+    border-radius: 7px;
+}
+
+/* 鼠标悬浮阴影过渡动画 */
+.HoverShadow {
+    /* 需要参与过渡的属性 */
+    transition-property: background-color;
+    /* 过渡动画的持续时间 */
+    transition-duration: 0.5s;
+    
+}
+
+/* 背景图片裁剪 */
+.BackgroundImage{
+    width: 100%;
+	height: 0;
+	overflow: hidden;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+}
+
+.HoverShadow:hover {
+    background-color: rgba(47, 47, 47, 0.2);
+}
+
+
+/* 调整底部空白大小 */
+.BottomBlank{
+    position: relative;
+    width: 100%;
+    height: 500px;
+    z-index: -1;
+}
+
+
+/* 下面是修改插件的默认样式 */
+
 /* 修改分页器原点样式 */
 .swiper-pagination .swiper-pagination-bullet {
-	width: 10px;
-	height: 10px;
+    width: 10px;
+    height: 10px;
     border: white 2px solid;
     opacity: 0.5;
     background: white;
     box-shadow: 2px 2px 4px black;
 }
+
 .swiper-pagination .swiper-pagination-bullet-active {
     opacity: 1;
     background: #007aff;
 }
+
 /* 修改分页器原点间距 */
-.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
     margin: 0 6px;
+}
+
+/* 修改 v-viewer 样式 */
+.viewer-list>li {
+    width: 50px;
+}
+
+.viewer-toolbar {
+    text-align: center;
+}
+
+/* 修改“在线展览” 标签页 样式 */
+/* 表头高一些 */
+.el-tabs__item {
+    height: 50px;
+    line-height: 250%;
+    font-size: 20px;
+}
+
+/* 内容周围的 padding 宽一些 */
+.el-tabs--border-card>.el-tabs__content {
+    padding: 30px;
+}
+
+/* 文字居中 */
+.el-descriptions__body .el-descriptions__table .el-descriptions-item__cell {
+    text-align: center;
 }

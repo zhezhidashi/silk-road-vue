@@ -163,7 +163,6 @@ export default {
 					BoardIndex: index,
 				},
 			});
-			this.$store.dispatch("GetHeaderIndex", 2);
 		},
 
 		GoExhibition(item, index) {

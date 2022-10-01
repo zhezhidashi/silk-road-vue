@@ -1,14 +1,7 @@
 <template>
-	<div class="background" :style="`height: auto; background: #efefef`">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
-		<div class="BoardTitle">{{ BoardTitle[BoardIndex] }}</div>
+	<div class="background" style="height: auto;">
+
+		<div class="Heading">{{ BoardTitle[BoardIndex] }}</div>
 		<img
 			v-show="BoardImage[BoardIndex] !== ''"
 			class="BoardImage"
@@ -25,7 +18,7 @@
 		</div>
 
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 800px"></div>
+		<div class="BottomBlank"></div>
 	</div>
 </template>
 
@@ -79,17 +72,6 @@ export default {
 </script>
 
 <style scoped>
-/*标题*/
-.BoardTitle {
-	position: relative;
-	width: 1440px;
-	text-align: center;
-	top: 100px;
-	font-size: 32px;
-	line-height: 150%;
-	color: black;
-	/* background:red; */
-}
 /* 图片 */
 .BoardImage {
 	position: relative;

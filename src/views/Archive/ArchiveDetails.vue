@@ -1,29 +1,22 @@
 <template>
-	<div class="background" style="height: 1623px; background: #efefef">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
-		<!--为了方便vue，我们把整个页面的图片文字全部放到 archive_details_data 里面-->
-		<div id="archive_details_data">
-			<!--    标题与副标题-->
-			<div class="archive_details_title">{{ archive_details_title }}</div>
-			<div class="archive_details_subtitle">
-				{{ archive_details_subtitle }}
-			</div>
+	<div class="background" style="height: auto; background: #efefef">
+		<!--    标题与副标题-->
+		<div class="Heading" style="width: 1000px">
+			{{ archive_details_title }}
+		</div>
+		<div class="Subtitle">
+			{{ Subtitle }}
+		</div>
 
-			<!--    左侧图片、查看档案、查看来源、图片中文描述、图片其他语种描述-->
-			<div class="archive_details_img_container">
+		<div class="ImageInfoContainer">
+			<div class="ImageContainer">
 				<div
-					class="archive_details_img"
-					:style="`background-image:url(${archive_details_img})`"
-					alt=""
+					class="Image BackgroundImage"
+					:style="`background-image:url(${Image})`"
 				></div>
 			</div>
+			<div class="InfoContainer"></div>
+			<!-- 
 
 			<div
 				@click="archive_details_see_archive($event)"
@@ -50,10 +43,9 @@
 				{{ archive_details_description_text_en }}
 			</div>
 
-			<!--    右侧档案的属性-->
+
 			<div class="archive_details_properties_container">
-				<!--        每一行都是一个div，分为左侧和右侧文字-->
-				<!-- 有些是一行的，有些是两行的，区分开 -->
+
 				<div class="archive_details_properties_content_line">
 					<div class="archive_details_properties_text_left_up">
 						年份
@@ -145,8 +137,10 @@
 						{{ archive_details_properties_language_en }}
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
+
+		<div class="BottomBlank"></div>
 	</div>
 </template>
 
@@ -156,12 +150,64 @@ export default {
 	name: "ArchiveDetails",
 	data() {
 		return {
+			Info: [
+				{
+					Type: 1,
+					NameZH: "年份",
+					NameEN: "Year",
+					Value1: "",
+					Value2: "",
+				},
+				{
+					Type: 2,
+					NameZH: "关键词",
+					NameEN: "Keywords",
+					Value1: "N/A",
+					Value2: "N/A",
+				},
+				{
+					Type: 2,
+					NameZH: "收藏单位",
+					NameEN: "Collection",
+					Value1: "N/A",
+					Value2: "N/A",
+				},
+				{
+					Type: 2,
+					NameZH: "收藏地点",
+					NameEN: "Location",
+					Value1: "N/A",
+					Value2: "N/A",
+				},
+				{
+					Type: 1,
+					NameZH: "档案页数",
+					NameEN: "Pages",
+					Value1: "N/A",
+					Value2: "N/A",
+				},
+				{
+					Type: 1,
+					NameZH: "文件尺寸",
+					NameEN: "Size",
+					Value1: "N/A",
+					Value2: "N/A",
+				},
+				{
+					Type: 2,
+					NameZH: "使用语种",
+					NameEN: "Language",
+					Value1: "N/A",
+					Value2: "N/A",
+				},
+			],
+
 			//档案在后端数据库的主键
-			archive_details_id: "",
+			ArchiveID: "",
 			//主标题、副标题、主页大图的url、中文描述、外文描述
 			archive_details_title: "N/A",
-			archive_details_subtitle: "N/A",
-			archive_details_img: "",
+			Subtitle: "N/A",
+			Image: "",
 			archive_details_description_text_zh: "N/A",
 			archive_details_description_text_en: "N/A",
 
@@ -187,9 +233,9 @@ export default {
 
 	created() {
 		//从url中获取档案在后端数据库中的主键
-		this.archive_details_id = this.$route.query.search_result_id;
+		this.ArchiveID = this.$route.query.search_result_id;
 		//向http请求档案的详细信息
-		let url = "/archive/detail?archive_id=" + this.archive_details_id;
+		let url = "/archive/detail?archive_id=" + this.ArchiveID;
 
 		console.log(url);
 
@@ -203,10 +249,10 @@ export default {
 			for (let item in data.title) {
 				if (item === "ZH")
 					inner_this.archive_details_title = data.title.ZH;
-				else inner_this.archive_details_subtitle = data.title[item];
+				else inner_this.Subtitle = data.title[item];
 			}
 
-			inner_this.archive_details_img =
+			inner_this.Image =
 				data.mini_pic_url === "" ? "默认图片.jpg" : data.mini_pic_url;
 
 			for (let item in data.intro) {
@@ -288,13 +334,13 @@ export default {
 			inner_this.archive_details_see_source_url = data.from_url;
 		});
 	},
-    mounted(){
-        this.$store.dispatch("GetHeaderIndex", 0);
-    },
+	mounted() {
+		this.$store.dispatch("GetHeaderIndex", 0);
+	},
 	methods: {
 		// 路由回退
 		router_go_back() {
-            // 这个界面只能从 ArchiveList 跳转过来，因此回退用 go(-1) 就很方便
+			// 这个界面只能从 ArchiveList 跳转过来，因此回退用 go(-1) 就很方便
 			this.$router.go(-1);
 		},
 		archive_details_see_archive(event) {
@@ -316,51 +362,53 @@ export default {
 </script>
 
 <style scoped>
+/*与副标题*/
+.Subtitle {
+	position: relative;
+	text-align: center;
+	width: 1000px;
+	height: auto;
+	top: 100px;
+	font-size: 20px;
+	line-height: 150%;
+	color: #b8b8b8;
 
-/*标题与副标题*/
-.archive_details_title {
-	position: absolute;
-	text-align: center;
-	width: 1440px;
-	top: 221px;
-	font-size: 24px;
-	line-height: 150%;
-	color: #2f2f2f;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
-.archive_details_subtitle {
-	position: absolute;
-	text-align: center;
-	width: 1440px;
-	height: 18px;
-	top: 251px;
-	font-size: 16px;
-	line-height: 150%;
-	color: #b9b9b9;
+
+.ImageInfoContainer {
+	position: relative;
+	width: 1100px;
+	height: 500px;
+	top: 200px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: skyblue;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 /*左侧图片、查看档案、查看来源、图片中文描述、图片其他语种描述*/
-.archive_details_img_container {
-	position: absolute;
-	width: 454px;
-	height: 524px;
-	left: 122px;
-	top: 345px;
-	filter: drop-shadow(6px 6px 11px rgba(0, 0, 0, 0.25));
+.ImageContainer {
+	position: relative;
+	width: 450px;
+	height: 500px;
 }
 
-.archive_details_img {
-	width: 100%;
-	height: 0;
-	padding-bottom: 116%;
-	overflow: hidden;
-	background-position: center center;
-	background-repeat: no-repeat;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
-	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
+.Image {
+	padding-bottom: 111%;
 }
-
+.InfoContainer {
+	position: relative;
+	width: 600px;
+	height: 500px;
+	background: red;
+}
 .archive_details_view {
 	position: absolute;
 	top: 902px;
@@ -437,14 +485,14 @@ export default {
 .archive_details_properties_content_line {
 	position: relative;
 	width: 480px;
-    height: 50px;
+	height: 50px;
 	padding: 10px;
 }
 /* 中英文两行文字 */
 .archive_details_properties_content {
 	position: relative;
 	width: 480px;
-    height: 80px;
+	height: 80px;
 	padding: 15px;
 }
 

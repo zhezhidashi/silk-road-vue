@@ -1,15 +1,7 @@
 <template>
 	<div class="background" style="background: #efefef">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
 		<!--线上展览标题-->
-		<div class="exh_list_h1">线上展览</div>
+		<div class="Heading">线上展览</div>
 
 		<!-- 把 标题、查看全部、图片列表当作一个类，记为 exh_list_content。并且把这些类全部装到 exh_list_container 里面方便 v-for 展示-->
 		<div class="exh_list_container">
@@ -194,17 +186,6 @@ export default {
 </script>
 
 <style scoped>
-
-/*页面标题*/
-.exh_list_h1 {
-	position: absolute;
-	width: 1440px;
-    text-align: center;
-	top: 100px;
-	font-size: 32px;
-    line-height: 150%;
-	color: #023871;
-}
 
 /*exhibition list 整个框*/
 .exh_list_container {

@@ -1,14 +1,6 @@
 <template>
 	<div class="background" style="height: 1500px">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
-		<div class="web_intro_title">网站简介</div>
+		<div class="Heading">网站简介</div>
 		<div class="web_intro_text">
 			<div class="web_intro_paragraph">
 				&emsp;&emsp;{{ ParagraphOne }}
@@ -57,16 +49,6 @@ export default {
 </script>
 
 <style scoped>
-
-/*标题*/
-.web_intro_title {
-	position: relative;
-	width: 1440px;
-	text-align: center;
-	top: 100px;
-	font-size: 32px;
-	color: #023871;
-}
 .web_intro_text {
 	position: relative;
 	width: 1000px;

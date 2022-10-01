@@ -1,15 +1,7 @@
 <template>
-	<div class="background" style="height: 1300px; background: #efefef">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
+	<div class="background" style="height: 1300px;">
 		<!--标题-->
-		<div class="MajorEventTitle">网站大事记</div>
+		<div class="Heading">网站大事记</div>
 
 		<!--时间、事件-->
 		<div class="MajorEventTextContainer">
@@ -51,16 +43,6 @@ export default {
 </script>
 
 <style scoped>
-/*标题*/
-.MajorEventTitle {
-	position: absolute;
-	width: 1440px;
-	text-align: center;
-	top: 100px;
-	font-size: 32px;
-	line-height: 150%;
-	color: #023871;
-}
 /* 文字的Container */
 .MajorEventTextContainer {
     position: relative;

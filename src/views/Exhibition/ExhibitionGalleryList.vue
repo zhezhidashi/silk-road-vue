@@ -1,19 +1,10 @@
 <template>
 	<div class="background" style="background: #efefef">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
-		<div class="exh_gallery_list_container">
-			<!--    展览详情页面标题-->
-			<div class="exh_gallery_list_heading">
+			<!-- 展览详情页面标题 -->
+			<div class="Heading">
 				{{ exh_gallery_list_heading }}
 			</div>
-			<!--展览详情的描述-->
+			<!-- 展览详情的描述 -->
 			<div class="exh_gallery_list_text">
 				<div
 					v-for="(item, index) in exh_gallery_list_text"
@@ -79,7 +70,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div style="position: relative; height: 800px"></div>
 	</div>
@@ -183,18 +173,6 @@ export default {
 
 <style scoped>
 
-/*页面标题*/
-.exh_gallery_list_heading {
-	position: relative;
-	width: 1440px;
-	text-align: center;
-
-	top: 100px;
-	font-size: 32px;
-	line-height: 150%;
-	text-align: center;
-	color: #2f2f2f;
-}
 .exh_gallery_list_text {
 	position: relative;
 	width: 1000px;

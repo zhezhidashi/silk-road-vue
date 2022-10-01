@@ -1,16 +1,7 @@
 <template>
 	<div class="background">
 		<!--    标题-->
-		<div class="academic_activity_title">学术活动</div>
-
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
+		<div class="Heading">学术活动</div>
 
 		<!--一排一排陈列图片-->
 		<div class="list_images" id="academic_activity_images">
@@ -195,19 +186,6 @@ export default {
 </script>
 
 <style scoped>
-/*标题*/
-.academic_activity_title {
-	position: relative;
-	width: 1440px;
-	left: 0;
-	right: 0;
-	margin: auto;
-	text-align: center;
-	top: 100px;
-	font-size: 32px;
-	line-height: 150%;
-	color: #023871;
-}
 /*存放整个页面的数据*/
 #academic_activity_images {
 	position: relative;
@@ -226,7 +204,7 @@ export default {
 	background: #ffffff;
 	margin: 20px;
 	box-shadow: 0 3px 3px rgba(159, 158, 158, 0.42);
-	border-radius: 0 0 3px 3px;
+	border-radius: 7px;
 	overflow: hidden;
 	z-index: 10;
 }
@@ -236,7 +214,7 @@ export default {
 	position: relative;
 	width: 268px;
 	height: 360px;
-	border-radius: 3px 3px 0 0;
+	border-radius: 7px 7px 0 0;
 	overflow: hidden;
 }
 
@@ -252,7 +230,7 @@ export default {
 	-moz-background-size: cover;
 	background-size: cover;
 	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
-	border-radius: 3px 3px 0 0;
+	border-radius: 7px 7px 0 0;
 }
 
 /*图片日期*/

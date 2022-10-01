@@ -1,15 +1,7 @@
 <template>
 	<div class="background">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
 		<!--标题-->
-		<div class="academic_activity_details_title">
+		<div class="Heading">
 			{{ academic_activity_details_title }}
 		</div>
 		<!--左侧图片-->
@@ -83,18 +75,6 @@ export default {
 </script>
 
 <style scoped>
-
-/*标题*/
-.academic_activity_details_title {
-	position: relative;
-	top: 120px;
-	width: 1440px;
-	font-size: 36px;
-	line-height: 150%;
-	text-align: center;
-	line-height: 100%;
-	color: #2f2f2f;
-}
 
 .ImageAndText {
 	position: relative;

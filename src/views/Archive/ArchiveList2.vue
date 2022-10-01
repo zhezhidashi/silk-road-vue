@@ -1,14 +1,5 @@
 <template>
 	<div class="background" style="background: #efefef">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-			alt=""
-		/> -->
-
 		<!--    左侧高级搜索部分-->
 		<div class="SearchContainer">
 			<!-- 关键词 -->

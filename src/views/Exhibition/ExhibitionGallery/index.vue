@@ -1,13 +1,5 @@
 <template>
-	<div class="background" style="height: 3000px; background: #efefef">
-		<!--回退到上一个页面-->
-		<!-- <img
-			@click="router_go_back()"
-			class="go_back"
-			id="go_back1"
-			src="GoBack.png"
-		/> -->
-
+	<div class="background" style="height: auto;">
 		<!-- 图片题目 -->
 		<div class="GalleryImageTitle">{{ MainImageProp.TitleZH }}</div>
 
@@ -48,15 +40,6 @@
 						item.gallery_img_id === MainImageProp.gallery_img_id
 					"
 				/>
-				<!-- <el-tooltip
-					class="item"
-					effect="dark"
-					content="点击查看大图"
-					placement="right"
-					position="absolute"
-				>
-					
-				</el-tooltip> -->
 			</viewer>
 		</div>
 
@@ -121,6 +104,8 @@
 				</el-descriptions>
 			</el-tab-pane>
 		</el-tabs>
+        <!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
+		<div style="position: relative; height: 600px"></div>
 	</div>
 </template>
 
@@ -412,13 +397,9 @@ export default {
 	left: 0;
 	right: 0;
 	margin: auto;
-	width: 1000px;
+	width: 1200px;
 	height: auto;
 	/* background: skyblue; */
 }
 
-/* 调整标签页的样式 */
-.el-tabs__item {
-	font-size: 20px;
-}
 </style>

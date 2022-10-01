@@ -54,6 +54,14 @@ const routes = [
                 component: () => import('../views/LatestBoard')
             },
             {
+                path: '/LatestBoardList',
+                name: 'LatestBoardList',
+                meta: {
+                    title: '最新公告列表'
+                },
+                component: () => import('../views/LatestBoard/LatestBoardList')
+            },
+            {
                 path: '/ExhibitionList',
                 name: 'ExhibitionList',
                 meta: {

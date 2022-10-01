@@ -1,8 +1,8 @@
 import Vue from 'vue'
 Vue.config.productionTip = false
-
+// 引入 element ui
 import 'element-ui/lib/theme-chalk/index.css'
-import './assets/base.css'
+
 
 import App from './App.vue'
 import ElementUI from 'element-ui'
@@ -13,34 +13,20 @@ import router from './router'
 // 引入Swiper样式
 import "swiper/dist/css/swiper.css";
 
-// 引入 v-viewer 样式
-import 'viewerjs/dist/viewer.css'
-
 // 引入 vuescroll
 import vuescroll from 'vuescroll';
 Vue.use(vuescroll);
 
+// 引入图片查看器
 import Viewer from 'v-viewer'
-
+import 'viewerjs/dist/viewer.css'
 Vue.use(Viewer)
 
 // 引入仓库
 import store from './store'
 
-//停止页面滚动、禁止鼠标点击
-function stopMove() {
-    let m = function (e) { e.preventDefault(); };
-    document.body.style.overflow = 'hidden';
-    // 禁止页面滑动
-    document.addEventListener("touchmove", m, { passive: false });
-}
-//开启页面滚动
-function Move() {
-    let m = function (e) { e.preventDefault(); };
-    document.body.style.overflow = '';//出现滚动条
-    document.removeEventListener("touchmove", m, { passive: true });
-}
-
+// 引入自制样式
+import './assets/base.css'
 //title修改
 router.beforeEach((to, from, next) => {
     document.body.scrollTop = 0

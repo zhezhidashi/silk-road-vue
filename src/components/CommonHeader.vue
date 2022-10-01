@@ -53,8 +53,8 @@ export default {
 					name: "WebIntro",
 				},
 				{
-					path: "/LatestBoard",
-					name: "LatestBoard",
+					path: "/LatestBoardList",
+					name: "LatestBoardList",
 				},
 				{
 					path: "/ExhibitionList",
