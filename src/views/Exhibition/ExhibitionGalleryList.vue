@@ -9,9 +9,8 @@
 				<div
 					v-for="(item, index) in exh_gallery_list_text"
 					:key="index"
-					style="padding: 5px"
 				>
-					&emsp;&emsp;{{ item }}
+					<div style="margin: 10px 0 15px 0;">{{ item }}</div>
 				</div>
 			</div>
 
@@ -180,10 +179,12 @@ export default {
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;
-	/* background: red; */
     left: 0;
     right: 0;
     margin: auto;
+
+    display: flex;
+    flex-direction: column;
 }
 
 /*展览详情页，把整个模块都定义成类*/
@@ -206,11 +207,14 @@ export default {
 	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
 	box-shadow: 6px 0 12px -5px rgb(190, 196, 252),
 		-6px 0 12px -5px rgb(189, 196, 252);
+
+    display: flex;
+    justify-content: space-between;
 }
 
 /*图片部分*/
 .exh_gallery_list_imgText_img_container {
-	position: absolute;
+	position: relative;
 	width: 574px;
 	height: 372px;
 	left: 0;
@@ -248,13 +252,15 @@ export default {
 
 /*文字部分*/
 .exh_gallery_list_imgText_text {
-	position: absolute;
-	width: 383px;
-	left: 700px;
-	top: 150px;
-
+	position: relative;
+	width: 576px;
+    height: 372px;
 	font-size: 28px;
 	line-height: 200%;
 	color: #2f2f2f;
+    /* background: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

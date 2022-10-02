@@ -24,7 +24,7 @@
 				class="index_search_words"
 				placeholder="输入档案关键词 / search for"
 			/>
-			<img id="Wave" src="搜索框浪花.png" />
+			<!-- <img id="Wave" src="搜索框浪花.png" /> -->
 			<img id="SearchLogo" :src="index_search_logo_src" />
 		</div>
 	</div>
@@ -100,7 +100,7 @@ export default {
 /* 搜索框部分 */
 .index_search_back {
 	position: absolute;
-	width: 1081px;
+	width: 1080px;
 	height: 60px;
 	left: 0;
 	right: 0;
@@ -111,20 +111,23 @@ export default {
 	z-index: 15;
 
 	display: flex;
+    justify-content: center;
 	align-items: center;
 }
 .index_search_words {
 	position: relative;
-	width: 950px;
-	height: 50px;
-	border: none;
+	width: 1000px;
+	height: 60px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+	border-bottom: 2px solid #588cc8;
 	outline: none;
-	left: 15px;
 	font-size: 20px;
 	line-height: 100%;
 	color: rgb(136, 136, 136);
 	background: #efefef;
-	/* background: red; */
+    
 }
 /* 浪花 */
 #Wave {
@@ -140,12 +143,14 @@ export default {
 	position: absolute;
 	width: 36px;
 	height: 48px;
-	right: 70px;
+	right: 40px;
 	cursor: pointer;
 }
 ::-webkit-input-placeholder {
 	color: #588cc8;
 }
+
+
 /* 标题图片 */
 #IndexImageContainer {
 	position: relative;
