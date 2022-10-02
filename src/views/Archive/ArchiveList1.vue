@@ -71,7 +71,7 @@
 		</div>
 
 		<!--右方的搜索结果-->
-		<div class="archive_list_search_result">
+		<div class="SearchResultContainer">
 			<div
 				v-for="search_result in search_result_list"
 				:key="search_result.search_result_id"
@@ -126,7 +126,7 @@
 			</div>
 		</div>
 
-		<div class="archive_list_jump_container">
+		<div class="JumpContainer">
 			<img
 				class="PageShift"
 				@click="archive_list_jump_last_btn($event)"
@@ -144,7 +144,7 @@
 			/>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 500px; z-index: 0"></div>
+		<div class="BottomBlank"></div>
 	</div>
 </template>
 
@@ -164,20 +164,14 @@ export default {
 				},
 				{
 					id: 2,
-					language: "Japanese",
-					text: "日语",
+					language: "Spanish",
+					text: "西班牙语",
 					SquareColor: "rgb(255, 255, 255)",
 				},
 				{
 					id: 3,
-					language: "French",
-					text: "法语",
-					SquareColor: "rgb(255, 255, 255)",
-				},
-				{
-					id: 4,
-					language: "Spanish",
-					text: "西班牙语",
+					language: "Dutch",
+					text: "荷兰语",
 					SquareColor: "rgb(255, 255, 255)",
 				},
 			],
@@ -207,15 +201,7 @@ export default {
 				path: "/Home",
 			});
 		},
-		watch: {
-			"this.$route.query": {
-				handler() {
-					window.location.reload();
-				},
-			},
-		},
 		getList() {
-			console.log(this.$route);
 			//从接收的url中取出参数，把data中的变量赋值，用于发送http请求
 			this.search_keywords = this.$route.query.search_keywords;
 			this.search_date_from = this.$route.query.search_date_from;
@@ -226,7 +212,6 @@ export default {
 			//修改该实例中now_page_num的值 如果传参是空，那么默认就是第一页
 			if (this.now_page_num === "") this.now_page_num = "1";
 
-			// console.log('this.search_language', this.search_language === '4')
 			//左侧搜索页面有语言选项，因此要根据 url 传递的参数，把对应的选项前面的白色方块变成黑色方块
 
 			if (this.search_language !== "") {
@@ -238,9 +223,8 @@ export default {
 			let now_search_language = "";
 			//把language从数字变成英语单词
 			if (this.search_language === "1") now_search_language = "Chinese";
-			if (this.search_language === "2") now_search_language = "Japanese";
-			if (this.search_language === "3") now_search_language = "French";
-			if (this.search_language === "4") now_search_language = "Spanish";
+			if (this.search_language === "2") now_search_language = "Spanish";
+			if (this.search_language === "3") now_search_language = "Dutch";
 
 			//如果关键字的值为空，就不传参
 			let url = "/archive/list/?";
@@ -256,26 +240,18 @@ export default {
 				url += "&language=" + now_search_language;
 
 			console.log(url);
-			let inner_this = this; // 别改
+			let _this = this; // 别改
 			let http_get_result = [];
 
 			getForm(url, function (res, msg) {
 				let data = res.data;
-				console.log("data is here");
-				console.log(data);
-				/* your code begin*/
+				console.log("data is here", data);
 
-				/****************************************************************************************
-             请求到数据后，从data里取出内容
-             代码必须写在这里面！！！！！！！！！
-             ****************************************************************************************/
 				// 计算出总共多少页
-				console.log("total_page_num", data["total_items"]);
-				inner_this.total_page_num = Math.ceil(
+				_this.total_page_num = Math.ceil(
 					data["total_items"] / 15
 				).toString();
 
-				console.log("data.list", data.list);
 				for (let search_list_item of data.list) {
 					let new_map = {
 						search_result_id:
@@ -283,14 +259,13 @@ export default {
 						// img_src: search_list_item["mini_pic_url"],
 						img_src: "默认图片.jpg",
 						search_result_title: search_list_item["title"]["ZH"],
-						search_result_subtitle:
-							search_list_item["location"]["ZH"],
+						// search_result_subtitle:
+						// 	search_list_item["location"]["ZH"],
 						search_result_date_from: search_list_item["begin_year"],
 						search_result_date_to: search_list_item["end_year"],
 						search_result_description:
 							search_list_item["intro"]["ZH"],
 					};
-					// console.log(new_map);
 					if (new_map["search_result_id"] === undefined)
 						new_map["search_result_id"] = "N/A";
 					if (new_map["search_result_title"] === undefined)
@@ -301,20 +276,14 @@ export default {
 						new_map["search_result_date"] = "N/A";
 					if (new_map["search_result_description"] === undefined)
 						new_map["search_result_description"] = "N/A";
-					http_get_result.push(new_map);
+					_this.search_result_list.push(new_map);
 				}
-				/* your code end*/
 			});
-			this.search_result_list = http_get_result;
+            console.log(this.search_language_list)
 		},
 
 		//左侧搜索页面有语言选项，鼠标点击哪个，就把哪个选项前面的白色方块变成黑色方块，或者是把黑色方块变成白色方块
 		archive_list_search_language_option(event, language_option) {
-			console.log(
-				"language_option",
-				language_option,
-				this.search_language_list[language_option - 1]
-			);
 			if (
 				this.search_language_list[language_option - 1].SquareColor ===
 				"rgb(0, 0, 0)"
@@ -615,7 +584,7 @@ export default {
 }
 
 /*右方的搜索结果*/
-.archive_list_search_result {
+.SearchResultContainer {
 	position: relative;
 	width: 950px;
 	min-height: 100vh;
@@ -719,7 +688,7 @@ export default {
 }
 
 /*搜索结果换页*/
-.archive_list_jump_container {
+.JumpContainer {
 	position: relative;
 	width: 400px;
 	height: 40px;
