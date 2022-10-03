@@ -5,20 +5,20 @@ Vue.use(VueRouter)
 
 let OriginPush = VueRouter.prototype.push;
 let OriginReplace = VueRouter.prototype.replace;
-VueRouter.prototype.push = function(location, resolve, reject){
-    if(resolve && reject){
+VueRouter.prototype.push = function (location, resolve, reject) {
+    if (resolve && reject) {
         OriginPush.call(this, location, resolve, reject);
     }
-    else{
-        OriginPush.call(this, location, ()=>{}, ()=>{});
+    else {
+        OriginPush.call(this, location, () => { }, () => { });
     }
 }
-VueRouter.prototype.replace = function(location, resolve, reject){
-    if(resolve && reject){
+VueRouter.prototype.replace = function (location, resolve, reject) {
+    if (resolve && reject) {
         OriginReplace.call(this, location, resolve, reject);
     }
-    else{
-        OriginReplace.call(this, location, ()=>{}, ()=>{});
+    else {
+        OriginReplace.call(this, location, () => { }, () => { });
     }
 }
 
@@ -140,6 +140,11 @@ const routes = [
                     title: '档案详情'
                 },
                 component: () => import('../views/Archive/ArchiveDetails.vue')
+            },
+            // 重定向
+            {
+                path: '*',
+                redirect: '/Home'
             },
         ]
     },

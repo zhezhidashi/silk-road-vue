@@ -1,13 +1,16 @@
 <template>
-	<div class="background" style="height: auto;">
+	<div class="background" style="height: auto">
 		<!-- 图片题目 -->
-		<div class="GalleryImageTitle">{{ MainImageProp.TitleZH }}</div>
 
 		<!--网页路径-->
 		<div class="WebPath">
 			线上展览&ensp;&gt;&ensp;{{
 				WebPathGalleryListTitle
 			}}&ensp;&gt;&ensp;{{ WebPathGalleryTitle }}
+		</div>
+
+		<div class="Heading" style="top: 150px">
+			{{ MainImageProp.TitleZH }}
 		</div>
 
 		<div class="ListAndMainImageContainer">
@@ -104,7 +107,7 @@
 				</el-descriptions>
 			</el-tab-pane>
 		</el-tabs>
-        <!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
+		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div style="position: relative; height: 600px"></div>
 	</div>
 </template>
@@ -118,8 +121,8 @@ export default {
 			// gallery_list 在数据库中的主键，gallery在数据库中主键
 			ExhibitionID: "",
 			AlbumID: "",
-            // 展览的简介，用于回退
-            exh_gallery_list_text: '',
+			// 展览的简介，用于回退
+			exh_gallery_list_text: "",
 			// 左上角的路径、大图的url，大图底下的文字描述
 			WebPathGalleryListTitle: "加载中",
 			WebPathGalleryTitle: "加载中",
@@ -130,10 +133,10 @@ export default {
 				gallery_img_id: "",
 				TitleZH: "加载中",
 				TitleEN: "",
-				TitleES: "",
+				TitleOther: "",
 				IntroZH: "",
 				IntroEN: "",
-				IntroES: "",
+				IntroOther: "",
 				date: "",
 				size: "",
 				organization: "",
@@ -146,14 +149,47 @@ export default {
 			// 为了方便 v-viewer 显示下方的列表，需要单独存储所有 Img 的 Src
 			ImgSrcList: ["Loading.gif"],
 
-			// 存储需要展示那些语种
-			LanguageType: ["ZH", "EN", "ES"],
+            // 记录三种语言
+            LanguageType: [],
 
 			// 语种简称对应表
 			LanguageMap: {
-				ZH: "中文",
+				AR: "阿拉伯文",
+				BE: "白俄罗斯文",
+				BG: "保加利亚文",
+				CA: "加泰罗尼亚文",
+				CS: "捷克文",
+				DA: "丹麦文",
+				DE: "德文",
+				EL: "希腊文",
 				EN: "英文",
 				ES: "西班牙文",
+				ET: "爱沙尼亚文",
+				FI: "芬兰文",
+				FR: "法文",
+				HR: "克罗地亚文",
+				HU: "匈牙利文",
+				IT: "意大利文",
+				IW: "希伯来文",
+				JA: "日文",
+				KO: "朝鲜文",
+				LT: "立陶宛文",
+				MK: "马其顿文",
+				NL: "荷兰文",
+				NO: "挪威文",
+				PL: "波兰文",
+				PT: "葡萄牙文",
+				RO: "罗马尼亚文",
+				RU: "俄文",
+				SK: "斯洛伐克文",
+				SL: "斯洛文尼亚文",
+				SQ: "阿尔巴尼亚文",
+				SR: "塞尔维亚文",
+				SV: "瑞典文",
+				TH: "泰文",
+				TR: "土耳其文",
+				UK: "乌克兰文",
+				ZH: "中文",
 			},
 
 			// scroll 的配置项
@@ -174,7 +210,7 @@ export default {
 	},
 	mounted() {
 		this.GetData();
-        this.$store.dispatch("GetHeaderIndex", 3);
+		this.$store.dispatch("GetHeaderIndex", 3);
 	},
 	methods: {
 		// 路由回退
@@ -193,13 +229,20 @@ export default {
 			this.MainImageProp = item;
 		},
 
+        ListContain(list, x){
+            for(let item of list){
+                if(x === item) return true;
+            }
+            return false;
+        },
 		// HTTP获取网页基本数据
 		GetData() {
 			//从本页面的url中获取 ExhibitionID 和 AlbumID 的值
 			this.ExhibitionID = this.$route.query.gallery_list_id;
 			this.AlbumID = this.$route.query.gallery_id;
 			this.WebPathGalleryListTitle = this.$route.query.gallery_list_title;
-            this.exh_gallery_list_text = this.$route.query.exh_gallery_list_text;
+			this.exh_gallery_list_text =
+				this.$route.query.exh_gallery_list_text;
 
 			//http请求
 
@@ -227,32 +270,21 @@ export default {
 						gallery_img_id: item,
 						TitleZH: "N/A",
 						TitleEN: "N/A",
-						TitleES: "N/A",
+						TitleOther: "N/A",
 						IntroZH: "N/A",
 						IntroEN: "N/A",
-						IntroES: "N/A",
+						IntroOther: "N/A",
 						date: data[item].date,
 						size: data[item].size,
 						organization: data[item].organization,
 						archive_id: data[item].archive_id,
 					};
 					for (let item_id in data[item].title) {
-						if (item_id === "ZH") {
-							new_map.TitleZH = data[item].title[item_id];
-						} else if (item_id === "EN") {
-							new_map.TitleEN = data[item].title[item_id];
-						} else if (item_id === "ES") {
-							new_map.TitleES = data[item].title[item_id];
-						}
+                        if(!_this.ListContain(_this.LanguageType, item_id)) _this.LanguageType.push(item_id);
+                        new_map['Title' + item_id] = data[item].title[item_id];
 					}
 					for (let item_id in data[item].intro) {
-						if (item_id === "ZH") {
-							new_map.IntroZH = data[item].intro[item_id];
-						} else if (item_id === "EN") {
-							new_map.IntroEN = data[item].intro[item_id];
-						} else if (item_id === "ES") {
-							new_map.IntroES = data[item].intro[item_id];
-						}
+                        new_map['Intro' + item_id] = data[item].title[item_id];
 					}
 					_this.ImgList.push(new_map);
 					if (_this.ImgList.length === 1) {
@@ -292,17 +324,7 @@ export default {
 </script>
 
 <style>
-
 /* 网页图片标题 */
-.GalleryImageTitle {
-	position: relative;
-	width: 1440px;
-	top: 100px;
-	font-size: 32px;
-	line-height: 150%;
-	text-align: center;
-	/* background: blue; */
-}
 
 /*左上角的网页路径*/
 .WebPath {
@@ -312,7 +334,7 @@ export default {
 	left: 0;
 	right: 0;
 	margin: auto;
-	top: 200px;
+	top: 80px;
 	font-size: 24px;
 	line-height: 150%;
 	color: #2f2f2f;
@@ -401,5 +423,4 @@ export default {
 	height: auto;
 	/* background: skyblue; */
 }
-
 </style>

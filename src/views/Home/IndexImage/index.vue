@@ -18,13 +18,13 @@
 
 		<!-- 搜索框 -->
 		<div class="index_search_back">
-			<input
+			<div style="position: absolute; width: 100%; height: 100%; opacity: 0.4;" :style="`background-image:url(底部浪花.svg)`"></div>
+            <input
 				type="search"
 				v-model="search_keywords"
 				class="index_search_words"
 				placeholder="输入档案关键词 / search for"
 			/>
-			<!-- <img id="Wave" src="搜索框浪花.png" /> -->
 			<img id="SearchLogo" :src="index_search_logo_src" />
 		</div>
 	</div>
@@ -113,6 +113,7 @@ export default {
 	display: flex;
     justify-content: center;
 	align-items: center;
+    opacity: 1;
 }
 .index_search_words {
 	position: relative;
@@ -126,7 +127,7 @@ export default {
 	font-size: 20px;
 	line-height: 100%;
 	color: rgb(136, 136, 136);
-	background: #efefef;
+	background: rgb(240, 240, 240, 0);
     
 }
 /* 浪花 */

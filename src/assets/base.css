@@ -149,3 +149,8 @@ div {
 .el-descriptions__body .el-descriptions__table .el-descriptions-item__cell {
     text-align: center;
 }
+
+/* 修改联系方式的反馈框 */
+.el-textarea {
+    font-size: 18px;
+}
