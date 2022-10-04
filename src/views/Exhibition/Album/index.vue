@@ -4,9 +4,9 @@
 
 		<!--网页路径-->
 		<div class="WebPath">
-			线上展览&ensp;&gt;&ensp;{{
-				WebPathGalleryListTitle
-			}}&ensp;&gt;&ensp;{{ WebPathGalleryTitle }}
+			线上展览&ensp;&gt;&ensp;{{ ExhibitionTitle }}&ensp;&gt;&ensp;{{
+				AlbumTitle
+			}}
 		</div>
 
 		<div class="Heading" style="top: 150px">
@@ -24,7 +24,7 @@
 							:id="`ImageListImgContainer_${item.gallery_img_id}`"
 						>
 							<div
-								class="ImageListImg"
+								class="ImageListImg Card"
 								:style="`background-image:url(${item.src})`"
 							></div>
 						</div>
@@ -35,7 +35,7 @@
 			<!--右侧大图片-->
 			<viewer class="GalleryMainImageContainer" :images="ImgList">
 				<img
-					class="GalleryMainImage"
+					class="GalleryMainImage Card"
 					v-for="item in ImgList"
 					:src="item.src"
 					:key="item.gallery_img_id"
@@ -115,17 +115,16 @@
 <script>
 import { getForm } from "../../../api/data.js";
 export default {
-	name: "ExhibitionGallery",
+	name: "Album",
 	data() {
 		return {
 			// gallery_list 在数据库中的主键，gallery在数据库中主键
 			ExhibitionID: "",
 			AlbumID: "",
-			// 展览的简介，用于回退
-			exh_gallery_list_text: "",
+
 			// 左上角的路径、大图的url，大图底下的文字描述
-			WebPathGalleryListTitle: "加载中",
-			WebPathGalleryTitle: "加载中",
+			ExhibitionTitle: "加载中",
+			AlbumTitle: "加载中",
 
 			// 大图片的属性
 			MainImageProp: {
@@ -149,8 +148,8 @@ export default {
 			// 为了方便 v-viewer 显示下方的列表，需要单独存储所有 Img 的 Src
 			ImgSrcList: ["Loading.gif"],
 
-            // 记录三种语言
-            LanguageType: [],
+			// 记录三种语言
+			LanguageType: [],
 
 			// 语种简称对应表
 			LanguageMap: {
@@ -209,43 +208,61 @@ export default {
 		};
 	},
 	mounted() {
-		this.GetData();
+		//从本页面的url中获取 ExhibitionID 和 AlbumID 的值
+		this.ExhibitionID = this.$route.query.ExhibitionID;
+		this.AlbumID = this.$route.query.AlbumID;
+
+		this.GetExhibitionTitle();
+        this.GetAlbumTitle();
+		this.GetPics();
 		this.$store.dispatch("GetHeaderIndex", 3);
+        this.$store.dispatch("GetLineIndex", 1);
 	},
 	methods: {
-		// 路由回退
-		router_go_back() {
-			this.$router.push({
-				path: "/ExhibitionGalleryList",
-				query: {
-					gallery_list_id: this.ExhibitionID,
-					exh_gallery_list_heading: this.WebPathGalleryListTitle,
-					exh_gallery_list_text: this.exh_gallery_list_text,
-				},
-			});
-		},
 		// 点击下方列表的图片，修改大图的url
 		ImageListBtn(item) {
 			this.MainImageProp = item;
 		},
 
-        ListContain(list, x){
-            for(let item of list){
-                if(x === item) return true;
-            }
-            return false;
+		ListContain(list, x) {
+			for (let item of list) {
+				if (x === item) return true;
+			}
+			return false;
+		},
+
+        GetExhibitionTitle(){
+            let url = "/exhibition/list";
+			console.log("http请求的url是 " + url);
+			let _this = this; 
+			getForm(url, res => {
+				let data = res.data;
+
+				for (let item of data.list) {
+                    if(_this.ExhibitionID === item.main_id.toString()){
+                        _this.ExhibitionTitle = item.title;
+                    }
+				}
+			});
         },
-		// HTTP获取网页基本数据
-		GetData() {
-			//从本页面的url中获取 ExhibitionID 和 AlbumID 的值
-			this.ExhibitionID = this.$route.query.gallery_list_id;
-			this.AlbumID = this.$route.query.gallery_id;
-			this.WebPathGalleryListTitle = this.$route.query.gallery_list_title;
-			this.exh_gallery_list_text =
-				this.$route.query.exh_gallery_list_text;
+        GetAlbumTitle(){
+            let url =
+				"/exhibition/all-album?exhibition_id=" + this.ExhibitionID;
+			console.log("http请求的url是 " + url);
 
-			//http请求
+			let _this = this;
 
+			getForm(url, (res) => {
+				let data = res.data;
+				for (let item in data) {
+					if(_this.AlbumID === item){
+                        _this.AlbumTitle = data[item].title;
+                    }
+				}
+			});
+        },
+
+		GetPics() {
 			let url =
 				"/exhibition/album-detail?exhibition_id=" +
 				this.ExhibitionID +
@@ -256,13 +273,12 @@ export default {
 
 			this.ImgList = [];
 
-			let _this = this; // 别改
+			let _this = this; 
 
 			getForm(url, function (res, msg) {
 				let data = res.data["picture_dict"];
-				// console.log("picture_dict is here", res.data);
 				// 修改 标题、图片url，图片简介
-				_this.WebPathGalleryTitle = res.data["title"];
+				_this.AlbumTitle = res.data["title"];
 
 				for (let item in data) {
 					let new_map = {
@@ -280,18 +296,18 @@ export default {
 						archive_id: data[item].archive_id,
 					};
 					for (let item_id in data[item].title) {
-                        if(!_this.ListContain(_this.LanguageType, item_id)) _this.LanguageType.push(item_id);
-                        new_map['Title' + item_id] = data[item].title[item_id];
+						if (!_this.ListContain(_this.LanguageType, item_id))
+							_this.LanguageType.push(item_id);
+						new_map["Title" + item_id] = data[item].title[item_id];
 					}
 					for (let item_id in data[item].intro) {
-                        new_map['Intro' + item_id] = data[item].title[item_id];
+						new_map["Intro" + item_id] = data[item].title[item_id];
 					}
 					_this.ImgList.push(new_map);
 					if (_this.ImgList.length === 1) {
 						_this.ImageListBtn(_this.ImgList[0]);
 					}
 				}
-				console.log("ImgList", _this.ImgList);
 			});
 		},
 	},
@@ -386,7 +402,6 @@ export default {
 	-moz-background-size: cover;
 	background-size: cover;
 	border-radius: 7px;
-	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
 	cursor: pointer;
 	z-index: 10;
 }
@@ -408,8 +423,6 @@ export default {
 	max-width: 1000px;
 	max-height: 80vh;
 	cursor: pointer;
-	box-shadow: 6px 0 12px -5px rgb(190, 196, 252),
-		-6px 0 12px -5px rgb(189, 196, 252);
 }
 
 /*大图片的描述*/

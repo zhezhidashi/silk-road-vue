@@ -29,7 +29,7 @@
 							item.academic_activity_id
 						)
 					"
-					class="academic_activity_images_container"
+					class="academic_activity_images_container Card"
 					:id="
 						'academic_activity_images_container_' +
 						item.academic_activity_id
@@ -117,6 +117,7 @@ export default {
 	},
     mounted(){
         this.$store.dispatch("GetHeaderIndex", 4);
+        this.$store.dispatch("GetLineIndex", 1);
     },
 	// 这里定义方法
 	methods: {
@@ -203,8 +204,6 @@ export default {
 
 	background: #ffffff;
 	margin: 20px;
-	box-shadow: 0 3px 3px rgba(159, 158, 158, 0.42);
-	border-radius: 7px;
 	overflow: hidden;
 	z-index: 10;
 }

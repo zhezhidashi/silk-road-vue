@@ -67,6 +67,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 2);
+        this.$store.dispatch("GetLineIndex", 1);
 	},
 };
 </script>

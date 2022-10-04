@@ -95,15 +95,15 @@
 							search_result.search_result_id
 						)
 					"
-					class="archive_list_search_result_container"
+					class="archive_list_search_result_container Card"
 					:id="
 						'archive_list_search_result_container_' +
 						search_result.search_result_id
 					"
 				>
-					<div class="search_result_img_container">
+					<div class="search_result_img_container Card">
 						<div
-							class="search_result_img"
+							class="search_result_img Card"
 							:style="`background-image:url(${search_result.img_src})`"
 							alt="图片路径错误"
 						></div>
@@ -194,6 +194,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 0);
+        this.$store.dispatch("GetLineIndex", 0);
 	},
 	methods: {
 		router_go_back() {
@@ -602,7 +603,6 @@ export default {
 	width: 909px;
 	height: 339px;
 	background: #f4f4f4;
-	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25);
 	border-radius: 7px;
 	margin: 20px;
 	cursor: pointer;

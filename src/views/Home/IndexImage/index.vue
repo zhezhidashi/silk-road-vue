@@ -156,20 +156,19 @@ export default {
 #IndexImageContainer {
 	position: relative;
 	width: auto;
-	top: -1vh;
-	height: 88vh;
+	height: 89vh;
 	left: 0;
 }
 .swiper-slide {
 	position: relative;
-	height: 88vh;
+	height: inherit;
 	width: auto;
 	overflow: hidden;
 }
 #IndexImage {
 	position: absolute;
 	width: auto;
-	height: 88vh;
+	height: inherit;
 	cursor: pointer;
 	left: 50%;
 	transform: translate(-50%, 0);

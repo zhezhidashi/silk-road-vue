@@ -21,6 +21,7 @@ export default {
 	},
     mounted(){
         this.$store.dispatch("GetHeaderIndex", 0);
+        this.$store.dispatch("GetLineIndex", 1);
     },
 	data() {
 		return {};

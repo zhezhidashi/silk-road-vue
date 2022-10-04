@@ -6,7 +6,7 @@
 		</div>
 		<!--左侧图片-->
 		<div class="ImageAndText">
-			<div class="academic_activity_details_img_container">
+			<div class="academic_activity_details_img_container Card">
 				<div
 					class="academic_activity_details_img"
 					:style="`background-image:url(${academic_activity_details_img_src})`"
@@ -62,6 +62,7 @@ export default {
 	},
     mounted(){
         this.$store.dispatch("GetHeaderIndex", 4);
+        this.$store.dispatch("GetLineIndex", 1);
     },
 	methods: {
 		// 路由回退

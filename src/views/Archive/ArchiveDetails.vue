@@ -11,7 +11,7 @@
 		<div class="ImageInfoContainer">
 			<div class="ImageContainer Card">
 				<div
-					class="Image BackgroundImage"
+					class="Image BackgroundImage Card"
 					:style="`background-image:url(${Image})`"
 				></div>
 			</div>
@@ -33,8 +33,8 @@
 			</div>
 		</div>
 		<div class="ArchiveSourceContainer">
-			<div class="ArchiveSource">查看档案</div>
-			<div class="ArchiveSource">查看来源</div>
+			<div class="ArchiveSource" @click="SeeArchive">查看档案</div>
+			<div class="ArchiveSource" @click="SeeSource">查看来源</div>
 		</div>
 		<div class="DescriptionContainer">
 			<div class="DescriptionItem">
@@ -136,11 +136,9 @@ export default {
 		console.log(url);
 
 		let _this = this; // 别改
-
-		getForm(url, function (res, msg) {
+        
+		getForm(url, (res) => {
 			let data = res.data;
-			console.log(data);
-
 			//主标题、副标题、主页大图的url、中文描述、外文描述
 			for (let item in data.title) {
 				if (item === "ZH") _this.Title = data.title.ZH;
@@ -204,21 +202,17 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 0);
+        this.$store.dispatch("GetLineIndex", 0);
 	},
 	methods: {
-		// 路由回退
-		router_go_back() {
-			// 这个界面只能从 ArchiveList 跳转过来，因此回退用 go(-1) 就很方便
-			this.$router.go(-1);
-		},
-		archive_details_see_archive(event) {
+		SeeArchive(event) {
 			if (event.button === 0) {
 				window.open(this.ArchiveUrl, "_blank");
 			} else if (event.button === 1) {
 				window.open(this.ArchiveUrl, "_blank");
 			}
 		},
-		archive_details_see_source(event) {
+		SeeSource(event) {
 			if (event.button === 0) {
 				window.open(this.SourceUrl, "_blank");
 			} else if (event.button === 1) {
@@ -367,15 +361,16 @@ export default {
 	/* background: yellow; */
 }
 
-.InfoNameZH, .InfoValue1 {
+.InfoNameZH,
+.InfoValue1 {
 	font-size: 20px;
 	line-height: 150%;
 	color: #9a9999;
 }
-.InfoNameEN, .InfoValue2 {
-    font-size: 16px;
+.InfoNameEN,
+.InfoValue2 {
+	font-size: 16px;
 	line-height: 150%;
 	color: #9a9999;
 }
-
 </style>

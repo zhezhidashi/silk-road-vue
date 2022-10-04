@@ -6,7 +6,7 @@
 		<div class="ContentContainer">
 			<div v-for="(item, index) in ExhibitionList" :key="index">
 				<div
-					class="ItemContainer"
+					class="ItemContainer Card"
 					@click="GoExhibition(item, index)"
 					@mouseover="ItemMouseOver(`Exhibition${index}`)"
 					@mouseleave="ItemMouseLeave(`Exhibition${index}`)"
@@ -33,7 +33,7 @@
 		<div class="ContentContainer">
 			<div v-for="(item, index) in BoardList[BoardIndex]" :key="index">
 				<div
-					class="ItemContainer"
+					class="ItemContainer Card"
 					:id="`ItemContainerBoard${index}`"
 					@click="GoBoard(item, index)"
 					@mouseover="ItemMouseOver(`Board${index}`)"
@@ -167,7 +167,7 @@ export default {
 
 		GoExhibition(item, index) {
             this.$router.push({
-				path: "/ExhibitionGalleryList",
+				path: "/AlbumList",
 				query: {
 					gallery_list_id: item.ID,
 					exh_gallery_list_heading: item.Title,
@@ -257,9 +257,7 @@ export default {
 	height: 260px;
 	margin: 0 20px 0 20px;
 	/* background: red; */
-	border-radius: 7px;
 	cursor: pointer;
-	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
 }
 /* 图片的 Container */
 .ImageContainer {

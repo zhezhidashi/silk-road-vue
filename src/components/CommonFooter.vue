@@ -12,8 +12,8 @@
 
 <style>
 .FooterStyle{
-    width: 1440px;
-    height: 140px;
+    width: 100%;
+    height: inherit;
     display: flex;
 	justify-content: center;
 	align-items: center;

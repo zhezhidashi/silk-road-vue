@@ -5,7 +5,7 @@
 
 		<!-- 把 标题、查看全部、图片列表当作一个类，记为 exh_list_content。并且把这些类全部装到 exh_list_container 里面方便 v-for 展示-->
 		<div class="exh_list_container">
-			<div v-for="item in exh_list_items" :key="item.gallery_list_id">
+			<div v-for="item in exh_list_items" :key="item.ExhibitionID">
 				<div class="exh_list_content">
 					<!--标题-->
 					<div class="exh_list_h2">{{ item.exh_list_h2 }}</div>
@@ -17,7 +17,7 @@
 							@click="
 								see_all_btn(
 									$event,
-									item.gallery_list_id,
+									item.ExhibitionID,
 									item.exh_list_h2,
 									item.exh_list_text
 								)
@@ -32,27 +32,27 @@
 						<!-- 照片只展示前四个 -->
 						<div
 							v-for="(img_src, index) in item.imgList"
-							:key="img_src.gallery_id"
+							:key="img_src.AlbumID"
 						>
 							<div
 								@click="
 									exh_list_images_btn(
 										$event,
-										item.gallery_list_id,
-										img_src.gallery_id,
+										item.ExhibitionID,
+										img_src.AlbumID,
 										item.exh_list_h2,
                                         item.exh_list_text
 									)
 								"
-								class="exh_list_images_img_container"
-                                @mouseover="MouseOverImage(item.gallery_list_id, img_src.gallery_id)"
-                                @mouseleave="MouseLeaveImage(item.gallery_list_id, img_src.gallery_id)"
+								class="exh_list_images_img_container Card"
+                                @mouseover="MouseOverImage(item.ExhibitionID, img_src.AlbumID)"
+                                @mouseleave="MouseLeaveImage(item.ExhibitionID, img_src.AlbumID)"
 							>
 								<!-- 鼠标悬停查看详情 -->
-								<div class="ImageSeeDetailsHover" :id="`ImageSeeDetails_${item.gallery_list_id}_${img_src.gallery_id}`">查看大图</div>
-								<div class="ImageContainerHover" :id="`ImageContainer_${item.gallery_list_id}_${img_src.gallery_id}`"></div>
+								<div class="ImageSeeDetailsHover" :id="`ImageSeeDetails_${item.ExhibitionID}_${img_src.AlbumID}`">查看大图</div>
+								<div class="ImageContainerHover" :id="`ImageContainer_${item.ExhibitionID}_${img_src.AlbumID}`"></div>
                                 <div
-									class="exh_list_images_img"
+									class="exh_list_images_img Card"
 									:style="`background-image:url(${img_src.src})`"
 									v-show="index < 4"
 								></div>
@@ -77,7 +77,7 @@ export default {
 				{
 					exh_list_h2: "",
 					exh_list_text: "",
-					gallery_list_id: "",
+					ExhibitionID: "",
 					imgList: [],
 				},
 			],
@@ -85,6 +85,7 @@ export default {
 	},
     mounted(){
         this.$store.dispatch("GetHeaderIndex", 3);
+        this.$store.dispatch("GetLineIndex", 1);
     },
 	created() {
 		// http 请求部分
@@ -93,11 +94,10 @@ export default {
 		console.log("http请求的url是 " + url);
 
 		this.exh_list_items = [];
-		let inner_this = this; // 别改
+		let _this = this; // 别改
 
 		getForm(url, function (res, msg) {
 			let data = res.data;
-			console.log(data);
 
 			// 遍历 gallery
 			for (let item of data.list) {
@@ -109,15 +109,13 @@ export default {
 				for (let item_gallery in item["album_dict"]) {
 					let new_img_map = {
 						src: null,
-						gallery_id: item_gallery,
+						AlbumID: item_gallery,
 					};
-					// console.log('item_gallery', item_gallery)
 
 					// 这个遍历仅仅是为了取出 album 的封面
 					for (let item_img in item["album_dict"][item_gallery][
 						"picture_dict"
 					]) {
-						// console.log('item_img', item['album_dict'][item_gallery]['picture_dict'][item_img]['pic_url'])
 						// 把相册封面取出来
 						if (new_img_map["src"] === null) {
 							new_img_map["src"] =
@@ -127,45 +125,34 @@ export default {
 							break;
 						}
 					}
-					// console.log(new_img_map)
 					new_img_list.push(new_img_map);
 				}
 
 				let new_map = {
 					exh_list_h2: item["title"],
 					exh_list_text: item["intro"],
-					gallery_list_id: item["main_id"],
+					ExhibitionID: item["main_id"],
 					imgList: new_img_list,
 				};
-				inner_this.exh_list_items.push(new_map);
+				_this.exh_list_items.push(new_map);
 			}
 		});
 	},
 	methods: {
-		// 路由回退
-		router_go_back() {
+		see_all_btn(event, ExhibitionID, title, intro) {
 			this.$router.push({
-                path: '/Home'
-            })
-		},
-		see_all_btn(event, gallery_list_id, title, intro) {
-			this.$router.push({
-				path: "/ExhibitionGalleryList",
+				path: "/AlbumList",
 				query: {
-					gallery_list_id,
-					exh_gallery_list_heading: title,
-					exh_gallery_list_text: intro,
+					ExhibitionID,
 				},
 			});
 		},
-		exh_list_images_btn(event, gallery_list_id, gallery_id, exh_list_h2, intro) {
+		exh_list_images_btn(event, ExhibitionID, AlbumID, exh_list_h2, intro) {
 			this.$router.push({
-				path: "/ExhibitionGallery",
+				path: "/Album",
 				query: {
-					gallery_list_id,
-					gallery_id,
-					gallery_list_title: exh_list_h2,
-                    exh_gallery_list_text: intro,
+					ExhibitionID,
+					AlbumID,
 				},
 			});
 		},

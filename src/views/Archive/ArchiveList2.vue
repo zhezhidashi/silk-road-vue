@@ -71,7 +71,7 @@
 		</div>
 
 		<!--右方的搜索结果-->
-		<div class="archive_list_search_result">
+		<div class="SearchResultContainer">
 			<div
 				v-for="search_result in search_result_list"
 				:key="search_result.search_result_id"
@@ -95,15 +95,15 @@
 							search_result.search_result_id
 						)
 					"
-					class="archive_list_search_result_container"
+					class="archive_list_search_result_container Card"
 					:id="
 						'archive_list_search_result_container_' +
 						search_result.search_result_id
 					"
 				>
-					<div class="search_result_img_container">
+					<div class="search_result_img_container Card">
 						<div
-							class="search_result_img"
+							class="search_result_img Card"
 							:style="`background-image:url(${search_result.img_src})`"
 							alt="图片路径错误"
 						></div>
@@ -126,7 +126,7 @@
 			</div>
 		</div>
 
-		<div class="archive_list_jump_container">
+		<div class="JumpContainer">
 			<img
 				class="PageShift"
 				@click="archive_list_jump_last_btn($event)"
@@ -144,7 +144,7 @@
 			/>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 500px; z-index: 0"></div>
+		<div class="BottomBlank"></div>
 	</div>
 </template>
 
@@ -194,6 +194,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 0);
+        this.$store.dispatch("GetLineIndex", 0);
 	},
 	methods: {
 		router_go_back() {
@@ -584,7 +585,7 @@ export default {
 }
 
 /*右方的搜索结果*/
-.archive_list_search_result {
+.SearchResultContainer {
 	position: relative;
 	width: 950px;
 	min-height: 100vh;
@@ -602,7 +603,6 @@ export default {
 	width: 909px;
 	height: 339px;
 	background: #f4f4f4;
-	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25);
 	border-radius: 7px;
 	margin: 20px;
 	cursor: pointer;
@@ -688,7 +688,7 @@ export default {
 }
 
 /*搜索结果换页*/
-.archive_list_jump_container {
+.JumpContainer {
 	position: relative;
 	width: 400px;
 	height: 40px;

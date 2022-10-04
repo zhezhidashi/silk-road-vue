@@ -28,7 +28,7 @@ export const postForm = (requestUrl, params, callback) => {
         console.log('postForm 的 response', res);
         nprogress.done()
         if (res.code === 0) {
-            alert("请求成功");
+            alert("提交成功");
         } else if (res.code === 400) {
             alert("请求对象不存在");
         } else {

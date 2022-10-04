@@ -1,6 +1,6 @@
 <template>
-	<div class="Container">
-		<div class="Header">
+	<!-- <div class="Container">
+		<div class="Header Card">
 			<common-header></common-header>
 		</div>
 		<div class="Main">
@@ -10,20 +10,18 @@
 		<div class="Footer">
 			<common-footer></common-footer>
 		</div>
-	</div>
-	<!-- <el-container style="height: 100%">
-		<el-container>
-			<el-header height="90px">
-				<common-header></common-header>
-			</el-header>
-			<el-main>
-				<router-view></router-view>
-			</el-main>
-			<el-footer height="70px">
-				<common-footer></common-footer>
-			</el-footer>
-		</el-container>
-	</el-container> -->
+	</div> -->
+	<el-container>
+		<el-header class="Header" height="11vh">
+			<common-header></common-header>
+		</el-header>
+		<el-main class="Main">
+			<router-view></router-view>
+		</el-main>
+		<el-footer class="Footer" height="12vh">
+			<common-footer></common-footer>
+		</el-footer>
+	</el-container>
 </template>
 
 <style scoped>
@@ -33,7 +31,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	background: #efefef;
+	align-items: flex-start;
 }
 
 .Header {
@@ -46,27 +44,31 @@
 	justify-content: center;
 	align-content: center;
 	background: #023871;
+	border-radius: 0;
 }
 .Main {
+    padding: 0;
 	position: relative;
-	top: 100px;
+	top: 11vh;
+	width: 100%;
 	height: auto;
-	display: flex;
+	/* display: flex;
 	justify-content: center;
-	align-content: center;
+	align-content: center; */
 }
 .Footer {
 	position: relative;
 	display: flex;
-	top: 100px;
+	top: 11vh;
 	justify-content: center;
 	align-items: center;
 	background: #023871;
+	width: 100%;
 }
 
-.NotClick {
+/* .NotClick {
 	pointer-events: none;
-}
+} */
 </style>
 
 <script>
