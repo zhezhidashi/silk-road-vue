@@ -64,36 +64,48 @@ div {
 .Card {
     box-shadow: 0 5px 4px rgba(159, 158, 158, 0.42);
     border-radius: 7px;
+    border: 1px solid rgba(88, 140, 200, 0.6);
 }
 
-/* 鼠标悬浮阴影过渡动画 */
+/* 鼠标悬浮阴影, 用于点击链接 */
 .HoverShadow {
     /* 需要参与过渡的属性 */
     transition-property: background-color;
     /* 过渡动画的持续时间 */
     transition-duration: 0.5s;
-    
-}
-
-/* 背景图片裁剪 */
-.BackgroundImage{
-    width: 100%;
-	height: 0;
-	overflow: hidden;
-	background-position: center center;
-	background-repeat: no-repeat;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
 }
 
 .HoverShadow:hover {
     background-color: rgba(47, 47, 47, 0.2);
 }
 
+/* 背景图片裁剪 */
+.BackgroundImage {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+/* 悬浮背景变成暗色, 用于点击学术活动、近期展览、最新公告 */
+.HoverDark {
+    /* 需要参与过渡的属性 */
+    transition-property: background-color color;
+    /* 过渡动画的持续时间 */
+    transition-duration: 0.5s;
+}
+
+.HoverDark:hover {
+    background-color: rgba(2, 56, 113, 1);
+    color: white;
+}
 
 /* 调整底部空白大小 */
-.BottomBlank{
+.BottomBlank {
     position: relative;
     width: 100%;
     height: 500px;
@@ -116,6 +128,17 @@ div {
 .swiper-pagination .swiper-pagination-bullet-active {
     opacity: 1;
     background: #007aff;
+}
+
+/* 底部浪花 */
+.BottomWave {
+    position: absolute;
+    padding: 0;
+    width: 98.9vw;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 /* 修改分页器原点间距 */

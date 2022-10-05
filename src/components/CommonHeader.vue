@@ -1,26 +1,29 @@
 <template>
 	<div class="navigation" id="index_navigation">
 		<img
-			@click="MenuClick(menu[0], 0)"
+			@click="MenuClick(menu[0])"
 			class="navigation_logo"
 			src="logo.png"
 		/>
 
-		<div class="nav_bar_text_container">
+		<div class="NavBarContainer">
 			<div v-for="(item, index) in menu" class="NavBarItem" :key="index">
 				<div
-					@click="MenuClick($event, menu[index])"
+					@click="MenuClick(menu[index])"
 					:id="item.name"
+					class="NavBarTitle"
 				>
 					{{ item.title }}
+					<img
+						:class="{ nav_bar_underline: index === HeaderIndex }"
+						src="nav_bar_underline.png"
+						v-show="
+							LineDisplay[LineIndex] === 'inline' &&
+							index === HeaderIndex
+						"
+					/>
 				</div>
 			</div>
-
-			<img
-				class="nav_bar_underline"
-				src="nav_bar_underline.png"
-				:style="`left: ${LineLeft[HeaderIndex]}; display: ${LineDisplay[LineIndex]};`"
-			/>
 		</div>
 	</div>
 </template>
@@ -34,16 +37,7 @@ export default {
 	},
 	data() {
 		return {
-			// 波浪线的左端距离
-			LineLeft: [
-				"-1vw",
-				"7.4vw",
-				"17.3vw",
-				"27vw",
-				"37vw",
-				"46vw",
-				"55vw",
-			],
+			// 波浪线是否显示
 			LineDisplay: ["none", "inline"],
 			// 为了导航栏 hover 效果, HeaderIndex 做一个备份
 			HeaderIndexCopy: 0,
@@ -87,13 +81,10 @@ export default {
 		};
 	},
 	methods: {
-		MenuClick(event, item) {
+		MenuClick(item) {
 			this.$router.push({
 				name: item.name,
 			});
-
-            let ClickID = event.target.id;
-            console.log(document.querySelector('#' + ClickID).style)
 		},
 	},
 };
@@ -112,18 +103,18 @@ export default {
 .navigation_logo {
 	position: absolute;
 	height: 9vh;
-	left: 9vw;
+	left: 8vw;
 	top: 0;
 	bottom: 0;
 	margin: auto;
 	cursor: pointer;
 }
 /*导航栏六个跳转选项*/
-.nav_bar_text_container {
+.NavBarContainer {
 	position: absolute;
-	width: 60vw;
+	width: 55vw;
 	height: auto;
-	right: 9vw;
+	right: 8vw;
 	top: 0;
 	bottom: 0;
 	margin: auto;
@@ -139,20 +130,31 @@ export default {
 	color: #ffffff;
 	cursor: pointer;
 }
+.NavBarTitle {
+	top: 1vh;
+	position: relative;
+	height: 4.2vh;
+	width: 9ch;
+	/* background: red; */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
 
 /*导航栏中跳转至某个页面的下划波浪线*/
 .nav_bar_underline {
-	position: absolute;
-	height: 9px;
-	top: 7vh;
+	position: relative;
+	animation: MyMove 0.3s forwards;
 }
-/* .nav_bar_underline::before {
-	width: 0;
+
+@keyframes MyMove {
+	from {
+		width: 0;
+	}
+	to {
+        width: 5.7ch;
+	}
 }
-.nav_bar_underline::after {
-	width: 72px;
-}
-.nav_bar_underline::active {
-	transition: all 0.5s linear;
-} */
+
 </style>

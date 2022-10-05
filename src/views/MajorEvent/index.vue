@@ -22,6 +22,7 @@
 				7月31日，数据库网站上线。
 			</div>
 		</div>
+        <img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 

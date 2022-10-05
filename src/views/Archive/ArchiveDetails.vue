@@ -50,6 +50,7 @@
 		</div>
 
 		<div class="BottomBlank"></div>
+        <img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 

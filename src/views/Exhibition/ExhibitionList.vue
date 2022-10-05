@@ -41,17 +41,18 @@
 										item.ExhibitionID,
 										img_src.AlbumID,
 										item.exh_list_h2,
-                                        item.exh_list_text
+										item.exh_list_text
 									)
 								"
 								class="exh_list_images_img_container Card"
-                                @mouseover="MouseOverImage(item.ExhibitionID, img_src.AlbumID)"
-                                @mouseleave="MouseLeaveImage(item.ExhibitionID, img_src.AlbumID)"
 							>
 								<!-- 鼠标悬停查看详情 -->
-								<div class="ImageSeeDetailsHover" :id="`ImageSeeDetails_${item.ExhibitionID}_${img_src.AlbumID}`">查看大图</div>
-								<div class="ImageContainerHover" :id="`ImageContainer_${item.ExhibitionID}_${img_src.AlbumID}`"></div>
-                                <div
+								<div class="ImageContainerHover">
+									<div class="ImageSeeDetailsHover">
+										查看大图
+									</div>
+								</div>
+								<div
 									class="exh_list_images_img Card"
 									:style="`background-image:url(${img_src.src})`"
 									v-show="index < 4"
@@ -63,7 +64,8 @@
 			</div>
 		</div>
 		<!-- 这里留一块300px高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 600px"></div>
+		<div class="BottomBlank"></div>
+        <img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -83,10 +85,10 @@ export default {
 			],
 		};
 	},
-    mounted(){
-        this.$store.dispatch("GetHeaderIndex", 3);
-        this.$store.dispatch("GetLineIndex", 1);
-    },
+	mounted() {
+		this.$store.dispatch("GetHeaderIndex", 3);
+		this.$store.dispatch("GetLineIndex", 1);
+	},
 	created() {
 		// http 请求部分
 		let url = "/exhibition/list";
@@ -96,7 +98,7 @@ export default {
 		this.exh_list_items = [];
 		let _this = this; // 别改
 
-		getForm(url, function (res, msg) {
+		getForm(url, function (res) {
 			let data = res.data;
 
 			// 遍历 gallery
@@ -139,7 +141,7 @@ export default {
 		});
 	},
 	methods: {
-		see_all_btn(event, ExhibitionID, title, intro) {
+		see_all_btn(event, ExhibitionID) {
 			this.$router.push({
 				path: "/AlbumList",
 				query: {
@@ -147,7 +149,7 @@ export default {
 				},
 			});
 		},
-		exh_list_images_btn(event, ExhibitionID, AlbumID, exh_list_h2, intro) {
+		exh_list_images_btn(event, ExhibitionID, AlbumID) {
 			this.$router.push({
 				path: "/Album",
 				query: {
@@ -156,34 +158,21 @@ export default {
 				},
 			});
 		},
-        MouseOverImage(v1, v2){
-            let Container = document.querySelector(`#ImageContainer_${v1}_${v2}`)
-            let SeeDetails = document.querySelector(`#ImageSeeDetails_${v1}_${v2}`)
-            Container.style.display = "flex";
-            SeeDetails.style.display = "flex";
-        },
-        MouseLeaveImage(v1, v2){
-            let Container = document.querySelector(`#ImageContainer_${v1}_${v2}`)
-            let SeeDetails = document.querySelector(`#ImageSeeDetails_${v1}_${v2}`)
-            Container.style.display = "none";
-            SeeDetails.style.display = "none";
-        }
 	},
 };
 </script>
 
 <style scoped>
-
 /*exhibition list 整个框*/
 .exh_list_container {
 	position: relative;
 	width: 1150px;
-    min-height: 100vh;
+	min-height: 100vh;
 	top: 220px;
 	/* background: lightblue; */
-    left: 0;
-    right: 0;
-    margin: auto;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
 
 /*每一个exhibition对应的块*/
@@ -215,7 +204,7 @@ export default {
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;
-    /* background: red; */
+	/* background: red; */
 
 	/* 最多显示2行文字，否则就是省略号 */
 	overflow: hidden;
@@ -248,9 +237,9 @@ export default {
 	border-radius: 7px;
 	margin: 20px;
 	cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .exh_list_images_img {
@@ -268,16 +257,26 @@ export default {
 }
 
 /* 鼠标悬浮出现“查看详情” */
-.ImageContainerHover{
-    position: absolute;
-    width: 210px;
+.ImageContainerHover {
+	position: absolute;
+	width: 210px;
 	height: 210px;
-    overflow: hidden;
-    background: rgba(95, 95, 95, 0.37);
-    display: none;
-    z-index: 15;
-} 
+	overflow: hidden;
+	background: rgba(95, 95, 95, 0.37);
+	z-index: 15;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
+    opacity: 0;
+	/* 需要参与过渡的属性 */
+	transition-property: opacity;
+	/* 过渡动画的持续时间 */
+	transition-duration: 0.5s;
+}
+.exh_list_images_img_container:hover .ImageContainerHover {
+	opacity: 1;
+}
 .ImageSeeDetailsHover {
 	position: absolute;
 	width: 150px;
@@ -294,8 +293,5 @@ export default {
 	color: #ffffff;
 	cursor: pointer;
 	z-index: 20;
-
-    display: none;
 }
-
 </style>

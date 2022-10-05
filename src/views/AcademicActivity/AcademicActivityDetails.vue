@@ -19,7 +19,8 @@
 				{{ academic_activity_details_description }}
 			</div>
 		</div>
-        <div style="height: 500px;"></div>
+        <div class="BottomBlank"></div>
+        <img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 

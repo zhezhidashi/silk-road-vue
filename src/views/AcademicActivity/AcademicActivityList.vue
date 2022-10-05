@@ -17,23 +17,7 @@
 							item.academic_activity_id
 						)
 					"
-					@mouseover="
-						academic_activity_mouseover(
-							$event,
-							item.academic_activity_id
-						)
-					"
-					@mouseleave="
-						academic_activity_mouseleave(
-							$event,
-							item.academic_activity_id
-						)
-					"
-					class="academic_activity_images_container Card"
-					:id="
-						'academic_activity_images_container_' +
-						item.academic_activity_id
-					"
+					class="academic_activity_images_container Card HoverDark"
 				>
 					<!--图片-->
 					<div class="academic_activity_images_img_container">
@@ -72,7 +56,8 @@
 			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 500px"></div>
+		<div class="BottomBlank"></div>
+        <img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -140,48 +125,6 @@ export default {
 				document.querySelector("div").style["user-select"] = "auto";
 			}, 500);
 		},
-		//鼠标悬停效果。背景色改为蓝色，文字改为白色
-		academic_activity_mouseover(event, academic_activity_id) {
-			//修改整个边框和鼠标指针样式
-			let now_container = document.querySelector(
-				"#academic_activity_images_container_" + academic_activity_id
-			);
-			now_container.style.cursor = "pointer";
-			now_container.style.background = "#023871";
-
-			//修改图片大小
-			// let now_img = document.querySelector(
-			// 	"#academic_activity_images_img_" + academic_activity_id
-			// );
-			// now_img.style.transform = "scale(1.2, 1.2)";
-
-			//修改图片文字颜色
-			let now_text = document.querySelector(
-				"#academic_activity_images_text_" + academic_activity_id
-			);
-			now_text.style.color = "#FFFFFF";
-		},
-
-		academic_activity_mouseleave(event, academic_activity_id) {
-			//还原整个边框和鼠标指针样式
-			let now_container = document.querySelector(
-				"#academic_activity_images_container_" + academic_activity_id
-			);
-			now_container.style.cursor = "default";
-			now_container.style.background = "#FFFFFF";
-
-			//还原图片大小
-			// let now_img = document.querySelector(
-			// 	"#academic_activity_images_img_" + academic_activity_id
-			// );
-			// now_img.style.transform = "scale(1, 1)";
-
-			//还原图片文字颜色
-			let now_text = document.querySelector(
-				"#academic_activity_images_text_" + academic_activity_id
-			);
-			now_text.style.color = "#000000";
-		},
 	},
 };
 </script>
@@ -202,7 +145,6 @@ export default {
 	width: 268px;
 	height: 490px;
 
-	background: #ffffff;
 	margin: 20px;
 	overflow: hidden;
 	z-index: 10;
@@ -247,7 +189,7 @@ export default {
 	font-size: 20px;
 	margin: 10px 15px 10px 15px;
 	line-height: 150%;
-	color: #000000;
+	/* color: #000000; */
 
 	/*最多显示两行文字，否则就是省略号*/
 	overflow: hidden;

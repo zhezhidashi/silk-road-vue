@@ -6,10 +6,8 @@
 		<div class="ContentContainer">
 			<div v-for="(item, index) in ExhibitionList" :key="index">
 				<div
-					class="ItemContainer Card"
+					class="ItemContainer Card HoverDark"
 					@click="GoExhibition(item, index)"
-					@mouseover="ItemMouseOver(`Exhibition${index}`)"
-					@mouseleave="ItemMouseLeave(`Exhibition${index}`)"
 				>
 					<div class="ImageContainer">
 						<div
@@ -19,9 +17,8 @@
 					</div>
 					<div
 						class="ImageTitleContainer"
-						:id="`TitleContainerExhibition${index}`"
 					>
-						<div class="ImageTitle" :id="`TitleExhibition${index}`">
+						<div class="ImageTitle">
 							{{ item.Title }}
 						</div>
 					</div>
@@ -33,11 +30,9 @@
 		<div class="ContentContainer">
 			<div v-for="(item, index) in BoardList[BoardIndex]" :key="index">
 				<div
-					class="ItemContainer Card"
+					class="ItemContainer Card HoverDark"
 					:id="`ItemContainerBoard${index}`"
 					@click="GoBoard(item, index)"
-					@mouseover="ItemMouseOver(`Board${index}`)"
-					@mouseleave="ItemMouseLeave(`Board${index}`)"
 				>
 					<div class="ImageContainer">
 						<div
@@ -47,9 +42,8 @@
 					</div>
 					<div
 						class="ImageTitleContainer"
-						:id="`TitleContainerBoard${index}`"
 					>
-						<div class="ImageTitle" :id="`TitleBoard${index}`">
+						<div class="ImageTitle">
 							{{ item.Title }}
 						</div>
 					</div>
@@ -74,7 +68,7 @@
 		</div>
 
         <!-- 页底放浪花效果 -->
-        <img src="底部浪花.svg" style="position: absolute; width: 100%; bottom: 0;"/>
+        <img src="底部浪花.svg" class="BottomWave"/>
 	</div>
 </template>
 
@@ -175,25 +169,6 @@ export default {
 				},
 			});
         },
-
-		ItemMouseOver(type) {
-			// 鼠标悬浮修改 Style
-			let TitleContainer = document.querySelector(
-				`#TitleContainer` + type
-			);
-			let Title = document.querySelector(`#Title` + type);
-			TitleContainer.style.background = "rgb(02, 38, 71, 0.6)";
-			Title.style.color = "white";
-		},
-		ItemMouseLeave(type) {
-			// 鼠标离开修改 Style
-			let TitleContainer = document.querySelector(
-				`#TitleContainer` + type
-			);
-			let Title = document.querySelector(`#Title` + type);
-			TitleContainer.style.background = "white";
-			Title.style.color = "black";
-		},
 	},
 };
 </script>
@@ -209,7 +184,7 @@ export default {
 	justify-content: space-evenly;
 
 	/* 字体颜色 */
-	color: black;
+	/* color: black; */
 	/* background: blue; */
 }
 
@@ -233,21 +208,6 @@ export default {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-}
-
-/* 最新公告的 Container，包括标题、内容、分页器 */
-.BoardContainer {
-	position: relative;
-	width: 1020px;
-	height: 560px;
-	background: white;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-	border-radius: 7px;
 }
 
 /* 近期展览、最新公告 每一部分的 Container */
@@ -284,7 +244,7 @@ export default {
 	position: relative;
 	width: 100%;
 	height: 80px;
-	background: white;
+	/* background-color: white; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -294,7 +254,7 @@ export default {
 	font-size: 18px;
 	line-height: 150%;
 	margin: 0 30px 0 30px;
-	color: black;
+	/* color: black; */
 	text-align: center;
 
 	/*最多显示两行文字，否则就是省略号*/

@@ -83,23 +83,7 @@
 							search_result.search_result_id
 						)
 					"
-					@mouseover="
-						archive_list_search_result_mouseover(
-							$event,
-							search_result.search_result_id
-						)
-					"
-					@mouseleave="
-						archive_list_search_result_mouseleave(
-							$event,
-							search_result.search_result_id
-						)
-					"
-					class="archive_list_search_result_container Card"
-					:id="
-						'archive_list_search_result_container_' +
-						search_result.search_result_id
-					"
+					class="archive_list_search_result_container Card HoverShadow"
 				>
 					<div class="search_result_img_container Card">
 						<div
@@ -145,6 +129,7 @@
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div class="BottomBlank"></div>
+        <img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -385,18 +370,6 @@ export default {
 			}
 			this.archive_list_jmp(event, (now_page_num_int + 1).toString());
 		},
-
-		// 鼠标停留效果
-		archive_list_search_result_mouseover(event, search_result_id) {
-			document.querySelector(
-				"#archive_list_search_result_container_" + search_result_id
-			).style.background = "rgba(47, 47, 47, 0.2)";
-		},
-		archive_list_search_result_mouseleave(event, search_result_id) {
-			document.querySelector(
-				"#archive_list_search_result_container_" + search_result_id
-			).style.background = "#F4F4F4";
-		},
 	},
 };
 </script>
@@ -602,7 +575,7 @@ export default {
 	position: relative;
 	width: 909px;
 	height: 339px;
-	background: #f4f4f4;
+	/* background: #f4f4f4; */
 	border-radius: 7px;
 	margin: 20px;
 	cursor: pointer;

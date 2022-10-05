@@ -40,9 +40,9 @@
 	z-index: 999;
 	height: auto;
 	width: 100%;
-	display: flex;
+	/* display: flex;
 	justify-content: center;
-	align-content: center;
+	align-content: center; */
 	background: #023871;
 	border-radius: 0;
 }

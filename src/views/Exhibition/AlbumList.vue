@@ -16,33 +16,13 @@
 			<div v-for="item in imgText_list" :key="item.ExhibitionID">
 				<div class="exh_gallery_list_imgText_container">
 					<!--图片-->
-					<div
-						class="exh_gallery_list_imgText_img_container"
-						@mouseenter="
-							exh_gallery_list_imgText_mouseover(
-								$event,
-								item.AlbumID
-							)
-						"
-						@mouseleave="
-							exh_gallery_list_imgText_mouseleave(
-								$event,
-								item.AlbumID
-							)
-						"
-					>
+					<div class="exh_gallery_list_imgText_img_container">
 						<div
 							class="exh_gallery_list_imgText_img"
 							:style="`background-image:url(${item.img_src})`"
 						></div>
 						<!--图片的阴影-->
-						<div
-							class="exh_gallery_list_imgText_img_shadow"
-							:id="
-								'exh_gallery_list_imgText_img_shadow_' +
-								item.AlbumID
-							"
-						>
+						<div class="exh_gallery_list_imgText_img_shadow">
 							<!--查看详情部分-->
 							<div
 								@click="
@@ -67,7 +47,8 @@
 			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
-		<div style="position: relative; height: 800px"></div>
+		<div class="BottomBlank"></div>
+        <img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -86,7 +67,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 3);
-        this.$store.dispatch("GetLineIndex", 1);
+		this.$store.dispatch("GetLineIndex", 1);
 	},
 	created() {
 		this.ExhibitionID = this.$route.query.ExhibitionID;
@@ -98,15 +79,17 @@ export default {
 		GetExhibitionTitleText() {
 			let url = "/exhibition/list";
 			console.log("http请求的url是 " + url);
-			let _this = this; 
-			getForm(url, res => {
+			let _this = this;
+			getForm(url, (res) => {
 				let data = res.data;
 
 				for (let item of data.list) {
-                    if(_this.ExhibitionID === item.main_id.toString()){
-                        _this.ExhibitionTitle = item.title;
-                        _this.ExhibitionIntro = item.intro.toString().split("\\n");
-                    }
+					if (_this.ExhibitionID === item.main_id.toString()) {
+						_this.ExhibitionTitle = item.title;
+						_this.ExhibitionIntro = item.intro
+							.toString()
+							.split("\\n");
+					}
 				}
 			});
 		},
@@ -207,7 +190,7 @@ export default {
 	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
 	box-shadow: 6px 0 12px -5px rgb(190, 196, 252),
 		-6px 0 12px -5px rgb(189, 196, 252);
-    border-radius: 7px;
+	border-radius: 7px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -233,13 +216,14 @@ export default {
 	-moz-background-size: cover;
 	background-size: cover;
 	border-radius: 7px;
+	cursor: pointer;
 }
 
 /*图片的灰色表面，用于hover效果*/
 .exh_gallery_list_imgText_img_shadow {
 	position: absolute;
 	width: 574px;
-	height: 372px;
+	height: 373px;
 	left: 0;
 	top: 0;
 	border-radius: 7px;
@@ -247,7 +231,16 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	visibility: hidden;
+	opacity: 0;
+
+	/* 需要参与过渡的属性 */
+	transition-property: opacity;
+	/* 过渡动画的持续时间 */
+	transition-duration: 0.5s;
+}
+.exh_gallery_list_imgText_img_container:hover
+	.exh_gallery_list_imgText_img_shadow {
+	opacity: 1;
 }
 
 /*文字部分*/
