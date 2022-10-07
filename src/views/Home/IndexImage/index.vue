@@ -18,14 +18,24 @@
 
 		<!-- 搜索框 -->
 		<div class="index_search_back">
-			<div style="position: absolute; width: 100%; height: 100%; opacity: 0.4;" :style="`background-image:url(底部浪花.svg)`"></div>
-            <input
-				type="search"
-				v-model="search_keywords"
-				class="index_search_words"
-				placeholder="输入档案关键词 / search for"
-			/>
-			<img id="SearchLogo" :src="index_search_logo_src" />
+			<div
+				style="
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					opacity: 0.4;
+				"
+				:style="`background-image:url(底部浪花.svg)`"
+			></div>
+			<div class="SearchTextLogo">
+				<input
+					type="search"
+					v-model="search_keywords"
+					class="index_search_words"
+					placeholder="输入档案关键词 / search for"
+				/>
+				<img id="SearchLogo" :src="index_search_logo_src" />
+			</div>
 		</div>
 	</div>
 </template>
@@ -58,7 +68,7 @@ export default {
 			loop: true, // 循环模式选项
 
 			autoplay: {
-				delay: 15000,
+				delay: 7000,
 				stopOnLastSlide: false,
 				disableOnInteraction: true,
 			},
@@ -111,24 +121,38 @@ export default {
 	z-index: 15;
 
 	display: flex;
-    justify-content: center;
+	justify-content: center;
 	align-items: center;
-    opacity: 1;
+	opacity: 1;
 }
-.index_search_words {
+/* 文字和搜索放大镜的Container */
+.SearchTextLogo {
 	position: relative;
-	width: 1000px;
+	width:auto;
 	height: 60px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
+	border-top: none;
+	border-left: none;
+	border-right: none;
 	border-bottom: 2px solid #588cc8;
 	outline: none;
 	font-size: 20px;
 	line-height: 100%;
 	color: rgb(136, 136, 136);
 	background: rgb(240, 240, 240, 0);
-    
+    display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.index_search_words {
+	position: relative;
+	width: 980px;
+	height: 50px;
+    border: none;
+	outline: none;
+	font-size: 20px;
+	line-height: 100%;
+	color: rgb(136, 136, 136);
+	background: rgb(240, 240, 240, 0);
 }
 /* 浪花 */
 #Wave {
@@ -141,16 +165,13 @@ export default {
 	/* z-index: 100; */
 }
 #SearchLogo {
-	position: absolute;
+	position: relative;
 	width: 36px;
-	height: 48px;
-	right: 40px;
 	cursor: pointer;
 }
 ::-webkit-input-placeholder {
 	color: #588cc8;
 }
-
 
 /* 标题图片 */
 #IndexImageContainer {

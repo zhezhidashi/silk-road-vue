@@ -86,7 +86,7 @@ export default {
 				for (let item of data.list) {
 					if (_this.ExhibitionID === item.main_id.toString()) {
 						_this.ExhibitionTitle = item.title;
-						_this.ExhibitionIntro = item.intro
+						_this.ExhibitionIntro = item.intro.Intro
 							.toString()
 							.split("\\n");
 					}

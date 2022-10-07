@@ -132,7 +132,7 @@ export default {
 
 				let new_map = {
 					exh_list_h2: item["title"],
-					exh_list_text: item["intro"],
+					exh_list_text: item["intro"]["Intro"],
 					ExhibitionID: item["main_id"],
 					imgList: new_img_list,
 				};

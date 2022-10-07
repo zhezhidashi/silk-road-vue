@@ -155,6 +155,10 @@ div {
     text-align: center;
 }
 
+.viewer-button{
+    background-color: red;
+}
+
 /* 修改“在线展览” 标签页 样式 */
 /* 表头高一些 */
 .el-tabs__item {

@@ -20,8 +20,7 @@
 					<div v-for="item in ImgList" :key="item.gallery_img_id">
 						<div
 							@click="ImageListBtn(item)"
-							class="ImageListImgContainer"
-							:id="`ImageListImgContainer_${item.gallery_img_id}`"
+							:class="item.gallery_img_id === MainImageProp.gallery_img_id ? 'ClickImage' : 'ImageListImgContainer'"
 						>
 							<div
 								class="ImageListImg Card"
@@ -109,7 +108,7 @@
 		</el-tabs>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div class="BottomBlank"></div>
-        <img src="底部浪花.svg" class="BottomWave" />
+		<img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -214,10 +213,10 @@ export default {
 		this.AlbumID = this.$route.query.AlbumID;
 
 		this.GetExhibitionTitle();
-        this.GetAlbumTitle();
+		this.GetAlbumTitle();
 		this.GetPics();
 		this.$store.dispatch("GetHeaderIndex", 3);
-        this.$store.dispatch("GetLineIndex", 1);
+		this.$store.dispatch("GetLineIndex", 1);
 	},
 	methods: {
 		// 点击下方列表的图片，修改大图的url
@@ -232,22 +231,22 @@ export default {
 			return false;
 		},
 
-        GetExhibitionTitle(){
-            let url = "/exhibition/list";
+		GetExhibitionTitle() {
+			let url = "/exhibition/list";
 			console.log("http请求的url是 " + url);
-			let _this = this; 
-			getForm(url, res => {
+			let _this = this;
+			getForm(url, (res) => {
 				let data = res.data;
 
 				for (let item of data.list) {
-                    if(_this.ExhibitionID === item.main_id.toString()){
-                        _this.ExhibitionTitle = item.title;
-                    }
+					if (_this.ExhibitionID === item.main_id.toString()) {
+						_this.ExhibitionTitle = item.title;
+					}
 				}
 			});
-        },
-        GetAlbumTitle(){
-            let url =
+		},
+		GetAlbumTitle() {
+			let url =
 				"/exhibition/all-album?exhibition_id=" + this.ExhibitionID;
 			console.log("http请求的url是 " + url);
 
@@ -256,12 +255,12 @@ export default {
 			getForm(url, (res) => {
 				let data = res.data;
 				for (let item in data) {
-					if(_this.AlbumID === item){
-                        _this.AlbumTitle = data[item].title;
-                    }
+					if (_this.AlbumID === item) {
+						_this.AlbumTitle = data[item].title;
+					}
 				}
 			});
-        },
+		},
 
 		GetPics() {
 			let url =
@@ -274,7 +273,7 @@ export default {
 
 			this.ImgList = [];
 
-			let _this = this; 
+			let _this = this;
 
 			getForm(url, function (res, msg) {
 				let data = res.data["picture_dict"];
@@ -310,31 +309,6 @@ export default {
 					}
 				}
 			});
-		},
-	},
-	watch: {
-		MainImageProp: {
-			handler(newValue, oldValue) {
-				this.$nextTick(() => {
-					// 把之前的 Container 还原
-					if (oldValue.gallery_img_id !== "") {
-						let CurGalleryImg = document.querySelector(
-							`#ImageListImgContainer_${oldValue.gallery_img_id}`
-						);
-						CurGalleryImg.style.width = "130px";
-						CurGalleryImg.style.height = "130px";
-						CurGalleryImg.style.padding = "30px";
-					}
-
-					// 把新的 Container 放大
-					let CurGalleryImg = document.querySelector(
-						`#ImageListImgContainer_${newValue.gallery_img_id}`
-					);
-					CurGalleryImg.style.width = "160px";
-					CurGalleryImg.style.height = "160px";
-					CurGalleryImg.style.padding = "15px";
-				});
-			},
 		},
 	},
 };
@@ -390,6 +364,24 @@ export default {
 	height: 130px;
 	padding: 30px;
 	/* background: blue; */
+}
+
+.ClickImage{
+    position: relative;
+    animation: MyMove 0.3s forwards;
+}
+
+@keyframes MyMove {
+	from {
+		width: 130px;
+		height: 130px;
+		padding: 30px;
+	}
+	to {
+		width: 160px;
+		height: 160px;
+		padding: 15px;
+	}
 }
 
 .ImageListImg {
