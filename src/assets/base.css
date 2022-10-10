@@ -1,7 +1,7 @@
 /* 公共属性 */
 .background {
     position: relative;
-    width: 1440px;
+    width: 98.8vw;
     background: #efefef;
     min-height: 100vh;
 }
@@ -9,7 +9,7 @@
 /* 大标题 */
 .Heading {
     position: relative;
-    width: 1440px;
+    width: 98.8vw;
     height: auto;
     text-align: center;
     top: 100px;
@@ -46,14 +46,16 @@
 }
 
 /*一排一排陈列图片对应的class*/
-.list_images {
-    position: absolute;
+.ListImages {
+    position: relative;
     display: flex;
     flex-flow: wrap;
     align-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* 调整字体 */
+/* 调整字体、空白符 */
 div {
     font-family: 'Alegreya';
     font-weight: 400;
@@ -112,6 +114,35 @@ div {
     z-index: -1;
 }
 
+/* 底部浪花 */
+.BottomWave {
+    position: absolute;
+    padding: 0;
+    width: 98.8vw;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.LineLimit {
+    /*最多显示x行文字，否则就是省略号*/
+    overflow: hidden;
+    white-space: nowrap;
+    /* text-overflow: ellipsis; */
+    display: -webkit-box;
+    /* -webkit-line-clamp: 2; */
+    -webkit-box-orient: vertical;
+}
+
+
+
+
+
+
+
+
+
 
 /* 下面是修改插件的默认样式 */
 
@@ -130,17 +161,6 @@ div {
     background: #007aff;
 }
 
-/* 底部浪花 */
-.BottomWave {
-    position: absolute;
-    padding: 0;
-    width: 98.9vw;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-
 /* 修改分页器原点间距 */
 .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
     margin: 0 6px;
@@ -155,7 +175,7 @@ div {
     text-align: center;
 }
 
-.viewer-button{
+.viewer-button {
     background-color: red;
 }
 

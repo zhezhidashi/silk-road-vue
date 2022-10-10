@@ -1,12 +1,14 @@
 <template>
-	<div class="background" style="height: auto;">
-
+	<div class="background" style="height: auto">
 		<div class="Heading">{{ BoardTitle[BoardIndex] }}</div>
-		<img
-			v-show="BoardImage[BoardIndex] !== ''"
-			class="BoardImage"
-			:src="BoardImage[BoardIndex]"
-		/>
+		<div class="BoardImageContainer">
+			<img
+				v-show="BoardImage[BoardIndex] !== ''"
+				class="BoardImage"
+				:src="BoardImage[BoardIndex]"
+			/>
+		</div>
+
 		<div class="BoardText">
 			<div
 				v-for="(Paragraph, index) in BoardText[BoardIndex]"
@@ -19,7 +21,7 @@
 
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div class="BottomBlank"></div>
-        <img src="底部浪花.svg" class="BottomWave" />
+		<img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -68,27 +70,38 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 2);
-        this.$store.dispatch("GetLineIndex", 1);
+		this.$store.dispatch("GetLineIndex", 1);
 	},
 };
 </script>
 
 <style scoped>
 /* 图片 */
+
+.BoardImageContainer {
+	position: relative;
+	height: 80vh;
+	left: 0;
+	right: 0;
+	margin: auto;
+	top: 200px;
+    text-align: center;
+}
+
 .BoardImage {
 	position: relative;
-	width: 800px;
-	height: auto;
-	left: 320px;
-	top: 200px;
+	height: 80vh;
 }
+
 /* 正文的 Container */
 .BoardText {
+    top: 250px;
 	position: relative;
-	width: 1000px;
+	width: 80vw;
 	height: auto;
-	left: 220px;
-	top: 250px;
+    left: 0;
+    right: 0;
+    margin: auto;
 
 	display: flex;
 	flex-direction: column;
@@ -98,7 +111,6 @@ export default {
 .BoardTextParagraph {
 	position: relative;
 	margin: 10px;
-	width: 900px;
 	font-size: 20px;
 	line-height: 200%;
 }

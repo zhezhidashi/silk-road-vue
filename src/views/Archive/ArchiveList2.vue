@@ -213,7 +213,7 @@ export default {
 			if (this.search_language === "3") now_search_language = "Dutch";
 
 			//如果关键字的值为空，就不传参
-			let url = "/archive/list/?";
+			let url = "/archive/list?";
 			if (this.now_page_num !== "")
 				url += "&page_index=" + this.now_page_num;
 			if (this.search_keywords !== "")
@@ -226,8 +226,7 @@ export default {
 				url += "&language=" + now_search_language;
 
 			console.log(url);
-			let _this = this; // 别改
-			let http_get_result = [];
+			let _this = this; 
 
 			getForm(url, function (res, msg) {
 				let data = res.data;
@@ -253,15 +252,15 @@ export default {
 							search_list_item["intro"]["ZH"],
 					};
 					if (new_map["search_result_id"] === undefined)
-						new_map["search_result_id"] = "N/A";
+						new_map["search_result_id"] = "";
 					if (new_map["search_result_title"] === undefined)
-						new_map["search_result_title"] = "N/A";
+						new_map["search_result_title"] = "";
 					if (new_map["search_result_subtitle"] === undefined)
-						new_map["search_result_subtitle"] = "N/A";
+						new_map["search_result_subtitle"] = "";
 					if (new_map["search_result_date"] === undefined)
-						new_map["search_result_date"] = "N/A";
+						new_map["search_result_date"] = "";
 					if (new_map["search_result_description"] === undefined)
-						new_map["search_result_description"] = "N/A";
+						new_map["search_result_description"] = "";
 					_this.search_result_list.push(new_map);
 				}
 			});
@@ -353,22 +352,21 @@ export default {
 
 		//跳转至上一页
 		archive_list_jump_last_btn(event) {
-			let now_page_num_int = parseInt(this.now_page_num);
 			if (this.now_page_num === "1") {
 				alert("当前已经是第一页");
 				return;
 			}
-			this.archive_list_jmp(event, (now_page_num_int - 1).toString());
+			this.archive_list_jmp(event, (parseInt(this.now_page_num) - 1).toString());
 		},
 
 		//跳转至下一页
 		archive_list_jump_next_btn(event) {
-			let now_page_num_int = parseInt(this.now_page_num);
-			if (this.now_page_num >= this.total_page_num) {
+
+			if (parseInt(this.now_page_num) >= parseInt(this.total_page_num)) {
 				alert("当前已经是最后一页");
 				return;
 			}
-			this.archive_list_jmp(event, (now_page_num_int + 1).toString());
+			this.archive_list_jmp(event, (parseInt(this.now_page_num) + 1).toString());
 		},
 	},
 };

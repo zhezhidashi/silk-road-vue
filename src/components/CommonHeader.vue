@@ -13,7 +13,7 @@
 					:id="item.name"
 					class="NavBarTitle"
 				>
-					{{ item.title }}
+					<div class="ItemTitle">{{ item.title }}</div>
 					<img
 						:class="{ nav_bar_underline: index === HeaderIndex }"
 						src="nav_bar_underline.png"
@@ -60,7 +60,7 @@ export default {
 				{
 					path: "/ExhibitionList",
 					name: "ExhibitionList",
-					title: "最新展览",
+					title: "线上展览",
 				},
 				{
 					path: "/AcademicActivityList",
@@ -102,7 +102,8 @@ export default {
 /*导航栏“太平洋丝绸之路”的logo*/
 .navigation_logo {
 	position: absolute;
-	height: 9vh;
+	width: 13vw;
+	min-width: 80px;
 	left: 8vw;
 	top: 0;
 	bottom: 0;
@@ -125,21 +126,26 @@ export default {
 }
 
 .NavBarItem {
-	font-size: 20px;
-	line-height: 100%;
-	color: #ffffff;
 	cursor: pointer;
+	margin-left: 1px;
+	margin-right: 1px;
 }
 .NavBarTitle {
-	top: 1vh;
 	position: relative;
-	height: 4.2vh;
-	width: 9ch;
-	/* background: red; */
+	width: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
+}
+.ItemTitle {
+	min-width: 18px;
+	width: 6vw;
+	text-align: center;
+	font-size: 18px;
+	line-height: 90%;
+	color: #ffffff;
+	
 }
 
 /*导航栏中跳转至某个页面的下划波浪线*/
@@ -153,8 +159,7 @@ export default {
 		width: 0;
 	}
 	to {
-        width: 5.7ch;
+		width: 5.7ch;
 	}
 }
-
 </style>

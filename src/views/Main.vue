@@ -39,10 +39,7 @@
 	top: 0;
 	z-index: 999;
 	height: auto;
-	width: 100%;
-	/* display: flex;
-	justify-content: center;
-	align-content: center; */
+	width: 98.8vw;
 	background: #023871;
 	border-radius: 0;
 }
@@ -50,11 +47,8 @@
     padding: 0;
 	position: relative;
 	top: 11vh;
-	width: 100%;
+	width: 98.8vw;
 	height: auto;
-	/* display: flex;
-	justify-content: center;
-	align-content: center; */
 }
 .Footer {
 	position: relative;
@@ -63,7 +57,7 @@
 	justify-content: center;
 	align-items: center;
 	background: #023871;
-	width: 100%;
+	width: 98.8vw;
 }
 
 /* .NotClick {

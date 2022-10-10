@@ -30,12 +30,6 @@
 export default {
 	name: "MajorEvent",
 	methods: {
-		// 路由回退
-		router_go_back() {
-			this.$router.push({
-                path: '/Home'
-            })
-		},
 	},
     mounted(){
         this.$store.dispatch("GetHeaderIndex", 5);
@@ -48,7 +42,7 @@ export default {
 /* 文字的Container */
 .MajorEventTextContainer {
     position: relative;
-	width: 1000px;
+	width: 80vw;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -59,7 +53,7 @@ export default {
     /* background: red; */
 }
 .major_event_time_1 {
-	width: 1000px;
+	width: 80vw;
 	font-weight: bold;
 	font-size: 20px;
 	line-height: 200%;
@@ -67,7 +61,7 @@ export default {
 	margin: 10px;
 }
 .major_event_text_1 {
-	width: 1000px;
+	width: 80vw;
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;
@@ -75,7 +69,7 @@ export default {
 }
 
 .major_event_time_2 {
-	width: 1000px;
+	width: 80vw;
 	font-weight: bold;
 	font-size: 20px;
 	line-height: 200%;
@@ -83,7 +77,7 @@ export default {
 	margin: 10px;
 }
 .major_event_text_2 {
-	width: 1000px;
+	width: 80vw;
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;

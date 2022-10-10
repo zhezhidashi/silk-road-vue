@@ -1,7 +1,7 @@
 <template>
 	<div class="IndexBoard">
 		<!-- 公告部分 -->
-		<div class="ExhibitionBoardTitle">近期展览</div>
+		<div class="ExhibitionBoardTitle">线上展览</div>
 
 		<div class="ContentContainer">
 			<div v-for="(item, index) in ExhibitionList" :key="index">

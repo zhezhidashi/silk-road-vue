@@ -4,60 +4,41 @@
 		<div class="Heading">学术活动</div>
 
 		<!--一排一排陈列图片-->
-		<div class="list_images" id="academic_activity_images">
+		<div class="ListImages ImageItemContainer">
 			<div
 				v-for="item in academic_activity_images_src"
-				:key="item.academic_activity_id"
+				:key="item.AcademicActivityID"
 			>
 				<!--把每一块img、时间、简介都包装成一个container-->
 				<div
-					@click.once="
-						academic_activity_images_btn(
-							$event,
-							item.academic_activity_id
-						)
-					"
-					class="academic_activity_images_container Card HoverDark"
+					@click.once="ImageItemButton(item.AcademicActivityID)"
+					:class="item.AcademicActivityID === '-1' ? `ImageItem ` : `ImageItem Card HoverDark`"
 				>
 					<!--图片-->
-					<div class="academic_activity_images_img_container">
+					<div
+						v-show="item.AcademicActivityID !== '-1'"
+						class="ImageContainer"
+					>
 						<div
 							:style="`background-image:url(${item.src})`"
-							class="academic_activity_images_img"
-							:id="
-								'academic_activity_images_img_' +
-								item.academic_activity_id
-							"
+							class="BackgroundImage"
 						></div>
 					</div>
 
-					<!--日期-->
+					<!--日期和描述-->
 					<div
-						class="academic_activity_images_date"
-						:id="
-							'academic_activity_images_date_' +
-							item.academic_activity_id
-						"
+						v-show="item.AcademicActivityID !== '-1'"
+						class="ImageDateDescription"
 					>
-						{{ item.date }}
-					</div>
-
-					<!--图片描述-->
-					<div
-						class="academic_activity_images_text"
-						:id="
-							'academic_activity_images_text_' +
-							item.academic_activity_id
-						"
-					>
-						{{ item.description }}
+						<div class="ImageDate">{{ item.date }}</div>
+						<div class="ImageTitle">{{ item.description }}</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div class="BottomBlank"></div>
-        <img src="底部浪花.svg" class="BottomWave" />
+		<img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -81,29 +62,38 @@ export default {
 
 		let inner_this = this; // 别改
 
+		let index = 0;
 		getForm(url, function (res, msg) {
 			let data = res.data;
-			console.log("http-get data is here");
-			console.log("data list", data.list);
+			console.log("data list", data.list.length);
+			let Length = data.list.length;
+			while (Length % 4 != 0) {
+				data.list.push({
+					main_id: -1,
+					cover_pic: "",
+					date: "",
+					title: "",
+				});
+				Length++;
+			}
 			for (let item of data.list) {
-				console.log("academic item", item);
 				let new_map = {
-					academic_activity_id: item["main_id"].toString(),
+					AcademicActivityID: item["main_id"].toString(),
 					src: item["cover_pic"],
 					date: item["date"],
 					description: item["title"],
 				};
-				console.log("academic new_map", new_map);
 				inner_this.academic_activity_images_src.push(new_map);
+				index++;
 			}
 		});
 
 		console.log("academic_list", this.academic_activity_images_src);
 	},
-    mounted(){
-        this.$store.dispatch("GetHeaderIndex", 4);
-        this.$store.dispatch("GetLineIndex", 1);
-    },
+	mounted() {
+		this.$store.dispatch("GetHeaderIndex", 4);
+		this.$store.dispatch("GetLineIndex", 1);
+	},
 	// 这里定义方法
 	methods: {
 		// 路由回退
@@ -112,11 +102,11 @@ export default {
 				path: "/Home",
 			});
 		},
-		academic_activity_images_btn(event, academic_activity_id) {
+		ImageItemButton(AcademicActivityID) {
 			this.$router.push({
 				path: "/AcademicActivityDetails",
 				query: {
-					academic_activity_id,
+					AcademicActivityID,
 				},
 			});
 
@@ -131,65 +121,65 @@ export default {
 
 <style scoped>
 /*存放整个页面的数据*/
-#academic_activity_images {
+.ImageItemContainer {
 	position: relative;
-	width: 1330px;
+	width: 80vw;
 	min-height: 100vh;
-	left: 95px;
+	left: 0;
+	right: 0;
+	margin: auto;
 	top: 200px;
 }
 
 /*把每一块img、时间、简介都包装成一个container*/
-.academic_activity_images_container {
+.ImageItem {
 	position: relative;
-	width: 268px;
-	height: 490px;
+	width: 18vw;
+	height: 36vw;
 
-	margin: 20px;
-	overflow: hidden;
+	margin-bottom: 5vh;
 	z-index: 10;
 }
 
 /* 图片的 container */
-.academic_activity_images_img_container {
+.ImageContainer {
 	position: relative;
-	width: 268px;
-	height: 360px;
+	width: 18vw;
+	height: 27vw;
 	border-radius: 7px 7px 0 0;
 	overflow: hidden;
 }
 
 /*图片*/
-.academic_activity_images_img {
-	width: 100%;
-	height: 0;
+.BackgroundImage {
 	padding-bottom: 150%;
-	overflow: hidden;
-	background-position: center center;
-	background-repeat: no-repeat;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
-	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
-	border-radius: 7px 7px 0 0;
 }
 
+.ImageDateDescription {
+	position: relative;
+	width: 18vw;
+	height: 9vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
 /*图片日期*/
-.academic_activity_images_date {
+.ImageDate {
 	position: relative;
 	font-size: 20px;
 	line-height: 150%;
-	margin: 10px 15px 0 15px;
+	margin-left: 1vw;
+	margin-right: 1vw;
 	color: #919191;
 }
 
 /*图片简介*/
-.academic_activity_images_text {
+.ImageTitle {
 	position: relative;
 	font-size: 20px;
-	margin: 10px 15px 10px 15px;
 	line-height: 150%;
-	/* color: #000000; */
+	margin-left: 1vw;
+	margin-right: 1vw;
 
 	/*最多显示两行文字，否则就是省略号*/
 	overflow: hidden;

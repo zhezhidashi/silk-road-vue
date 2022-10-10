@@ -7,7 +7,7 @@
 					type="textarea"
 					autosize
 					placeholder="请输入姓名"
-					style="width: 380px; margin-right: 10px"
+					style="width: 28vw; margin-right: 1vw"
 					v-model="NameText"
 				>
 				</el-input>
@@ -17,7 +17,7 @@
 					prefix-icon="el-icon-user"
 					placeholder="请输入联系方式"
 					v-model="ContactText"
-					style="width: 380px; margin-left: 10px"
+					style="width: 28vw; margin-left: 1vw"
 				>
 				</el-input>
 			</div>
@@ -27,14 +27,14 @@
 				:autosize="{ minRows: 2, maxRows: 4 }"
 				placeholder="请输入反馈内容"
 				v-model="ContentText"
-				style="width: 780px; margin-bottom: 20px"
+				style="width: 58vw; margin-bottom: 2vh"
 				class="FeedbackInput"
 			>
 			</el-input>
 
 			<div
 				class="blue_rectangle_container"
-				style="width: 130px; height: 45px; margin-bottom: 20px"
+				style="width: 15vw; height: 6vh; margin-bottom: 2vh;"
 				@click="SubmitFeedback()"
 			>
 				提交
@@ -69,8 +69,23 @@ export default {
 				contact: this.ContactText,
 				feedback_content: this.ContentText,
 			};
-
-            postForm('/feedback/submit', params, (res) => {})
+            let _this = this;
+            postForm('/feedback/submit', params, (res) => {
+                if (res.code == 0) {
+                    _this.$message({
+                        message: '提交成功',
+                        type: 'success'
+                    });
+                    _this.NameText = "";
+                    _this.ContactText = "";
+                    _this.ContentText = "";
+                } else {
+                    _this.$message({
+                        message: '提交失败',
+                        type: 'error'
+                    });
+                }
+            });
 		},
 	},
 	mounted() {
@@ -84,7 +99,7 @@ export default {
 .FeedbackContainer {
 	position: relative;
 	top: 200px;
-	width: 820px;
+	width: 60vw;
 	height: auto;
 	left: 0;
 	right: 0;
@@ -102,7 +117,7 @@ export default {
 
 .FeedbackInput {
 	position: relative;
-	margin: 10px 20px 10px 20px;
+	margin: 1vh 1vw 1vh 1vw;
 	display: flex;
 	flex-direction: row;
 }

@@ -2,25 +2,27 @@
 	<div class="background">
 		<!--标题-->
 		<div class="Heading">
-			{{ academic_activity_details_title }}
+			{{ Title }}
 		</div>
 		<!--左侧图片-->
 		<div class="ImageAndText">
-			<div class="academic_activity_details_img_container Card">
+			<div class="ImageContainer Card">
 				<div
-					class="academic_activity_details_img"
-					:style="`background-image:url(${academic_activity_details_img_src})`"
+					class="Image BackgroundImage"
+					:style="`background-image:url(${ImageUrl})`"
 					alt=""
 				></div>
 			</div>
 
 			<!--描述-->
-			<div class="academic_activity_details_description">
-				{{ academic_activity_details_description }}
+			<div class="ActivityDescription">
+				<div v-for="(item, index) in ActivityDescription" :key="index">
+					<div style="margin: 10px 0 15px 0">{{ item }}</div>
+				</div>
 			</div>
 		</div>
-        <div class="BottomBlank"></div>
-        <img src="底部浪花.svg" class="BottomWave" />
+		<div class="BottomBlank"></div>
+		<img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -31,87 +33,78 @@ export default {
 	name: "AcademicActivityDetails",
 	data() {
 		return {
-			academic_activity_id: "",
-			academic_activity_details_title: "",
-			academic_activity_details_img_src: "",
-			academic_activity_details_description: "",
+			AcademicActivityID: "",
+			Title: "",
+			ImageUrl: "",
+			ActivityDescription: [],
 		};
 	},
 	created() {
 		//从本页url的参数中获取academic_activity_id的值
-		this.academic_activity_id = this.$route.query.academic_activity_id;
+		this.AcademicActivityID = this.$route.query.AcademicActivityID;
 
 		//http请求
-		let url = "/activity/detail?activity_id=" + this.academic_activity_id;
+		let url = "/activity/detail?activity_id=" + this.AcademicActivityID;
 
 		console.log(url);
-		let inner_this = this; // 别改
+		let _this = this; // 别改
 
 		getForm(url, function (res, msg) {
 			let data = res.data;
 			console.log("http-get data is here");
 			console.log(data);
-			inner_this.academic_activity_id = data["main_id"];
-			inner_this.academic_activity_details_title = data["title"];
-			inner_this.academic_activity_details_img_src = data["cover_pic"];
-			inner_this.academic_activity_details_description = data["intro"];
+			_this.AcademicActivityID = data["main_id"];
+			_this.Title = data["title"];
+			_this.ImageUrl = data["cover_pic"];
+			_this.ActivityDescription = data["intro"]
+				.toString()
+				.split("\\n");
+            console.log(_this.ActivityDescription)
 		});
-
-		//把主页图片的 url 设置好
-		document.querySelector(".academic_activity_details_img").src =
-			this.academic_activity_details_img_src;
 	},
-    mounted(){
-        this.$store.dispatch("GetHeaderIndex", 4);
-        this.$store.dispatch("GetLineIndex", 1);
-    },
+	mounted() {
+		this.$store.dispatch("GetHeaderIndex", 4);
+		this.$store.dispatch("GetLineIndex", 1);
+	},
 	methods: {
 		// 路由回退
 		router_go_back() {
 			this.$router.push({
-                path: '/AcademicActivityList'
-            })
+				path: "/AcademicActivityList",
+			});
 		},
 	},
 };
 </script>
 
 <style scoped>
-
 .ImageAndText {
 	position: relative;
-	width: 1200px;
+	width: 80vw;
 	top: 220px;
 	left: 0;
 	right: 0;
 	margin: auto;
 	/* background: skyblue; */
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 /*左侧图片*/
-.academic_activity_details_img_container {
+.ImageContainer {
 	position: relative;
-	width: 498px;
-	height: 705px;
+	width: 33vw;
+	height: 44vw;
 	/* background: red; */
 }
-.academic_activity_details_img {
-	width: 100%;
-	height: 0;
-	padding-bottom: 142%;
-	overflow: hidden;
-	background-position: center center;
-	background-repeat: no-repeat;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
+.Image {
+	padding-bottom: 133%;
+	border-radius: 7px;
 }
 
 /*描述*/
-.academic_activity_details_description {
+.ActivityDescription {
 	position: relative;
-	width: 550px;
+	width: 40vw;
 	height: auto;
 	font-size: 20px;
 	line-height: 200%;

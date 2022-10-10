@@ -66,9 +66,9 @@ export default {
 <style scoped>
 .BoardContainer {
 	position: relative;
-	width: 1000px;
+	width: 80vw;
 	height: auto;
-	min-height: 500px;
+	min-height: 100vh;
 	/* background: skyblue; */
 	top: 200px;
 	left: 0;
@@ -82,8 +82,9 @@ export default {
 }
 .BoardItem{
     position: relative;
-    width: 960px;
-    height: 150px;
+    width: 80vw;
+    height: 10vw;
+    min-height: 100px;
     margin: 20px;
     /* background: red; */
     cursor: pointer;
@@ -94,19 +95,20 @@ export default {
 }
 .BoardItemImageContainer{
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 8vw;
+    height: 8vw;
 }
 .BoardItemImage{
     padding-bottom: 100%;
 }
 .BoardItemText{
     position: relative;
-    width: 800px;
-    height: 100px;
+    width: 66vw;
+    height: 8vw;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .BoardItemTitle{
     font-size: 20px;

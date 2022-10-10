@@ -1,7 +1,7 @@
 <template>
-	<div class="background" style="height: auto; background: #efefef">
+	<div class="background" style="height: auto;">
 		<!--    标题与副标题-->
-		<div class="Heading" style="width: 1000px">
+		<div class="Heading" style="width: 80vw;">
 			{{ Title }}
 		</div>
 		<div class="Subtitle">
@@ -44,7 +44,7 @@
 			<div class="DescriptionItem">
 				<div class="DescriptionItem">
 					<div class="DescriptionTitle">Description</div>
-					<div class="Description">{{ DescriptionZH }}</div>
+					<div class="Description">{{ DescriptionEN }}</div>
 				</div>
 			</div>
 		</div>
@@ -65,62 +65,62 @@ export default {
 					Type: 1,
 					NameZH: "年份",
 					NameEN: "Year",
-					Value1: "N/A",
-					Value2: "N/A",
+					Value1: "",
+					Value2: "",
 				},
 				{
 					Type: 2,
 					NameZH: "关键词",
 					NameEN: "Keywords",
-					Value1: "N/A",
-					Value2: "N/A",
+					Value1: "",
+					Value2: "",
 				},
 				{
 					Type: 2,
 					NameZH: "收藏单位",
 					NameEN: "Collection",
-					Value1: "N/A",
-					Value2: "N/A",
+					Value1: "",
+					Value2: "",
 				},
 				{
 					Type: 2,
 					NameZH: "收藏地点",
 					NameEN: "Location",
-					Value1: "N/A",
-					Value2: "N/A",
+					Value1: "",
+					Value2: "",
 				},
 				{
 					Type: 1,
 					NameZH: "档案页数",
 					NameEN: "Pages",
-					Value1: "N/A",
-					Value2: "N/A",
+					Value1: "",
+					Value2: "",
 				},
 				{
 					Type: 1,
 					NameZH: "文件尺寸",
 					NameEN: "Size",
-					Value1: "N/A",
-					Value2: "N/A",
+					Value1: "",
+					Value2: "",
 				},
 				{
 					Type: 2,
 					NameZH: "使用语种",
 					NameEN: "Language",
-					Value1: "N/A",
-					Value2: "N/A",
+					Value1: "",
+					Value2: "",
 				},
 			],
 
 			//档案在后端数据库的主键
 			ArchiveID: "",
 			//主标题、副标题、主页大图的url、中文描述、外文描述
-			Title: "N/A",
-			Subtitle: "N/A",
+			Title: "",
+			Subtitle: "",
 			Image: "",
 
-			DescriptionZH: "N/A",
-			DescriptionEN: "N/A",
+			DescriptionZH: "",
+			DescriptionEN: "",
 
 			//图片下方“查看文档”和“查看来源”对应的 url
 			ArchiveUrl: "",
@@ -154,26 +154,27 @@ export default {
 				else _this.DescriptionEN = data.intro[item];
 			}
 
+
 			//档案的各种属性：年份（中英文）、关键词（中英文）、收藏单位（中英文）、收藏地点（中英文）、档案页数（中英文）、文件尺寸（中英文）、使用语种（中英文）
 			_this.Info[0].Value1 =
-				data.begin_year === "" ? "N/A" : data.begin_year;
-			_this.Info[0].Value2 = data.end_year === "" ? "N/A" : data.end_year;
+				data.begin_year === "" ? "" : data.begin_year;
+			_this.Info[0].Value2 = data.end_year === "" ? "" : data.end_year;
 
-			for (let item of data.tag_list) {
-				if (item.slice(0, 2) === "ZH") {
-					if (_this.Info[1].Value1 === "N/A") {
-						_this.Info[1].Value1 = item.slice(3);
-					} else {
-						_this.Info[1].Value1 += "、" + item.slice(3);
-					}
-				} else {
-					if (_this.Info[1].Value2 === "N/A") {
-						_this.Info[1].Value2 = item.slice(3);
-					} else {
-						_this.Info[1].Value2 += ", " + item.slice(3);
-					}
-				}
-			}
+			// for (let item of data.tag_list) {
+			// 	if (item.slice(0, 2) === "ZH") {
+			// 		if (_this.Info[1].Value1 === "") {
+			// 			_this.Info[1].Value1 = item.slice(3);
+			// 		} else {
+			// 			_this.Info[1].Value1 += "、" + item.slice(3);
+			// 		}
+			// 	} else {
+			// 		if (_this.Info[1].Value2 === "") {
+			// 			_this.Info[1].Value2 = item.slice(3);
+			// 		} else {
+			// 			_this.Info[1].Value2 += ", " + item.slice(3);
+			// 		}
+			// 	}
+			// }
 
 			for (let item in data.organization) {
 				if (item === "ZH") _this.Info[2].Value1 = data.organization.ZH;
@@ -186,10 +187,10 @@ export default {
 			}
 
 			_this.Info[4].Value1 =
-				data.page_count === undefined ? "N/A" : data.page_count;
+				data.page_count === undefined ? "" : data.page_count;
 
 			_this.Info[5].Value1 =
-				data.file_size === undefined ? "N/A" : data.file_size;
+				data.file_size === undefined ? "" : data.file_size;
 
 			for (let item in data.language) {
 				if (item === "ZH") _this.Info[6].Value1 = data.language.ZH;
@@ -229,7 +230,7 @@ export default {
 .Subtitle {
 	position: relative;
 	text-align: center;
-	width: 1000px;
+	width: 80vw;
 	height: auto;
 	top: 100px;
 	font-size: 20px;
@@ -243,8 +244,9 @@ export default {
 
 .ImageInfoContainer {
 	position: relative;
-	width: 1100px;
-	height: 500px;
+	width: 80vw;
+	height: 33vw;
+    min-height: 500px;
 	top: 200px;
 	left: 0;
 	right: 0;
@@ -259,12 +261,12 @@ export default {
 /*左侧图片、图片中文描述、图片其他语种描述*/
 .ImageContainer {
 	position: relative;
-	width: 450px;
-	height: 500px;
+	width: 30vw;
+	height: 33vw;
 }
 
 .Image {
-	padding-bottom: 111%;
+	padding-bottom: 110%;
 }
 
 /* 查看档案、查看来源 */
@@ -272,8 +274,8 @@ export default {
 	position: relative;
 	width: 200px;
 	height: auto;
-	top: 230px;
-	left: 400px;
+	top: 260px;
+	left: 25vw;
 	/* background: red; */
 	display: flex;
 	justify-content: space-between;
@@ -292,21 +294,21 @@ export default {
 /* 图片的中文描述和外文描述 */
 .DescriptionContainer {
 	position: relative;
-	top: 260px;
-	width: 1100px;
+	top: 280px;
+	width: 80vw;
 	height: auto;
 	left: 0;
 	right: 0;
 	margin: auto;
 	display: flex;
-	align-items: center;
+	/* align-items: center; */
 	justify-content: space-between;
 	/* background: skyblue; */
 }
 
 .DescriptionItem {
 	position: relative;
-	width: 500px;
+	width: 35vw;
 	height: auto;
 	display: flex;
 	flex-direction: column;
@@ -329,8 +331,8 @@ export default {
 
 .InfoContainer {
 	position: relative;
-	width: 500px;
-	height: 500px;
+	width: 38vw;
+	height: 33vw;
 	/* background: skyblue; */
 	display: flex;
 	flex-direction: column;
@@ -338,10 +340,9 @@ export default {
 	align-items: center;
 }
 /*每一行（中英文）都包装成一个类*/
-/* 只有一行文字 */
 .InfoItem {
 	position: relative;
-	width: 500px;
+	width: 33vw;
 	height: auto;
 	/* background: pink; */
 
@@ -353,12 +354,13 @@ export default {
 
 .InfoName {
 	position: relative;
-	width: 80px;
+	min-width: 80px;
+    margin-right: 10px;
 	/* background: yellow; */
 }
 .InfoValue {
 	position: relative;
-	width: 400px;
+	min-width: 400px;
 	/* background: yellow; */
 }
 

@@ -1,7 +1,8 @@
 import axios from "./axios";
 import nprogress from 'nprogress';
 import "nprogress/nprogress.css";
-export const baseUrl = 'https://api_doc.pacificsilkroad.cn'
+// export const baseUrl = 'https://api_doc.pacificsilkroad.cn'
+export const baseUrl = 'https://dev.pacificsilkroad.cn/api-service'
 
 // 向指定的 url 获取数据表单
 export const getForm = (requestUrl, callback) => {
@@ -27,13 +28,13 @@ export const postForm = (requestUrl, params, callback) => {
     }).then(({ data: res }) => {
         console.log('postForm 的 response', res);
         nprogress.done()
-        if (res.code === 0) {
-            alert("提交成功");
-        } else if (res.code === 400) {
-            alert("请求对象不存在");
-        } else {
-            alert("网络错误");
-        }
+        // if (res.code === 0) {
+        //     alert("提交成功");
+        // } else if (res.code === 400) {
+        //     alert("请求对象不存在");
+        // } else {
+        //     alert("网络错误");
+        // }
         callback(res);
     })
 }

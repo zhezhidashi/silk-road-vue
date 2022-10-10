@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="height: 1500px">
+	<div class="background" style="height: auto;">
 		<div class="Heading">网站简介</div>
 		<div class="web_intro_text">
 			<div class="web_intro_paragraph">
@@ -15,6 +15,7 @@
 				&emsp;&emsp;{{ ParagraphFour }}
 			</div>
 		</div>
+        <div class="BottomBlank"></div>
         <img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
@@ -53,13 +54,14 @@ export default {
 <style scoped>
 .web_intro_text {
 	position: relative;
-	width: 1000px;
+	width: 80vw;
     left: 0;
     right: 0;
     margin: auto;
     top: 160px;
 }
 .web_intro_paragraph{
+    position: relative;
     margin: 20px;
     font-size: 20px;
     line-height: 200%;
