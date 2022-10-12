@@ -1,110 +1,125 @@
 <template>
 	<div class="background" style="background: #efefef">
-		<!--    左侧高级搜索部分-->
-		<div class="SearchContainer">
-			<!-- 关键词 -->
-			<div class="archive_list_search_keywords">关键词</div>
-			<!-- 关键词白框 -->
-			<div class="archive_list_search_keywords_block">
-				<input
-					type="search"
-					v-model="search_keywords"
-					class="archive_list_search_keywords_text"
-				/>
-			</div>
-
-			<!-- 年份 -->
-			<div class="archive_list_search_year">年份</div>
-
-			<!-- 年份白框 -->
-			<div class="YearFromToContainer">
-				<div class="archive_list_search_date_from">
+		<div class="SearchResultContainer">
+			<!--    左侧高级搜索部分-->
+			<div class="SearchContainer">
+				<!-- 关键词 -->
+				<div class="archive_list_search_keywords">关键词</div>
+				<!-- 关键词白框 -->
+				<div class="archive_list_search_keywords_block">
 					<input
 						type="search"
-						v-model="search_date_from"
-						class="archive_list_search_date_from_text"
+						v-model="search_keywords"
+						class="archive_list_search_keywords_text"
 					/>
 				</div>
-				<div class="archive_list_search_date_text">至</div>
-				<div class="archive_list_search_date_to">
-					<input
-						type="search"
-						v-model="search_date_to"
-						class="archive_list_search_date_to_text"
-					/>
+
+				<!-- 年份 -->
+				<div class="archive_list_search_year">年份</div>
+
+				<!-- 年份白框 -->
+				<div class="YearFromToContainer">
+					<div class="archive_list_search_date_from">
+						<input
+							type="search"
+							v-model="search_date_from"
+							class="archive_list_search_date_from_text"
+						/>
+					</div>
+					<div class="archive_list_search_date_text">至</div>
+					<div class="archive_list_search_date_to">
+						<input
+							type="search"
+							v-model="search_date_to"
+							class="archive_list_search_date_to_text"
+						/>
+					</div>
 				</div>
-			</div>
 
-			<!-- 语言 -->
-			<div class="archive_list_search_language">语言</div>
+				<!-- 语言 -->
+				<div class="archive_list_search_language">语言</div>
 
-			<div class="LanguageContainer">
-				<div v-for="item in search_language_list" :key="item.id">
-					<div class="archive_list_search_language_option">
-						<div
-							@click="
-								archive_list_search_language_option(
-									$event,
-									item.id
-								)
-							"
-							class="archive_list_search_language_option_square"
-							:id="`archive_list_search_language_option_square_${item.language}`"
-							:style="`background: ${item.SquareColor}`"
-						></div>
-						<div class="archive_list_search_language_option_text">
-							{{ item.text }}
+				<div class="LanguageContainer">
+					<div v-for="item in search_language_list" :key="item.id">
+						<div class="archive_list_search_language_option">
+							<div
+								@click="
+									archive_list_search_language_option(
+										$event,
+										item.id
+									)
+								"
+								class="
+									archive_list_search_language_option_square
+								"
+								:id="`archive_list_search_language_option_square_${item.language}`"
+								:style="`background: ${item.SquareColor}`"
+							></div>
+							<div
+								class="archive_list_search_language_option_text"
+							>
+								{{ item.text }}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<!--高级搜索框-->
-			<div class="blue_rectangle_container" id="AdvancedSearchContainer">
+				<!--高级搜索框-->
 				<div
-					@click="archive_list_advanced_search_btn($event)"
-					style="font-weight: 700; font-size: 18px; color: #ffffff"
+					class="blue_rectangle_container"
+					id="AdvancedSearchContainer"
 				>
-					搜索
+					<div
+						@click="archive_list_advanced_search_btn($event)"
+						style="
+							font-weight: 700;
+							font-size: 18px;
+							color: #ffffff;
+						"
+					>
+						搜索
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<!--右方的搜索结果-->
-		<div class="SearchResultContainer">
-			<div
-				v-for="search_result in search_result_list"
-				:key="search_result.search_result_id"
-			>
+			<!--右方的搜索结果-->
+			<div class="ResultContainer">
 				<div
-					@click="
-						archive_list_search_result_btn(
-							$event,
-							search_result.search_result_id
-						)
-					"
-					class="archive_list_search_result_container Card HoverShadow"
+					v-for="search_result in search_result_list"
+					:key="search_result.search_result_id"
 				>
-					<div class="search_result_img_container Card">
-						<div
-							class="search_result_img Card"
-							:style="`background-image:url(${search_result.img_src})`"
-							alt="图片路径错误"
-						></div>
-					</div>
-					<div class="archive_list_search_result_title">
-						{{ search_result.search_result_title }}
-					</div>
-					<div class="archive_list_search_result_subtitle">
-						{{ search_result.search_result_subtitle }}
-					</div>
-					<div class="archive_list_search_result_date">
-						{{ search_result.search_result_date_from }}~{{
-							search_result.search_result_date_to
-						}}
-					</div>
-					<div class="archive_list_search_result_description">
-						{{ search_result.search_result_description }}
+					<div
+						@click="
+							archive_list_search_result_btn(
+								$event,
+								search_result.search_result_id
+							)
+						"
+						class="ResultItemContainer Card HoverShadow"
+					>
+						<div class="ImageContainer Card">
+							<div
+								class="search_result_img Card"
+								:style="`background-image:url(${search_result.img_src})`"
+								alt="图片路径错误"
+							></div>
+						</div>
+						<div class="ImageTextContainer">
+							<div class="ImageTitle">
+								{{ search_result.search_result_title }}
+							</div>
+							<div class="ImageSubtitle">
+								{{ search_result.search_result_subtitle }}
+							</div>
+							<div class="ImageDate">
+								{{ search_result.search_result_date_from }}~{{
+									search_result.search_result_date_to
+								}}
+							</div>
+							<div class="ImageDescription">
+								{{ search_result.search_result_description }}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -129,7 +144,7 @@
 		</div>
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div class="BottomBlank"></div>
-        <img src="底部浪花.svg" class="BottomWave" />
+		<img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -179,7 +194,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 0);
-        this.$store.dispatch("GetLineIndex", 0);
+		this.$store.dispatch("GetLineIndex", 0);
 	},
 	methods: {
 		router_go_back() {
@@ -226,7 +241,7 @@ export default {
 				url += "&language=" + now_search_language;
 
 			console.log(url);
-			let _this = this; 
+			let _this = this;
 
 			getForm(url, function (res, msg) {
 				let data = res.data;
@@ -241,8 +256,11 @@ export default {
 					let new_map = {
 						search_result_id:
 							search_list_item["main_id"].toString(),
-						// img_src: search_list_item["mini_pic_url"],
-						img_src: "默认图片.jpg",
+						img_src:
+							search_list_item["mini_pic_url"] === ""
+								? "默认图片.jpg"
+								: search_list_item["mini_pic_url"],
+						// img_src: "默认图片.jpg",
 						search_result_title: search_list_item["title"]["ZH"],
 						// search_result_subtitle:
 						// 	search_list_item["location"]["ZH"],
@@ -264,7 +282,7 @@ export default {
 					_this.search_result_list.push(new_map);
 				}
 			});
-            console.log(this.search_language_list)
+			console.log(this.search_language_list);
 		},
 
 		//左侧搜索页面有语言选项，鼠标点击哪个，就把哪个选项前面的白色方块变成黑色方块，或者是把黑色方块变成白色方块
@@ -356,40 +374,55 @@ export default {
 				alert("当前已经是第一页");
 				return;
 			}
-			this.archive_list_jmp(event, (parseInt(this.now_page_num) - 1).toString());
+			this.archive_list_jmp(
+				event,
+				(parseInt(this.now_page_num) - 1).toString()
+			);
 		},
 
 		//跳转至下一页
 		archive_list_jump_next_btn(event) {
-
 			if (parseInt(this.now_page_num) >= parseInt(this.total_page_num)) {
 				alert("当前已经是最后一页");
 				return;
 			}
-			this.archive_list_jmp(event, (parseInt(this.now_page_num) + 1).toString());
+			this.archive_list_jmp(
+				event,
+				(parseInt(this.now_page_num) + 1).toString()
+			);
 		},
 	},
 };
 </script>
 
 <style scoped>
+/* 左侧高级检索和右侧搜索结果的 Container */
+.SearchResultContainer {
+	position: relative;
+	top: 150px;
+	height: auto;
+	width: 80vw;
+	min-width: 1200px;
+	display: flex;
+	justify-content: space-around;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* background: red; */
+}
+
 /*左侧高级搜索部分*/
 .SearchContainer {
-	position: absolute;
-	left: 100px;
-	top: 150px;
-	width: 230px;
+	position: relative;
+
+	width: 15vw;
+	min-width: 230px;
 	height: 500px;
-	/* background: red; */
+	/* background: skyblue; */
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	/* align-items: center; */
-}
-/* 左侧搜索的向下指的箭头图片 */
-.archive_list_search_arrow {
-	position: absolute;
-	width: 13px;
 }
 
 /*关键字和年份的Container*/
@@ -407,7 +440,8 @@ export default {
 /* 输入关键字的Container */
 .archive_list_search_keywords_block {
 	position: relative;
-	width: 230px;
+	width: 15vw;
+	min-width: 230px;
 	height: 42px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.4px rgba(0, 0, 0, 0.11);
@@ -419,7 +453,8 @@ export default {
 /* 输入关键字文本 */
 .archive_list_search_keywords_text {
 	position: absolute;
-	width: 210px;
+	width: 13.7vw;
+	min-width: 210px;
 	height: 30px;
 	border: none;
 	outline: none;
@@ -439,7 +474,8 @@ export default {
 .YearFromToContainer {
 	position: relative;
 	height: 42px;
-	width: 230px;
+	width: 15vw;
+	min-width: 230px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -447,7 +483,8 @@ export default {
 
 .archive_list_search_date_from {
 	position: relative;
-	width: 84px;
+	width: 5.5vw;
+	min-width: 84px;
 	height: 42px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.3px rgba(0, 0, 0, 0.11);
@@ -459,7 +496,8 @@ export default {
 /* 年份 from 的文本 */
 .archive_list_search_date_from_text {
 	position: absolute;
-	width: 75px;
+	width: 4.9vw;
+	min-width: 75px;
 	height: 30px;
 	border: none;
 	outline: none;
@@ -475,7 +513,8 @@ export default {
 /* 年份 to 的 Container */
 .archive_list_search_date_to {
 	position: relative;
-	width: 84px;
+	width: 5.5vw;
+	min-width: 84px;
 	height: 42px;
 	background: #ffffff;
 	box-shadow: inset 0.7px 0.7px 1.3px rgba(0, 0, 0, 0.11);
@@ -487,7 +526,8 @@ export default {
 /* 年份 to 的文本 */
 .archive_list_search_date_to_text {
 	position: absolute;
-	width: 75px;
+	width: 4.9vw;
+	min-width: 75px;
 	height: 30px;
 	border: none;
 	outline: none;
@@ -497,17 +537,20 @@ export default {
 /*语言*/
 .archive_list_search_language {
 	position: relative;
-	width: 42px;
+	width: 2.7vw;
+	min-width: 42px;
 	font-weight: 600;
 	font-size: 20px;
 	line-height: 150%;
 	color: #2f2f2f;
 	z-index: 10;
 }
+
 /* 语言的 Container */
 .LanguageContainer {
 	position: relative;
-	width: 230px;
+	width: 15vw;
+	min-width: 230px;
 
 	height: 170px;
 	display: flex;
@@ -524,7 +567,8 @@ export default {
 
 .archive_list_search_language_option {
 	position: relative;
-	width: 190px;
+	width: 12.4vw;
+	min-width: 190px;
 	height: 27px;
 	/* background: pink; */
 	margin-left: 20px;
@@ -532,6 +576,7 @@ export default {
 	display: flex;
 	align-items: center;
 }
+
 .archive_list_search_language_option_square {
 	position: absolute;
 	width: 18px;
@@ -539,6 +584,7 @@ export default {
 	left: 0;
 	cursor: pointer;
 }
+
 .archive_list_search_language_option_text {
 	position: absolute;
 	left: 30px;
@@ -550,43 +596,45 @@ export default {
 /*高级搜索框*/
 #AdvancedSearchContainer {
 	position: relative;
-	width: 230px;
+	width: 15vw;
+	min-width: 230px;
 	height: 48px;
 	z-index: 10;
 }
 
 /*右方的搜索结果*/
-.SearchResultContainer {
+.ResultContainer {
 	position: relative;
-	width: 950px;
+	width: 62vw;
+	min-width: 950px;
 	min-height: 100vh;
-	left: 440px;
-	top: 150px;
 	display: flex;
 	flex-flow: wrap;
 	align-content: flex-start;
 	z-index: 10;
 	/* background: #588cc8; */
 }
-/*白色的框*/
-.archive_list_search_result_container {
+.ResultItemContainer {
 	position: relative;
-	width: 909px;
-	height: 339px;
-	/* background: #f4f4f4; */
+	width: 59.4vw;
+	min-width: 909px;
+	height: 22.2vw;
+	min-height: 339px;
 	border-radius: 7px;
 	margin: 20px;
 	cursor: pointer;
 	/* background: red; */
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
 }
 /*图片*/
-.search_result_img_container {
-	position: absolute;
-	position: absolute;
-	width: 208px;
-	height: 240px;
-	left: 49px;
-	top: 40px;
+.ImageContainer {
+	position: relative;
+	width: 13.6vw;
+	min-width: 208px;
+	height: 15.7vw;
+	min-height: 240px;
 }
 .search_result_img {
 	width: 100%;
@@ -599,15 +647,29 @@ export default {
 	-moz-background-size: cover;
 	background-size: cover;
 }
+
+
+/* 图片文字的 Container */
+.ImageTextContainer{
+    position: relative;
+    width: 40vw;
+    min-width: 580px;
+    height: 15.7vw;
+    min-height: 240px;
+    /* background: red; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 /*标题*/
-.archive_list_search_result_title {
-	position: absolute;
-	width: 400px;
-	height: 30px;
-	left: 286px;
-	top: 40px;
-	font-size: 24px;
-	line-height: 30px;
+.ImageTitle {
+	position: relative;
+    width: 33.1vw;
+    min-width: 500px;
+	font-size: 22px;
+	line-height: 150%;
 	color: #2f2f2f;
 	/*最多显示一行文字，否则就是省略号*/
 	overflow: hidden;
@@ -618,35 +680,27 @@ export default {
 }
 
 /*副标题*/
-.archive_list_search_result_subtitle {
+.ImageSubtitle {
 	/* 西印度档案总馆 */
-	position: absolute;
-	width: 400px;
-	height: 16px;
-	left: 290px;
-	top: 76px;
-	font-size: 20px;
+	position: relative;
+	font-size: 18px;
+    line-height: 200%;
 	color: #2f2f2f;
 }
 /*时间*/
-.archive_list_search_result_date {
-	position: absolute;
-	width: 224px;
-	height: 18px;
-	left: 289px;
-	top: 106px;
-	font-size: 20px;
+.ImageDate {
+	position: relative;
+	font-size: 18px;
+    line-height: 200%;
 	color: #2f2f2f;
 }
 /*描述*/
-.archive_list_search_result_description {
-	position: absolute;
-	position: absolute;
-	width: 589px;
-	left: 286px;
-	top: 168px;
+.ImageDescription {
+	position: relative;
+    width: 38.5vw;
+	min-width: 589px;
 
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 150%;
 	color: #2f2f2f;
 
@@ -660,7 +714,7 @@ export default {
 
 /*搜索结果换页*/
 .JumpContainer {
-	position: relative;
+	position: relative; 
 	width: 400px;
 	height: 40px;
 	top: 300px;

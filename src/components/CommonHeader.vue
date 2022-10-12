@@ -102,8 +102,8 @@ export default {
 /*导航栏“太平洋丝绸之路”的logo*/
 .navigation_logo {
 	position: absolute;
-	width: 13vw;
-	min-width: 80px;
+	width: 16vw;
+	min-width: 90px;
 	left: 8vw;
 	top: 0;
 	bottom: 0;
@@ -143,7 +143,7 @@ export default {
 	width: 6vw;
 	text-align: center;
 	font-size: 18px;
-	line-height: 90%;
+	line-height: 96%;
 	color: #ffffff;
 	
 }
@@ -159,7 +159,8 @@ export default {
 		width: 0;
 	}
 	to {
-		width: 5.7ch;
+		width: 5vw;
+        max-width: 70px;
 	}
 }
 </style>

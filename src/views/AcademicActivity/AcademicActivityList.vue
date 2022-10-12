@@ -13,6 +13,7 @@
 				<div
 					@click.once="ImageItemButton(item.AcademicActivityID)"
 					:class="item.AcademicActivityID === '-1' ? `ImageItem ` : `ImageItem Card HoverDark`"
+                    :style="item.AcademicActivityID === '-1' ? `` : `cursor: pointer`"
 				>
 					<!--图片-->
 					<div
@@ -60,9 +61,7 @@ export default {
 
 		this.academic_activity_images_src = [];
 
-		let inner_this = this; // 别改
-
-		let index = 0;
+		let _this = this; // 别改
 		getForm(url, function (res, msg) {
 			let data = res.data;
 			console.log("data list", data.list.length);
@@ -83,8 +82,7 @@ export default {
 					date: item["date"],
 					description: item["title"],
 				};
-				inner_this.academic_activity_images_src.push(new_map);
-				index++;
+				_this.academic_activity_images_src.push(new_map);
 			}
 		});
 
@@ -96,13 +94,8 @@ export default {
 	},
 	// 这里定义方法
 	methods: {
-		// 路由回退
-		router_go_back() {
-			this.$router.push({
-				path: "/Home",
-			});
-		},
 		ImageItemButton(AcademicActivityID) {
+            if(AcademicActivityID === '-1') return;
 			this.$router.push({
 				path: "/AcademicActivityDetails",
 				query: {

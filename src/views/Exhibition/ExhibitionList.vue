@@ -1,297 +1,163 @@
 <template>
-	<div class="background" style="background: #efefef">
-		<!--线上展览标题-->
+	<div class="background">
 		<div class="Heading">线上展览</div>
-
-		<!-- 把 标题、查看全部、图片列表当作一个类，记为 exh_list_content。并且把这些类全部装到 exh_list_container 里面方便 v-for 展示-->
-		<div class="exh_list_container">
-			<div v-for="item in exh_list_items" :key="item.ExhibitionID">
-				<div class="exh_list_content">
-					<!--标题-->
-					<div class="exh_list_h2">{{ item.exh_list_h2 }}</div>
-					<!--文字描述-->
-					<div class="exh_list_text">{{ item.exh_list_text }}</div>
-					<!--“查看全部”方框-->
-					<div class="blue_rectangle_container" id="exh_list_see_all">
+		<div class="ExhibitionContainer">
+			<div v-for="(item, index) in ExhibitionList" :key="index">
+				<div
+					class="ExhibitionItem Card HoverShadow"
+					@click="GoExhibition(item.ExhibitionID)"
+				>
+					<div class="ExhibitionItemImageContainer">
 						<div
-							@click="
-								see_all_btn(
-									$event,
-									item.ExhibitionID,
-									item.exh_list_h2,
-									item.exh_list_text
-								)
-							"
-							class="see_all_text"
-						>
-							查看全部
-						</div>
+							class="ExhibitionItemImage BackgroundImage"
+							:style="`background-image:url(${item.Image})`"
+						></div>
 					</div>
-					<!--图片列表-->
-					<div class="list_images" id="exh_list_images">
-						<!-- 照片只展示前四个 -->
-						<div
-							v-for="(img_src, index) in item.imgList"
-							:key="img_src.AlbumID"
-						>
-							<div
-								@click="
-									exh_list_images_btn(
-										$event,
-										item.ExhibitionID,
-										img_src.AlbumID,
-										item.exh_list_h2,
-										item.exh_list_text
-									)
-								"
-								class="exh_list_images_img_container Card"
-							>
-								<!-- 鼠标悬停查看详情 -->
-								<div class="ImageContainerHover">
-									<div class="ImageSeeDetailsHover">
-										查看大图
-									</div>
-								</div>
-								<div
-									class="exh_list_images_img Card"
-									:style="`background-image:url(${img_src.src})`"
-									v-show="index < 4"
-								></div>
-							</div>
-						</div>
+					<div class="ExhibitionItemText">
+						<div class="ExhibitionItemTitle">{{ item.Title }}</div>
+						<div class="ExhibitionItemIntro">{{ item.Intro[0] }}</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- 这里留一块300px高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
+		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div class="BottomBlank"></div>
-        <img src="底部浪花.svg" class="BottomWave" />
+		<img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
 <script>
-import { getForm } from "../../api/data.js";
 export default {
-	name: "ExhibitionList",
 	data() {
 		return {
-			exh_list_items: [
+			ExhibitionList: [
 				{
-					exh_list_h2: "",
-					exh_list_text: "",
-					ExhibitionID: "",
-					imgList: [],
+					Title: "马尼拉：亚洲中转站",
+					Intro: [
+						"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
+						"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
+						"大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。",
+					],
+					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-XkM51DS9Na.jpg",
+                    ExhibitionID: 0,
+				},
+                {
+					Title: "大帆船：海上堡垒",
+					Intro: [
+						"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
+						"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
+						"大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。",
+					],
+					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-XkM51DS9Na.jpg",
+                    ExhibitionID: 0,
+				},
+                {
+					Title: "船上生活：太平洋针路",
+					Intro: [
+						"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
+						"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
+						"大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。",
+					],
+					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-XkM51DS9Na.jpg",
+                    ExhibitionID: 0,
+				},
+                {
+					Title: "阿卡普尔科：辐射美洲",
+					Intro: [
+						"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
+						"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
+						"大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。",
+					],
+					Image: "https://dev.pacificsilkroad.cn/img-service/1/1-XkM51DS9Na.jpg",
+                    ExhibitionID: 0,
 				},
 			],
 		};
+	},
+	methods: {
+		GoExhibition(ExhibitionID) {
+			this.$router.push({
+				path: "/Exhibition",
+				query: {
+					ExhibitionID,
+				},
+			});
+		},
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 3);
 		this.$store.dispatch("GetLineIndex", 1);
 	},
-	created() {
-		// http 请求部分
-		let url = "/exhibition/list";
-
-		console.log("http请求的url是 " + url);
-
-		this.exh_list_items = [];
-		let _this = this; // 别改
-
-		getForm(url, function (res) {
-			let data = res.data;
-
-			// 遍历 gallery
-			for (let item of data.list) {
-				let new_img_list = [];
-
-				// console.log('album_dict', item['album_dict'])
-
-				// 遍历 album
-				for (let item_gallery in item["album_dict"]) {
-					let new_img_map = {
-						src: null,
-						AlbumID: item_gallery,
-					};
-
-					// 这个遍历仅仅是为了取出 album 的封面
-					for (let item_img in item["album_dict"][item_gallery][
-						"picture_dict"
-					]) {
-						// 把相册封面取出来
-						if (new_img_map["src"] === null) {
-							new_img_map["src"] =
-								item["album_dict"][item_gallery][
-									"picture_dict"
-								][item_img]["pic_url"];
-							break;
-						}
-					}
-					new_img_list.push(new_img_map);
-				}
-
-				let new_map = {
-					exh_list_h2: item["title"],
-					exh_list_text: item["intro"]["Intro"],
-					ExhibitionID: item["main_id"],
-					imgList: new_img_list,
-				};
-				_this.exh_list_items.push(new_map);
-			}
-		});
-	},
-	methods: {
-		see_all_btn(event, ExhibitionID) {
-			this.$router.push({
-				path: "/AlbumList",
-				query: {
-					ExhibitionID,
-				},
-			});
-		},
-		exh_list_images_btn(event, ExhibitionID, AlbumID) {
-			this.$router.push({
-				path: "/Album",
-				query: {
-					ExhibitionID,
-					AlbumID,
-				},
-			});
-		},
-	},
 };
 </script>
 
 <style scoped>
-/*exhibition list 整个框*/
-.exh_list_container {
+.ExhibitionContainer {
 	position: relative;
-	width: 1150px;
+	width: 80vw;
+	height: auto;
 	min-height: 100vh;
-	top: 220px;
-	/* background: lightblue; */
+	/* background: skyblue; */
+	top: 200px;
 	left: 0;
 	right: 0;
 	margin: auto;
-}
 
-/*每一个exhibition对应的块*/
-.exh_list_content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.ExhibitionItem {
 	position: relative;
-	width: 1100px;
-	height: 500px;
-	margin: 30px;
-	/* background: blue; */
+	width: 80vw;
+	height: 10vw;
+	min-height: 100px;
+	margin: 20px;
+	/* background: red; */
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
 }
-
-/*每一个exhibition的标题*/
-.exh_list_h2 {
-	position: absolute;
-	width: 800px;
-	left: 20px;
-	top: 25px;
-	font-size: 28px;
-	line-height: 120%;
-	color: #2f2f2f;
+.ExhibitionItemImageContainer {
+	position: relative;
+	width: 8vw;
+	height: 8vw;
 }
-
-/*每一个exhibition对应文字描述*/
-.exh_list_text {
-	position: absolute;
-	width: 1050px;
-	left: 20px;
-	top: 100px;
+.ExhibitionItemImage {
+	padding-bottom: 100%;
+}
+.ExhibitionItemText {
+	position: relative;
+	width: 66vw;
+	height: 8vw;
+	min-height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.ExhibitionItemTitle {
 	font-size: 20px;
 	line-height: 200%;
-	color: #2f2f2f;
-	/* background: red; */
+	font-weight: bold;
+	/*最多显示一行文字，否则就是省略号*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+.ExhibitionItemIntro {
+	font-size: 16px;
+	line-height: 200%;
 
-	/* 最多显示2行文字，否则就是省略号 */
+	/*最多显示两行文字，否则就是省略号*/
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
-}
-
-/*每一个exhibition对应的查看全部*/
-#exh_list_see_all {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	font-size: 20px;
-}
-
-/*一排一排陈列图片 上半部分对应的id*/
-#exh_list_images {
-	width: 1000px;
-	left: 0;
-	top: 180px;
-	z-index: 10;
-}
-
-/* 每一张图片的属性 */
-.exh_list_images_img_container {
-	width: 210px;
-	height: 210px;
-	border-radius: 7px;
-	margin: 20px;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.exh_list_images_img {
-	width: 100%;
-	height: 0;
-	padding-bottom: 100%;
-	border-radius: 7px;
-
-	background-position: center center;
-	background-repeat: no-repeat;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	background-size: cover;
-	border-radius: 7px;
-}
-
-/* 鼠标悬浮出现“查看详情” */
-.ImageContainerHover {
-	position: absolute;
-	width: 210px;
-	height: 210px;
-	overflow: hidden;
-	background: rgba(95, 95, 95, 0.37);
-	z-index: 15;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-    opacity: 0;
-	/* 需要参与过渡的属性 */
-	transition-property: opacity;
-	/* 过渡动画的持续时间 */
-	transition-duration: 0.5s;
-}
-.exh_list_images_img_container:hover .ImageContainerHover {
-	opacity: 1;
-}
-.ImageSeeDetailsHover {
-	position: absolute;
-	width: 150px;
-	height: 50px;
-
-	background: #588cc8;
-	border-radius: 7px;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	font-size: 18px;
-	color: #ffffff;
-	cursor: pointer;
-	z-index: 20;
 }
 </style>

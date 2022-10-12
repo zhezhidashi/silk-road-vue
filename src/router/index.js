@@ -70,20 +70,20 @@ const routes = [
                 component: () => import('../views/Exhibition/ExhibitionList.vue')
             },
             {
-                path: '/AlbumList',
-                name: 'AlbumList',
+                path: '/Exhibition',
+                name: 'Exhibition',
                 meta: {
-                    title: '线上展览-相册列表'
+                    title: '线上展览'
                 },
-                component: () => import('../views/Exhibition/AlbumList.vue')
+                component: () => import('../views/Exhibition/Exhibition')
             },
             {
-                path: '/Album',
-                name: 'Album',
+                path: '/Pictures',
+                name: 'Pictures',
                 meta: {
-                    title: '线上展览-相册内容'
+                    title: '图片'
                 },
-                component: () => import('../views/Exhibition/Album')
+                component: () => import('../views/Exhibition/Pictures.vue')
             },
             {
                 path: '/AcademicActivityList',
