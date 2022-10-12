@@ -1,8 +1,12 @@
 <template>
 	<div class="background">
-		<title-intro :ExhibitionTitle="ExhibitionTitle" :ExhibitionIntro="ExhibitionIntro" :ExhibitionID="ExhibitionID"/>
-        <pic-list :Images="Images" :ExhibitionID="ExhibitionID" />
-        <info />
+		<title-intro
+			:ExhibitionTitle="ExhibitionTitle[ExhibitionID]"
+			:ExhibitionIntro="ExhibitionIntro"
+			:ExhibitionID="ExhibitionID"
+		/>
+		<pic-list :Images="Images[ExhibitionID]" :ExhibitionID="ExhibitionID" />
+		<info />
 		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
 		<div class="BottomBlank"></div>
 		<img src="底部浪花.svg" class="BottomWave" />
@@ -16,15 +20,20 @@ import PicList from "./PicList.vue";
 import Info from "./Info.vue";
 export default {
 	name: "Exhibition",
-    components: {
-        TitleIntro,
-        PicList,
-        Info
-    },
+	components: {
+		TitleIntro,
+		PicList,
+		Info,
+	},
 	data() {
-        // 记住，Exhibition 这个界面只保存八张图片
+		// 记住，Exhibition 这个界面只保存八张图片
 		return {
-			ExhibitionTitle: "有帆自远方来",
+			ExhibitionTitle: [
+				"马尼拉：亚洲中转站",
+				"大帆船：海上堡垒",
+				"船上生活：太平洋针路",
+				"阿卡普尔科：辐射美洲",
+			],
 			ExhibitionIntro: [
 				"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
 				"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
@@ -32,126 +41,134 @@ export default {
 			],
 			ExhibitionID: "0",
 			Images: [
-				{
-					PictureUrl:
-						"https://dev.pacificsilkroad.cn/img-service/1/1-h47ROx438L.jpg",
-					Title: {
-						ZH: "中文标题",
-						EN: "",
-						ES: "Título en español",
+				[
+					{
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-Gf6C84oLjP.jpg",
+						Title: {
+							ZH: "古今形胜之图",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "传入欧洲的首张中国全图，为福建金沙书院重刻本，地图经闽南华商取得，并在马尼拉华人协助下由神父将图注译为西班牙文。1574年，时任西班牙驻菲律宾总督将其呈交西班牙国王菲利普二世。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "0",
 					},
-					Intro: {
-						ZH: "1564-1565年完成阿卡普尔科-马尼拉-阿卡普尔科首次航行的“圣佩德罗”号（剖面模型），其催生了1565-1815年间持续运行的马尼拉-阿卡普尔科跨太平洋贸易航线。推测比例1:12",
-						EN: "",
-						ES: "Medio casco  de la nao San Pedro que completó el primer viaje. Acapulco-Manila-Acapulco, 1564-1565, dando origen a la ruta transpacífica Manila-Acapulco-Manila que duró desde 1565 a 1815. Réplica hipotética a escala 1:12",
+					{
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-q4tjvrVuN3.jpg",
+						Title: {
+							ZH: "西班牙人绘吕宋岛及周边中国海岸图",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "附于数学家、天文学家Hernando de los Ríos Coronel上书，信中号召由两条路前来占领爱尔摩沙岛。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "1",
 					},
-					PictureID: "0",
-				},
-				{
-					PictureUrl:
-						"https://dev.pacificsilkroad.cn/img-service/1/1-ROkyqUBXxf.jpg",
-					Title: {
-						ZH: "中文标题",
-						EN: "",
-						ES: "Título en español",
+				],
+				[
+					{
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-2IP3692m8x.jpg",
+						Title: {
+							ZH: "麦哲伦环球航行譬喻图",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "西奥多·德布莱生于比利时列日，后为逃避天主教迫害前往法兰克福，这幅铜版是他1590年代开始制作的“伟大航行·西印度”系列之一，其去世前完成了6卷，美洲为第4卷、共24幅，此幅描绘了渡过麦哲伦海峡的光辉意义。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "0",
 					},
-					Intro: {
-						ZH: "关于从1527年到16世纪70年代初新西班牙建造的船只，我们所知很少，主要是缺乏图片、草图、设计图，因为造船业直到16世纪末还主要掌握在不识字的造船师傅手中，他们都是经验型，通过实践代代相传，直接决定船只的尺寸和比例。",
-						EN: "",
-						ES: "Pocas son las noticias que tenemos acerca de cómo fueron los barcos que se construyeron en Nueva España desde 1527 hasta el principio del último tercio del siglo XVI. Nos referimos a la falta dibujos, bocetos o planos que hubieran sido utilizados para la construcción de estos navíos, debida a que hasta casi finales de siglo XVI, la construcción naval estuvo en manos de los carpinteros de ribera analfabetas en su gran mayoría. Estos fueron constructores empíricos cuya larga y rica experiencia, transmitida de generación en generación mediante la práctica directa de construir navíos, era la herramienta primordial para tomar las decisiones acerca de las dimensiones y proporciones del futuro navío.",
+					{
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-AV8SBpcdmY.jpg",
+						Title: {
+							ZH: "西班牙巴斯克地区的一份造船委托合同",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "合同中明确要一艘内径最大宽度13.5腕尺、龙骨26.5腕尺、艏楼艉楼舷高10.75腕尺的船。此处1腕尺为57厘米。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "1",
 					},
-					PictureID: "1",
-				},
-				{
-					PictureUrl:
-						"https://dev.pacificsilkroad.cn/img-service/1/1-oyJpMu8ENy.jpg",
-					Title: {
-						ZH: "中文标题",
-						EN: "",
-						ES: "Título en español",
+				],
+				[
+					{
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-CxLavSdZZx.jpg",
+						Title: {
+							ZH: "",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "",
+							EN: "",
+							ES: "Grumete en la tabla de jarcia. Es un joven de 16 a 20 años, aprendiz de marinero, vestido con blusón blanco, calzones azules y bonete rojo, que tenía mucho éxito entre la marinería.(Dibujo de Marcelino González)",
+						},
+						PictureID: "0",
 					},
-					Intro: {
-						ZH: "用于“南海”的船只是什么特点和比例，最好的资料无疑是船谱《关于墨西哥地区船只设计、管理和规范运行的说明》，由国王理事会成员、墨西哥检审庭听证员迭戈·加西亚·德帕拉西奥博士编写，1587年在墨城佩德罗·奥查尔特印刷所出版。这部专论，特别是第四册，对于我们了解“圣佩德罗”号的情况特别重要，这艘旗舰是为黎牙实比指挥舰队跨太平洋航行而在巴拉-德-纳维达专门建造的。",
-						EN: "",
-						ES: "Sin duda,  el tratado de construcción naval que mejor idea nos puede dar acerca de cuáles eran las características y las proporciones de las naos destinadas al servicio en la Mar del Sur, es la Instrucción Náutica para el buen uso y regimiento de las naos, su traza y gobierno, conforme a la altura de México. Compuesta por el doctor Diego García de Palacio, del Consejo de su Majestad y su Oidor en la Real Audiencia de la dicha ciudad, impresa por Pedro Ocharte, en la ciudad de México en 1587. Este tratado, especialmente el Libro IV, es particularmente importante para aproximarnos al conocimiento de cuáles eran las características y medidas de la nao San Pedro, nave capitana de la flota que se construyó en Barra de Navidad para el viaje transpacífico de la expedición comandada por Miguel López de Legazpi.",
+					{
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-hMQT94rLWC.jpg",
+						Title: {
+							ZH: "",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "",
+							EN: "",
+							ES: "Representación de una nao medieval tomada de un grabado de época. (Dibujo de Marcelino González)",
+						},
+						PictureID: "1",
 					},
-					PictureID: "2",
-				},
-				{
-					PictureUrl:
-						"https://dev.pacificsilkroad.cn/img-service/1/1-SWV6LfK90B.jpg",
-					Title: {
-						ZH: "中文标题",
-						EN: "",
-						ES: "Título en español",
+				],
+				[
+					{
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-OeJOa2J52o.jpg",
+						Title: {
+							ZH: "新制墨西哥及周边省份地图",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "新西班牙总督地图，在北纬15°到28 °之间。右上角显示了与下加利福尼亚半岛和索诺拉海岸及部分内陆地区相应的领土，表示的是雷维拉吉多群岛的索科罗岛和加利福尼亚湾的岛屿。中间的插图描绘了墨西哥，东部是普埃布拉，南部是约特佩克和库埃纳瓦卡，西部是托卢卡和莱尔马，北部是图拉。它显示了湖泊、从墨西哥城出发的公路网。这是一个非常详细的地图，有许多地名，涵盖了了首都、城市、村庄、矿场、庄园、牧场和保护区等。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "0",
 					},
-					Intro: {
-						ZH: "根据书中信息，“圣佩德罗”号约为此形制，当时使用了“王肘”为单位，换算后约为：龙骨净长19.54 m. 最大宽度9.20 m. 弦高5.74 m. 船底2.87 m. 总长29.50 m. 最大宽度与总长比 1/3.2. 最大宽度与龙骨比 1/2. 载重约 400吨。",
-						EN: "",
-						ES: "as dimensiones de la nao San Pedro expresadas en codos de ribera y sus equivalents en el sistema métrico decimal, serían las siguientes: Quilla limpia: 34 codos de ribera* = 19.54 m. Manga: 16 codos de ribera = 9.20 m. Puntal: 10 codos de ribera =   5.74 m. Plan: 5 codos de ribera = 2.87 m. Eslora total (desde el beque al coronamiento): 51 1/3 codos de ribera = 29.50 m. Relación manga-eslora: 1/3.2. Relación manga-quilla: ½.1. Arqueo aproximado: 400 toneladas.",
+					{
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-6yKMZGWDye.jpg",
+						Title: {
+							ZH: "阿卡普尔科和马尔克斯港之间的海岸图",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "图例用A到Z标明了两地之间的重要设施，图下方还绘制了阿卡普尔科海湾和周边的天际线，以便领航员辨认进港。此图由4部分拼接而成，为护卫舰舰长Juan Vernacci下令绘制，他在1804年至1809年间指挥“麦哲伦号”每年往返于阿卡普尔科和马尼拉之间。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "1",
 					},
-					PictureID: "3",
-				},
-				{
-					PictureUrl:
-						"https://dev.pacificsilkroad.cn/img-service/1/1-Qkl1jWnunq.jpg",
-					Title: {
-						ZH: "中文标题",
-						EN: "",
-						ES: "Título en español",
-					},
-					Intro: {
-						ZH: "乌尔达内塔指挥的“圣佩德罗”号应有三层甲板。据加西亚·德帕拉西奥的说法，“第一层从龙骨往上”2.59米，第二层，所谓第一甲板，有1.72米，第三层“舰桥”也有1.72米。第一层被用作仓库，第二层为乘客或海军准备，第三层舰桥是操帆和掌舵的地方。",
-						EN: "",
-						ES: "El casco de una nao como la que utilizó Urdaneta tenía tres cubiertas. De acuerdo con García de Palacio,”…  la primera contando desde la quilla hasta lo alto…”tenía un altura de cuatro codos y medio (2.59 m); la segunda, denominada primera cubierta, medía tres codos de alto  (1.72 m); la altura de la tercera cubierta que recibía el nombre de puente, era también de tres codos (1.72 m). Los dos espacios ubicados entre la quilla y la segunda cubierta –llamada primera cubierta- se usaban como bodega; la primera cubierta se destinaba a “… los pasajeros, o gente de guerra,”mientras que la tercera cubierta o puente  “… es sobre la cual se marcarán las velas y gobiernan los mareantes.”",
-					},
-					PictureID: "4",
-				},
-				{
-					PictureUrl:
-						"https://dev.pacificsilkroad.cn/img-service/1/1-F2dMe3XD0r.jpg",
-					Title: {
-						ZH: "中文标题",
-						EN: "",
-						ES: "Título en español",
-					},
-					Intro: {
-						ZH: "“我们的圣母雷梅迪奥斯”号，又称“被眷顾的”",
-						EN: "",
-						ES: "Fragata S. M. C. Nuestra Señora de los Remedios alias Favorita.”",
-					},
-					PictureID: "5",
-				},
-				// {
-				// 	PictureUrl:
-				// 		"https://dev.pacificsilkroad.cn/img-service/1/1-wyn4R29Jhl.jpg",
-				// 	Title: {
-				// 		ZH: "中文标题",
-				// 		EN: "",
-				// 		ES: "Título en español",
-				// 	},
-				// 	Intro: {
-				// 		ZH: "原船1779年建于秘鲁卡亚俄、墨西哥圣布拉斯",
-				// 		EN: "",
-				// 		ES: "Lugar y fecha de construcción del barco original: El Callao, Perú - San Blas, Nayarit, México. 1779.",
-				// 	},
-				// 	PictureID: "6",
-				// },
-				// {
-				// 	PictureUrl:
-				// 		"https://dev.pacificsilkroad.cn/img-service/1/1-Hej62F1xrF.jpg",
-				// 	Title: {
-				// 		ZH: "中文标题",
-				// 		EN: "",
-				// 		ES: "Título en español",
-				// 	},
-				// 	Intro: {
-				// 		ZH: "水线和肋骨结构图，藏于墨西哥国家档案总馆",
-				// 		EN: "",
-				// 		ES: "Planos de líneas de agua y caja de cuadernas: Archivo General de la Nación, México. ",
-				// 	},
-				// 	PictureID: "7",
-				// },
+				],
 			],
 		};
 	},
@@ -167,5 +184,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

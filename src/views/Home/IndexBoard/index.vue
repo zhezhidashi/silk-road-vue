@@ -15,11 +15,12 @@
 					<div class="ImageContainer">
 						<div
 							class="BackgroundImage"
+                            id="ExhibitionBackgroundImage"
 							:style="`background-image:url(${item.Image})`"
 						></div>
 					</div>
 					<div class="ImageTitleContainer">
-						<div class="ImageTitle">
+						<div class="ImageTitle" id="ExhibitionImageTitle">
 							{{ item.Title }}
 						</div>
 					</div>
@@ -55,11 +56,12 @@
 					<div class="ImageContainer">
 						<div
 							class="BackgroundImage"
+                            id="BoardBackgroundImage"
 							:style="`background-image:url(${item.Image})`"
 						></div>
 					</div>
 					<div class="ImageTitleContainer">
-						<div class="ImageTitle">
+						<div class="ImageTitle" id="BoardImageTitle">
 							{{ item.Title }}
 						</div>
 					</div>
@@ -101,46 +103,46 @@ export default {
 			ExhibitionList: [
 				[
 					{
-						Title: "有帆自远方来",
+						Title: "马尼拉：亚洲中转站",
 						Intro: [
 							"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
 							"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
 							"大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。",
 						],
-						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-XkM51DS9Na.jpg",
+						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-Gf6C84oLjP.jpg",
 						ExhibitionID: 0,
 					},
 					{
-						Title: "有帆自远方来",
+						Title: "大帆船：海上堡垒",
 						Intro: [
 							"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
 							"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
 							"大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。",
 						],
-						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-XkM51DS9Na.jpg",
-						ExhibitionID: 0,
+						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-2IP3692m8x.jpg",
+						ExhibitionID: 1,
 					},
 					{
-						Title: "有帆自远方来",
+						Title: "船上生活：太平洋针路",
 						Intro: [
 							"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
 							"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
 							"大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。",
 						],
-						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-XkM51DS9Na.jpg",
-						ExhibitionID: 0,
+						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-AV8SBpcdmY.jpg",
+						ExhibitionID: 2,
 					},
 				],
 				[
 					{
-						Title: "有帆自远方来",
+						Title: "阿卡普尔科：辐射美洲",
 						Intro: [
 							"2009年，联合国教科文组织将每年的10月8日定为“国际大帆船日”，纪念1565-1815年间往返于墨西哥阿卡普尔科和菲律宾马尼拉之间的大帆船贸易。以大帆船贸易为依托，太平洋地区逐渐形成了一个纵横交错、多地联动、辐射亚洲大陆和美洲大陆的贸易网络，构筑了文化交流的美丽画卷。东方的商品通过中菲贸易和大帆船贸易到达太平洋东岸，进一步通过陆路穿过美洲，接入大西洋贸易网络，到达欧洲地区。来自美洲的白银、作物也“返空”进入东方世界，丰富了此岸的商业活动、农业生产和社会发展。中菲贸易和大帆船贸易共同形成了独具特色的太平洋丝绸之路，频繁的往回带来了丰富的物质史，催生了新的思想、制度和秩序，改变了个人与世界的关系，充实了太平洋两岸的精神空间，深刻地影响了世界。",
 							"经过数百年的探索和积累，以太平洋丝绸之路为通道，人员交流、知识传播、制度互鉴愈发深入，形成经济、文化、政治等领域互相交流的地理场域和历史空间，铸就了东西方文化传播的繁荣景象。大量珍贵的、可视化的、直观的历史图像，涵盖海上航线、海外贸易、文化交流、海外移民、民间信仰、地理描述等领域，印证着这条互惠之路、沟通之路。",
 							"大帆船贸易承载了中国、菲律宾与墨西哥源远流长的文化交往，拉开了早期全球化的序幕，对这一重要时期的回溯不仅能为新时代中、菲、墨和平交流提供重要的历史参照，还将为三国的进一步信任合作带来新机遇和新启示。为更好地展现这段风起云涌的太平洋之旅，北京大学外国语学院拟于2022年10月8日举行主题为“有帆自远方来”的线上历史文化展。展览由国家社会科学基金重大项目“‘太平洋丝绸之路’档案文献整理与研究”项目组承办，精选16世纪大帆船贸易至今有代表性的百余幅地图、海图、档案、肖像、书信、音乐等材料，既展现大帆船贸易关联起的大世界，也发掘在时代大潮中起伏的“小”人物，从史料史实中捕捉和呈现太平洋交流的全貌。本次主题展览期望能够引起国内学界对于中墨、中菲、中拉关系史以及全球史视角下太平洋贸易的更多关注，为“一带一路”倡议拓展更大的国际空间，为推动构建人类命运共同体的美好愿景作出积极的贡献。",
 						],
-						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-XkM51DS9Na.jpg",
-						ExhibitionID: 0,
+						Image: "https://dev.pacificsilkroad.cn/img-service/1/1-CxLavSdZZx.jpg",
+						ExhibitionID: 3,
 					},
 				],
 			],
@@ -171,16 +173,48 @@ export default {
 		};
 	},
 	methods: {
-		BoardShift: throttle(function (d) {
-			let BoardImage = document.querySelectorAll(".BackgroundImage");
-			let BoardTitle = document.querySelectorAll(".ImageTitle");
+        ExhibitionShift: throttle(function (d) {
+			let ExhibitionImage = document.querySelectorAll("#ExhibitionBackgroundImage");
+			let ExhibitionTitle = document.querySelectorAll("#ExhibitionImageTitle");
+            let Len = ExhibitionImage.length;
 
 			let ImageFadeTimer = setInterval(ImageFade, 7);
 			let opa = 100;
 			let _this = this;
 			function ImageFade() {
 				if (opa > 0) {
-					for (let i = 3; i < 6; i++) {
+					for (let i = 0; i < Len; i++) {
+						ExhibitionImage[i].style.opacity = String(opa / 100);
+						ExhibitionTitle[i].style.opacity = String(opa / 100);
+					}
+				} else if (opa === 0) {
+					_this.ExhibitionIndex =
+						(_this.ExhibitionIndex + d + _this.ExhibitionTotal) %
+						_this.ExhibitionTotal;
+				} else if (opa > -100) {
+					for (let i = 0; i < Len; i++) {
+						ExhibitionImage[i].style.opacity = String(-opa / 100);
+						ExhibitionTitle[i].style.opacity = String(-opa / 100);
+					}
+				} else {
+					clearInterval(ImageFadeTimer);
+				}
+				opa--;
+			}
+		}, 2000),
+
+
+		BoardShift: throttle(function (d) {
+			let BoardImage = document.querySelectorAll("#BoardBackgroundImage");
+			let BoardTitle = document.querySelectorAll("#BoardImageTitle");
+            
+            let Len = BoardImage.length;
+			let ImageFadeTimer = setInterval(ImageFade, 7);
+			let opa = 100;
+			let _this = this;
+			function ImageFade() {
+				if (opa > 0) {
+					for (let i = 0; i < Len; i++) {
 						BoardImage[i].style.opacity = String(opa / 100);
 						BoardTitle[i].style.opacity = String(opa / 100);
 					}
@@ -189,7 +223,7 @@ export default {
 						(_this.BoardIndex + d + _this.BoardTotal) %
 						_this.BoardTotal;
 				} else if (opa > -100) {
-					for (let i = 3; i < 6; i++) {
+					for (let i = 0; i < Len; i++) {
 						BoardImage[i].style.opacity = String(-opa / 100);
 						BoardTitle[i].style.opacity = String(-opa / 100);
 					}
@@ -200,34 +234,7 @@ export default {
 			}
 		}, 2000),
 
-        ExhibitionShift: throttle(function (d) {
-			let ExhibitionImage = document.querySelectorAll(".BackgroundImage");
-			let ExhibitionTitle = document.querySelectorAll(".ImageTitle");
-
-			let ImageFadeTimer = setInterval(ImageFade, 7);
-			let opa = 100;
-			let _this = this;
-			function ImageFade() {
-				if (opa > 0) {
-					for (let i = 0; i < 3; i++) {
-						ExhibitionImage[i].style.opacity = String(opa / 100);
-						ExhibitionTitle[i].style.opacity = String(opa / 100);
-					}
-				} else if (opa === 0) {
-					_this.ExhibitionIndex =
-						(_this.ExhibitionIndex + d + _this.ExhibitionTotal) %
-						_this.ExhibitionTotal;
-				} else if (opa > -100) {
-					for (let i = 0; i < 3; i++) {
-						ExhibitionImage[i].style.opacity = String(-opa / 100);
-						ExhibitionTitle[i].style.opacity = String(-opa / 100);
-					}
-				} else {
-					clearInterval(ImageFadeTimer);
-				}
-				opa--;
-			}
-		}, 2000),
+		
 
 		GoBoard(item, index) {
 			this.$router.push({

@@ -82,7 +82,7 @@ export default {
 	top: 300px;
 	min-height: 20vw;
     height: auto;
-	background: skyblue;
+	/* background: skyblue; */
 	left: 0;
 	right: 0;
 	margin: 0 auto;
