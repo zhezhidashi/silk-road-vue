@@ -12,11 +12,12 @@
 					@click="MenuClick(menu[index])"
 					:id="item.name"
 					class="NavBarTitle"
+                    v-if="index != 0"
 				>
 					<div class="ItemTitle">{{ item.title }}</div>
 					<img
 						:class="{ nav_bar_underline: index === HeaderIndex }"
-						src="nav_bar_underline.png"
+						src="nav_bar_underline.svg"
 						v-show="
 							LineDisplay[LineIndex] === 'inline' &&
 							index === HeaderIndex
@@ -103,7 +104,7 @@ export default {
 .navigation_logo {
 	position: absolute;
 	width: 16vw;
-	min-width: 90px;
+	min-width: 160px;
 	left: 8vw;
 	top: 0;
 	bottom: 0;
@@ -113,7 +114,7 @@ export default {
 /*导航栏六个跳转选项*/
 .NavBarContainer {
 	position: absolute;
-	width: 55vw;
+	width: 43vw;
 	height: auto;
 	right: 8vw;
 	top: 0;
@@ -151,6 +152,7 @@ export default {
 /*导航栏中跳转至某个页面的下划波浪线*/
 .nav_bar_underline {
 	position: relative;
+    top: 3px;
 	animation: MyMove 0.3s forwards;
 }
 

@@ -53,10 +53,10 @@
 					id="PageShiftRight"
 					:src="ShiftRightSrc"
 				/>
-				<viewer class="MainImageContainer" :images="ImgList">
+				<viewer class="MainImageContainer" :images="PictureList[ExhibitionID]">
 					<img
 						class="MainImage"
-						v-for="item in ImgList"
+						v-for="item in PictureList[ExhibitionID]"
 						:src="item.PictureUrl"
 						:key="item.PictureID"
 						v-show="item.PictureID === PictureID"
@@ -124,7 +124,7 @@ export default {
 
 			// 大图在展览中的序号
 			PictureID: "0",
-			PictureTotal: 2,
+			PictureTotal: [8, 2, 2, 2],
 			// 线上展览标题
 			ExhibitionTitle: [
 				"马尼拉：亚洲中转站",
@@ -165,6 +165,96 @@ export default {
 							ES: "",
 						},
 						PictureID: "1",
+					},
+                    {
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-2v73NQqb1K.jpg",
+						Title: {
+							ZH: "西班牙人绘中国艾尔摩沙岛和南方部分地区",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "附于1626年菲岛都督上书，称已占领艾尔摩沙岛北部一港口。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "2",
+					},
+                    {
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-5VAzeM910w.jpg",
+						Title: {
+							ZH: "对艾尔摩沙岛上西班牙人所占港口的描绘",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "1626年5月5日，西班牙人自马尼拉向台湾出发，因南部已被荷兰人占领，遂沿东海岸北上，11日到三貂角（Santiago），次日入鸡笼港，登陆湾内小岛并举行占领典礼。本地图附于菲律宾代理都督当年上书，介绍海湾情况及周边可取木材、修建堡垒处。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "3",
+					},
+                    {
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-vd1S8YpJNV.jpg",
+						Title: {
+							ZH: "帕劳群岛分布图",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "西太平洋群岛，领航员José Somera绘，图例解释了当年11-12月传教士发现的几个岛屿，及当地人赤身裸体、“体面着装”、接待来宾的地方及所用船只等。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "4",
+					},
+                    {
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-sHm0izGZD4.jpg",
+						Title: {
+							ZH: "马尼拉湾、苏比克湾及周边海岸",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "图右为北，右上标苏比克，1698年由Don Joseph Cortés Monrroy中士发现，是马尼拉及甲米地西北方向重要的木材产地，适宜建造船厂。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "5",
+					},
+                    {
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-F1im1cdxMn.jpg",
+						Title: {
+							ZH: "卡加延河岸教堂分布图（局部）",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "船长、领航员Juan Luis de Acosta绘，以字母标注了吕宋岛最北端卡加延河流域地势、道路、村庄、教堂等。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "6",
+					},
+                    {
+						PictureUrl:
+							"https://dev.pacificsilkroad.cn/img-service/1/1-F1im1cdxMn.jpg",
+						Title: {
+							ZH: "卡加延河岸教堂分布图（局部）",
+							EN: "",
+							ES: "",
+						},
+						Intro: {
+							ZH: "船长、领航员Juan Luis de Acosta绘，以字母标注了吕宋岛最北端卡加延河流域地势、道路、村庄、教堂等。",
+							EN: "",
+							ES: "",
+						},
+						PictureID: "7",
 					},
 				],
 				[
@@ -499,8 +589,8 @@ export default {
 		// 左右按钮切换图片
 		ImageShift(d) {
 			this.PictureID = (
-				(parseInt(this.PictureID) + d + this.PictureTotal) %
-				this.PictureTotal
+				(parseInt(this.PictureID) + d + this.PictureTotal[this.ExhibitionID]) %
+				this.PictureTotal[this.ExhibitionID]
 			).toString();
 			console.log(this.PictureID);
 		},
