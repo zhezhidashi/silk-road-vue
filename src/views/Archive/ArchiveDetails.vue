@@ -1,7 +1,7 @@
 <template>
-	<div class="background" style="height: auto;">
+	<div class="background" style="height: auto">
 		<!--    标题与副标题-->
-		<div class="Heading" style="width: 80vw;">
+		<div class="Heading" style="width: 80vw">
 			{{ Title }}
 		</div>
 		<div class="Subtitle">
@@ -50,7 +50,7 @@
 		</div>
 
 		<div class="BottomBlank"></div>
-        <img src="底部浪花.svg" class="BottomWave" />
+		<img src="底部浪花.svg" class="BottomWave" />
 	</div>
 </template>
 
@@ -128,85 +128,90 @@ export default {
 		};
 	},
 
-	created() {
-		//从url中获取档案在后端数据库中的主键
-		this.ArchiveID = this.$route.query.search_result_id;
-		//向http请求档案的详细信息
-		let url = "/archive/detail?archive_id=" + this.ArchiveID;
-
-		console.log(url);
-
-		let _this = this; // 别改
-        
-		getForm(url, (res) => {
-			let data = res.data;
-			//主标题、副标题、主页大图的url、中文描述、外文描述
-			for (let item in data.title) {
-				if (item === "ZH") _this.Title = data.title.ZH;
-				else _this.Subtitle = data.title[item];
-			}
-
-			_this.Image =
-				data.mini_pic_url === "" ? "默认图片.jpg" : data.mini_pic_url;
-
-			for (let item in data.intro) {
-				if (item === "ZH") _this.DescriptionZH = data.intro.ZH;
-				else _this.DescriptionEN = data.intro[item];
-			}
-
-
-			//档案的各种属性：年份（中英文）、关键词（中英文）、收藏单位（中英文）、收藏地点（中英文）、档案页数（中英文）、文件尺寸（中英文）、使用语种（中英文）
-			_this.Info[0].Value1 =
-				data.begin_year === "" ? "" : data.begin_year;
-			_this.Info[0].Value2 = data.end_year === "" ? "" : data.end_year;
-
-			// for (let item of data.tag_list) {
-			// 	if (item.slice(0, 2) === "ZH") {
-			// 		if (_this.Info[1].Value1 === "") {
-			// 			_this.Info[1].Value1 = item.slice(3);
-			// 		} else {
-			// 			_this.Info[1].Value1 += "、" + item.slice(3);
-			// 		}
-			// 	} else {
-			// 		if (_this.Info[1].Value2 === "") {
-			// 			_this.Info[1].Value2 = item.slice(3);
-			// 		} else {
-			// 			_this.Info[1].Value2 += ", " + item.slice(3);
-			// 		}
-			// 	}
-			// }
-
-			for (let item in data.organization) {
-				if (item === "ZH") _this.Info[2].Value1 = data.organization.ZH;
-				else _this.Info[2].Value2 = data.organization[item];
-			}
-
-			for (let item in data.location) {
-				if (item === "ZH") _this.Info[3].Value1 = data.location.ZH;
-				else _this.Info[3].Value2 = data.location[item];
-			}
-
-			_this.Info[4].Value1 =
-				data.page_count === undefined ? "" : data.page_count;
-
-			_this.Info[5].Value1 =
-				data.file_size === undefined ? "" : data.file_size;
-
-			for (let item in data.language) {
-				if (item === "ZH") _this.Info[6].Value1 = data.language.ZH;
-				else _this.Info[6].Value2 = data.language[item];
-			}
-
-			//图片下方“查看文档”和“查看来源”对应的 url
-			_this.ArchiveUrl = data.archive_url;
-			_this.SourceUrl = data.from_url;
-		});
-	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 0);
-        this.$store.dispatch("GetLineIndex", 0);
+		this.$store.dispatch("GetLineIndex", 0);
+        this.GetData();
 	},
 	methods: {
+		GetData() {
+			//从url中获取档案在后端数据库中的主键
+			this.ArchiveID = this.$route.query.search_result_id;
+			//向http请求档案的详细信息
+			let url = "/archive/detail?archive_id=" + this.ArchiveID;
+
+			console.log(url);
+
+			let _this = this; // 别改
+
+			getForm(url, (res) => {
+				let data = res.data;
+				//主标题、副标题、主页大图的url、中文描述、外文描述
+				for (let item in data.title) {
+					if (item === "ZH") _this.Title = data.title.ZH;
+					else _this.Subtitle = data.title[item];
+				}
+
+				_this.Image =
+					data.mini_pic_url === ""
+						? "默认图片.jpg"
+						: data.mini_pic_url;
+
+				for (let item in data.intro) {
+					if (item === "ZH") _this.DescriptionZH = data.intro.ZH;
+					else _this.DescriptionEN = data.intro[item];
+				}
+
+				//档案的各种属性：年份（中英文）、关键词（中英文）、收藏单位（中英文）、收藏地点（中英文）、档案页数（中英文）、文件尺寸（中英文）、使用语种（中英文）
+				_this.Info[0].Value1 =
+					data.begin_year === "" ? "" : data.begin_year;
+				_this.Info[0].Value2 =
+					data.end_year === "" ? "" : data.end_year;
+
+				// for (let item of data.tag_list) {
+				// 	if (item.slice(0, 2) === "ZH") {
+				// 		if (_this.Info[1].Value1 === "") {
+				// 			_this.Info[1].Value1 = item.slice(3);
+				// 		} else {
+				// 			_this.Info[1].Value1 += "、" + item.slice(3);
+				// 		}
+				// 	} else {
+				// 		if (_this.Info[1].Value2 === "") {
+				// 			_this.Info[1].Value2 = item.slice(3);
+				// 		} else {
+				// 			_this.Info[1].Value2 += ", " + item.slice(3);
+				// 		}
+				// 	}
+				// }
+
+				for (let item in data.organization) {
+					if (item === "ZH")
+						_this.Info[2].Value1 = data.organization.ZH;
+					else _this.Info[2].Value2 = data.organization[item];
+				}
+
+				for (let item in data.location) {
+					if (item === "ZH") _this.Info[3].Value1 = data.location.ZH;
+					else _this.Info[3].Value2 = data.location[item];
+				}
+
+				_this.Info[4].Value1 =
+					data.page_count === undefined ? "" : data.page_count;
+
+				_this.Info[5].Value1 =
+					data.file_size === undefined ? "" : data.file_size;
+
+				for (let item in data.language) {
+					if (item === "ZH") _this.Info[6].Value1 = data.language.ZH;
+					else _this.Info[6].Value2 = data.language[item];
+				}
+
+				//图片下方“查看文档”和“查看来源”对应的 url
+				_this.ArchiveUrl = data.archive_url;
+				_this.SourceUrl = data.from_url;
+			});
+		},
+
 		SeeArchive(event) {
 			if (event.button === 0) {
 				window.open(this.ArchiveUrl, "_blank");
@@ -246,7 +251,7 @@ export default {
 	position: relative;
 	width: 80vw;
 	height: 33vw;
-    min-height: 500px;
+	min-height: 500px;
 	top: 200px;
 	left: 0;
 	right: 0;
@@ -254,19 +259,73 @@ export default {
 	/* background: skyblue; */
 
 	display: flex;
+	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 }
 
 /*左侧图片、图片中文描述、图片其他语种描述*/
 .ImageContainer {
-	position: relative;
+	position: absolute;
+    top: 0;
+    left: 0;
 	width: 30vw;
 	height: 33vw;
+	/* background: red; */
 }
 
 .Image {
 	padding-bottom: 110%;
+}
+
+.InfoContainer {
+	position: absolute;
+    top: 0;
+    left: 42vw;
+	width: 38vw;
+	height: 33vw;
+	/* background: blue; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+/*每一行（中英文）都包装成一个类*/
+.InfoItem {
+	position: relative;
+	width: 33vw;
+	height: auto;
+	/* background: pink; */
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.InfoName {
+	position: relative;
+	min-width: 80px;
+	margin-right: 10px;
+	/* background: yellow; */
+}
+.InfoValue {
+	position: relative;
+	min-width: 400px;
+	/* background: yellow; */
+}
+
+.InfoNameZH,
+.InfoValue1 {
+	font-size: 20px;
+	line-height: 150%;
+	color: #9a9999;
+}
+.InfoNameEN,
+.InfoValue2 {
+	font-size: 16px;
+	line-height: 150%;
+	color: #9a9999;
 }
 
 /* 查看档案、查看来源 */
@@ -327,53 +386,5 @@ export default {
 	font-size: 20px;
 	line-height: 200%;
 	/* background: red; */
-}
-
-.InfoContainer {
-	position: relative;
-	width: 38vw;
-	height: 33vw;
-	/* background: skyblue; */
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-}
-/*每一行（中英文）都包装成一个类*/
-.InfoItem {
-	position: relative;
-	width: 33vw;
-	height: auto;
-	/* background: pink; */
-
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.InfoName {
-	position: relative;
-	min-width: 80px;
-    margin-right: 10px;
-	/* background: yellow; */
-}
-.InfoValue {
-	position: relative;
-	min-width: 400px;
-	/* background: yellow; */
-}
-
-.InfoNameZH,
-.InfoValue1 {
-	font-size: 20px;
-	line-height: 150%;
-	color: #9a9999;
-}
-.InfoNameEN,
-.InfoValue2 {
-	font-size: 16px;
-	line-height: 150%;
-	color: #9a9999;
 }
 </style>

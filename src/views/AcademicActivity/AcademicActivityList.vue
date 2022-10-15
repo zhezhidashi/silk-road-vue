@@ -12,7 +12,7 @@
 				<!--把每一块img、时间、简介都包装成一个container-->
 				<div
 					@click.once="ImageItemButton(item.AcademicActivityID)"
-					:class="item.AcademicActivityID === '-1' ? `ImageItem ` : `ImageItem Card HoverDark`"
+					:class="item.AcademicActivityID === '-1' ? `ImageItem ` : `ImageItem Card HoverShadow`"
                     :style="item.AcademicActivityID === '-1' ? `` : `cursor: pointer`"
 				>
 					<!--图片-->
@@ -159,7 +159,7 @@ export default {
 /*图片日期*/
 .ImageDate {
 	position: relative;
-	font-size: 20px;
+	font-size: 16px;
 	line-height: 150%;
 	margin-left: 1vw;
 	margin-right: 1vw;
@@ -170,9 +170,11 @@ export default {
 .ImageTitle {
 	position: relative;
 	font-size: 20px;
+    font-weight: 400;
 	line-height: 150%;
 	margin-left: 1vw;
 	margin-right: 1vw;
+    color: black;
 
 	/*最多显示两行文字，否则就是省略号*/
 	overflow: hidden;

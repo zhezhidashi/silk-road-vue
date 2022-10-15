@@ -84,7 +84,7 @@ export default {
 	methods: {
 		MenuClick(item) {
 			this.$router.push({
-				name: item.name,
+				path: item.path,
 			});
 		},
 	},
@@ -153,10 +153,10 @@ export default {
 .nav_bar_underline {
 	position: relative;
     top: 3px;
-	animation: MyMove 0.3s forwards;
+	animation: ClickUnderline 0.3s forwards;
 }
 
-@keyframes MyMove {
+@keyframes ClickUnderline {
 	from {
 		width: 0;
 	}

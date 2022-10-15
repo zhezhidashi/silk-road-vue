@@ -73,6 +73,7 @@
 /* 调整字体、空白符 */
 div {
     font-family: 'Open Sans';
+    /* color: black; */
     font-weight: 400;
     text-align: justify;
 }

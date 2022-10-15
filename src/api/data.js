@@ -39,3 +39,50 @@ export const postForm = (requestUrl, params, callback) => {
     })
 }
 
+// 语种简称对应表
+export const LanguageMap = {
+    AR: "阿拉伯文",
+    BE: "白俄罗斯文",
+    BG: "保加利亚文",
+    CA: "加泰罗尼亚文",
+    CS: "捷克文",
+    DA: "丹麦文",
+    DE: "德文",
+    EL: "希腊文",
+    EN: "English",
+    ES: "Español",
+    ET: "爱沙尼亚文",
+    FI: "芬兰文",
+    FR: "法文",
+    HR: "克罗地亚文",
+    HU: "匈牙利文",
+    IT: "意大利文",
+    IW: "希伯来文",
+    JA: "日文",
+    KO: "朝鲜文",
+    LT: "立陶宛文",
+    MK: "马其顿文",
+    NL: "Nederlands",
+    NO: "挪威文",
+    PL: "波兰文",
+    PT: "葡萄牙文",
+    RO: "罗马尼亚文",
+    RU: "俄文",
+    SK: "斯洛伐克文",
+    SL: "斯洛文尼亚文",
+    SQ: "阿尔巴尼亚文",
+    SR: "塞尔维亚文",
+    SV: "瑞典文",
+    TH: "泰文",
+    TR: "土耳其文",
+    UK: "乌克兰文",
+    ZH: "中文",
+}
+
+// 判断 list 列表是否含有 x
+export const ListContain = (list, x) => {
+    for (let item of list) {
+        if (x === item) return true;
+    }
+    return false;
+}
