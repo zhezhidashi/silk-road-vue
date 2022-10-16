@@ -38,7 +38,7 @@
 			</div>
 
 			<!--右侧大图片-->
-			<div style="position: relative; width: 65vw; height: 40vw">
+			<div style="position: relative; width: 65vw; height: 35vw">
 				<img
 					@click="ImageShift(-1)"
 					class="PageShift"
@@ -271,7 +271,7 @@ export default {
 .ListAndMainImageContainer {
 	position: relative;
 	top: 100px;
-	height: 40vw;
+	height: 35vw;
 	width: 80vw;
 	left: 0;
 	right: 0;
@@ -286,7 +286,7 @@ export default {
 .ImageListContainer {
 	position: relative;
 	width: 15vw;
-	height: 40vw;
+	height: 35vw;
 	background: white;
 	border-radius: 7px 0 0 7px;
 	display: flex;
@@ -339,7 +339,7 @@ export default {
 .MainImageContainer {
 	position: relative;
 	width: 65vw;
-	height: 40vw;
+	height: 35vw;
 	background: lightgrey;
 	border-radius: 0 7px 7px 0;
 	display: flex;
@@ -348,27 +348,27 @@ export default {
 }
 #PageShiftLeft {
 	position: absolute;
-	top: 20vw;
+	top: 17vw;
 	left: 1vw;
 	z-index: 120;
 }
 #PageShiftRight {
 	position: absolute;
+    top: 17vw;
 	right: 1vw;
-	top: 20vw;
 	z-index: 120;
 }
 .MainImage {
 	position: relative;
 	max-width: 65vw;
-	max-height: 40vw;
+	max-height: 35vw;
 	cursor: pointer;
 }
 
 /* 大图片的信息 */
 .InfoContainer {
 	position: relative;
-	top: 340px;
+	top: 130px;
 	width: 80vw;
 	height: auto;
 	/* min-height: 300px; */

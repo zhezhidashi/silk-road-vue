@@ -68,9 +68,9 @@
 				<div
 					class="blue_rectangle_container"
 					id="AdvancedSearchContainer"
+                    @click="archive_list_advanced_search_btn($event)"
 				>
 					<div
-						@click="archive_list_advanced_search_btn($event)"
 						style="
 							font-weight: 700;
 							font-size: 18px;
