@@ -39,7 +39,7 @@
 	top: 0;
 	z-index: 999;
 	height: auto;
-	width: 98.8vw;
+	width: 100%;
 	background: #023871;
 	border-radius: 0;
 }
@@ -47,7 +47,7 @@
     padding: 0;
 	position: relative;
 	top: 11vh;
-	width: 98.8vw;
+	width: 100%;
 	height: auto;
 }
 .Footer {
@@ -57,7 +57,7 @@
 	justify-content: center;
 	align-items: center;
 	background: #023871;
-	width: 98.8vw;
+	width: 100%;
 }
 
 /* .NotClick {

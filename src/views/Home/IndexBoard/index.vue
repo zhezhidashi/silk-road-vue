@@ -1,7 +1,7 @@
 <template>
 	<div class="IndexBoard">
 		<!-- 公告部分 -->
-		<div class="ExhibitionBoardTitle">线上展览</div>
+		<div class="ExhibitionBoardTitle TitleStyle">线上展览</div>
 
 		<div class="ContentContainer">
 			<div
@@ -45,7 +45,7 @@
 			/>
 		</div>
 
-		<div class="ExhibitionBoardTitle">最新公告</div>
+		<div class="ExhibitionBoardTitle TitleStyle">最新公告</div>
 		<div class="ContentContainer">
 			<div v-for="(item, index) in BoardList[BoardIndex]" :key="index">
 				<div
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="ShiftContainer">
+		<div class="ShiftContainer" style="margin-bottom: 3vw;">
 			<!-- 公告部分左右切换按钮 -->
 			<img
 				@click="BoardShift(-1)"
@@ -221,7 +221,7 @@ export default {
 			_this.ExhibitionList = [];
 			let url = "/exhibition/list?&page_size=100";
 			console.log("请求的url", url);
-			getForm(url, (res) => {
+			getForm(url, 4, (res) => {
 				let data = res.data;
                 // 计算在线展览的栏数（三个在线展览为一栏，向上取整）
 				_this.ExhibitionTotal = Math.ceil((data.list.length) / 3);
@@ -253,7 +253,7 @@ export default {
 .IndexBoard {
 	position: relative;
 	width: 100%;
-	height: 120vw;
+	height: 90vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -267,9 +267,7 @@ export default {
 /* 标题 */
 .ExhibitionBoardTitle {
 	position: relative;
-	width: 200px;
-	height: 80px;
-	font-size: 48px;
+	font-size: 40px;
 	line-height: 166%;
 	/* background: red; */
 }
@@ -277,7 +275,7 @@ export default {
 /* 近期展览内容的 Container */
 .ContentContainer {
 	position: relative;
-	width: 70vw;
+	width: 82vw;
 	height: 18vw;
 	/* background: skyblue; */
 
@@ -346,8 +344,7 @@ export default {
 .ShiftContainer {
 	position: relative;
 	width: 30vw;
-	min-height: 5vw;
-	margin: 30px;
+	/* margin: 30px; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

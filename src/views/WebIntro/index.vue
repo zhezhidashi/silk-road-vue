@@ -1,17 +1,17 @@
 <template>
 	<div class="background" style="height: auto;">
 		<div class="Heading">网站简介</div>
-		<div class="web_intro_text">
-			<div class="web_intro_paragraph">
+		<div class="BelowHeading TextContainer">
+			<div class="ParagraphContainer">
 				&emsp;&emsp;{{ ParagraphOne }}
 			</div>
-			<div class="web_intro_paragraph">
+			<div class="ParagraphContainer">
 				&emsp;&emsp;{{ ParagraphTow }}
 			</div>
-			<div class="web_intro_paragraph">
+			<div class="ParagraphContainer">
 				&emsp;&emsp;{{ ParagraphThree }}
 			</div>
-			<div class="web_intro_paragraph">
+			<div class="ParagraphContainer">
 				&emsp;&emsp;{{ ParagraphFour }}
 			</div>
 		</div>
@@ -52,17 +52,16 @@ export default {
 </script>
 
 <style scoped>
-.web_intro_text {
+.TextContainer {
 	position: relative;
 	width: 80vw;
     left: 0;
     right: 0;
     margin: auto;
-    top: 160px;
 }
-.web_intro_paragraph{
+.ParagraphContainer{
     position: relative;
-    margin: 20px;
+    margin-bottom: 20px;
     font-size: 20px;
     line-height: 200%;
     /* display: flex;

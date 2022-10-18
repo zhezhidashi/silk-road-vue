@@ -79,7 +79,7 @@ export default {
 	position: relative;
 	width: 82vw;
 	height: auto;
-	top: 300px;
+	top: 170px;
 	min-height: 20vw;
     height: auto;
 	/* background: skyblue; */

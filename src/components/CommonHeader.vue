@@ -104,13 +104,14 @@ export default {
 .navigation_logo {
 	position: absolute;
 	width: 16vw;
-	min-width: 160px;
+	min-width: 170px;
 	left: 8vw;
 	top: 0;
 	bottom: 0;
 	margin: auto;
 	cursor: pointer;
 }
+
 /*导航栏六个跳转选项*/
 .NavBarContainer {
 	position: absolute;
@@ -129,7 +130,6 @@ export default {
 .NavBarItem {
 	cursor: pointer;
 	margin-left: 1px;
-	margin-right: 1px;
 }
 .NavBarTitle {
 	position: relative;
@@ -141,12 +141,11 @@ export default {
 }
 .ItemTitle {
 	min-width: 18px;
-	width: 6vw;
+	width: 6.5vw;
 	text-align: center;
 	font-size: 18px;
 	line-height: 96%;
 	color: #ffffff;
-	
 }
 
 /*导航栏中跳转至某个页面的下划波浪线*/

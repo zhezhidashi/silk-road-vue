@@ -1,7 +1,7 @@
 /* 公共属性 */
 .background {
     position: relative;
-    width: 98.8vw;
+    width: 100%;
     background: #efefef;
     min-height: 100vh;
 }
@@ -9,10 +9,10 @@
 /* 大标题 */
 .Heading {
     position: relative;
-    width: 98.8vw;
+    width: 100%;
     height: auto;
     text-align: center;
-    top: 100px;
+    top: 50px;
     font-size: 32px;
     line-height: 150%;
     color: #023871;
@@ -22,19 +22,24 @@
     font-weight: bold;
 }
 
+/* 大标题下面紧跟着的 */
+.BelowHeading{
+    top: 100px;
+}
+
 /*左上角的网页路径（面包屑）*/
 .WebPath {
-	position: relative;
-	width: 80vw;
-	height: auto;
-	left: 0;
-	right: 0;
-	margin: auto;
-	top: 80px;
-	font-size: 24px;
-	line-height: 150%;
-	color: #2f2f2f;
-	display: flex;
+    position: relative;
+    width: 80vw;
+    height: auto;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 30px;
+    font-size: 20px;
+    line-height: 150%;
+    color: #2f2f2f;
+    display: flex;
 }
 
 /*向左右切换的图标*/
@@ -77,6 +82,15 @@ div {
     font-weight: 400;
     text-align: justify;
 }
+
+/* 标题字体 */
+.TitleStyle {
+    background: linear-gradient(330deg, #e05252 0%, #78b43c 25%, #43b8b8 50%, #8f47d7 75%, #e05252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
 
 /* 卡片的效果 阴影 圆角 */
 .Card {
@@ -126,7 +140,7 @@ div {
 .BottomBlank {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 400px;
     z-index: -1;
 }
 
@@ -134,7 +148,7 @@ div {
 .BottomWave {
     position: absolute;
     padding: 0;
-    width: 98.8vw;
+    width: 100%;
     bottom: 0;
     left: 0;
     right: 0;

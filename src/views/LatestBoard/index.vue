@@ -1,7 +1,7 @@
 <template>
 	<div class="background" style="height: auto">
 		<div class="Heading">{{ BoardTitle[BoardIndex] }}</div>
-		<div class="BoardImageContainer">
+		<div class="BelowHeading BoardImageContainer">
 			<img
 				v-show="BoardImage[BoardIndex] !== ''"
 				class="BoardImage"
@@ -84,7 +84,6 @@ export default {
 	left: 0;
 	right: 0;
 	margin: auto;
-	top: 200px;
     text-align: center;
 }
 
@@ -95,7 +94,7 @@ export default {
 
 /* 正文的 Container */
 .BoardText {
-    top: 250px;
+    top: 150px;
 	position: relative;
 	width: 80vw;
 	height: auto;

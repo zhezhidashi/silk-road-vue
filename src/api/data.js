@@ -5,16 +5,31 @@ import "nprogress/nprogress.css";
 export const baseUrl = 'https://dev.pacificsilkroad.cn/api-service'
 
 // 向指定的 url 获取数据表单
-export const getForm = (requestUrl, callback) => {
+export const getForm = (requestUrl, type, callback) => {
     nprogress.start();
+    let UrlType = [
+        "/activity/list",
+        "/activity/detail",
+        "/archive/list",
+        "/archive/detail",
+        "/exhibition/list",
+        "/exhibition/detail",
+    ];
     axios.request({
         url: baseUrl + requestUrl,
         method: 'get'
     }).then(({ data: res }) => {
         nprogress.done()
         console.log('getForm 的 response', res);
-        callback(res)
-    })
+        callback(res);
+        let params = {
+            "target_url": UrlType[type],
+        };
+        postForm('/visit/add', params, () => { });
+    }).catch((err) => {
+        nprogress.done()
+        console.log('getForm 的 err', err);
+    });
 }
 
 // 向指定的 url 提交数据表单

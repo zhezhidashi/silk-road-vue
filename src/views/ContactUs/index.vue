@@ -1,5 +1,5 @@
 <template>
-	<div class="background" style="height: 906px; background: #efefef">
+	<div class="background" style="background: #efefef">
 		<div class="Heading">联系我们</div>
 		<div class="FeedbackContainer">
 			<div class="FeedbackInput" style="margin-top: 20px">
@@ -98,7 +98,7 @@ export default {
 <style scoped>
 .FeedbackContainer {
 	position: relative;
-	top: 200px;
+	top: 100px;
 	width: 60vw;
 	height: auto;
 	left: 0;

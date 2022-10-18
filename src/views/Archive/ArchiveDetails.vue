@@ -144,7 +144,7 @@ export default {
 
 			let _this = this; // 别改
 
-			getForm(url, (res) => {
+			getForm(url, 3, (res) => {
 				let data = res.data;
 				//主标题、副标题、主页大图的url、中文描述、外文描述
 				for (let item in data.title) {
@@ -383,8 +383,10 @@ export default {
 }
 .Description {
 	position: relative;
+    width: 100%;
 	font-size: 20px;
 	line-height: 200%;
+    white-space: pre-wrap;
 	/* background: red; */
 }
 </style>

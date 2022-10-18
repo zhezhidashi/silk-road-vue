@@ -225,7 +225,7 @@ export default {
 	font-weight: 600;
 	color: white;
 	text-align: center;
-	bottom: 11vh;
+	bottom: 11.5vh;
 
 	/* 文字阴影 */
 	text-shadow: 1px 1px 1px black;

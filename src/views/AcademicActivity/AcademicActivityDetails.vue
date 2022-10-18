@@ -4,22 +4,18 @@
 		<div class="Heading">
 			{{ Title }}
 		</div>
-		<!--左侧图片-->
-		<div class="ImageAndText">
-			<div class="ImageContainer Card">
-				<div
-					class="Image BackgroundImage"
-					:style="`background-image:url(${ImageUrl})`"
-					alt=""
-				></div>
+		<div class="BelowHeading ImageTextContainer">
+			<img class="ImageContainer Card" :src="ImageUrl" align="left" />
+			<div v-for="(item, index) in ActivityDescription" :key="index">
+				<div class="ActivityDescription">{{ item }}</div>
 			</div>
 
 			<!--描述-->
-			<div class="ActivityDescription">
+			<!-- <div class="ActivityDescription">
 				<div v-for="(item, index) in ActivityDescription" :key="index">
 					<div style="margin: 10px 0 15px 0">{{ item }}</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="BottomBlank"></div>
 		<img src="底部浪花.svg" class="BottomWave" />
@@ -49,17 +45,12 @@ export default {
 		console.log(url);
 		let _this = this; // 别改
 
-		getForm(url, function (res, msg) {
+		getForm(url, 1, function (res, msg) {
 			let data = res.data;
-			console.log("http-get data is here");
-			console.log(data);
 			_this.AcademicActivityID = data["main_id"];
 			_this.Title = data["title"];
 			_this.ImageUrl = data["cover_pic"];
-			_this.ActivityDescription = data["intro"]
-				.toString()
-				.split("\\n");
-            console.log(_this.ActivityDescription)
+			_this.ActivityDescription = data["intro"].toString().split("\\n");
 		});
 	},
 	mounted() {
@@ -78,37 +69,32 @@ export default {
 </script>
 
 <style scoped>
-.ImageAndText {
+.ImageTextContainer {
 	position: relative;
 	width: 80vw;
-	top: 220px;
 	left: 0;
 	right: 0;
 	margin: auto;
 	/* background: skyblue; */
-	display: flex;
-	justify-content: space-between;
+	/* display: flex;
+	justify-content: space-between; */
 }
 /*左侧图片*/
 .ImageContainer {
 	position: relative;
 	width: 33vw;
-	height: 44vw;
+	height: 46.7vw;
 	/* background: red; */
-}
-.Image {
-	padding-bottom: 133%;
-	border-radius: 7px;
+    margin: 0 5vw 2vw 0;
 }
 
 /*描述*/
 .ActivityDescription {
 	position: relative;
-	width: 40vw;
-	height: auto;
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;
+    margin: 10px 0 15px 0
 	/* background: blue; */
 }
 </style>

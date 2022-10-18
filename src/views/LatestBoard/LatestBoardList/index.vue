@@ -1,11 +1,11 @@
 <template>
 	<div class="background">
 		<div class="Heading">最新公告</div>
-		<div class="BoardContainer">
+		<div class="BelowHeading BoardContainer">
             <div v-for="(item, index) in BoardList" :key="index">
                 <div class="BoardItem Card HoverShadow" @click="GoBoard(index)">
-                    <div class="BoardItemImageContainer">
-                        <div class="BoardItemImage BackgroundImage" :style="`background-image:url(${item.Image})`"></div>
+                    <div class="Card BoardItemImageContainer">
+                        <div class="Card BoardItemImage BackgroundImage" :style="`background-image:url(${item.Image})`"></div>
                     </div>
                     <div class="BoardItemText">
                         <div class="BoardItemTitle">{{item.Title}}</div>
@@ -68,9 +68,7 @@ export default {
 	position: relative;
 	width: 80vw;
 	height: auto;
-	min-height: 100vh;
 	/* background: skyblue; */
-	top: 200px;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -78,14 +76,14 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 .BoardItem{
     position: relative;
     width: 80vw;
-    height: 10vw;
+    height: 14vw;
     min-height: 100px;
-    margin: 20px;
+    margin-bottom: 30px;
     /* background: red; */
     cursor: pointer;
     display: flex;
@@ -95,16 +93,16 @@ export default {
 }
 .BoardItemImageContainer{
     position: relative;
-    width: 8vw;
-    height: 8vw;
+    width: 10vw;
+    height: 10vw;
 }
 .BoardItemImage{
     padding-bottom: 100%;
 }
 .BoardItemText{
     position: relative;
-    width: 66vw;
-    height: 8vw;
+    width: 63vw;
+    height: 10vw;
     min-height: 100px;
     display: flex;
     flex-direction: column;
@@ -129,7 +127,7 @@ export default {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 }
 </style>

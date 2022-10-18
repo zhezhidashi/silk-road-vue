@@ -4,7 +4,7 @@
 		<div class="Heading">学术活动</div>
 
 		<!--一排一排陈列图片-->
-		<div class="ListImages ImageItemContainer">
+		<div class="BelowHeading ListImages ImageItemContainer">
 			<div
 				v-for="item in academic_activity_images_src"
 				:key="item.AcademicActivityID"
@@ -62,7 +62,7 @@ export default {
 		this.academic_activity_images_src = [];
 
 		let _this = this; // 别改
-		getForm(url, function (res, msg) {
+		getForm(url, 0, function (res, msg) {
 			let data = res.data;
 			console.log("data list", data.list.length);
 			let Length = data.list.length;
@@ -113,7 +113,7 @@ export default {
 </script>
 
 <style scoped>
-/*存放整个页面的数据*/
+/*所有图片的Container*/
 .ImageItemContainer {
 	position: relative;
 	width: 80vw;
@@ -121,7 +121,6 @@ export default {
 	left: 0;
 	right: 0;
 	margin: auto;
-	top: 200px;
 }
 
 /*把每一块img、时间、简介都包装成一个container*/

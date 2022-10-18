@@ -7,7 +7,7 @@
 		/>
 		<pic-list :Images="Images" :ExhibitionID="ExhibitionID" />
 		<info />
-		<!-- 这里留一块空的高度，因为后面的flex布局有点影响 Footer 的相对高度 -->
+		<!-- 这里留一块空的高度 -->
 		<div class="BottomBlank"></div>
 		<img src="底部浪花.svg" class="BottomWave" />
 	</div>
@@ -47,7 +47,7 @@ export default {
 
 			let url = `/exhibition/detail?exhibition_id=${this.ExhibitionID}`;
             console.log("请求的url", url);
-			getForm(url, (res) => {
+			getForm(url, 5, (res) => {
 				let data = res.data;
 				_this.ExhibitionTitle = data.title;
 				_this.ExhibitionIntro = data.intro.Introduction.split("$$$");

@@ -9,7 +9,7 @@
 		</div>
 
 		<!-- 图片题目 -->
-		<div class="Heading" style="top: 150px">
+		<div class="Heading" style="top: 70px">
 			{{ ExhibitionTitle }}
 		</div>
 
@@ -40,7 +40,7 @@ export default {
 .ExhibitionIntro {
 	position: relative;
 	width: 80vw;
-	top: 200px;
+	top: 120px;
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;

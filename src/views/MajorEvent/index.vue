@@ -1,10 +1,10 @@
 <template>
-	<div class="background" style="height: 1300px;">
+	<div class="background" style="height: 1200px;">
 		<!--标题-->
 		<div class="Heading">网站大事记</div>
 
 		<!--时间、事件-->
-		<div class="MajorEventTextContainer">
+		<div class="BelowHeading MajorEventTextContainer">
 			<div class="major_event_time_1">2021 年</div>
 			<div class="major_event_text_1">
 				10月29日，太平洋丝绸之路档案文献整理与研究正式立项。<br />
@@ -46,7 +46,6 @@ export default {
 	left: 0;
 	right: 0;
 	margin: auto;
-    top: 250px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;

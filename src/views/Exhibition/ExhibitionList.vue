@@ -1,15 +1,15 @@
 <template>
 	<div class="background">
 		<div class="Heading">线上展览</div>
-		<div class="ExhibitionContainer">
+		<div class="BelowHeading ExhibitionContainer">
 			<div v-for="(item, index) in ExhibitionList" :key="index">
 				<div
 					class="ExhibitionItem Card HoverShadow"
 					@click="GoExhibition(item.ExhibitionID)"
 				>
-					<div class="ExhibitionItemImageContainer">
+					<div class="Card ExhibitionItemImageContainer">
 						<div
-							class="ExhibitionItemImage BackgroundImage"
+							class="Card ExhibitionItemImage BackgroundImage"
 							:style="`background-image:url(${item.Image})`"
 						></div>
 					</div>
@@ -53,7 +53,7 @@ export default {
 			_this.ExhibitionList = [];
 			let url = "/exhibition/list?&page_size=100";
 			console.log("请求的url", url);
-			getForm(url, (res) => {
+			getForm(url, 4, (res) => {
 				let data = res.data;
 
 				for (let item of data.list) {
@@ -80,9 +80,7 @@ export default {
 	position: relative;
 	width: 80vw;
 	height: auto;
-	min-height: 100vh;
 	/* background: skyblue; */
-	top: 200px;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -90,14 +88,14 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 }
 .ExhibitionItem {
 	position: relative;
 	width: 80vw;
-	height: 10vw;
+	height: 13vw;
 	min-height: 100px;
-	margin: 20px;
+	margin-bottom: 30px;
 	/* background: red; */
 	cursor: pointer;
 	display: flex;
@@ -107,16 +105,16 @@ export default {
 }
 .ExhibitionItemImageContainer {
 	position: relative;
-	width: 8vw;
-	height: 8vw;
+	width: 10vw;
+	height: 10vw;
 }
 .ExhibitionItemImage {
 	padding-bottom: 100%;
 }
 .ExhibitionItemText {
 	position: relative;
-	width: 66vw;
-	height: 8vw;
+	width: 63vw;
+	height: 10vw;
 	min-height: 100px;
 	display: flex;
 	flex-direction: column;
@@ -141,7 +139,7 @@ export default {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 }
 </style>

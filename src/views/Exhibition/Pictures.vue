@@ -171,7 +171,7 @@ export default {
 			let _this = this;
 			let url = `/exhibition/detail?exhibition_id=${this.ExhibitionID}`;
 			console.log("请求的url", url);
-			getForm(url, (res) => {
+			getForm(url, 5, (res) => {
 				let data = res.data;
 				_this.ExhibitionTitle = data.title;
 				_this.PictureTotal = data.pic_list.length;
@@ -270,7 +270,7 @@ export default {
 /* 图片列表和大图片的 Container */
 .ListAndMainImageContainer {
 	position: relative;
-	top: 100px;
+	top: 50px;
 	height: 35vw;
 	width: 80vw;
 	left: 0;
@@ -368,7 +368,7 @@ export default {
 /* 大图片的信息 */
 .InfoContainer {
 	position: relative;
-	top: 130px;
+	top: 100px;
 	width: 80vw;
 	height: auto;
 	/* min-height: 300px; */

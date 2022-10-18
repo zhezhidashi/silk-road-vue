@@ -243,7 +243,7 @@ export default {
 			console.log(url);
 			let _this = this;
 
-			getForm(url, function (res, msg) {
+			getForm(url, 2, function (res, msg) {
 				let data = res.data;
 				console.log("data is here", data);
 
