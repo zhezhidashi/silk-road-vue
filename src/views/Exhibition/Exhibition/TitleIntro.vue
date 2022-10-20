@@ -16,7 +16,7 @@
 		<!-- 展览详情的描述 -->
 		<div class="ExhibitionIntro">
 			<div v-for="(item, index) in ExhibitionIntro" :key="index">
-				<div style="margin: 10px 0 10px 0">{{ item }}</div>
+				<div class="ExhibitionIntroParagraph" style="margin: 10px 0 10px 0">{{ item }}</div>
 			</div>
 		</div>
 	</div>
@@ -50,5 +50,10 @@ export default {
 
 	display: flex;
 	flex-direction: column;
+}
+.ExhibitionIntroParagraph {
+    position: relative;
+    margin: 0 0 8px 0;
+    white-space: pre-wrap;
 }
 </style>

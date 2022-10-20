@@ -94,7 +94,8 @@ export default {
 	font-size: 20px;
 	line-height: 200%;
 	color: #2f2f2f;
-    margin: 10px 0 15px 0
+    margin: 10px 0 15px 0;
+    white-space: pre-wrap;
 	/* background: blue; */
 }
 </style>

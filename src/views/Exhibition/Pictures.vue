@@ -102,7 +102,7 @@
 							.Intro[LanguageType[LanguageIndex]]"
 						:key="index"
 					>
-						<div style="margin: 0 0 8px 0;">{{ Paragraph }}</div>
+						<div class="ImageIntroParagraph">{{ Paragraph }}</div>
 					</div>
 				</div>
 			</div>
@@ -293,7 +293,7 @@ export default {
 	flex-direction: column;
 	align-items: center;
 }
-
+/* 左侧图片列表中每一个 image 的 Container */
 .ImageListImgContainer {
 	position: relative;
 	width: 8vw;
@@ -302,6 +302,7 @@ export default {
 	/* background: blue; */
 }
 
+/* 点击图片的动画 */
 .ClickImage {
 	position: relative;
 	animation: MyMove 0.3s forwards;
@@ -432,5 +433,12 @@ export default {
 	position: relative;
 	font-size: 18px;
 	line-height: 200%;
+}
+
+/* 大图下方介绍的每个段落 */
+.ParagraphIntroParagraph{
+    position: relative;
+    white-space: pre-wrap;
+    margin: 0 0 8px 0;
 }
 </style>

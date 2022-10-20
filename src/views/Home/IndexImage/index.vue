@@ -251,3 +251,4 @@ export default {
 	bottom: 18vh;
 }
 </style>
+
