@@ -122,6 +122,7 @@ export default {
 			keyboard: true,
 			on: {
 				click: function (event) {
+                    console.log(event)
 					if (event.path[0].id === "IndexImage") {
 						console.log("点击了主页的图片！");
 					} else if (event.path[0].id === "SearchLogo") {

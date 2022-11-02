@@ -50,7 +50,7 @@ export default {
 			_this.AcademicActivityID = data["main_id"];
 			_this.Title = data["title"];
 			_this.ImageUrl = data["cover_pic"];
-			_this.ActivityDescription = data["intro"].toString().split("\\n");
+			_this.ActivityDescription = data["intro"].toString().split("$$$");
 		});
 	},
 	mounted() {

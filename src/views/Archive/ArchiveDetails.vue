@@ -110,6 +110,12 @@ export default {
 					Value1: "",
 					Value2: "",
 				},
+                {
+                    Type: 1,
+                    NameZH: "数字对象标识",
+                    NameEN: "DOID",
+                    Value1: "86.5000.470/pacificsilkroad-100358"
+                }
 			],
 
 			//档案在后端数据库的主键
@@ -151,11 +157,12 @@ export default {
 					if (item === "ZH") _this.Title = data.title.ZH;
 					else _this.Subtitle = data.title[item];
 				}
-
-				_this.Image =
-					data.mini_pic_url === ""
-						? "默认图片.jpg"
-						: data.mini_pic_url;
+                
+                _this.Image = "http://pares.mcu.es/ParesBusquedas20/ViewImage.do?accion=42&txt_id_imagen=1&txt_rotar=0&txt_zoom=10&txt_contraste=0&txt_totalImagenes=16&dbCode=1598367&txt_polarizado=NaN10&txt_contrast=1"
+				// _this.Image =
+				// 	data.mini_pic_url === ""
+				// 		? "默认图片.jpg"
+				// 		: data.mini_pic_url;
 
 				for (let item in data.intro) {
 					if (item === "ZH") _this.DescriptionZH = data.intro.ZH;
@@ -237,7 +244,7 @@ export default {
 	text-align: center;
 	width: 80vw;
 	height: auto;
-	top: 100px;
+	top: 80px;
 	font-size: 20px;
 	line-height: 150%;
 	color: #b8b8b8;
@@ -252,7 +259,7 @@ export default {
 	width: 80vw;
 	height: 33vw;
 	min-height: 500px;
-	top: 200px;
+	top: 130px;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -315,13 +322,22 @@ export default {
 	/* background: yellow; */
 }
 
-.InfoNameZH,
+.InfoNameZH{
+    font-size: 20px;
+	line-height: 150%;
+    color: #588cc8;
+}
 .InfoValue1 {
 	font-size: 20px;
 	line-height: 150%;
 	color: #9a9999;
 }
-.InfoNameEN,
+.InfoNameEN{
+    font-size: 16px;
+	line-height: 150%;
+    color: #588cc8;   
+}
+
 .InfoValue2 {
 	font-size: 16px;
 	line-height: 150%;
@@ -333,7 +349,7 @@ export default {
 	position: relative;
 	width: 200px;
 	height: auto;
-	top: 260px;
+	top: 160px;
 	left: 25vw;
 	/* background: red; */
 	display: flex;
@@ -353,7 +369,7 @@ export default {
 /* 图片的中文描述和外文描述 */
 .DescriptionContainer {
 	position: relative;
-	top: 280px;
+	top: 200px;
 	width: 80vw;
 	height: auto;
 	left: 0;
