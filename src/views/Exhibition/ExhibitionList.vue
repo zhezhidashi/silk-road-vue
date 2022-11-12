@@ -114,8 +114,11 @@ export default {
 .ExhibitionItemText {
 	position: relative;
 	width: 63vw;
-	height: 10vw;
+	height: auto;
 	min-height: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -139,7 +142,7 @@ export default {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 3;
+	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
 </style>

@@ -102,8 +102,9 @@ export default {
 .BoardItemText{
     position: relative;
     width: 63vw;
-    height: 10vw;
-    min-height: 100px;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -127,7 +128,7 @@ export default {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 3;
+	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
 </style>
