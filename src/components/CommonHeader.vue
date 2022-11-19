@@ -143,7 +143,7 @@ export default {
 	min-width: 18px;
 	width: 6.5vw;
 	text-align: center;
-	font-size: 18px;
+	font-size: 1.5vw;
 	line-height: 96%;
 	color: #ffffff;
 }

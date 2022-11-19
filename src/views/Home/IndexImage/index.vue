@@ -173,7 +173,7 @@ export default {
 	border-right: none;
 	border-bottom: 2px solid #588cc8;
 	outline: none;
-	font-size: 20px;
+	font-size: 1.5vw;
 	line-height: 100%;
 	color: rgb(136, 136, 136);
 	background: rgb(240, 240, 240, 0);
@@ -187,7 +187,7 @@ export default {
 	height: 7vh;
 	border: none;
 	outline: none;
-	font-size: 20px;
+	font-size: 1.5vw;
 	line-height: 100%;
 	color: rgb(136, 136, 136);
 	background: rgb(240, 240, 240, 0);
@@ -222,7 +222,7 @@ export default {
 .ImageTitle {
 	position: absolute;
 	width: 100%;
-	font-size: 24px;
+	font-size: 1.8vw;
 	font-weight: 600;
 	color: white;
 	text-align: center;

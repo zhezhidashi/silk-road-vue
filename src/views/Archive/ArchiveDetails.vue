@@ -245,7 +245,7 @@ export default {
 	width: 80vw;
 	height: auto;
 	top: 80px;
-	font-size: 20px;
+	font-size: 1.5vw;
 	line-height: 150%;
 	color: #b8b8b8;
 
@@ -257,8 +257,7 @@ export default {
 .ImageInfoContainer {
 	position: relative;
 	width: 80vw;
-	height: 33vw;
-	min-height: 500px;
+	min-height: 35vw;
 	top: 130px;
 	left: 0;
 	right: 0;
@@ -290,7 +289,7 @@ export default {
     top: 0;
     left: 42vw;
 	width: 38vw;
-	height: 33vw;
+	min-height: 33vw;
 	/* background: blue; */
 	display: flex;
 	flex-direction: column;
@@ -312,34 +311,34 @@ export default {
 
 .InfoName {
 	position: relative;
-	min-width: 80px;
+	min-width: 10vw;
 	margin-right: 10px;
 	/* background: yellow; */
 }
 .InfoValue {
 	position: relative;
-	min-width: 400px;
+	min-width: 23vw;
 	/* background: yellow; */
 }
 
 .InfoNameZH{
-    font-size: 20px;
+    font-size: 1.3vw;
 	line-height: 150%;
-    color: #588cc8;
+    color: #9a9999;
 }
 .InfoValue1 {
-	font-size: 20px;
+	font-size: 1.3vw;
 	line-height: 150%;
-	color: #9a9999;
+	color: #000000;
 }
 .InfoNameEN{
-    font-size: 16px;
+    font-size: 1.1vw;
 	line-height: 150%;
-    color: #588cc8;   
+    color: #9a9999;   
 }
 
 .InfoValue2 {
-	font-size: 16px;
+	font-size: 1.1vw;
 	line-height: 150%;
 	color: #9a9999;
 }
@@ -347,7 +346,7 @@ export default {
 /* 查看档案、查看来源 */
 .ArchiveSourceContainer {
 	position: relative;
-	width: 200px;
+	width: 15vw;
 	height: auto;
 	top: 160px;
 	left: 25vw;
@@ -359,7 +358,7 @@ export default {
 
 .ArchiveSource {
 	font-weight: 600;
-	font-size: 20px;
+	font-size: 1.5vw;
 	line-height: 150%;
 	color: #023871;
 	text-decoration: underline;
@@ -390,17 +389,17 @@ export default {
 }
 .DescriptionTitle {
 	position: relative;
-	font-size: 20px;
+	font-size: 1.5vw;
 	line-height: 200%;
 
-	font-size: 24px;
+	font-size: 1.8vw;
 	line-height: 200%;
 	color: #588cc8;
 }
 .Description {
 	position: relative;
     width: 100%;
-	font-size: 20px;
+	font-size: 1.5vw;
 	line-height: 200%;
     white-space: pre-wrap;
 	/* background: red; */

@@ -1,7 +1,12 @@
 <template>
 	<div class="IndexBoard">
 		<!-- 公告部分 -->
-		<div class="ExhibitionBoardTitle TitleStyle">线上展览</div>
+        <div class="TitleContainer">
+            <img class="TitleCloud" src="CloudLeft.svg" alt="">
+            <div class="ExhibitionBoardTitle">线上展览</div>
+            <img class="TitleCloud" src="CloudRight.svg" alt="">
+        </div>
+		
 
 		<div class="ContentContainer">
 			<div
@@ -45,7 +50,12 @@
 			/>
 		</div>
 
-		<div class="ExhibitionBoardTitle TitleStyle">最新公告</div>
+        <div class="TitleContainer">
+            <img class="TitleCloud" src="CloudLeft.svg" alt="">
+            <div class="ExhibitionBoardTitle">最新公告</div>
+            <img class="TitleCloud" src="CloudRight.svg" alt="">
+        </div>
+		
 		<div class="ContentContainer">
 			<div v-for="(item, index) in BoardList[BoardIndex]" :key="index">
 				<div
@@ -253,7 +263,7 @@ export default {
 .IndexBoard {
 	position: relative;
 	width: 100%;
-	height: 90vw;
+	height: 85vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -264,10 +274,22 @@ export default {
 	/* background: blue; */
 }
 
+.TitleContainer{
+    position: relative;
+    width: 25vw;
+    height: 5vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.TitleCloud{
+    height: 2.5vw;
+}
 /* 标题 */
 .ExhibitionBoardTitle {
 	position: relative;
-	font-size: 40px;
+	font-size: 2.5vw;
 	line-height: 166%;
 	/* background: red; */
 }
@@ -287,9 +309,9 @@ export default {
 /* 近期展览、最新公告 每一部分的 Container */
 .ItemContainer {
 	position: relative;
-	width: 20vw;
-	height: 18vw;
-	margin: 0 20px 0 20px;
+	width: 24vw;
+	height: 20vw;
+	margin: 0 1vw 0 1vw;
 	/* background: red; */
 	cursor: pointer;
 }
@@ -297,14 +319,14 @@ export default {
 .ImageContainer {
 	position: relative;
 	width: 100%;
-	height: 12vw;
+	height: 15vw;
 	border-radius: 7px 7px 0 0;
 	/* background: blue; */
 }
 .BackgroundImage {
 	width: 100%;
 	height: 0;
-	padding-bottom: 60%;
+	padding-bottom: 62.5%;
 	overflow: hidden;
 	background-position: top center;
 	background-repeat: no-repeat;
@@ -317,7 +339,7 @@ export default {
 .ImageTitleContainer {
 	position: relative;
 	width: 100%;
-	height: 6vw;
+	height: 5vw;
 	/* background-color: white; */
 	display: flex;
 	justify-content: center;
@@ -325,7 +347,7 @@ export default {
 	border-radius: 0 0 7px 7px;
 }
 .ImageTitle {
-	font-size: 18px;
+	font-size: 1.3vw;
     font-weight: 400;
 	line-height: 150%;
 	margin: 0 30px 0 30px;
@@ -353,11 +375,12 @@ export default {
 }
 
 .ShiftPages {
-	width: 90px;
+	width: 10vw;
 	height: 60px;
 	text-align: center;
 
-	font-size: 20px;
+	font-size: 1.5vw;
 	line-height: 60px;
+    /* background: lightblue; */
 }
 </style>
