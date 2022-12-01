@@ -86,6 +86,14 @@ const routes = [
                 component: () => import('../views/Exhibition/Pictures.vue')
             },
             {
+                path: '/ExhibitionLogo',
+                name: 'ExhibitionLogo',
+                meta: {
+                    title: '合作单位'
+                },
+                component: () => import('../views/ExhibitionLogo')
+            },
+            {
                 path: '/AcademicActivityList',
                 name: 'AcademicActivityList',
                 meta: {

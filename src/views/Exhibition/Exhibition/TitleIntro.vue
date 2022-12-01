@@ -19,6 +19,7 @@
 				<div class="ExhibitionIntroParagraph" style="margin: 10px 0 10px 0">{{ item }}</div>
 			</div>
 		</div>
+        <div class="blue_rectangle_container ExhibitionLogo" @click="GoToPage('/ExhibitionLogo')">查看合作单位</div>
 	</div>
 </template>
 
@@ -32,6 +33,15 @@ export default {
 				path: "/ExhibitionList",
 			});
 		},
+        // 跳转到展览logo
+        GoToPage(page) {
+            this.$router.push({
+                path: page,
+                query: {
+                    ExhibitionID: this.ExhibitionID,
+                },
+            });
+        },
 	},
 };
 </script>
@@ -41,7 +51,7 @@ export default {
 	position: relative;
 	width: 80vw;
 	top: 120px;
-	font-size: 20px;
+	font-size: 1.5vw;
 	line-height: 200%;
 	color: #2f2f2f;
 	left: 0;
@@ -55,5 +65,13 @@ export default {
     position: relative;
     margin: 0 0 8px 0;
     white-space: pre-wrap;
+}
+.ExhibitionLogo{
+    position: relative;
+    width: 12vw;
+    height: 3vw;
+    left: 10vw;
+    top: 130px;
+    font-size: 1.5vw;
 }
 </style>
