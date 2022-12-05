@@ -29,7 +29,10 @@
 			<div class="Text2">Organizadores</div>
 			<div class="ImageBlock">
 				<div v-for="(item, index) in Images1" :key="index">
-					<div class="HoverShadow ImageContainer" @click="OpenNewPage(item.Url, index)">
+					<div
+						class="HoverShadow ImageContainer"
+						@click="OpenNewPage(item.Url, index)"
+					>
 						<img
 							class="ImageStyle1"
 							:src="item.Image"
@@ -53,7 +56,10 @@
 			<div class="Text2">Colaboradores</div>
 			<div class="ImageBlock">
 				<div v-for="(item, index) in Images2" :key="index">
-					<div class="HoverShadow ImageContainer" @click="OpenNewPage(item.Url, index)">
+					<div
+						class="HoverShadow ImageContainer"
+						@click="OpenNewPage(item.Url, index)"
+					>
 						<img
 							class="ImageStyle2"
 							:src="item.Image"
@@ -75,7 +81,7 @@
 		<div class="Part3">
 			<div class="Text2">作者与顾问</div>
 			<div class="Text2">Autores y Asesores</div>
-			<div class="PeopleBlock" style="width: 70vw">
+			<div class="PeopleBlock">
 				<div v-for="(item, index) in People1" :key="index">
 					<div class="PeopleContainer">
 						<img class="PeopleImage" :src="item.Image" alt="" />
@@ -92,28 +98,44 @@
 				</div>
 			</div>
 			<div class="PeopleBlock">
-				<div class="PeopleBlock">
-					<div v-for="(item, index) in People2" :key="index">
-						<div class="PeopleContainer">
-							<img class="PeopleImage" :src="item.Image" alt="" />
-							<div class="PeopleText">
-								<div
-									v-for="(line, index) in item.Name"
-									:key="index"
-									class="PeopleTextline"
-								>
-									{{ line }}
-								</div>
+				<div v-for="(item, index) in People2" :key="index">
+					<div class="PeopleContainer">
+						<img class="PeopleImage" :src="item.Image" alt="" />
+						<div class="PeopleText">
+							<div
+								v-for="(line, index) in item.Name"
+								:key="index"
+								class="PeopleTextline"
+							>
+								{{ line }}
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<div class="PeopleBlock" style="width: 57vw">
+				<div v-for="(item, index) in People3" :key="index">
+					<div class="PeopleContainer">
+						<img class="PeopleImage" :src="item.Image" alt="" />
+						<div class="PeopleText">
+							<div
+								v-for="(line, index) in item.Name"
+								:key="index"
+								class="PeopleTextline"
+							>
+								{{ line }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="Text2">技术支持</div>
 			<div class="Text2">Soporte Técnico</div>
-			<div class="PeopleBlock" style="width: 53vw">
+			<div class="PeopleBlock" style="width: 57vw">
 				<div class="PeopleBlock">
-					<div v-for="(item, index) in People3" :key="index">
+					<div v-for="(item, index) in People4" :key="index">
 						<div class="PeopleContainer">
 							<img class="PeopleImage" :src="item.Image" alt="" />
 							<div class="PeopleText">
@@ -265,6 +287,18 @@ export default {
 			],
 			People2: [
 				{
+					Image: "程露.jpg",
+					Name: ["程露", "Cheng Lu"],
+				},
+				{
+					Image: "马宇晨.jpg",
+					Name: ["马宇晨", "Ma Yuchen"],
+				},
+				{
+					Image: "王以琳.jpg",
+					Name: ["王以琳", "Wang Yilin"],
+				},
+				{
 					Image: "马塞洛·阿达诺·贝尔纳斯科尼.jpg",
 					Name: [
 						"马塞洛·阿达诺·贝尔纳斯科尼",
@@ -275,6 +309,8 @@ export default {
 					Image: "马塞利诺·冈萨雷斯.jpg",
 					Name: ["马塞利诺·冈萨雷斯", "Marcelino González"],
 				},
+			],
+			People3: [
 				{
 					Image: "洪舒珊.jpg",
 					Name: ["洪舒珊", "Susana Mejía"],
@@ -292,7 +328,7 @@ export default {
 					Name: ["李毓中", "Fabio Yu-chung Lee"],
 				},
 			],
-			People3: [
+			People4: [
 				{
 					Image: "马郓.jpg",
 					Name: ["马郓", "Ma Yun"],
@@ -312,11 +348,11 @@ export default {
 			],
 		};
 	},
-    methods: {
-        OpenNewPage(url, index){
-            window.open(url, "__blank", index.toString());
-        }
-    }
+	methods: {
+		OpenNewPage(url, index) {
+			window.open(url, "__blank", index.toString());
+		},
+	},
 };
 </script>
 
@@ -397,37 +433,37 @@ export default {
 }
 .ImageStyle1 {
 	position: relative;
-    top: 2vw;
+	top: 2vw;
 	width: auto;
 	height: 4vw;
 }
 .ImageStyle2 {
 	position: relative;
-    top: 2vw;
+	top: 2vw;
 	width: auto;
 	height: 6vw;
 }
-.ImageTextContainer1{
+.ImageTextContainer1 {
 	position: relative;
-    top: 4vw;
+	top: 4vw;
 	width: 100%;
 	height: 8vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-    /* background-color: lightblue; */
+	/* background-color: lightblue; */
 }
-.ImageTextContainer2{
+.ImageTextContainer2 {
 	position: relative;
-    top: 4vw;
+	top: 4vw;
 	width: 100%;
 	height: 5vw;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-    /* background-color: lightblue; */
+	/* background-color: lightblue; */
 }
 .ImageText {
 	position: relative;
@@ -438,7 +474,7 @@ export default {
 .Part3 {
 	position: relative;
 	width: 80vw;
-	height: 75vw;
+	height: 95vw;
 	/* background-color: lightgreen; */
 	display: flex;
 	flex-direction: column;
@@ -447,7 +483,7 @@ export default {
 }
 .PeopleBlock {
 	position: relative;
-	width: 80vw;
+	width: 72vw;
 	height: 18vw;
 	/* background-color: lightyellow; */
 	display: flex;
@@ -459,7 +495,7 @@ export default {
 
 .PeopleContainer {
 	position: relative;
-	width: 13vw;
+	width: 14vw;
 	height: 18vw;
 	/* background-color: lightcoral; */
 	display: flex;
@@ -475,7 +511,7 @@ export default {
 }
 .PeopleText {
 	position: relative;
-	width: 13vw;
+	width: 14vw;
 	height: 8vw;
 	display: flex;
 	flex-direction: column;

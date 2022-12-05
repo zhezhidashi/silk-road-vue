@@ -26,7 +26,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 20px;
+	font-size: 1.3vw;
 	line-height: 150%;
 	color: #ffffff;
 }

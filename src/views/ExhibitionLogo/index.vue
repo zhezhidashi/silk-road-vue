@@ -26,7 +26,7 @@ export default {
 .ExhibitionLogoContainer {
     position: relative;
     width: 100vw;
-    height: 190vw;
+    height: 210vw;
     display: flex;
     flex-direction: column;
     align-items: center;
