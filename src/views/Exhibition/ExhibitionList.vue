@@ -52,7 +52,6 @@ export default {
 			let _this = this;
 			_this.ExhibitionList = [];
 			let url = "/exhibition/list?&page_size=100";
-			console.log("请求的url", url);
 			getForm(url, 4, (res) => {
 				let data = res.data;
 

@@ -230,7 +230,6 @@ export default {
 			let _this = this;
 			_this.ExhibitionList = [];
 			let url = "/exhibition/list?&page_size=100";
-			console.log("请求的url", url);
 			getForm(url, 4, (res) => {
 				let data = res.data;
                 // 计算在线展览的栏数（三个在线展览为一栏，向上取整）

@@ -42,7 +42,6 @@ export default {
 		//http请求
 		let url = "/activity/detail?activity_id=" + this.AcademicActivityID;
 
-		console.log(url);
 		let _this = this; // 别改
 
 		getForm(url, 1, function (res, msg) {

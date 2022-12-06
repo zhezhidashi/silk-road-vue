@@ -46,7 +46,6 @@ export default {
 			let _this = this;
 
 			let url = `/exhibition/detail?exhibition_id=${this.ExhibitionID}`;
-            console.log("请求的url", url);
 			getForm(url, 5, (res) => {
 				let data = res.data;
 				_this.ExhibitionTitle = data.title;

@@ -7,6 +7,7 @@ export const baseUrl = 'https://dev.pacificsilkroad.cn/api-service'
 // 向指定的 url 获取数据表单
 export const getForm = (requestUrl, type, callback) => {
     nprogress.start();
+    // console.log('requestUrl', requestUrl);
     let UrlType = [
         "/activity/list",
         "/activity/detail",
@@ -20,7 +21,7 @@ export const getForm = (requestUrl, type, callback) => {
         method: 'get'
     }).then(({ data: res }) => {
         nprogress.done()
-        console.log('getForm 的 response', res);
+        // console.log('getForm 的 response', res);
         callback(res);
         let params = {
             "target_url": UrlType[type],
@@ -28,20 +29,20 @@ export const getForm = (requestUrl, type, callback) => {
         postForm('/visit/add', params, () => { });
     }).catch((err) => {
         nprogress.done()
-        console.log('getForm 的 err', err);
+        // console.log('getForm 的 err', err);
     });
 }
 
 // 向指定的 url 提交数据表单
 export const postForm = (requestUrl, params, callback) => {
-    console.log('postForm 的表单', requestUrl, params)
+    // console.log('postForm 的表单', requestUrl, params)
     nprogress.start();
     axios.request({
         url: baseUrl + requestUrl,
         method: 'post',
         data: params,
     }).then(({ data: res }) => {
-        console.log('postForm 的 response', res);
+        // console.log('postForm 的 response', res);
         nprogress.done()
         // if (res.code === 0) {
         //     alert("提交成功");

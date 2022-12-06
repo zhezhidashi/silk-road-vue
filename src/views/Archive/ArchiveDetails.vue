@@ -146,8 +146,6 @@ export default {
 			//向http请求档案的详细信息
 			let url = "/archive/detail?archive_id=" + this.ArchiveID;
 
-			console.log(url);
-
 			let _this = this; // 别改
 
 			getForm(url, 3, (res) => {

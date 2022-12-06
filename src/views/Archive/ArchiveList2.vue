@@ -240,12 +240,10 @@ export default {
 			if (this.search_language !== "")
 				url += "&language=" + now_search_language;
 
-			console.log(url);
 			let _this = this;
 
 			getForm(url, 2, function (res, msg) {
 				let data = res.data;
-				console.log("data is here", data);
 
 				// 计算出总共多少页
 				_this.total_page_num = Math.ceil(
@@ -282,7 +280,6 @@ export default {
 					_this.search_result_list.push(new_map);
 				}
 			});
-			console.log(this.search_language_list);
 		},
 
 		//左侧搜索页面有语言选项，鼠标点击哪个，就把哪个选项前面的白色方块变成黑色方块，或者是把黑色方块变成白色方块

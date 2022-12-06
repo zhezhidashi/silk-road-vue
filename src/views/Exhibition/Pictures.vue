@@ -147,7 +147,8 @@ export default {
 				bar: {
 					hoverStyle: true,
 					onlyShowBarOnScroll: false, //是否只有滚动的时候才显示滚动条
-					opacity: 0, //滚动条透明度
+                    "background": "#9F9E9E",
+					// opacity: 0, //滚动条透明度
 					"overflow-x": "hidden",
 				},
 			},
@@ -170,7 +171,6 @@ export default {
 		GetData() {
 			let _this = this;
 			let url = `/exhibition/detail?exhibition_id=${this.ExhibitionID}`;
-			console.log("请求的url", url);
 			getForm(url, 5, (res) => {
 				let data = res.data;
 				_this.ExhibitionTitle = data.title;
@@ -260,7 +260,6 @@ export default {
 		ImageShift(d) {
 			this.PictureID =
 				(this.PictureID + d + this.PictureTotal) % this.PictureTotal;
-			// console.log(this.PictureID);
 		},
 	},
 };

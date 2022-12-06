@@ -57,14 +57,11 @@ export default {
 		//http请求
 		let url = "/activity/list";
 
-		console.log(url);
-
 		this.academic_activity_images_src = [];
 
 		let _this = this; // 别改
 		getForm(url, 0, function (res, msg) {
 			let data = res.data;
-			console.log("data list", data.list.length);
 			let Length = data.list.length;
 			while (Length % 4 != 0) {
 				data.list.push({
@@ -85,8 +82,6 @@ export default {
 				_this.academic_activity_images_src.push(new_map);
 			}
 		});
-
-		console.log("academic_list", this.academic_activity_images_src);
 	},
 	mounted() {
 		this.$store.dispatch("GetHeaderIndex", 4);

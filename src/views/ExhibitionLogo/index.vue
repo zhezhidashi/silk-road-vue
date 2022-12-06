@@ -1,6 +1,6 @@
 <template>
 	<div class="ExhibitionLogoContainer">
-        <Exhibition01 v-if="ExhibitionID === '12'" />
+        <Exhibition01 v-if="ExhibitionID === '9' || ExhibitionID === '10' || ExhibitionID === '11' || ExhibitionID === '12' || ExhibitionID === '13'" />
     </div>
 </template>
 
