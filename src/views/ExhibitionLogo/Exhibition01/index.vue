@@ -350,7 +350,7 @@ export default {
 	},
 	methods: {
 		OpenNewPage(url, index) {
-			window.open(url, "__blank", index.toString());
+			window.open(url, "_blank");
 		},
 	},
 };
