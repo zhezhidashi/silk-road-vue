@@ -3,12 +3,14 @@ import nprogress from 'nprogress';
 import "nprogress/nprogress.css";
 // export const baseUrl = 'https://api_doc.pacificsilkroad.cn'
 // export const baseUrl = 'https://dev.pacificsilkroad.cn/api-service'
-export const baseUrl = '162.105.209.20/api-service'
+// export const baseUrl = 'http://162.105.209.20/api-service'
+export const baseUrl = 'http://apsr.pku.edu.cn/api-service'
+// export const baseUrl = '/api'
 
 // 向指定的 url 获取数据表单
 export const getForm = (requestUrl, type, callback) => {
     nprogress.start();
-    // console.log('requestUrl', requestUrl);
+    console.log('requestUrl', requestUrl);
     let UrlType = [
         "/activity/list",
         "/activity/detail",
@@ -22,7 +24,7 @@ export const getForm = (requestUrl, type, callback) => {
         method: 'get'
     }).then(({ data: res }) => {
         nprogress.done()
-        // console.log('getForm 的 response', res);
+        console.log('getForm 的 response', res);
         callback(res);
         let params = {
             "target_url": UrlType[type],
@@ -36,14 +38,14 @@ export const getForm = (requestUrl, type, callback) => {
 
 // 向指定的 url 提交数据表单
 export const postForm = (requestUrl, params, callback) => {
-    // console.log('postForm 的表单', requestUrl, params)
+    console.log('postForm 的表单', requestUrl, params)
     nprogress.start();
     axios.request({
         url: baseUrl + requestUrl,
         method: 'post',
         data: params,
     }).then(({ data: res }) => {
-        // console.log('postForm 的 response', res);
+        console.log('postForm 的 response', res);
         nprogress.done()
         // if (res.code === 0) {
         //     alert("提交成功");

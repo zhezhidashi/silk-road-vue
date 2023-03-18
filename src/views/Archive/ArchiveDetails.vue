@@ -156,15 +156,15 @@ export default {
 					else _this.Subtitle = data.title[item];
 				}
                 
-                _this.Image = "http://pares.mcu.es/ParesBusquedas20/ViewImage.do?accion=42&txt_id_imagen=1&txt_rotar=0&txt_zoom=10&txt_contraste=0&txt_totalImagenes=16&dbCode=1598367&txt_polarizado=NaN10&txt_contrast=1"
+                _this.Image = "默认图片.jpg"
 				// _this.Image =
 				// 	data.mini_pic_url === ""
 				// 		? "默认图片.jpg"
 				// 		: data.mini_pic_url;
 
 				for (let item in data.intro) {
-					if (item === "ZH") _this.DescriptionZH = data.intro.ZH;
-					else _this.DescriptionEN = data.intro[item];
+					// if (item === "ZH") _this.DescriptionZH = data.intro.ZH;
+					if(item != "ZH") _this.DescriptionEN = data.intro[item];
 				}
 
 				//档案的各种属性：年份（中英文）、关键词（中英文）、收藏单位（中英文）、收藏地点（中英文）、档案页数（中英文）、文件尺寸（中英文）、使用语种（中英文）
