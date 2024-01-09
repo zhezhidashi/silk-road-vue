@@ -4,7 +4,7 @@ import "nprogress/nprogress.css";
 // export const baseUrl = 'https://api_doc.pacificsilkroad.cn'
 // export const baseUrl = 'https://dev.pacificsilkroad.cn/api-service'
 // export const baseUrl = 'http://162.105.209.20/api-service'
-export const baseUrl = 'http://apsr.pku.edu.cn/api-service'
+export const baseUrl = 'https://apsr.pku.edu.cn/api-service'
 // export const baseUrl = '/api'
 
 // 向指定的 url 获取数据表单
